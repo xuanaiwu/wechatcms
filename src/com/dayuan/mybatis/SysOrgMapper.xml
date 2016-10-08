@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.SysOrgMapper" >
+
+<!-- Result Map-->
+<resultMap id="BaseResultMap" type="com.dayuan.bean.SysOrg" >
+	<result column="oId" property="oId"/>
+	<result column="ciID" property="ciID"/>
+	<result column="pId" property="pId"/>
+	<result column="no" property="no"/>
+	<result column="name" property="name"/>
+</resultMap>
+
+
+<!-- sys_user table all fields -->
+<sql id="Base_Column_List" >
+	 oId,ciID,pId,no,name
+</sql>
+
+ 
+<!-- 查询系统用户列表 -->
+<select id="queryByList" resultMap="BaseResultMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from sys_org 
+</select>
+
+
+<!-- 系统用户 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from sys_org 
+</select>
+
+</mapper>   

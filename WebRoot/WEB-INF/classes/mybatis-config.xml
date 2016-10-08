@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration> 
+ 
+ 
+ 
+ 
+ <typeAliases>
+	
+ </typeAliases>
+
+ 
+ 
+ 
+ 
+ <mappers>    
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SiteMainMapper.xml"/>
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SiteTypeMapper.xml"/>
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SiteColumnMapper.xml"/>
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SiteScoreMapper.xml"/>
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SysMenuMapper.xml"/>
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SysUserMapper.xml"/>
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SysRoleMapper.xml"/>
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SysRoleRelMapper.xml"/> 
+  
+  
+  
+  
+  <mapper resource="com/dayuan/mybatis/SysMenuBtnMapper.xml"/>
+  
+  
+    <mapper resource="com/dayuan/mybatis/SysOrgMapper.xml"/>
+ 
+  
+ 
+ 
+ </mappers>
+
+
+
+
+
+</configuration>

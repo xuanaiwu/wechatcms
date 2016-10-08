@@ -1,10 +1,18 @@
 *.class
+*.svn
+.mymetadata
+.myumldata
+
+# Generated files
+bin/
+svn/
+.svn/
+.myeclipse/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
