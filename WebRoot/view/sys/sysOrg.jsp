@@ -29,67 +29,33 @@
      </form>
 
      <!-- Edit Form -->
-     <div id="edit-win" class="easyui-dialog" title="添加/修改" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:400px;height:500px;">  
+     <div id="edit-win" class="easyui-dialog" title="文书信息" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:400px;height:500px;">  
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" type="text" name="id">
      		 <input class="hidden" name="deleted">
      		 <div class="ui-edit">
-	     	   <div class="ftitle">用户信息</div>    
+	     	   <div class="ftitle">信息</div>    
+	           
+	           
 	           <div class="fitem">  
-	               <label>电子邮箱:</label>  
-	               <input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'">
-	           </div>  
+	               <label>客户姓名:</label>  
+	               <input class="easyui-validatebox" type="text" name="nickName" data-options="required:true,validType:'length[1,10]'">
+	           </div>
 	            
 	           <div class="fitem">  
-	               <label>别名:</label>  
+	               <label>姓名:</label>  
 	               <input class="easyui-validatebox" type="text" name="nickName" data-options="required:true,validType:'length[1,10]'">
 	           </div>
 	           
 	           
-	            <div class="fitem">  
-	               <label>用户性别:</label>  
-	               <select class="easyui-combobox" name="gender" data-options="required:true">
-                    	<option value="男" selected="selected">男</option>
-                    	<option value="女">女</option>
-                   	</select>
-	           </div>
 	           
-	           <div class="fitem">  
-	               <label>用户类型:</label>  
-	               <select class="easyui-combobox" name="kind" data-options="required:true">
-                    	<option value="个人" selected="selected">个人</option>
-                    	<option value="企业">企业</option>
-                   	</select>
-	           </div>
 	           
 	            <div class="fitem">  
-	               <label>生日:</label>  
+	               <label>年月日:</label>  
 	               <input id="birthday" type="text" name="birthday" class="easyui-datebox"></input> 
 	           </div>
 	           
-	            <div class="fitem">  
-	               <label>地址:</label>  
-	               <input id="addr" type="text" name="addr"  class="easyui-validatebox"></input> 
-	           </div>
 	           
-	           
-	            <div class="fitem">  
-	               <label>电话:</label>  
-	               <input id="phone" type="text" name="phone"  class="easyui-validatebox"   data-options="validType:'isNum'" ></input> 
-	           </div>
-	           
-	             <div class="fitem">  
-	               <label>状态:</label>  
-	               <select class="easyui-combobox" name="state" data-options="required:true">
-                    	<option value="0" selected="selected">可用</option>
-                    	<option value="1">禁用</option>
-                   	</select>
-	           </div> 
-	           
-	           <div class="fitem">  
-	               <label>备注:</label>  
-	               <textarea class="easyui-validatebox" data-options="length:[0,100]" name="memo"></textarea>
-	           </div>
 	           
 	          
 	         </div>
