@@ -62,8 +62,10 @@
   <mapper resource="com/dayuan/mybatis/SysMenuBtnMapper.xml"/>
   
   
-    <mapper resource="com/dayuan/mybatis/SysOrgMapper.xml"/>
+  <mapper resource="com/dayuan/mybatis/SysOrgMapper.xml"/>
+  
  
+  <mapper resource="com/dayuan/mybatis/BusLoanInfoMapper.xml"/>	
   
  
  

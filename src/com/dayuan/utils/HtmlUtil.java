@@ -12,8 +12,8 @@ import com.dayuan.utils.json.JSONUtil;
 /**
  * <br>
  * <b>功能：</b>详细的功能描述<br>
- * <b>作者：</b>罗泽军<br>
- * <b>日期：</b> Dec 14, 2011 <br>
+ * <b>作者：</b>禤爱武<br>
+ * <b>日期：</b> Dec 14, 2015 <br>
  * <b>更新者：</b><br>
  * <b>日期：</b> <br>
  * <b>更新内容：</b><br>
@@ -24,8 +24,8 @@ public class HtmlUtil {
 	 * 
 	 * <br>
 	 * <b>功能：</b>输出json格式<br>
-	 * <b>作者：</b>罗泽军<br>
-	 * <b>日期：</b> Dec 14, 2011 <br>
+	 * <b>作者：</b>禤爱武<br>
+	 * <b>日期：</b> Dec 14, 2015 <br>
 	 * @param response
 	 * @param jsonStr
 	 * @throws Exception
@@ -47,8 +47,8 @@ public class HtmlUtil {
 	 * 
 	 * <br>
 	 * <b>功能：</b>输出HTML代码<br>
-	 * <b>作者：</b>罗泽军<br>
-	 * <b>日期：</b> Dec 14, 2011 <br>
+	 * <b>作者：</b>禤爱武<br>
+	 * <b>日期：</b> Dec 14, 2015 <br>
 	 * @param response
 	 * @param htmlStr
 	 * @throws Exception

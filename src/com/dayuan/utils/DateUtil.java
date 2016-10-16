@@ -43,7 +43,7 @@ public class DateUtil
 
 	/**
 	 * @author Pablo
-	 * Descrption:ȡ�õ�ǰ����getgetg get Date format Example：2008-05-15
+	 * Descrption: get Date format Example：2008-05-15
 	 * @return String
 	 * @throws java.lang.Exception
 	 */
@@ -64,7 +64,7 @@ public class DateUtil
 	}
 	/**
 	 * @author Pablo
-	 * Descrption:ȡ�õ�ǰ����getgetg get Date format Example：2008年-05月-15日
+	 * Descrption: get Date format Example：2008年-05月-15日
 	 * @return String
 	 * @throws java.lang.Exception
 	 */
@@ -87,7 +87,7 @@ public class DateUtil
 	
 	/**
 	 * @author vowo
-	 * Descrption:ȡ�õ�ǰ����getgetg get Date format Example：05月-15日
+	 * Descrption: get Date format Example：05月-15日
 	 * @return String
 	 * @throws java.lang.Exception
 	 */
@@ -109,7 +109,7 @@ public class DateUtil
 	
 	/**
 	 * @author Pablo
-	 * Descrption:ȡ�õ�ǰ����getgetg get Date format Example：2008年-05月-15日 11:05
+	 * Descrption: get Date format Example：2008年-05月-15日 11:05
 	 * @return String
 	 * @throws java.lang.Exception
 	 */
@@ -131,7 +131,7 @@ public class DateUtil
 	
 	/**
 	 * @author Pablo
-	 * Descrption:ȡ�õ�ǰ����getgetg get Date format Example：Aug 28, 2007
+	 * Descrption: get Date format Example：Aug 28, 2007
 	 * @return String
 	 * @throws java.lang.Exception
 	 */
@@ -153,7 +153,7 @@ public class DateUtil
 	
 	/**
 	 * @author Pablo
-	 * Descrption:ȡ�õ�ǰ����getgetg get Date format Example：Aug 28, 2007
+	 * Descrption:get Date format Example：Aug 28, 2007
 	 * @return String
 	 * @throws java.lang.Exception
 	 */

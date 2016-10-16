@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>dy-后台管理系统</title>
+    <title>后台管理系统</title>
     <%@include file="/view/resource.jsp" %>
     <link rel="stylesheet" type="text/css" href="${msUrl}/css/main.css">
     <script type="text/javascript" src="${msUrl}/js/ux/main/main.js"></script>
@@ -12,7 +12,7 @@
   <body class="easyui-layout">
   	
  	<div class="ui-header" data-options="region:'north',split:true,border:false" style="height:40px;overflow: hidden;">
- 	<h1>dy Manager</h1>
+ 	<h1>文书生成系统</h1>
  	<div  class="ui-login">
  		<div class="ui-login-info">
 	 		欢迎 <span class="orange">${user.nickName}</span> 第[<span class="orange">${user.loginCount}</span>]次登录系统 
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div data-options="region:'south',split:true,border:false" style="height: 30px;overflow:hidden;">
-		<div class="panel-header" style="border: none;text-align: center;" >CopyRight &copy; 2012  达元  版权所有.</div>
+		<div class="panel-header" style="border: none;text-align: center;" >CopyRight &copy; 2016 .</div>
 	</div>
 	<!-- 中间内容页面 -->
 	<div data-options="region:'center'" >
@@ -44,11 +44,7 @@
 				<div style="margin-top:20px;">
 					<h3>简要说明</h3>
 					<ul>
-						<li>使用Java平台,采用SpringMVC+Mybatis等主流框架</li> 
-						<li>数据库:使用免费MYSQL</li> 
-						<li>前端:使用Jquery和Easyui技术.界面清晰简洁,易操作.</li> 
-						<li>权限:对菜单,按钮控制.仅展示有权限的菜单和按钮.</li> 
-						<li>拦截:对所有无权限URL进行拦截,防止手动发送HTTP请求,确保系统全性.</li>
+						<li>欢迎使用文书生成系统.</li> 
 					</ul>
 				</div>
 			</div>

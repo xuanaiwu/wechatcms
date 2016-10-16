@@ -69,7 +69,7 @@ var YDataGrid = function(config){
 			remove: function(callback){
 				var records = Utils.getCheckedRows();
 				if (Utils.checkSelect(records)){
-					$.messager.confirm('Confirm','Are you sure you want to delete record?',function(r){  
+					$.messager.confirm('Confirm','你确定要删除选中的数据吗?',function(r){  
 					    if (r){
 					    	var idKey = dataGrid.idField || 'id'; //主键名称
 					    	var  data = $("input[name='"+idKey+"']", Form.list ).fieldSerialize(); //序列化字段
@@ -128,7 +128,7 @@ var YDataGrid = function(config){
 				return false;
 				
 			},
-			checkSelectOne : function(rows){//检查grid是否只勾选了一行,是返回 true,否返回true
+			checkSelectOne : function(rows){//检查grid是否只勾选了一行,是返回 true,否返回false
 				var records = rows;
 				if(!Utils.checkSelect(records)){
 					return false;

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.BusLoanInfoMapper" >
+
+
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+	 	<if test="applicationName != null and applicationName != ''" >
+	     and applicationName like CONCAT('%', #{applicationName}, '%')
+	</if>
+	<if test="urgentContAddress != null and urgentContAddress!= ''" >
+	    and urgentContAddress =  #{urgentContAddress}
+	</if>
+	<if test="loanType != null and loanType!= ''" >
+	    and loanType =  #{loanType}
+	</if>
+	
+	
+</trim>
+</sql>
+
+<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+ select count(1) from bus_loanInfo
+ <include refid="Example_Where_Clause"/>
+
+</select>
+
+<select id="queryByList" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
+select * from bus_loanInfo
+<include refid="Example_Where_Clause"/>
+</select>
+
+
+<select id="queryById" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
+select * from bus_loanInfo where id=#{id}
+</select>
+
+
+
+<insert id="add" parameterType="Object">
+ <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into bus_loanInfo (surveyOrgName,surveyPersonName,surveyPhone,applicationName,applicationAmount,applicationTerm,loanType,urgentCont,urgentContPhone,urgentContAddress,relationship,taobaoTreeDiamondMore,otherPlatform,operatingPeriodMore,
+  shopOwner,haveGuarantor,shopController,salesOfMore,than3credit,notOverdue,perNotOverdue,legalPerson,gender,idCard,companyName) values (#{surveyOrgName},#{surveyPersonName},#{surveyPhone},#{applicationName},#{applicationAmount},#{applicationTerm},#{loanType},#{urgentCont},#{urgentContPhone},
+  #{urgentContAddress},#{relationship},#{taobaoTreeDiamondMore},#{otherPlatform},#{operatingPeriodMore},#{shopOwner},#{haveGuarantor},#{shopController},#{salesOfMore},#{than3credit},#{notOverdue},#{perNotOverdue},#{legalPerson},#{gender},#{idCard},#{companyName})
+</insert>
+
+<!-- 根据id，修改记录-->  
+<update id="update" parameterType="Object">
+update bus_loanInfo set surveyOrgName=#{surveyOrgName},surveyPersonName=#{surveyPersonName},surveyPhone=#{surveyPhone},applicationName=#{applicationName},applicationAmount=#{applicationAmount},applicationTerm=#{applicationTerm},loanType=#{loanType},urgentCont=#{urgentCont},
+urgentContPhone=#{urgentContPhone},urgentContAddress=#{urgentContAddress},relationship=#{relationship},taobaoTreeDiamondMore=#{taobaoTreeDiamondMore},otherPlatform=#{otherPlatform},operatingPeriodMore=#{operatingPeriodMore},shopOwner=#{shopOwner},haveGuarantor=#{haveGuarantor},
+shopController=#{shopController},salesOfMore=#{salesOfMore},than3credit=#{than3credit},notOverdue=#{notOverdue},perNotOverdue=#{perNotOverdue},legalPerson=#{legalPerson},gender=#{gender},idCard=#{idCard},companyName=#{companyName} where id=#{id}
+
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+delete from bus_loanInfo where id=#{id}
+</delete>
+ 
+
+
+
+
+
+</mapper>   

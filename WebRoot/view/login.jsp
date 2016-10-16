@@ -29,7 +29,7 @@
 										用户名：
 									</li>
 									<li class=user_main_input>
-										<input class="txtusernamecssclass easyui-validatebox"  data-options="required:true,validType:'email',missingMessage:'邮箱不能为空.',invalidMessage:'邮箱格式不正确'" name="email"  value="admin@qq.com" maxlength="20">
+										<input class="txtusernamecssclass easyui-validatebox"  data-options="required:true,validType:'email',missingMessage:'邮箱不能为空.',invalidMessage:'邮箱格式不正确'" name="email" maxlength="20">
 									</li>
 								</ul>
 								<ul>
@@ -37,7 +37,7 @@
 										密 码：
 									</li>
 									<li class=user_main_input>
-										<input class="txtpasswordcssclass easyui-validatebox"   data-options="required:true,missingMessage:'密码不能为空.'" type="password" name="pwd" value="654321">
+										<input class="txtpasswordcssclass easyui-validatebox"   data-options="required:true,missingMessage:'密码不能为空.'" type="password" name="pwd" >
 									</li>
 								</ul>
 								<ul>
