@@ -144,7 +144,7 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("nian", DateUtil.getNowYear());
 			dataMap.put("yue", DateUtil.getNowMonth());
 			dataMap.put("ri",DateUtil.getNowDay());
-			tempName1="daihouxuzhi"+DateUtil.getNowPlusTimeMill()+".doc";
+			tempName1="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"daihouxuzhi.ftl",outFilePath,tempName1);
 			if(dataMap.get("xingming")!=null){
 				dataMap.remove("xingming");
@@ -153,7 +153,7 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("xingbie", busLoanInfo.getGender());
 			dataMap.put("shenfenzheng", busLoanInfo.getIdCard());
 			dataMap.put("gongsimingcheng", busLoanInfo.getCompanyName());
-			tempName2="qianziyangben"+DateUtil.getNowPlusTimeMill()+".doc";
+			tempName2="签字样本"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"qianziyangben.ftl",outFilePath,tempName2);
 			wordName=tempName1+","+tempName2;
 		}else if(wordType.equals("1")){
@@ -162,7 +162,7 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("nian", DateUtil.getNowYear());
 			dataMap.put("yue", DateUtil.getNowMonth());
 			dataMap.put("ri",DateUtil.getNowDay());
-			wordName="daihouxuzhi"+DateUtil.getNowPlusTimeMill()+".doc";
+			wordName="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"daihouxuzhi.ftl",outFilePath,wordName);
 		}else if(wordType.equals("2")){
 			dataMap.put("xingming",busLoanInfo.getLegalPerson());
@@ -172,14 +172,14 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("nian", DateUtil.getNowYear());
 			dataMap.put("yue", DateUtil.getNowMonth());
 			dataMap.put("ri",DateUtil.getNowDay());
-			wordName="qianziyangben"+DateUtil.getNowPlusTimeMill()+".doc";
+			wordName="签字样本"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"qianziyangben.ftl",outFilePath,wordName);
 		}else{
 			sendFailureMessage(response, "你输入的信息无效！");
 			return;
 		}
 		if(sign){
-			sendFailureMessage(response, "文书生成成功！文件名是："+wordName);
+			sendSuccessMessage(response, "文书生成成功！文件名是："+wordName);
 			return;
 		}else{
 			sendFailureMessage(response, "文书生成失败,请联系管理员！");

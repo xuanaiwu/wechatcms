@@ -9,7 +9,7 @@ dy.busLoan = function(){
 		editPwdWin:function(){
 			return $("#edit-pwd-win");
 		},
-		savePwd:function(){
+		createSave:function(){
 			if(_this.editPwdForm().form('validate')){
 				_this.editPwdForm().attr('action',_this.createWordsAction);
 				dy.saveForm(_this.editPwdForm(),function(data){
@@ -18,9 +18,9 @@ dy.busLoan = function(){
 			 }
 		},
 		initForm:function(){
-			//修改密码
+			//生成文书
 			_this.editPwdWin().find("#btn-pwd-submit").click(function(){
-				_this.savePwd();
+				_this.createSave();
 			});
 			_this.editPwdWin().find("#btn-pwd-close").click(function(){	
 				$.messager.confirm('Confirm','你确定要关闭当前窗口?',function(r){  

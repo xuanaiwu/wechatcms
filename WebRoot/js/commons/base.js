@@ -119,6 +119,7 @@ var dy={
 				dy.closeProgress();
 			 	if(data.success){
 			 		if(callback){
+			 			dy.alert('提示',data.msg,'info');
 				       	callback(data);
 				    }else{
 			       		dy.alert('提示','保存成功.','info');
