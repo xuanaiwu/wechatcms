@@ -56,7 +56,7 @@ dy.busLoan = function(){
 				toolbar:[
 					{id:'btnadd',text:'添加',btnType:'add'},
 					{id:'btnedit',text:'修改',btnType:'edit'},
-					{id:'btnedit',text:'生成文书',btnType:'edit',iconCls:'icon-edit',handler:function(){
+					{id:'btnedit',text:'生成word',btnType:'edit',iconCls:'icon-edit',handler:function(){
 							var selected = _box.utils.getCheckedRows();
 							if ( _box.utils.checkSelectOne(selected)){
 								_this.editPwdForm().resetForm();

@@ -12,7 +12,7 @@
   <body class="easyui-layout">
   	
  	<div class="ui-header" data-options="region:'north',split:true,border:false" style="height:40px;overflow: hidden;">
- 	<h1>文书生成系统</h1>
+ 	<h1>DEMO</h1>
  	<div  class="ui-login">
  		<div class="ui-login-info">
 	 		欢迎 <span class="orange">${user.nickName}</span> 第[<span class="orange">${user.loginCount}</span>]次登录系统 
@@ -44,7 +44,7 @@
 				<div style="margin-top:20px;">
 					<h3>简要说明</h3>
 					<ul>
-						<li>欢迎使用文书生成系统.</li> 
+						<li>欢迎使用DEMO.</li> 
 					</ul>
 				</div>
 			</div>

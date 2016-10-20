@@ -48,6 +48,7 @@ public class CreateWords {
 		}
 		try {
 			t.process(dataMap, out);
+			out.flush();
 			out.close();
 			sign=true;
 		} catch (TemplateException e) {

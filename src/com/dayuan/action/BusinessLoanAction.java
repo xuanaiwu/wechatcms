@@ -1,6 +1,8 @@
 package com.dayuan.action;
 
 
+import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +72,7 @@ public class BusinessLoanAction extends BaseAction{
 	 */
 	@RequestMapping("/save")
 	public void save(BusLoanInfo busLoanInfo,HttpServletResponse response) throws Exception{
+		System.out.println(new Date()+":saving");
 		if(busLoanInfo==null){
 			sendFailureMessage(response,"请不要非法操作~！");
 			return;
@@ -80,6 +83,7 @@ public class BusinessLoanAction extends BaseAction{
 			busLoanInfoService.update(busLoanInfo);
 		}
 		sendSuccessMessage(response,"保存成功！");
+		return;
 	}
 	
 	
@@ -118,7 +122,7 @@ public class BusinessLoanAction extends BaseAction{
 	 * 生成文书
 	 * */
 	@RequestMapping("/createWords")
-	public void createWords(Integer id,String wordType,HttpServletRequest request,HttpServletResponse response)throws Exception{
+	public void createWords(Integer id,String wordType,String filePath,HttpServletRequest request,HttpServletResponse response)throws Exception{
 		if(id==null||wordType.equals("")){
 			sendFailureMessage(response, "请不要非法操作~！");
 			return;
@@ -131,8 +135,20 @@ public class BusinessLoanAction extends BaseAction{
 		Map<String,Object> dataMap=new HashMap<String,Object>();
 		//String path=request.getRealPath("/")+"wordsTemplate"+"\\daihouxuzhi.ftl";
 		String path="/";
-		String outFilePath="D:/";
-		System.out.println("path="+path);
+		String outFilePath="";
+		if(filePath.equals("")){
+			outFilePath="D://createWords//";
+		}else{
+			outFilePath=filePath+"/";
+		}
+		File file=new File(outFilePath);
+		if(!file.exists()){
+			file.mkdirs();
+		}
+		if(!file.isDirectory()){
+			sendFailureMessage(response, "你输入word保存的目录格式错误！");
+			return;
+		}
 		CreateWords createWords=new CreateWords();
 		boolean sign=false;
 		String wordName="";
@@ -178,11 +194,14 @@ public class BusinessLoanAction extends BaseAction{
 			sendFailureMessage(response, "你输入的信息无效！");
 			return;
 		}
+		if(file!=null){
+			file=null;
+		}
 		if(sign){
-			sendSuccessMessage(response, "文书生成成功！文件名是："+wordName);
+			sendSuccessMessage(response, "word生成成功！文件名是："+wordName);
 			return;
 		}else{
-			sendFailureMessage(response, "文书生成失败,请联系管理员！");
+			sendFailureMessage(response, "word生成失败,请联系管理员！");
 			return;
 		}
 		

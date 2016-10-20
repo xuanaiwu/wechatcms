@@ -219,7 +219,7 @@ var YDataGrid = function(config){
 			var dataconfig = {
 				title: dataGrid.title || 'Data List',
 				iconCls: dataGrid.iconCls || 'icon-save',
-				height: dataGrid.height || 365,
+				height: dataGrid.height ||800,
 				nowrap: true,
 				autoRowHeight: false,
 				striped: true,
