@@ -2,12 +2,14 @@
 *.svn
 .mymetadata
 .myumldata
+.classpath
 
 # Generated files
 bin/
 svn/
 .svn/
 .myeclipse/
+.settings/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

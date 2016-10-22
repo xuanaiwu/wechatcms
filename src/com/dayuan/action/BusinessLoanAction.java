@@ -173,13 +173,15 @@ public class BusinessLoanAction extends BaseAction{
 			sign=createWords.create(dataMap,path,"qianziyangben.ftl",outFilePath,tempName2);
 			wordName=tempName1+","+tempName2;
 		}else if(wordType.equals("1")){
-			dataMap.put("kehuxingming",busLoanInfo.getApplicationName());
+			//dataMap.put("kehuxingming",busLoanInfo.getApplicationName());
 			dataMap.put("xingming", busLoanInfo.getApplicationName());
-			dataMap.put("nian", DateUtil.getNowYear());
-			dataMap.put("yue", DateUtil.getNowMonth());
-			dataMap.put("ri",DateUtil.getNowDay());
+			dataMap.put("xingming2", busLoanInfo.getApplicationName());
+			dataMap.put("dianhua", busLoanInfo.getSurveyPhone());
+			//dataMap.put("nian", DateUtil.getNowYear());
+			//dataMap.put("yue", DateUtil.getNowMonth());
+			//dataMap.put("ri",DateUtil.getNowDay());
 			wordName="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
-			sign=createWords.create(dataMap,path,"daihouxuzhi.ftl",outFilePath,wordName);
+			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi.ftl",outFilePath,wordName);
 		}else if(wordType.equals("2")){
 			dataMap.put("xingming",busLoanInfo.getLegalPerson());
 			dataMap.put("xingbie", busLoanInfo.getGender());
