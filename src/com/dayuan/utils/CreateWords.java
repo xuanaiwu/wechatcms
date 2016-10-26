@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.Map;
 
@@ -42,7 +43,9 @@ public class CreateWords {
 		File outFile = new File(outFilePath+outFileName);
 		Writer out=null;
 		try{
-			out=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile)));
+			out=new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile),"UTF-8"));
+		}catch(UnsupportedEncodingException e){
+			e.printStackTrace();
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
@@ -59,9 +62,9 @@ public class CreateWords {
 			if(t!=null){
 				t=null;
 			}
-		}
-		if(outFile!=null){
-			outFile=null;
+			if(outFile!=null){
+				outFile=null;
+			}
 		}
 		return sign;
 	}

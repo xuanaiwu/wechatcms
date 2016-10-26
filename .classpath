@@ -42,7 +42,6 @@
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/dom4j-1.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/fastjson-1.2.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/fluent-hc-4.3.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/freemarker.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/Jama-1.0.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/jaxen-full.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/jaxp-api.jar"/>
@@ -96,5 +95,6 @@
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/httpclient-4.3.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/httpcore-4.3.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/common-Base64-1.8.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/技术积累/yiya/YIYA_MS/YIYA_MS/WebRoot/WEB-INF/lib/freemarker-2.3.25.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

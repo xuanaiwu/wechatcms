@@ -134,7 +134,7 @@ public class BusinessLoanAction extends BaseAction{
 		}
 		Map<String,Object> dataMap=new HashMap<String,Object>();
 		//String path=request.getRealPath("/")+"wordsTemplate"+"\\daihouxuzhi.ftl";
-		String path="/";
+		String path="\\com\\dayuan\\template\\";
 		String outFilePath="";
 		if(filePath.equals("")){
 			outFilePath="D://createWords//";
@@ -155,13 +155,11 @@ public class BusinessLoanAction extends BaseAction{
 		if(wordType.equals("0")){
 			String tempName1="";
 			String tempName2="";
-			dataMap.put("kehuxingming",busLoanInfo.getApplicationName());
 			dataMap.put("xingming", busLoanInfo.getApplicationName());
-			dataMap.put("nian", DateUtil.getNowYear());
-			dataMap.put("yue", DateUtil.getNowMonth());
-			dataMap.put("ri",DateUtil.getNowDay());
+			dataMap.put("xingming2", busLoanInfo.getApplicationName());
+			dataMap.put("dianhua", busLoanInfo.getSurveyPhone());
 			tempName1="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
-			sign=createWords.create(dataMap,path,"daihouxuzhi.ftl",outFilePath,tempName1);
+			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi.ftl",outFilePath,tempName1);
 			if(dataMap.get("xingming")!=null){
 				dataMap.remove("xingming");
 			}
@@ -169,17 +167,16 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("xingbie", busLoanInfo.getGender());
 			dataMap.put("shenfenzheng", busLoanInfo.getIdCard());
 			dataMap.put("gongsimingcheng", busLoanInfo.getCompanyName());
+			dataMap.put("nian", DateUtil.getNowYear());
+			dataMap.put("yue", DateUtil.getNowMonth());
+			dataMap.put("ri",DateUtil.getNowDay());
 			tempName2="签字样本"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"qianziyangben.ftl",outFilePath,tempName2);
 			wordName=tempName1+","+tempName2;
 		}else if(wordType.equals("1")){
-			//dataMap.put("kehuxingming",busLoanInfo.getApplicationName());
 			dataMap.put("xingming", busLoanInfo.getApplicationName());
 			dataMap.put("xingming2", busLoanInfo.getApplicationName());
 			dataMap.put("dianhua", busLoanInfo.getSurveyPhone());
-			//dataMap.put("nian", DateUtil.getNowYear());
-			//dataMap.put("yue", DateUtil.getNowMonth());
-			//dataMap.put("ri",DateUtil.getNowDay());
 			wordName="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi.ftl",outFilePath,wordName);
 		}else if(wordType.equals("2")){

@@ -30,7 +30,6 @@ public class URLUtils {
 			String key = e.nextElement().toString();
 			String value = get(key);
 			urlsMap.put(key, value);
-			System.out.println(key+"-xuan0823-"+value);
 		}
 		return urlsMap;
 	}
