@@ -27,15 +27,6 @@ public class PathUtil {
 	 */
 	public static String getRootPath(){
 		
-//		String rootPath ="";
-//		try{
-//			 File file = new File(PathUtil.class.getResource("/").getFile());
-//			 rootPath = file.getParentFile().getParent();
-//			 rootPath = java.net.URLDecoder.decode(rootPath,"utf-8");
-//			 return rootPath;
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
 		return Constant.WORK_ROOT_PATH;
 	}
 	
@@ -305,13 +296,4 @@ public class PathUtil {
   	    url.append("item/").append(picId).append(".html");
   		return url.toString();
 	}
-	/****************** ilook MM  url end*******************************/
-	 public static void main(String[] args) {
-//		 String t = uploadPicPath(MethodUtil.getInit().getLongId()+".jpg","ori");
-//		 t = minPicPath(t,"200_200");
-		 System.out.println(getRootPath());
-	 }
-
-	
-	
 }

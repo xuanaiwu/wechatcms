@@ -23,10 +23,7 @@ public class Constant {
 	//上传根目录地址 http://image.mn606.com/
 	public static String UPLOAD_URL = res.getString("upload.url");
 	
-	
-	//搜索图片过滤分数0.0-.1.0之间的小数
-	public static String SEARCH_SCORE =  res.getString("search.score");
-	
+
 	
 	public static String UPLOAD_PATH = res.getString("upload.path");
 	

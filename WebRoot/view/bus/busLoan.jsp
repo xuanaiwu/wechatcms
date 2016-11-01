@@ -31,169 +31,150 @@
      </form>
 
      <!-- Edit Form 添加 -->
-     <div id="edit-win" class="easyui-dialog" title="总表信息" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:579px;height:649px;">  
+     <div id="edit-win" class="easyui-dialog" title="总表信息" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:1029px;height:549px;">  
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" type="text" name="id">
      		 <input class="hidden" type="text" name="uName" value="${user.nickName}">
      		 <input class="hidden" type="text"  name="uId" value="${user.id}"> 
-     		 <div class="ui-edit">
-	     	   <div class="ftitle">上报信息</div>
-	     	  
-	           <div class="fitem">  
-	               <label>调查机构名称:</label>  
-	               <input class="easyui-validatebox" type="text" name="surveyOrgName"   data-options="required:true,validType:'length[1,100]'">
-	           </div>
-	            
-	           <div class="fitem">  
-	               <label>调查人姓名:</label>  
-	               <input class="easyui-validatebox" type="text" name="surveyPersonName" data-options="required:true,validType:'length[1,100]'">
-	               <label>手机:</label>  
-	               <input class="easyui-validatebox" type="text" name="surveyPhone" data-options="required:true,validType:'length[1,100]'">
-	           </div>
-	           
-	            <div class="ftitle">申请人信息</div>
-	            <div class="fitem">  
-	               <label>借款申请人名称:</label>  
-	               <input id="birthday" type="text" name="applicationName" class="easyui-validatebox"></input> 
-	           </div>
-	           
-	            <div class="fitem">  
-	               <label>申请金额:</label>  
-	               <input id="birthday" type="text" name="applicationAmount" class="easyui-validatebox"></input>
-	               <label>申请期限:</label>  
-	               <input id="birthday" type="text" name="applicationTerm" class="easyui-validatebox"></input>  
-	           </div>
-	           
-	            <div class="fitem">  
-	                <label class="ui-label">申请贷款类型：</label><select class="easyui-combobox" name="loanType" style="width:139px">
-            			<option value=""></option>
-                    	<option value="个体工商户">个体工商户</option>
-                    	<option value="小企业主">小企业主</option>
-                    	<option value="小企业">小企业</option>
-            		</select>
-	           </div>
-	           
-	           
-	           <div class="fitem">  
-	               <label>紧急联系人（限亲属，非保证人）:</label>  
-	               <input id="birthday" type="text" name="urgentCont" class="easyui-validatebox"></input>
-	               <label>紧急联系人电话:</label>  
-	               <input id="birthday" type="text" name="urgentContPhone" class="easyui-validatebox"></input>  
-	           </div>
-	           
-	           <div class="fitem">  
-	               <label>紧急联系人地址:</label>  
-	               <input id="birthday" type="text" name="urgentContAddress" class="easyui-validatebox"></input>
-	               <label>关系:</label>  
-	               <input id="birthday" type="text" name="relationship" class="easyui-validatebox"></input>  
-	           </div>
-	           
-	            <div class="ftitle">准入核查</div>
-	            <div class="fitem">  
-	               <label class="ui-label">淘宝三钻以上：</label><select class="easyui-combobox" name="taobaoTreeDiamondMore" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-            		</select>
-            		 <label class="ui-label">其他平台有营业执照：</label><select class="easyui-combobox" name="otherPlatform" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-            		</select>
-	           </div>
-	          
-	           <div class="fitem">  
-	               <label class="ui-label">持续经营期限一年以上：</label><select class="easyui-combobox" name="operatingPeriodMore" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-            		</select>
-            		 <label class="ui-label">是否网商店铺注册所有人：</label><select class="easyui-combobox" name="shopOwner" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-                    	
-            		</select>
-
-	           </div>
-	           
-	           
-	           <div class="fitem">
-            		 <label class="ui-label">非网商店铺注册所有人，但追加所有人担保：</label><select class="easyui-combobox" name="haveGuarantor" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-            		</select>
-            		 <label class="ui-label">是否网商店铺实际控制人：</label><select class="easyui-combobox" name="shopController" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-                    	
-            		</select>
-            	
-	           </div>
-	           
-	           
-	            <div class="fitem">
-            		 <label class="ui-label">近一年月均销售额10万以上：</label><select class="easyui-combobox" name="salesOfMore" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-            		</select>
-
-            		 <label class="ui-label">授信合作金融机构（含我行）原则上不超过3家，最多不超过5家：</label><select class="easyui-combobox" name="than3credit" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-                    	
-            		</select>
-            		
-	           </div>
-	           
+     		<div id="tt" class="easyui-tabs" style="width:1025px;height:540px;">    
+	     		 <div title="分表1" class="ui-edit" style="padding:20px;">
+			     	   <div class="ftitle">上报信息</div>
+			     	  
+			           <div class="fitem">  
+			               <label>调查机构名称:</label>  
+			               <input class="easyui-validatebox" type="text" name="surveyOrgName"   data-options="required:true,validType:'length[1,100]'">
+			               <label>调查人姓名:</label>  
+			               <input class="easyui-validatebox" type="text" name="surveyPersonName" data-options="required:true,validType:'length[1,100]'">
+			               <label>手机:</label>  
+			               <input class="easyui-validatebox" type="text" name="surveyPhone" data-options="required:true,validType:'length[1,100]'">
+			           </div>
+			            
+			       
+			           
+			            <div class="ftitle">申请人信息</div>
+			            <div class="fitem">  
+			               <label>借款申请人名称:</label>  
+			               <input id="birthday" type="text" name="applicationName" class="easyui-validatebox"></input>
+			               <label>申请金额:</label>  
+			               <input id="birthday" type="text" name="applicationAmount" class="easyui-validatebox"></input>
+			               <label>申请期限:</label>  
+			               <input id="birthday" type="text" name="applicationTerm" class="easyui-validatebox"></input> 
+							<label class="ui-label">申请贷款类型：</label><select class="easyui-combobox" name="loanType" style="width:129px">
+		            			<option value=""></option>
+		                    	<option value="个体工商户">个体工商户</option>
+		                    	<option value="小企业主">小企业主</option>
+		                    	<option value="小企业">小企业</option>
+		            		</select> 
+			           </div>
+			           
+			                 
+			           <div class="fitem">  
+			               <label>紧急联系人（限亲属，非保证人）:</label>  
+			               <input id="birthday" type="text" name="urgentCont" class="easyui-validatebox"></input>
+			               <label>紧急联系人电话:</label>  
+			               <input id="birthday" type="text" name="urgentContPhone" class="easyui-validatebox"></input>  
+			               <label>紧急联系人地址:</label>  
+			               <input id="birthday" type="text" name="urgentContAddress" class="easyui-validatebox"></input>
+			               <label>关系:</label>  
+			               <input id="birthday" type="text" name="relationship" class="easyui-validatebox"></input>  
+			           </div>
+			           
+			     
+			           
+			            <div class="ftitle">准入核查</div>
+			            <div class="fitem">  
+			               <label class="ui-label">淘宝三钻以上：</label><select class="easyui-combobox" name="taobaoTreeDiamondMore" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            		 <label class="ui-label">其他平台有营业执照：</label><select class="easyui-combobox" name="otherPlatform" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            		  <label class="ui-label">持续经营期限一年以上：</label><select class="easyui-combobox" name="operatingPeriodMore" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            		 <label class="ui-label">是否网商店铺注册所有人：</label><select class="easyui-combobox" name="shopOwner" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		                    	
+		            		</select>
+			           </div>
+			          
+			          
+			           
+			           
+			           <div class="fitem">
+		            		 <label class="ui-label">非网商店铺注册所有人，但追加所有人担保：</label><select class="easyui-combobox" name="haveGuarantor" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            		 <label class="ui-label">是否网商店铺实际控制人：</label><select class="easyui-combobox" name="shopController" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            		 <label class="ui-label">近一年月均销售额10万以上：</label><select class="easyui-combobox" name="salesOfMore" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            		 <label class="ui-label">授信合作金融机构（含我行）原则上不超过3家，最多不超过5家：</label><select class="easyui-combobox" name="than3credit" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            	
+			           </div>
+			           
+			        
+			           <div class="fitem">  
+		            		  <label class="ui-label">借款企业、借款企业法人代表、实际控制人近2年内无经营性逾期、欠息记录：</label><select class="easyui-combobox" name="notOverdue" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            	
+		            		 <label class="ui-label">个人消费类贷款无累计5次或连续3次的逾期、欠息记录</label><select class="easyui-combobox" name="perNotOverdue" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+		            		
+			           </div>
+			           
+			           
+			           
+			           
+		         </div>
 	         
-	        
-	           
-	           <div class="fitem">  
-            		  <label class="ui-label">借款企业、借款企业法人代表、实际控制人近2年内无经营性逾期、欠息记录：</label><select class="easyui-combobox" name="notOverdue" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-            		</select>
-            	
-            		 <label class="ui-label">个人消费类贷款无累计5次或连续3次的逾期、欠息记录</label><select class="easyui-combobox" name="perNotOverdue" style="width:139px">
-            			<option value=""></option>
-                    	<option value="是">是</option>
-                    	<option value="否">否</option>
-            		</select>
-            		
-	           </div>
-	           
-	           
-	           
-	            <div class="ftitle">法定代表人或负责人</div>
-	            
-	            <div class="fitem">  
-	                <label>姓名:</label>  
-	               <input class="easyui-validatebox" type="text" name="legalPerson" data-options="required:true,validType:'length[1,100]'">
-	               <label>性别:</label>  
-	               <select class="easyui-combobox" name="gender" style="width:139px" data-options="required:true,validType:'length[1,100]'">
-                    	<option value="男">男</option>
-                    	<option value="女">女</option>
-            		</select>
-            		
-	           </div>
-	           
-	             <div class="fitem">  
-	                <label>身份证号码:</label>  
-	               <input class="easyui-validatebox" type="text" name="idCard" data-options="required:true,validType:'length[1,100]'">
-	               <label>公司名称:</label>  
-	               <input class="easyui-validatebox" type="text" name="companyName" data-options="required:true,validType:'length[1,100]'">
-            		
-	           </div>
-	           
-	        
-	          
-	         </div>
+	         	 <div title="分表2" class="ui-edit" style="padding:20px;" >   
+			        tab2    
+			    </div>   
+			    <div title="分表3"  class="ui-edit" style="padding:20px;">   
+			         <div class="ftitle">法定代表人或负责人</div>
+			            
+			            <div class="fitem">  
+			                <label>姓名:</label>  
+			               <input class="easyui-validatebox" type="text" name="legalPerson" data-options="required:true,validType:'length[1,100]'">
+			               <label>性别:</label>  
+			               <select class="easyui-combobox" name="gender" style="width:139px" data-options="required:true,validType:'length[1,100]'">
+		                    	<option value="男">男</option>
+		                    	<option value="女">女</option>
+		            		</select>
+		            	   <label>身份证号码:</label>  
+			               <input class="easyui-validatebox" type="text" name="idCard" data-options="required:true,validType:'length[1,100]'">
+			               <label>公司名称:</label>  
+			               <input class="easyui-validatebox" type="text" name="companyName" data-options="required:true,validType:'length[1,100]'">
+			           </div>  
+			    </div>   
+	        </div>    
      	</form>
   	 </div> 
   	 

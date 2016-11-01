@@ -16,7 +16,5 @@ public class PublishPageUtil {
 	
 	private final static String  FILE_DIR_PATH = PathUtil.getRootPath();//获取项目部署根目录  如：F:\openwork\mn606\WebRoot
 
-	public static void main(String[] args) {
-//		createIndex();
-	}
+	
 }
