@@ -33,7 +33,7 @@
        
 <!-- sys_user table all fields -->
 <sql id="Base_Column_List" >
-	 id,email,pwd,nickName,state,loginCount,loginTime,deleted,createTime,updateTime,createBy,updateBy,superAdmin,kind,gender
+	 id,email,pwd,nickName,state,loginCount,loginTime,deleted,createTime,updateTime,createBy,updateBy,superAdmin,kind,gender,birthday,oId,oName,addr,phone,memo,pId,pName,uDate
 </sql>
    
    

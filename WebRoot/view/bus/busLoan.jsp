@@ -34,12 +34,14 @@
      <div id="edit-win" class="easyui-dialog" title="总表信息" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:579px;height:649px;">  
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" type="text" name="id">
-     		 <input class="hidden" name="deleted">
+     		 <input class="hidden" type="text" name="uName" value="${user.nickName}">
+     		 <input class="hidden" type="text"  name="uId" value="${user.id}"> 
      		 <div class="ui-edit">
 	     	   <div class="ftitle">上报信息</div>
+	     	  
 	           <div class="fitem">  
 	               <label>调查机构名称:</label>  
-	               <input class="easyui-validatebox" type="text" name="surveyOrgName" data-options="required:true,validType:'length[1,100]'">
+	               <input class="easyui-validatebox" type="text" name="surveyOrgName"   data-options="required:true,validType:'length[1,100]'">
 	           </div>
 	            
 	           <div class="fitem">  

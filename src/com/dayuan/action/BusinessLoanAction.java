@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dayuan.bean.BusLoanInfo;
+import com.dayuan.bean.SysUser;
 import com.dayuan.exception.ServiceException;
 import com.dayuan.model.BusLoanInfoModel;
 import com.dayuan.service.BusLoanInfoService;
 import com.dayuan.utils.CreateWords;
 import com.dayuan.utils.DateUtil;
 import com.dayuan.utils.HtmlUtil;
+import com.dayuan.utils.SessionUtils;
 
 
 
@@ -42,6 +44,8 @@ public class BusinessLoanAction extends BaseAction{
 	@RequestMapping("/loan") 
 	public ModelAndView loan(HttpServletRequest request)throws Exception{
 		Map<String,Object>  context = getRootMap();
+		SysUser user = SessionUtils.getUser(request);
+		context.put("user", user);
 		return forword("bus/busLoan",context); 
 	}
 	
