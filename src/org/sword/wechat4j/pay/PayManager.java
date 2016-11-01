@@ -677,7 +677,7 @@ public class PayManager {
         while (i < allNodes.getLength()) {
             node = allNodes.item(i);
             if (node instanceof Element) {
-                map.put(node.getNodeName(), node.getTextContent());
+                map.put(node.getNodeName(), node.getNodeValue());// node.getTextContent()
             }
             i++;
         }

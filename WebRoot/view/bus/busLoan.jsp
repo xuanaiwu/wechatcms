@@ -155,7 +155,50 @@
 		         </div>
 	         
 	         	 <div title="分表2" class="ui-edit" style="padding:20px;" >   
-			        tab2    
+			        	<div class="oz-form-fields"  style="width:450px;padding-top: 5px">  
+						    <table cellpadding="0" cellspacing="0" style="width:450px;" id="optionContainer">  
+						        <tr id="option0">   
+						            <td class="oz-form-topLabel">所属问题  
+						               
+						            </td>  
+						            <td class="oz-property" >  
+						               1111
+						            </td>  
+						            <td></td>  
+						        </tr>  
+						        <tr id="option1">   
+						            <td class="oz-form-topLabel">选项1：</td>  
+						            <td class="oz-property" >  
+						                <input type="text"  style="width:300px">  
+						            </td>  
+						            <td></td>  
+						        </tr>  
+						        <tr id="option2">   
+						            <td class="oz-form-topLabel">选项2：</td>  
+						            <td class="oz-property" >  
+						                <input type="text"  style="width:300px" >  
+						            </td>  
+						            <td></td>  
+						        </tr>  
+						        <tr id="option3">   
+						            <td class="oz-form-topLabel">选项3：</td>  
+						            <td class="oz-property" >  
+						                <input type="text"  style="width:300px">  
+						            </td>  
+						            <td></td>  
+						        </tr>  
+						        <tr id="option4">   
+						            <td class="oz-form-topLabel">选项4：</td>  
+						            <td class="oz-property" >  
+						                <input type="text"  style="width:300px">  
+						            </td>  
+						            <td></td>  
+						        </tr>  
+						    </table>  
+						    <div style="text-align: center;">  
+						        <a href="#" onclick="addRow()">添加一行</a>  
+						    </div>  
+					</div>   
 			    </div>   
 			    <div title="分表3"  class="ui-edit" style="padding:20px;">   
 			         <div class="ftitle">法定代表人或负责人</div>

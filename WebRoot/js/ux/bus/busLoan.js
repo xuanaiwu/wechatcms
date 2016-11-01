@@ -73,6 +73,7 @@ dy.busLoan = function(){
 			_this.initForm();
 			_box = new YDataGrid(_this.config); 
 			_box.init();
+			
 		}
 	}
 	return _this;
@@ -80,4 +81,18 @@ dy.busLoan = function(){
 
 $(function(){
 	dy.busLoan.init();
-});		
+	
+});	
+
+var rowCount=4;  //行数默认4行  
+//添加行  
+function addRow(){  
+    rowCount++;  
+    var newRow='<tr id="option'+rowCount+'"><td class="oz-form-topLabel">选项'+rowCount+'：</td><td class="oz-property" ><input type="text"  style="width:300px"></td><td><a href="#" onclick=delRow('+rowCount+')>删除</a></td></tr>';  
+    $('#optionContainer').append(newRow);  
+}  
+//删除行  
+function delRow(rowIndex){  
+    $("#option"+rowIndex).remove();  
+    rowCount--;  
+}  
