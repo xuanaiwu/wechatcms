@@ -3,6 +3,7 @@
 .mymetadata
 .myumldata
 .classpath
+.project
 
 # Generated files
 bin/
