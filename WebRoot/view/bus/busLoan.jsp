@@ -149,23 +149,66 @@
 		            		
 			           </div>
 			           
+			           <div class="ftitle">渠道信息</div>
+			            <div class="fitem">  
+			               <label class="ui-label">渠道：</label><select class="easyui-combobox" name="channel" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="自流量">自流量</option>
+		                    	<option value="云贷推送">云贷推送</option>
+		            		</select>
+			           </div>
 			           
 			           
 			           
 		         </div>
 	         
-	         	 <div title="分表2" class="ui-edit" style="padding:20px;" >   
-			        	<div class="oz-form-fields"  style="width:450px;padding-top: 5px">  
-						    <table cellpadding="0" cellspacing="0" style="width:450px;" id="optionContainer">  
-						        <tr id="option0">   
-						            <td class="oz-form-topLabel">所属问题  
-						               
-						            </td>  
-						            <td class="oz-property" >  
-						               1111
-						            </td>  
-						            <td></td>  
-						        </tr>  
+	         	 <div title="分表2" class="ui-edit" style="padding:20px;" >
+	         	 		<div id="optionContainer" class="ftitle">经验实体信息</div>  
+			        	<div id="option0"  class="ui-edit"  style="padding-top:5px">
+			        		<div class="fitem">
+			        				<label>经营网店名称:</label>  
+			               			<input class="easyui-validatebox" type="text" name="shopName"   data-options="required:true,validType:'length[1,100]'">
+			               			<label>所属电商平台名称:</label>  
+			               			<input class="easyui-validatebox" type="text" name="platformName"   data-options="required:true,validType:'length[1,100]'">
+			               			<label>网店级别（仅限淘宝及天猫商户）:</label>  
+			               			<input class="easyui-validatebox" type="text" name="shopLevel"   data-options="required:true,validType:'length[1,100]'">
+			               			<label>网店持续经营年限:</label>  
+			               			<input class="easyui-validatebox" type="text" name="operatingPeriod"   data-options="required:true,validType:'length[1,100]'">   
+			                 </div>
+			        		<div class="fitem">
+			        				<label>网店实际所有者（个人名称或公司名称):</label>  
+			               			<input class="easyui-validatebox" type="text" name="shopOwner"   data-options="required:true,validType:'length[1,100]'">
+			               			<label>子帐号:</label>  
+			               			<input class="easyui-validatebox" type="text" name="subAccount"   data-options="required:true,validType:'length[1,100]'">
+			               			<label>密码:</label>  
+			               			<input class="easyui-validatebox" type="text" name="sbuPassword"   data-options="required:true,validType:'length[1,100]'">
+			               			<label>主营业务及主要产品、品牌:</label>  
+			               			<input class="easyui-validatebox" type="text" name="businessOpera"   data-options="required:true,validType:'length[1,200]'">   
+			                 </div>
+			                 <div class="fitem">
+			        				<label>经营地址（如有）:</label>  
+			               			<input class="easyui-validatebox" type="text" name="businessAddress" >
+			               			<label>仓库地址:</label>  
+			               			<input class="easyui-validatebox" type="text" name="warehouseAddress" >
+			               			<label>经营实体上年度销售/营业收入:</label>  
+			               			<input class="easyui-validatebox" type="text" name="salesIncome"   data-options="required:true,validType:'length[1,100]'">
+			               			<label>经营实体总负债:</label>  
+			               			<input class="easyui-validatebox" type="text" name="totalLiability"   data-options="required:true,validType:'length[1,100]'">   
+			                 </div>
+			                 
+			                  <div class="fitem">
+			        				<label>银行负债:</label>  
+			               			<input class="easyui-validatebox" type="text" name="bankLiabilities"  data-options="required:true,validType:'length[1,100]'">
+			               			<label>上年度净利润:</label>  
+			               			<input class="easyui-validatebox" type="text" name="netProfit"  data-options="required:true,validType:'length[1,100]'">
+			               			  
+			                 </div>
+			        	
+			        	
+			        	
+			        	  
+						    <table cellpadding="0" cellspacing="0" style="width:450px;" >  
+						 
 						        <tr id="option1">   
 						            <td class="oz-form-topLabel">选项1：</td>  
 						            <td class="oz-property" >  
@@ -199,10 +242,10 @@
 						        <a href="#" onclick="addRow()">添加一行</a>  
 						    </div>  
 					</div>   
-			    </div>   
+			    </div>
+			       
 			    <div title="分表3"  class="ui-edit" style="padding:20px;">   
 			         <div class="ftitle">法定代表人或负责人</div>
-			            
 			            <div class="fitem">  
 			                <label>姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="legalPerson" data-options="required:true,validType:'length[1,100]'">
