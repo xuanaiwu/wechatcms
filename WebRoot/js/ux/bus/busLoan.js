@@ -84,11 +84,17 @@ $(function(){
 	
 });	
 
-var rowCount=4;  //行数默认4行  
+var rowCount=0;  //从0开始
 //添加行  
 function addRow(){  
-    rowCount++;  
-    var newRow='<tr id="option'+rowCount+'"><td class="oz-form-topLabel">选项'+rowCount+'：</td><td class="oz-property" ><input type="text"  style="width:300px"></td><td><a href="#" onclick=delRow('+rowCount+')>删除</a></td></tr>';  
+    rowCount++;
+    var newRow='<div id="option'+rowCount+'"class="ui-edit"  style="padding-top:5px"><div class="fitem">'+
+    '<label>经营网店名称:</label><input class="easyui-validatebox" type="text" name="shopName'+rowCount+'" data-options="required:true,validType:'+length[1,100]+'">'+
+    '<label>所属电商平台名称:</label><input class="easyui-validatebox" type="text" name="platformName'+rowCount+'"   data-options="required:true,validType:'+length[1,100]+'"><label>网店级别（仅限淘宝及天猫商户）:</label><input class="easyui-validatebox" type="text" name="shopLevel'+rowCount+'"   data-options="required:true,validType:'+length[1,100]+'"><label>网店持续经营年限:</label><input class="easyui-validatebox" type="text" name="operatingPeriod'+rowCount+'"   data-options="required:true,validType:'+length[1,100]+'">'+
+    '</div><a href="#" onclick=delRow('+rowCount+')>删除</a></div>';
+    
+    //var newRow='<tr id="option'+rowCount+'"><td class="oz-form-topLabel">选项'+rowCount+'：</td><td class="oz-property" ><input type="text"  style="width:300px"></td><td><a href="#" onclick=delRow('+rowCount+')>删除</a></td></tr>';
+    
     $('#optionContainer').append(newRow);  
 }  
 //删除行  
