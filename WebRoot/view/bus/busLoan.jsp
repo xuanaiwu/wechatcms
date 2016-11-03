@@ -34,6 +34,7 @@
      <div id="edit-win" class="easyui-dialog" title="总表信息" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:1029px;height:549px;">  
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" type="text" name="id">
+     		 <input class="hidden" id="rowCount" type="text" name="rowCount">
      		 <input class="hidden" type="text" name="uName" value="${user.nickName}">
      		 <input class="hidden" type="text"  name="uId" value="${user.id}"> 
      		<div id="tt" class="easyui-tabs" style="width:1025px;height:540px;">    
@@ -203,6 +204,7 @@
 			               			<input class="easyui-validatebox" type="text" name="netProfit0"  data-options="required:true,validType:'length[1,100]'">
 			               			  
 			                 </div>
+			                 <br />
 				        	 <div style="text-align:center;">  
 							       <a href="#" onclick="addRow()">添加一行</a>  
 							 </div>  
@@ -212,13 +214,13 @@
 			    <div title="分表3"  class="ui-edit" style="padding:20px;">   
 			         <div class="ftitle">法定代表人或负责人</div>
 			            <div class="fitem">  
-			                <label>姓名:</label>  
+			               <label>姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="legalPerson" data-options="required:true,validType:'length[1,100]'">
 			               <label>性别:</label>  
 			               <select class="easyui-combobox" name="gender" style="width:139px" data-options="required:true,validType:'length[1,100]'">
 		                    	<option value="男">男</option>
 		                    	<option value="女">女</option>
-		            		</select>
+		            	   </select>
 		            	   <label>身份证号码:</label>  
 			               <input class="easyui-validatebox" type="text" name="idCard" data-options="required:true,validType:'length[1,100]'">
 			               <label>公司名称:</label>  
