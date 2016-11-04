@@ -75,9 +75,9 @@ public class BusinessLoanAction extends BaseAction{
 	 * @throws Exception 
 	 */
 	@RequestMapping("/save")
-	public void save(HashMap map,HttpServletResponse response) throws Exception{
+	public void save(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		System.out.println(new Date()+":saving");
-		System.out.println("rowCount="+map.get("rowCount"));
+		System.out.println("rowCount="+request.getParameter("rowCount"));
 		/*if(busLoanInfo==null){
 			sendFailureMessage(response,"请不要非法操作~！");
 			return;
@@ -88,6 +88,7 @@ public class BusinessLoanAction extends BaseAction{
 			busLoanInfoService.update(busLoanInfo);
 		}
 		sendSuccessMessage(response,"保存成功！");*/
+		sendSuccessMessage(response,"保存成功！");
 		return;
 	}
 	

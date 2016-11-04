@@ -34,7 +34,7 @@
      <div id="edit-win" class="easyui-dialog" title="总表信息" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:1029px;height:549px;">  
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" type="text" name="id">
-     		 <input class="hidden" id="rowCount" type="text" name="rowCount">
+     		 <input class="hidden" id="rowCount" type="text" name="rowCount" value="0">
      		 <input class="hidden" type="text" name="uName" value="${user.nickName}">
      		 <input class="hidden" type="text"  name="uId" value="${user.id}"> 
      		<div id="tt" class="easyui-tabs" style="width:1025px;height:540px;">    
@@ -212,20 +212,74 @@
 			    </div>
 			       
 			    <div title="分表3"  class="ui-edit" style="padding:20px;">   
-			         <div class="ftitle">法定代表人或负责人</div>
+			         <div class="ftitle">法定代表人或负责人基本信息（必填）</div>
 			            <div class="fitem">  
 			               <label>姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="legalPerson" data-options="required:true,validType:'length[1,100]'">
+			               <label>证件号码:</label>  
+			               <input class="easyui-validatebox" type="text" name="idCard" data-options="required:true,validType:'length[1,100]'">
 			               <label>性别:</label>  
 			               <select class="easyui-combobox" name="gender" style="width:139px" data-options="required:true,validType:'length[1,100]'">
 		                    	<option value="男">男</option>
 		                    	<option value="女">女</option>
 		            	   </select>
-		            	   <label>身份证号码:</label>  
-			               <input class="easyui-validatebox" type="text" name="idCard" data-options="required:true,validType:'length[1,100]'">
 			               <label>公司名称:</label>  
 			               <input class="easyui-validatebox" type="text" name="companyName" data-options="required:true,validType:'length[1,100]'">
-			           </div>  
+			           </div>
+			           <div class="fitem">  
+			               <label>身份证有效期:</label>  
+			               <input class="easyui-validatebox" type="text" name="idCardPeriod" data-options="required:true,validType:'length[1,100]'">
+			               <label>身份证地址:</label>  
+			               <input class="easyui-validatebox" type="text" name="idCardAddress" data-options="required:true,validType:'length[1,100]'">
+			               <label>户籍地址:</label>  
+			               <input class="easyui-validatebox" type="text" name="householdRegistration" data-options="required:true,validType:'length[1,100]'">
+			               <label>现住址:</label>  
+			               <input class="easyui-validatebox" type="text" name="houseAddress" data-options="required:true,validType:'length[1,100]'">
+			           </div>
+			           <div class="fitem">  
+			               <label>可接受快递额地址:</label>  
+			               <input class="easyui-validatebox" type="text" name="deliveryAddress" data-options="required:true,validType:'length[1,200]'">
+			               <label>手机:</label>  
+			               <input class="easyui-validatebox" type="text" name="legalPhone" data-options="required:true,validType:'length[1,100]'">
+			           </div>
+			           
+			           <div class="ftitle">法定代表人或负责人家庭资产（必填）</div>
+			            <div class="fitem">  
+			               <label>房产数量:</label>  
+			               <input class="easyui-validatebox" type="text" name="propertyQuantity" data-options="required:true,validType:'length[1,100]'">
+			               <label>总面积:</label>  
+			               <input class="easyui-validatebox" type="text" name="totalArea" data-options="required:true,validType:'length[1,100]'">
+			              	<label>总价值:</label>  
+			               <input class="easyui-validatebox" type="text" name="totalValue" data-options="required:true,validType:'length[1,100]'">
+			               <label>详细地址（以;隔开）:</label>  
+			               <input class="easyui-validatebox" type="text" name="propertyAddress" data-options="required:true,validType:'length[1,500]'">
+			           </div>
+			           
+			           <div class="fitem">  
+			               <label>是否已为他人(企业)债权设定抵押:</label>  
+			               <select class="easyui-combobox" name="mortgage" style="width:139px" data-options="required:true,validType:'length[1,100]'">
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            	   </select>
+			               <label>车辆总数:</label>  
+			               <input class="easyui-validatebox" type="text" name="totalCar" data-options="required:true,validType:'length[1,500]'">
+			              	<label>牌照号（以;隔开）:</label>  
+			               <input class="easyui-validatebox" type="text" name="licenseNumber" data-options="required:true,validType:'length[1,100]'">
+			               <label>总价值:</label>  
+			               <input class="easyui-validatebox" type="text" name="totalCarValue" data-options="required:true,validType:'length[1,100]'">
+			           </div>
+			           
+			            <div class="fitem">  
+			               <label>其他资产:</label>  
+			             	<input class="easyui-validatebox" type="text" name="otherAssets">
+			               <label>借款所属银行:</label>  
+			               <input class="easyui-validatebox" type="text" name="borrowOfBank" >
+			              	<label>金额:</label>  
+			               <input class="easyui-validatebox" type="text" name="amount" >
+			               <label>期限:</label>  
+			               <input class="easyui-validatebox" type="text" name="theTerm">
+			           </div>
+			               
 			    </div>   
 	        </div>    
      	</form>
