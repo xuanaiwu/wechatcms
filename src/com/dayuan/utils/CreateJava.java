@@ -19,10 +19,16 @@ import org.apache.velocity.VelocityContext;
  * <b>更新内容：</b><br>
  */
 public class CreateJava {
-	private static ResourceBundle res = ResourceBundle.getBundle("DataSourceConfig");
-	private static String url= res.getString("gpt.url"); 
-	private static String username =  res.getString("gpt.username");
-	private static String passWord = res.getString("gpt.password");
+	/**
+	 * DataSourceConfig。properties于2016-11-5日删除
+	 *private static ResourceBundle res = ResourceBundle.getBundle("DataSourceConfig");
+	 *private static String url= res.getString("gpt.url"); 
+	 *private static String username =  res.getString("gpt.username");
+	 *private static String passWord = res.getString("gpt.password"); 
+	 * */
+	private static String url="";
+	private static String username="";
+	private static String passWord="";
 
 	 //项目跟路径路径，此处修改为你的项目路径
 	private static String rootPath = "F:\\360云盘\\YiYaWork\\YIYA_SERVICE\\";//getRootPath();// "F:\\openwork\\open\\";

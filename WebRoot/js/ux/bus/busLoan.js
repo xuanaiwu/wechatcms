@@ -46,12 +46,7 @@ dy.busLoan = function(){
 						{field:'urgentCont',title:'紧急联系人',width:120,sortable:true},
 						{field:'urgentContPhone',title:'紧急联系人电话',width:120,sortable:true},
 						{field:'urgentContAddress',title:'紧急联系人地址',width:120,sortable:true},
-						{field:'relationship',title:'关系',width:120,sortable:true},
-						{field:'legalPerson',title:'法人姓名',width:120,sortable:true},
-						{field:'gender',title:'性别',width:120,sortable:true},
-						{field:'idCard',title:'身份证',width:120,sortable:true},
-						{field:'companyName',title:'公司名称',width:120,sortable:true}
-						
+						{field:'relationship',title:'关系',width:120,sortable:true}
 				]],
 				toolbar:[
 					{id:'btnadd',text:'添加',btnType:'add'},
@@ -84,26 +79,78 @@ $(function(){
 	
 });	
 
-var rowCount=0;  //从0开始
 //添加行  
-function addRow(){  
-    rowCount++;
-    var newRow='<br/><div id="option'+rowCount+'"class="ui-edit"  style="padding-top:5px"><div class="fitem">'+
-    '<label>经营网店名称:</label><input class="easyui-validatebox" type="text" name="shopName'+rowCount+'">'+
-    '<label>所属电商平台名称:</label><input class="easyui-validatebox" type="text" name="platformName'+rowCount+'"><label>网店级别（仅限淘宝及天猫商户）:</label><input class="easyui-validatebox" type="text" name="shopLevel'+rowCount+'"><label>网店持续经营年限:</label><input class="easyui-validatebox" type="text" name="operatingPeriod'+rowCount+'"></div>'+
-    '<div class="fitem"><label>网店实际所有者（个人名称或公司名称):</label><input class="easyui-validatebox" type="text" name="shopOwner'+rowCount+'"><label>子帐号:</label>  <input class="easyui-validatebox" type="text" name="subAccount'+rowCount+'"><label>密码:</label>  <input class="easyui-validatebox" type="text" name="sbuPassword'+rowCount+'"><label>主营业务及主要产品、品牌:</label><input class="easyui-validatebox" type="text" name="businessOpera'+rowCount+'"></div>'+
-    '<div class="fitem"><label>经营地址（如有）:</label><input class="easyui-validatebox" type="text" name="businessAddress'+rowCount+'" ><label>仓库地址:</label><input class="easyui-validatebox" type="text" name="warehouseAddress'+rowCount+'" ><label>经营实体上年度销售/营业收入:</label><input class="easyui-validatebox" type="text" name="salesIncome'+rowCount+'"><label>经营实体总负债:</label>  <input class="easyui-validatebox" type="text" name="totalLiability'+rowCount+'"></div>'+
-    '<div class="fitem"><label>银行负债:</label>  <input class="easyui-validatebox" type="text" name="bankLiabilities'+rowCount+'" ><label>上年度净利润:</label><input class="easyui-validatebox" type="text" name="netProfit'+rowCount+'"></div>'+
-    '<br /><div style="text-align:center;"><a href="#" onclick=delRow('+rowCount+')>删除</a></div></div>';
-    
-    //var newRow='<tr id="option'+rowCount+'"><td class="oz-form-topLabel">选项'+rowCount+'：</td><td class="oz-property" ><input type="text"  style="width:300px"></td><td><a href="#" onclick=delRow('+rowCount+')>删除</a></td></tr>';
-    
-    $('#optionContainer').append(newRow);
-    $('#rowCount').val(rowCount);
+function addShopRow(){
+	var num=$("#rowCount").val();//取值
+	num=parseInt(num);
+	num++;
+	var str='<td><a href="#" onclick=delShopRow('+num+')>删除</a></td>';
+	$("#tShopRow0").clone(true).attr("id","tShopRow"+num).appendTo("#tblShopData");
+	$("#tShopRow"+num+"td").each(function(){
+		$(this).find("input[type='text']").val("");//清空数据
+		$(this).find("input[name='shopName']").attr("id","shopName"+num).attr("name","shopName"+num);
+		$(this).find("input[name='platformName']").attr("id","platformName"+num).attr("name","platformName"+num);
+		$(this).find("input[name='shopLevel']").attr("id","shopLevel"+num).attr("name","shopLevel"+num);
+		$(this).find("input[name='operatingPeriod']").attr("id","operatingPeriod"+num).attr("name","operatingPeriod"+num);
+		$(this).find("input[name='shopOwner']").attr("id","shopOwner"+num).attr("name","shopOwner"+num);
+		$(this).find("input[name='subAccount']").attr("id","subAccount"+num).attr("name","subAccount"+num);
+		$(this).find("input[name='sbuPassword']").attr("id","sbuPassword"+num).attr("name","sbuPassword"+num);
+		$(this).find("input[name='businessOpera']").attr("id","businessOpera"+num).attr("name","businessOpera"+num);
+		$(this).find("input[name='businessAddress']").attr("id","businessAddress"+num).attr("name","businessAddress"+num);
+		$(this).find("input[name='warehouseAddress']").attr("id","warehouseAddress"+num).attr("name","warehouseAddress"+num);
+		$(this).find("input[name='salesIncome']").attr("id","salesIncome"+num).attr("name","salesIncome"+num);
+		$(this).find("input[name='totalLiability']").attr("id","totalLiability"+num).attr("name","totalLiability"+num);
+		$(this).find("input[name='bankLiabilities']").attr("id","bankLiabilities"+num).attr("name","bankLiabilities"+num);
+		$(this).find("input[name='netProfit']").attr("id","netProfit"+num).attr("name","netProfit"+num);
+	});
+    $('#rowCount').val(num);//重新赋值
+    $("#tShopRow"+num).append(str);
 }  
 //删除行  
-function delRow(rowIndex){  
-    $("#option"+rowIndex).remove();  
-    rowCount--;
-    $('#rowCount').val(rowCount);
-}  
+function delShopRow(rowIndex){  
+	var num=$("#rowCount").val();//取值
+	num=parseInt(num);
+	if(rowIndex>0&&num>0){
+		$("#tShopRow"+rowIndex).remove();
+		num--;
+		 $('#rowCount').val(num);//重新赋值
+	}else{
+		alert("这是第一行了！");
+	}
+	
+}
+//保证人添加行
+function addGuaranterRow(){
+	var num=$("#guaranterRowCount").val();
+	num=parseInt(num);
+	num++;//点击自加
+	var str='<td><a href="#" onclick=delGuaranterRow('+num+')>删除</a></td>';
+	$("#tRow0").clone(true).attr("id","tRow"+num).appendTo("#tblData");
+	$("#tRow"+num+"td").each(function(){
+		$(this).find("input[type='text']").val("");//清空数据
+		$(this).find("input[name='guaranterName']").attr("id","guaranterName"+num).attr("name","guaranterName"+num);
+		$(this).find("input[name='guaranterCard']").attr("id","guaranterCard"+num).attr("name","guaranterCard"+num);
+		$(this).find("input[name='guaranterEmployer']").attr("id","guaranterEmployer"+num).attr("name","guaranterEmployer"+num);
+		$(this).find("input[name='guaranterDuties']").attr("id","guaranterDuties"+num).attr("name","guaranterDuties"+num);
+		$(this).find("input[name='guaranterPhone']").attr("id","guaranterPhone"+num).attr("name","guaranterPhone"+num);
+		$(this).find("input[name='guaranterMaritalStatus']").attr("id","guaranterMaritalStatus"+num).attr("name","guaranterMaritalStatus"+num);
+		$(this).find("input[name='guaranterHouseAddress']").attr("id","guaranterHouseAddress"+num).attr("name","guaranterHouseAddress"+num);
+		$(this).find("input[name='guaranterMonthlyIncome']").attr("id","guaranterMonthlyIncome"+num).attr("name","guaranterMonthlyIncome"+num);
+		$(this).find("input[name='guaranterValues']").attr("id","guaranterValues"+num).attr("name","guaranterValues"+num);
+		$(this).find("input[name='guaranterTotalLiabilities']").attr("id","guaranterTotalLiabilities"+num).attr("name","guaranterTotalLiabilities"+num);
+	});
+	$("#guaranterRowCount").val(num);//重新赋值
+	$("#tRow"+num).append(str);
+}
+//保证人删除行
+function delGuaranterRow(rowIndex){
+	var num=$("#guaranterRowCount").val();
+	num=parseInt(num);
+	if(rowIndex>0&&num>0){//判断是不是第一行
+		$("#tRow"+rowIndex).remove();
+		num--;//删除后要自减
+		$('#guaranterRowCount').val(num);//重新赋值
+	}else{
+		alert("这是第一行了！");
+	}
+}

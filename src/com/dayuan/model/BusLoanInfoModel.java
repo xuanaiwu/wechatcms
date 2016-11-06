@@ -16,11 +16,7 @@ public class BusLoanInfoModel extends BaseModel{
 	private String taobaoTreeDiamondMore;
 	private String otherPlatform;
 	private String operatingPeriodMore;
-	private String shopOwner;
-	private String legalPerson;
-	private String gender;
-	private String idCard;
-	private String companyName;
+	private String ifShopOwner;
 	private String haveGuarantor;
 	private String shopController;
 	private String salesOfMore;
@@ -29,32 +25,72 @@ public class BusLoanInfoModel extends BaseModel{
 	private String perNotOverdue;
 	
 	
-	public String getLegalPerson() {
-		return legalPerson;
-	}
-	public void setLegalPerson(String legalPerson) {
-		this.legalPerson = legalPerson;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	public String getIdCard() {
-		return idCard;
-	}
-	public void setIdCard(String idCard) {
-		this.idCard = idCard;
-	}
-	public String getCompanyName() {
-		return companyName;
-	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+	/**2016-11-5新增 */
+	private String uName;
+	private String uId;
+	private String content;
+	private String channel;
+	private String ifGuaranter;
+	private String localPaySocialSecurity;
+	private String ifCustomersVIP;
+	private String childrenIfLocally;
+	private String additionInfo;
 	
 	
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public String getuId() {
+		return uId;
+	}
+	public void setuId(String uId) {
+		this.uId = uId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getChannel() {
+		return channel;
+	}
+	public void setChannel(String channel) {
+		this.channel = channel;
+	}
+	public String getIfGuaranter() {
+		return ifGuaranter;
+	}
+	public void setIfGuaranter(String ifGuaranter) {
+		this.ifGuaranter = ifGuaranter;
+	}
+	public String getLocalPaySocialSecurity() {
+		return localPaySocialSecurity;
+	}
+	public void setLocalPaySocialSecurity(String localPaySocialSecurity) {
+		this.localPaySocialSecurity = localPaySocialSecurity;
+	}
+	public String getIfCustomersVIP() {
+		return ifCustomersVIP;
+	}
+	public void setIfCustomersVIP(String ifCustomersVIP) {
+		this.ifCustomersVIP = ifCustomersVIP;
+	}
+	public String getChildrenIfLocally() {
+		return childrenIfLocally;
+	}
+	public void setChildrenIfLocally(String childrenIfLocally) {
+		this.childrenIfLocally = childrenIfLocally;
+	}
+	public String getAdditionInfo() {
+		return additionInfo;
+	}
+	public void setAdditionInfo(String additionInfo) {
+		this.additionInfo = additionInfo;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -145,12 +181,7 @@ public class BusLoanInfoModel extends BaseModel{
 	public void setOperatingPeriodMore(String operatingPeriodMore) {
 		this.operatingPeriodMore = operatingPeriodMore;
 	}
-	public String getShopOwner() {
-		return shopOwner;
-	}
-	public void setShopOwner(String shopOwner) {
-		this.shopOwner = shopOwner;
-	}
+	
 	public String getHaveGuarantor() {
 		return haveGuarantor;
 	}
@@ -187,6 +218,11 @@ public class BusLoanInfoModel extends BaseModel{
 	public void setPerNotOverdue(String perNotOverdue) {
 		this.perNotOverdue = perNotOverdue;
 	}
-	
+	public String getIfShopOwner() {
+		return ifShopOwner;
+	}
+	public void setIfShopOwner(String ifShopOwner) {
+		this.ifShopOwner = ifShopOwner;
+	}
 
 }

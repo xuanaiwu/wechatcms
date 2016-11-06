@@ -35,6 +35,7 @@
      	<form id="editForm" class="ui-form" method="post">  
      		 <input class="hidden" type="text" name="id">
      		 <input class="hidden" id="rowCount" type="text" name="rowCount" value="0">
+     		 <input class="hidden" id="guaranterRowCount" type="text" name="guaranterRowCount" value="0">
      		 <input class="hidden" type="text" name="uName" value="${user.nickName}">
      		 <input class="hidden" type="text"  name="uId" value="${user.id}"> 
      		<div id="tt" class="easyui-tabs" style="width:1025px;height:540px;">    
@@ -43,7 +44,7 @@
 			     	  
 			           <div class="fitem">  
 			               <label>调查机构名称:</label>  
-			               <input class="easyui-validatebox" type="text" name="surveyOrgName"   data-options="required:true,validType:'length[1,100]'">
+			               <input class="easyui-validatebox" type="text" name="surveyOrgName"   data-options="required:true,validType:'length[1,200]'">
 			               <label>调查人姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="surveyPersonName" data-options="required:true,validType:'length[1,100]'">
 			               <label>手机:</label>  
@@ -99,7 +100,7 @@
 		                    	<option value="是">是</option>
 		                    	<option value="否">否</option>
 		            		</select>
-		            		 <label class="ui-label">是否网商店铺注册所有人：</label><select class="easyui-combobox" name="shopOwner" style="width:139px">
+		            		 <label class="ui-label">是否网商店铺注册所有人：</label><select class="easyui-combobox" name="ifShopOwner" style="width:139px">
 		            			<option value=""></option>
 		                    	<option value="是">是</option>
 		                    	<option value="否">否</option>
@@ -163,55 +164,8 @@
 			           
 		         </div>
 	         
-	         	 <div title="分表2" class="ui-edit" style="padding:20px;" >
-	         	 		<div id="optionContainer" class="ftitle">经验实体信息(必填，多个网商店铺需加行)</div>  
-			        	<div id="option0"  class="ui-edit"  style="padding-top:5px">
-			        		<div class="fitem">
-			        				<label>经营网店名称:</label>  
-			               			<input class="easyui-validatebox" type="text" name="shopName0"   data-options="required:true,validType:'length[1,100]'">
-			               			<label>所属电商平台名称:</label>  
-			               			<input class="easyui-validatebox" type="text" name="platformName0"   data-options="required:true,validType:'length[1,100]'">
-			               			<label>网店级别（仅限淘宝及天猫商户）:</label>  
-			               			<input class="easyui-validatebox" type="text" name="shopLevel0"   data-options="required:true,validType:'length[1,100]'">
-			               			<label>网店持续经营年限:</label>  
-			               			<input class="easyui-validatebox" type="text" name="operatingPeriod0"   data-options="required:true,validType:'length[1,100]'">   
-			                 </div>
-			        		<div class="fitem">
-			        				<label>网店实际所有者（个人名称或公司名称):</label>  
-			               			<input class="easyui-validatebox" type="text" name="shopOwner0"   data-options="required:true,validType:'length[1,100]'">
-			               			<label>子帐号:</label>  
-			               			<input class="easyui-validatebox" type="text" name="subAccount0"   data-options="required:true,validType:'length[1,100]'">
-			               			<label>密码:</label>  
-			               			<input class="easyui-validatebox" type="text" name="sbuPassword0"   data-options="required:true,validType:'length[1,100]'">
-			               			<label>主营业务及主要产品、品牌:</label>  
-			               			<input class="easyui-validatebox" type="text" name="businessOpera0"   data-options="required:true,validType:'length[1,200]'">   
-			                 </div>
-			                 <div class="fitem">
-			        				<label>经营地址（如有）:</label>  
-			               			<input class="easyui-validatebox" type="text" name="businessAddress0" >
-			               			<label>仓库地址:</label>  
-			               			<input class="easyui-validatebox" type="text" name="warehouseAddress0" >
-			               			<label>经营实体上年度销售/营业收入:</label>  
-			               			<input class="easyui-validatebox" type="text" name="salesIncome0"   data-options="required:true,validType:'length[1,100]'">
-			               			<label>经营实体总负债:</label>  
-			               			<input class="easyui-validatebox" type="text" name="totalLiability0"   data-options="required:true,validType:'length[1,100]'">   
-			                 </div>
-			                 
-			                  <div class="fitem">
-			        				<label>银行负债:</label>  
-			               			<input class="easyui-validatebox" type="text" name="bankLiabilities0"  data-options="required:true,validType:'length[1,100]'">
-			               			<label>上年度净利润:</label>  
-			               			<input class="easyui-validatebox" type="text" name="netProfit0"  data-options="required:true,validType:'length[1,100]'">
-			               			  
-			                 </div>
-			                 <br />
-				        	 <div style="text-align:center;">  
-							       <a href="#" onclick="addRow()">添加一行</a>  
-							 </div>  
-					</div>   
-			    </div>
 			       
-			    <div title="分表3"  class="ui-edit" style="padding:20px;">   
+			    <div title="分表2"  class="ui-edit" style="padding:20px;">   
 			         <div class="ftitle">法定代表人或负责人基本信息（必填）</div>
 			            <div class="fitem">  
 			               <label>姓名:</label>  
@@ -279,7 +233,237 @@
 			               <label>期限:</label>  
 			               <input class="easyui-validatebox" type="text" name="theTerm">
 			           </div>
+			           
+			           <div class="ftitle">是否为实际控制人，选否要填写实际控制人信息</div>
+			            <div class="fitem">  
+			               <label class="ui-label">是否为实际控制人：</label><select class="easyui-combobox" name="ifController" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+			           </div>
+			           
+			           
+			           <div class="ftitle">实际控制人基本信息</div>
+			            <div class="fitem">  
+			               <label>姓名:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerName" >
+			               <label>证件号码 :</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerIdCard" >
+			              	<label>户籍地址:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerRegistration" >
+			               <label>家庭住址:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerHouseAddress" >
+			           </div>
+			           
+			           <div class="fitem">  
+			               <label>手机:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerPhone">
+			               <label>房产数量:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerPropertyQuantity" >
+			              	<label>房产总面积:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerTotalArea" >
+			               <label>房产总价值:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllertotalValue">
+			           </div>
+			           
+			            <div class="fitem">
+			            <label>是否已为他人(企业)债权设定抵押:</label>  
+			               <select class="easyui-combobox" name="contrallerMortgage" style="width:139px" >
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            	   </select>	  
+			               <label>房产详细地址（以;隔开）:</label>  
+			             	<input class="easyui-validatebox" type="text" name="controllerPropertyAddress">
+			               <label>车辆总数:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerTotalCar" >
+			              	<label>牌照号（以;隔开）:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerLicenseNumber" >
 			               
+			           </div>
+			           
+			            <div class="fitem">
+			               <label>总价值:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerTotalCarValue">  
+			               <label>其他资产:</label>  
+			             	<input class="easyui-validatebox" type="text" name="controllerOtherAssets">
+			               <label>借款所属银行:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerBorrowOfBank" >
+			              	<label>金额:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerAmount" >
+			               
+			           </div>
+			           <div class="fitem">
+			               <label>期限:</label>  
+			               <input class="easyui-validatebox" type="text" name="controllerTheTerm">
+			           </div>
+			           
+			           
+			               
+			    </div>
+			    <div title="分表3"  class="ui-edit" style="padding:20px;">
+			    	<div id="optionContainer" class="ftitle">经验实体信息(必填，多个网商店铺需加行)</div>
+	         	 		 <div class="fitem">  
+			              	<table id="tblShopData">
+			              		<tr>
+			              			<td>网店名称</td>
+			              			<td>电商平台名称</td>
+			              			<td>网店级别（仅限淘宝及天猫商户）</td>
+			              			<td>网店持续经营年限</td>
+			              			<td>网店实际所有者（个人名称或公司名称)</td>
+			              			<td>子帐号</td>
+			              			<td>密码</td>
+			              			<td>主要产品、品牌</td>
+			              			<td>经营地址</td>
+			              			<td>仓库地址</td>
+			              			<td>上年度销售</td>
+			              			<td>总负债</td>
+			              			<td>银行负债</td>
+			              			<td>上年度净利润</td>
+			              		</tr>
+			              		<tr id="tShopRow0">
+			              			<td>
+			              			<input id="shopName" class="easyui-validatebox" name="shopName" style="width:59px" data-options="required:true,validType:'length[1,200]'">
+			              			</td>
+			              			<td>
+			              			<input id="platformName" class="easyui-validatebox" name="platformName" style="width:59px" data-options="required:true,validType:'length[1,200]'">
+			              			</td>
+			              			<td>
+			              			<input id="shopLevel" class="easyui-validatebox" name="shopLevel" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			<td>
+			              			<input id="operatingPeriod" class="easyui-validatebox"  name="operatingPeriod" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			<td>
+			              			<input id="shopOwner" class="easyui-validatebox"  name="shopOwner" style="width:59px" data-options="required:true,validType:'length[1,200]'">
+			              			</td>
+			              			<td>
+			              			<input id="subAccount" class="easyui-validatebox"  name="subAccount" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			<td>
+			              				<input id="sbuPassword" class="easyui-validatebox" name="sbuPassword" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			<td>
+			              				<input id="businessOpera" class="easyui-validatebox"  name="businessOpera" style="width:59px" data-options="required:true,validType:'length[1,300]'">
+			              			</td>
+			              			<td>
+			              				<input id="businessAddress" class="easyui-validatebox" name="businessAddress" style="width:59px" data-options="required:true,validType:'length[1,300]'">
+			              			</td>
+			              			<td>
+			              				<input id="warehouseAddress" class="easyui-validatebox"  name="warehouseAddress" style="width:59px" data-options="required:true,validType:'length[1,300]'">
+			              			</td>
+			              			
+			              			<td>
+			              				<input id="salesIncome" class="easyui-validatebox" name="salesIncome" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			<td>
+			              				<input id="totalLiability" class="easyui-validatebox"  name="totalLiability" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			<td>
+			              				<input id="bankLiabilities" class="easyui-validatebox" name="bankLiabilities" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			<td>
+			              				<input id="netProfit" class="easyui-validatebox" name="netProfit" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			</td>
+			              			
+			              		</tr>
+			              	</table>
+			              	<br />
+					        <div style="text-align:center;">  
+								  <a href="#" onclick="addShopRow()">添加一行</a>  
+							</div>	
+			           </div>   
+			    	
+			    	
+			    	
+			    	<div class="ftitle">是否提供自然人保证，是就填写下面信息</div>
+			            <div class="fitem">  
+			               <label class="ui-label">是否提供自然人保证：</label><select class="easyui-combobox" name="ifGuaranter" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+			           </div>
+			           
+			           <div class="ftitle">保证人信息</div>
+			            <div class="fitem">  
+			              	<table id="tblData">
+			              		<tr>
+			              			<td>保证人姓名</td>
+			              			<td>证件号码</td>
+			              			<td>工作单位</td>
+			              			<td>职务</td>
+			              			<td>联系电话</td>
+			              			<td>婚姻状况</td>
+			              			<td>家庭地址</td>
+			              			<td>月收入情况</td>
+			              			<td>资产总额</td>
+			              			<td>负债总额</td>
+			              		</tr>
+			              		<tr id="tRow0">
+			              			<td>
+			              			<input id="guaranterName" name="guaranterName" style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input id="guaranterCard"  name="guaranterCard" style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input id="guaranterEmployer"  name="guaranterEmployer" style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input id="guaranterDuties"  name="guaranterDuties" style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input id="guaranterPhone"  name="guaranterPhone" style="width:89px">
+			              			</td>
+			              			<td>
+			              			<select  id="guaranterMaritalStatus" name="guaranterMaritalStatus" style="width:89px">
+					            			<option value=""></option>
+					                    	<option value="已婚">已婚</option>
+					                    	<option value="未婚">未婚</option>
+					                    	<option value="离异">离异</option>
+					                    	<option value="丧偶">丧偶</option>
+					                    	<option value="其他">其他</option>
+					            		</select>
+			              			</td>
+			              			<td>
+			              				<input id="guaranterHouseAddress" name="guaranterHouseAddress" style="width:89px">
+			              			</td>
+			              			<td>
+			              				<input id="guaranterMonthlyIncome"  name="guaranterMonthlyIncome" style="width:89px">
+			              			</td>
+			              			<td>
+			              				<input id="guaranterValues" name="guaranterValues" style="width:89px">
+			              			</td>
+			              			<td>
+			              				<input id="guaranterTotalLiabilities"  name="guaranterTotalLiabilities" style="width:89px">
+			              			</td>
+			              		</tr>
+			              	</table>
+			              	<br />
+					        <div style="text-align:center;">  
+								  <a href="#" onclick="addGuaranterRow()">添加一行</a>  
+							</div>
+			              	
+			           </div>
+			              
+			           
+			           <div class="ftitle">附加信息</div>
+			            <div class="fitem">  
+			                <label>是否在当地缴纳社保:</label>  
+			             	<select class="easyui-combobox" name="localPaySocialSecurity" style="width:139px">
+		            			<option value=""></option>
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            		</select>
+			               <label>是否华夏银行金融资产类贵宾客户:</label>  
+			               <input class="easyui-validatebox" type="text" name="ifCustomersVIP" >
+			              	<label>子女是否在当地入学:</label>  
+			               <input class="easyui-validatebox" type="text" name="childrenIfLocally" >
+			               <label>其他补充信息:</label>  
+			               <input class="easyui-validatebox" type="text" name="additionInfo">
+			           </div>
+			           
 			    </div>   
 	        </div>    
      	</form>

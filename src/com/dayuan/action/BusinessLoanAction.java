@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dayuan.bean.BusLoanInfo;
+import com.dayuan.bean.BusLoanInfoLegal;
 import com.dayuan.bean.SysUser;
 import com.dayuan.exception.ServiceException;
 import com.dayuan.model.BusLoanInfoModel;
@@ -75,21 +76,41 @@ public class BusinessLoanAction extends BaseAction{
 	 * @throws Exception 
 	 */
 	@RequestMapping("/save")
-	public void save(HttpServletRequest request,HttpServletResponse response) throws Exception{
-		System.out.println(new Date()+":saving");
-		System.out.println("rowCount="+request.getParameter("rowCount"));
-		/*if(busLoanInfo==null){
-			sendFailureMessage(response,"请不要非法操作~！");
-			return;
+	public void save(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal ,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		System.out.println("uName="+busLoanInfo.getuName());
+		System.out.println("surveyOrgName="+busLoanInfo.getSurveyOrgName());
+		System.out.println("legalPerson="+busLoanInfoLegal.getLegalPerson());
+		System.out.println("idCard="+busLoanInfoLegal.getIdCard());
+		int rowCount=0;
+		int guaranterRowCount=0;
+		boolean flag=false;
+		if(!request.getParameter("rowCount").equals("")){
+			rowCount=Integer.parseInt(request.getParameter("rowCount").trim().toString());
 		}
+		if(!request.getParameter("guaranterRowCount").equals("")){
+			guaranterRowCount=Integer.parseInt(request.getParameter("guaranterRowCount").trim().toString());
+		}
+		busLoanInfo.setContent(busLoanInfo.getApplicationName()+","+busLoanInfo.getApplicationAmount()+","+busLoanInfo.getApplicationTerm());
 		if(busLoanInfo.getId()==null){
-			busLoanInfoService.add(busLoanInfo);
+			int num=busLoanInfoService.save(busLoanInfo);
+			if(num==1){
+				flag=true;
+			}
+			System.out.println("save="+num);
+			System.out.println("busLoanInfo.id="+busLoanInfo.getId());
 		}else{
-			busLoanInfoService.update(busLoanInfo);
+			int num=busLoanInfoService.updateReturnInfluences(busLoanInfo);
+			if(num==1){
+				flag=true;
+			}
+			System.out.println("update="+num);
 		}
-		sendSuccessMessage(response,"保存成功！");*/
-		sendSuccessMessage(response,"保存成功！");
-		return;
+		if(flag){
+			sendSuccessMessage(response,"保存成功！");
+		}else{
+			sendFailureMessage(response, "保存失败！");
+		}
+		
 	}
 	
 	
@@ -169,10 +190,10 @@ public class BusinessLoanAction extends BaseAction{
 			if(dataMap.get("xingming")!=null){
 				dataMap.remove("xingming");
 			}
-			dataMap.put("xingming",busLoanInfo.getLegalPerson());
+			/*dataMap.put("xingming",busLoanInfo.getLegalPerson());
 			dataMap.put("xingbie", busLoanInfo.getGender());
 			dataMap.put("shenfenzheng", busLoanInfo.getIdCard());
-			dataMap.put("gongsimingcheng", busLoanInfo.getCompanyName());
+			dataMap.put("gongsimingcheng", busLoanInfo.getCompanyName());*/
 			dataMap.put("nian", DateUtil.getNowYear());
 			dataMap.put("yue", DateUtil.getNowMonth());
 			dataMap.put("ri",DateUtil.getNowDay());
@@ -186,10 +207,11 @@ public class BusinessLoanAction extends BaseAction{
 			wordName="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi.ftl",outFilePath,wordName);
 		}else if(wordType.equals("2")){
+			/*
 			dataMap.put("xingming",busLoanInfo.getLegalPerson());
 			dataMap.put("xingbie", busLoanInfo.getGender());
 			dataMap.put("shenfenzheng", busLoanInfo.getIdCard());
-			dataMap.put("gongsimingcheng", busLoanInfo.getCompanyName());
+			dataMap.put("gongsimingcheng", busLoanInfo.getCompanyName());*/
 			dataMap.put("nian", DateUtil.getNowYear());
 			dataMap.put("yue", DateUtil.getNowMonth());
 			dataMap.put("ri",DateUtil.getNowDay());
