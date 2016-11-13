@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.BusLoanInfoLegalMapper" >
+
+<insert id="save"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
+  insert into bus_loaninfo_legal (bid,legalPerson,idCard,gender,companyName,idCardPeriod,idCardAddress,householdRegistration,houseAddress,deliveryAddress,legalPhone,propertyQuantity,totalArea,totalValue,mortgage,propertyAddress,totalCar,licenseNumber,totalCarValue,otherAssets,borrowOfBank,amount,theTerm,ifController) 
+  values (#{bid},#{legalPerson},#{idCard},#{gender},#{companyName},#{idCardPeriod},#{idCardAddress},#{householdRegistration},#{houseAddress},#{deliveryAddress},#{legalPhone},#{propertyQuantity},#{totalArea},#{totalValue},#{mortgage},#{propertyAddress},#{totalCar},#{licenseNumber},#{totalCarValue},#{otherAssets},#{borrowOfBank},#{amount},#{theTerm},#{ifController})
+</insert>
+
+
+<!-- 根据id，修改记录-->  
+<update id="updateReturnInfluences" parameterType="Object">
+update bus_loaninfo_legal set bid=#{bid},legalPerson=#{legalPerson},idCard=#{idCard},gender=#{gender},companyName=#{companyName},idCardPeriod=#{idCardPeriod},idCardAddress=#{idCardAddress},householdRegistration=#{householdRegistration},houseAddress=#{houseAddress},deliveryAddress=#{deliveryAddress},legalPhone=#{legalPhone},propertyQuantity=#{propertyQuantity},totalArea=#{totalArea},totalValue=#{totalValue},mortgage=#{mortgage},propertyAddress=#{propertyAddress},totalCar=#{totalCar},
+licenseNumber=#{licenseNumber},totalCarValue=#{totalCarValue},otherAssets=#{otherAssets},borrowOfBank=#{borrowOfBank},amount=#{amount},theTerm=#{theTerm},ifController=#{ifController}  where id=#{id}
+</update>
+
+</mapper>
+  

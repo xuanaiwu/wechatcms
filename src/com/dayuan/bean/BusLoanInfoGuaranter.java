@@ -1,8 +1,8 @@
 package com.dayuan.bean;
 
 public class BusLoanInfoGuaranter {
-	private int id;
-	private int bid;
+	private Integer id;
+	private Integer bid;
 	private String guaranterName;
 	private String guaranterCard;
 	private String guaranterEmployer;
@@ -14,17 +14,18 @@ public class BusLoanInfoGuaranter {
 	private String guaranterValues;
 	private String guaranterTotalLiabilities;
 
-	public int getId(){
-		return this.id;
+	
+	public Integer getId() {
+		return id;
 	}
-	public void setId(int id){
-		this.id=id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public int getBid(){
-		return this.bid;
+	public Integer getBid() {
+		return bid;
 	}
-	public void setBid(int bid){
-		this.bid=bid;
+	public void setBid(Integer bid) {
+		this.bid = bid;
 	}
 	public String getGuaranterName(){
 		return this.guaranterName;

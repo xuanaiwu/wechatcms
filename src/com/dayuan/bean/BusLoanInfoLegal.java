@@ -1,8 +1,8 @@
 package com.dayuan.bean;
 
 public class BusLoanInfoLegal {
-	private int id;
-	private int bid;
+	private Integer id;
+	private Integer bid;
 	private String legalPerson;
 	private String idCard;
 	private String gender;
@@ -27,17 +27,18 @@ public class BusLoanInfoLegal {
 	private String theTerm;
 	private String ifController;
 
-	public int getId(){
-		return this.id;
+	
+	public Integer getId() {
+		return id;
 	}
-	public void setId(int id){
-		this.id=id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public int getBid(){
-		return this.bid;
+	public Integer getBid() {
+		return bid;
 	}
-	public void setBid(int bid){
-		this.bid=bid;
+	public void setBid(Integer bid) {
+		this.bid = bid;
 	}
 	public String getLegalPerson(){
 		return this.legalPerson;

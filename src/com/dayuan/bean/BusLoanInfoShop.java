@@ -1,8 +1,8 @@
 package com.dayuan.bean;
 
 public class BusLoanInfoShop {
-	private int id;
-	private int bid;
+	private Integer id;
+	private Integer bid;
 	private String shopName;
 	private String platformName;
 	private String shopLevel;
@@ -18,17 +18,17 @@ public class BusLoanInfoShop {
 	private String bankLiabilities;
 	private String netProfit;
 
-	public int getId(){
-		return this.id;
+	public Integer getId() {
+		return id;
 	}
-	public void setId(int id){
-		this.id=id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public int getBid(){
-		return this.bid;
+	public Integer getBid() {
+		return bid;
 	}
-	public void setBid(int bid){
-		this.bid=bid;
+	public void setBid(Integer bid) {
+		this.bid = bid;
 	}
 	public String getShopName(){
 		return this.shopName;

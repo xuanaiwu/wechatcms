@@ -36,7 +36,7 @@ public class CreateWords {
 		configuration.setClassForTemplateLoading(this.getClass(),path);  //模板FTL文件所存在的位置
 		Template t=null;
 		try {
-			t = configuration.getTemplate(templeName); //文件名
+			t = configuration.getTemplate(templeName); //模板文件名
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

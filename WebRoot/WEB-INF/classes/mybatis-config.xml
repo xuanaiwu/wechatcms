@@ -65,7 +65,16 @@
   <mapper resource="com/dayuan/mybatis/SysOrgMapper.xml"/>
   
  
-  <mapper resource="com/dayuan/mybatis/BusLoanInfoMapper.xml"/>	
+  <mapper resource="com/dayuan/mybatis/BusLoanInfoMapper.xml"/>
+  
+  
+  <mapper resource="com/dayuan/mybatis/BusLoanInfoLegalMapper.xml"/>
+  
+  <mapper resource="com/dayuan/mybatis/BusLoanInfoControllerMapper.xml"/>
+  
+  <mapper resource="com/dayuan/mybatis/BusLoanInfoShopMapper.xml"/>
+  
+  <mapper resource="com/dayuan/mybatis/BusLoanInfoGuaranterMapper.xml"/>		
   
  
  

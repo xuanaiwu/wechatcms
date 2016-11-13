@@ -12,7 +12,13 @@ where 1=1
 	<if test="id != null and id != ''" >
 	    and id =  #{id}
 	</if>
-	 	<if test="applicationName != null and applicationName != ''" >
+	<if test="uId != null and uId != ''" >
+	    and uId =  #{uId}
+	</if>
+	<if test="uName != null and uName != ''" >
+	    and uName =  #{uName}
+	</if>
+	 <if test="applicationName != null and applicationName != ''" >
 	     and applicationName like CONCAT('%', #{applicationName}, '%')
 	</if>
 	<if test="urgentContAddress != null and urgentContAddress!= ''" >
@@ -33,8 +39,14 @@ where 1=1
 </select>
 
 <select id="queryByList" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
-select * from bus_loanInfo
-<include refid="Example_Where_Clause"/>
+		select * from bus_loanInfo
+		<include refid="Example_Where_Clause"/>
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+	      ${pager.orderCondition}
+	    </if>
+	    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+	       ${pager.mysqlQueryCondition}
+	    </if>
 </select>
 
 

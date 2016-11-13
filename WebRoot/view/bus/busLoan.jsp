@@ -323,47 +323,47 @@
 			              		</tr>
 			              		<tr id="tShopRow0">
 			              			<td>
-			              			<input id="shopName" class="easyui-validatebox" name="shopName" style="width:59px" data-options="required:true,validType:'length[1,200]'">
+			              			<input id="shop[0].shopName" class="easyui-validatebox" name="shop[0].shopName" style="width:59px" data-options="required:true,validType:'length[1,200]'">
 			              			</td>
 			              			<td>
-			              			<input id="platformName" class="easyui-validatebox" name="platformName" style="width:59px" data-options="required:true,validType:'length[1,200]'">
+			              			<input id="shop[0].platformName" class="easyui-validatebox" name="shop[0].platformName" style="width:59px" data-options="required:true,validType:'length[1,200]'">
 			              			</td>
 			              			<td>
-			              			<input id="shopLevel" class="easyui-validatebox" name="shopLevel" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			<input id="shop[0].shopLevel" class="easyui-validatebox" name="shop[0].shopLevel" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			<td>
-			              			<input id="operatingPeriod" class="easyui-validatebox"  name="operatingPeriod" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			<input id="shop[0].operatingPeriod" class="easyui-validatebox"  name="shop[0].operatingPeriod" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			<td>
-			              			<input id="shopOwner" class="easyui-validatebox"  name="shopOwner" style="width:59px" data-options="required:true,validType:'length[1,200]'">
+			              			<input id="shop[0].shopOwner" class="easyui-validatebox"  name="shop[0].shopOwner" style="width:59px" data-options="required:true,validType:'length[1,200]'">
 			              			</td>
 			              			<td>
-			              			<input id="subAccount" class="easyui-validatebox"  name="subAccount" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              			<input id="shop[0].subAccount" class="easyui-validatebox"  name="shop[0].subAccount" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			<td>
-			              				<input id="sbuPassword" class="easyui-validatebox" name="sbuPassword" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              				<input id="shop[0].sbuPassword" class="easyui-validatebox" name="shop[0].sbuPassword" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			<td>
-			              				<input id="businessOpera" class="easyui-validatebox"  name="businessOpera" style="width:59px" data-options="required:true,validType:'length[1,300]'">
+			              				<input id="shop[0].businessOpera" class="easyui-validatebox"  name="shop[0].businessOpera" style="width:59px" data-options="required:true,validType:'length[1,300]'">
 			              			</td>
 			              			<td>
-			              				<input id="businessAddress" class="easyui-validatebox" name="businessAddress" style="width:59px" data-options="required:true,validType:'length[1,300]'">
+			              				<input id="shop[0].businessAddress" class="easyui-validatebox" name="shop[0].businessAddress" style="width:59px" data-options="required:true,validType:'length[1,300]'">
 			              			</td>
 			              			<td>
-			              				<input id="warehouseAddress" class="easyui-validatebox"  name="warehouseAddress" style="width:59px" data-options="required:true,validType:'length[1,300]'">
+			              				<input id="shop[0].warehouseAddress" class="easyui-validatebox"  name="shop[0].warehouseAddress" style="width:59px" data-options="required:true,validType:'length[1,300]'">
 			              			</td>
 			              			
 			              			<td>
-			              				<input id="salesIncome" class="easyui-validatebox" name="salesIncome" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              				<input id="shop[0].salesIncome" class="easyui-validatebox" name="shop[0].salesIncome" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			<td>
-			              				<input id="totalLiability" class="easyui-validatebox"  name="totalLiability" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              				<input id="shop[0].totalLiability" class="easyui-validatebox"  name="shop[0].totalLiability" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			<td>
-			              				<input id="bankLiabilities" class="easyui-validatebox" name="bankLiabilities" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              				<input id="shop[0].bankLiabilities" class="easyui-validatebox" name="shop[0].bankLiabilities" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			<td>
-			              				<input id="netProfit" class="easyui-validatebox" name="netProfit" style="width:59px" data-options="required:true,validType:'length[1,100]'">
+			              				<input id="shop[0].netProfit" class="easyui-validatebox" name="shop[0].netProfit" style="width:59px" data-options="required:true,validType:'length[1,100]'">
 			              			</td>
 			              			
 			              		</tr>
@@ -371,6 +371,7 @@
 			              	<br />
 					        <div style="text-align:center;">  
 								  <a href="#" onclick="addShopRow()">添加一行</a>  
+								  &nbsp;&nbsp;<a href="#" onclick="delShopRow()">删除一行</a> 
 							</div>	
 			           </div>   
 			    	
@@ -402,47 +403,48 @@
 			              		</tr>
 			              		<tr id="tRow0">
 			              			<td>
-			              			<input id="guaranterName" name="guaranterName" style="width:89px">
+			              			<input type="text" id="guaranter[0].guaranterName" name="guaranter[0].guaranterName" style="width:89px">
 			              			</td>
 			              			<td>
-			              			<input id="guaranterCard"  name="guaranterCard" style="width:89px">
+			              			<input  type="text" id="guaranter[0].guaranterCard"  name="guaranter[0].guaranterCard" style="width:89px">
 			              			</td>
 			              			<td>
-			              			<input id="guaranterEmployer"  name="guaranterEmployer" style="width:89px">
+			              			<input  type="text" id="guaranter[0].guaranterEmployer"  name="guaranter[0].guaranterEmployer" style="width:89px">
 			              			</td>
 			              			<td>
-			              			<input id="guaranterDuties"  name="guaranterDuties" style="width:89px">
+			              			<input  type="text" id="guaranter[0].guaranterDuties"  name="guaranter[0].guaranterDuties" style="width:89px">
 			              			</td>
 			              			<td>
-			              			<input id="guaranterPhone"  name="guaranterPhone" style="width:89px">
+			              			<input  type="text" id="guaranter[0].guaranterPhone"  name="guaranter[0].guaranterPhone" style="width:89px">
 			              			</td>
 			              			<td>
-			              			<select  id="guaranterMaritalStatus" name="guaranterMaritalStatus" style="width:89px">
+			              			<select  id="guaranter[0].guaranterMaritalStatus" name="guaranter[0].guaranterMaritalStatus" style="width:89px">
 					            			<option value=""></option>
 					                    	<option value="已婚">已婚</option>
 					                    	<option value="未婚">未婚</option>
 					                    	<option value="离异">离异</option>
 					                    	<option value="丧偶">丧偶</option>
 					                    	<option value="其他">其他</option>
-					            		</select>
+					            	</select>
 			              			</td>
 			              			<td>
-			              				<input id="guaranterHouseAddress" name="guaranterHouseAddress" style="width:89px">
+			              				<input  type="text" id="guaranter[0].guaranterHouseAddress" name="guaranter[0].guaranterHouseAddress" style="width:89px">
 			              			</td>
 			              			<td>
-			              				<input id="guaranterMonthlyIncome"  name="guaranterMonthlyIncome" style="width:89px">
+			              				<input  type="text" id="guaranter[0].guaranterMonthlyIncome"  name="guaranter[0].guaranterMonthlyIncome" style="width:89px">
 			              			</td>
 			              			<td>
-			              				<input id="guaranterValues" name="guaranterValues" style="width:89px">
+			              				<input  type="text" id="guaranter[0].guaranterValues" name="guaranter[0].guaranterValues" style="width:89px">
 			              			</td>
 			              			<td>
-			              				<input id="guaranterTotalLiabilities"  name="guaranterTotalLiabilities" style="width:89px">
+			              				<input   type="text" id="guaranter[0].guaranterTotalLiabilities"  name="guaranter[0].guaranterTotalLiabilities" style="width:89px">
 			              			</td>
 			              		</tr>
 			              	</table>
 			              	<br />
 					        <div style="text-align:center;">  
-								  <a href="#" onclick="addGuaranterRow()">添加一行</a>  
+								  <a href="#" onclick="addGuaranterRow()">添加一行</a>
+								   &nbsp;&nbsp;<a href="#" onclick="delGuaranterRow()">删除一行</a>   
 							</div>
 			              	
 			           </div>

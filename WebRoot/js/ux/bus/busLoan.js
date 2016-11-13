@@ -2,13 +2,14 @@ $package('dy.busLoan');
 dy.busLoan = function(){
 	var _box = null;
 	var _this = {
-		createWordsAction:'createWords.do',
+		createWordsAction:'createWordsOnLine.do',
 		editPwdForm:function(){
 			return $("#pwdForm");
 		},
 		editPwdWin:function(){
 			return $("#edit-pwd-win");
 		},
+		//生成words,需要返回值
 		createSave:function(){
 			if(_this.editPwdForm().form('validate')){
 				_this.editPwdForm().attr('action',_this.createWordsAction);
@@ -17,11 +18,21 @@ dy.busLoan = function(){
 				});
 			 }
 		},
+		//生成words,不需要返回值，用于在线下载
+		createWords:function(){
+			if(_this.editPwdForm().form('validate')){
+				_this.editPwdForm().attr('action',_this.createWordsAction);
+				_this.editPwdForm().submit();
+				_this.editPwdWin().dialog('close');
+				alert("生成成功!");
+			}
+		},
 		initForm:function(){
-			//生成文书
+			//确定，生成文书
 			_this.editPwdWin().find("#btn-pwd-submit").click(function(){
-				_this.createSave();
+				_this.createWords();
 			});
+			//关闭
 			_this.editPwdWin().find("#btn-pwd-close").click(function(){	
 				$.messager.confirm('Confirm','你确定要关闭当前窗口?',function(r){  
 				    if (r){  
@@ -36,6 +47,7 @@ dy.busLoan = function(){
 	   			url:'dataList.do',
 	   			columns:[[
 						{field:'id',checkbox:true},
+						{field:'content',title:'内容',width:200,sortable:true},
 						{field:'surveyOrgName',title:'调查机构名称',width:120,sortable:true},
 						{field:'surveyPersonName',title:'调查人姓名',width:80,sortable:true},
 						{field:'surveyPhone',title:'手机',width:120,sortable:true},
@@ -84,34 +96,32 @@ function addShopRow(){
 	var num=$("#rowCount").val();//取值
 	num=parseInt(num);
 	num++;
-	var str='<td><a href="#" onclick=delShopRow('+num+')>删除</a></td>';
 	$("#tShopRow0").clone(true).attr("id","tShopRow"+num).appendTo("#tblShopData");
-	$("#tShopRow"+num+"td").each(function(){
+	$("#tShopRow"+num+" td").each(function(){
 		$(this).find("input[type='text']").val("");//清空数据
-		$(this).find("input[name='shopName']").attr("id","shopName"+num).attr("name","shopName"+num);
-		$(this).find("input[name='platformName']").attr("id","platformName"+num).attr("name","platformName"+num);
-		$(this).find("input[name='shopLevel']").attr("id","shopLevel"+num).attr("name","shopLevel"+num);
-		$(this).find("input[name='operatingPeriod']").attr("id","operatingPeriod"+num).attr("name","operatingPeriod"+num);
-		$(this).find("input[name='shopOwner']").attr("id","shopOwner"+num).attr("name","shopOwner"+num);
-		$(this).find("input[name='subAccount']").attr("id","subAccount"+num).attr("name","subAccount"+num);
-		$(this).find("input[name='sbuPassword']").attr("id","sbuPassword"+num).attr("name","sbuPassword"+num);
-		$(this).find("input[name='businessOpera']").attr("id","businessOpera"+num).attr("name","businessOpera"+num);
-		$(this).find("input[name='businessAddress']").attr("id","businessAddress"+num).attr("name","businessAddress"+num);
-		$(this).find("input[name='warehouseAddress']").attr("id","warehouseAddress"+num).attr("name","warehouseAddress"+num);
-		$(this).find("input[name='salesIncome']").attr("id","salesIncome"+num).attr("name","salesIncome"+num);
-		$(this).find("input[name='totalLiability']").attr("id","totalLiability"+num).attr("name","totalLiability"+num);
-		$(this).find("input[name='bankLiabilities']").attr("id","bankLiabilities"+num).attr("name","bankLiabilities"+num);
-		$(this).find("input[name='netProfit']").attr("id","netProfit"+num).attr("name","netProfit"+num);
+		$(this).find("input[name='shop[0].shopName']").attr("id","shop['"+num+"'].shopName").attr("name","shop['"+num+"'].shopName");
+		$(this).find("input[name='shop[0].platformName']").attr("id","shop['"+num+"'].platformName").attr("name","shop['"+num+"'].platformName");
+		$(this).find("input[name='shop[0].shopLevel']").attr("id","shop['"+num+"'].shopLevel").attr("name","shop['"+num+"'].shopLevel");
+		$(this).find("input[name='shop[0].operatingPeriod']").attr("id","shop['"+num+"'].operatingPeriod").attr("name","shop['"+num+"'].operatingPeriod");
+		$(this).find("input[name='shop[0].shopOwner']").attr("id","shop['"+num+"'].shopOwner").attr("name","shop['"+num+"'].shopOwner");
+		$(this).find("input[name='shop[0].subAccount']").attr("id","shop['"+num+"'].subAccount").attr("name","shop['"+num+"'].subAccount");
+		$(this).find("input[name='shop[0].sbuPassword']").attr("id","shop['"+num+"'].sbuPassword").attr("name","shop['"+num+"'].sbuPassword");
+		$(this).find("input[name='shop[0].businessOpera']").attr("id","shop['"+num+"'].businessOpera").attr("name","shop['"+num+"'].businessOpera");
+		$(this).find("input[name='shop[0].businessAddress']").attr("id","shop['"+num+"'].businessAddress").attr("name","shop['"+num+"'].businessAddress");
+		$(this).find("input[name='shop[0].warehouseAddress']").attr("id","shop['"+num+"'].warehouseAddress").attr("name","shop['"+num+"'].warehouseAddress");
+		$(this).find("input[name='shop[0].salesIncome']").attr("id","shop['"+num+"'].salesIncome").attr("name","shop['"+num+"'].salesIncome");
+		$(this).find("input[name='shop[0].totalLiability']").attr("id","shop['"+num+"'].totalLiability").attr("name","shop['"+num+"'].totalLiability");
+		$(this).find("input[name='shop[0].bankLiabilities']").attr("id","shop['"+num+"'].bankLiabilities").attr("name","shop['"+num+"'].bankLiabilities");
+		$(this).find("input[name='shop[0].netProfit']").attr("id","shop['"+num+"'].netProfit").attr("name","shop['"+num+"'].netProfit");
 	});
     $('#rowCount').val(num);//重新赋值
-    $("#tShopRow"+num).append(str);
 }  
 //删除行  
-function delShopRow(rowIndex){  
+function delShopRow(){  
 	var num=$("#rowCount").val();//取值
 	num=parseInt(num);
-	if(rowIndex>0&&num>0){
-		$("#tShopRow"+rowIndex).remove();
+	if(num>0){
+		$("#tShopRow"+num).remove();
 		num--;
 		 $('#rowCount').val(num);//重新赋值
 	}else{
@@ -124,30 +134,28 @@ function addGuaranterRow(){
 	var num=$("#guaranterRowCount").val();
 	num=parseInt(num);
 	num++;//点击自加
-	var str='<td><a href="#" onclick=delGuaranterRow('+num+')>删除</a></td>';
 	$("#tRow0").clone(true).attr("id","tRow"+num).appendTo("#tblData");
-	$("#tRow"+num+"td").each(function(){
+	$("#tRow"+num+" td").each(function(){
 		$(this).find("input[type='text']").val("");//清空数据
-		$(this).find("input[name='guaranterName']").attr("id","guaranterName"+num).attr("name","guaranterName"+num);
-		$(this).find("input[name='guaranterCard']").attr("id","guaranterCard"+num).attr("name","guaranterCard"+num);
-		$(this).find("input[name='guaranterEmployer']").attr("id","guaranterEmployer"+num).attr("name","guaranterEmployer"+num);
-		$(this).find("input[name='guaranterDuties']").attr("id","guaranterDuties"+num).attr("name","guaranterDuties"+num);
-		$(this).find("input[name='guaranterPhone']").attr("id","guaranterPhone"+num).attr("name","guaranterPhone"+num);
-		$(this).find("input[name='guaranterMaritalStatus']").attr("id","guaranterMaritalStatus"+num).attr("name","guaranterMaritalStatus"+num);
-		$(this).find("input[name='guaranterHouseAddress']").attr("id","guaranterHouseAddress"+num).attr("name","guaranterHouseAddress"+num);
-		$(this).find("input[name='guaranterMonthlyIncome']").attr("id","guaranterMonthlyIncome"+num).attr("name","guaranterMonthlyIncome"+num);
-		$(this).find("input[name='guaranterValues']").attr("id","guaranterValues"+num).attr("name","guaranterValues"+num);
-		$(this).find("input[name='guaranterTotalLiabilities']").attr("id","guaranterTotalLiabilities"+num).attr("name","guaranterTotalLiabilities"+num);
+		$(this).find("input[name='guaranter[0].guaranterName']").attr("id","guaranter['"+num+"'].guaranterName").attr("name","guaranter['"+num+"'].guaranterName");
+		$(this).find("input[name='guaranter[0].guaranterCard']").attr("id","guaranter['"+num+"'].guaranterCard").attr("name","guaranter['"+num+"'].guaranterCard");
+		$(this).find("input[name='guaranter[0].guaranterEmployer']").attr("id","guaranter['"+num+"'].guaranterEmployer").attr("name","guaranter['"+num+"'].guaranterEmployer");
+		$(this).find("input[name='guaranter[0].guaranterDuties']").attr("id","guaranter['"+num+"'].guaranterDuties").attr("name","guaranter['"+num+"'].guaranterDuties");
+		$(this).find("input[name='guaranter[0].guaranterPhone']").attr("id","guaranter['"+num+"'].guaranterPhone").attr("name","guaranter['"+num+"'].guaranterPhone");
+		$(this).find("select[name='guaranter[0].guaranterMaritalStatus']").attr("id","guaranter['"+num+"'].guaranterMaritalStatus").attr("name","guaranter['"+num+"'].guaranterMaritalStatus");
+		$(this).find("input[name='guaranter[0].guaranterHouseAddress']").attr("id","guaranter['"+num+"'].guaranterHouseAddress").attr("name","guaranter['"+num+"'].guaranterHouseAddress");
+		$(this).find("input[name='guaranter[0].guaranterMonthlyIncome']").attr("id","guaranter['"+num+"'].guaranterMonthlyIncome").attr("name","guaranter['"+num+"'].guaranterMonthlyIncome");
+		$(this).find("input[name='guaranter[0].guaranterValues']").attr("id","guaranter['"+num+"'].guaranterValues").attr("name","guaranter['"+num+"'].guaranterValues");
+		$(this).find("input[name='guaranter[0].guaranterTotalLiabilities']").attr("id","guaranter['"+num+"'].guaranterTotalLiabilities").attr("name","guaranter['"+num+"'].guaranterTotalLiabilities");
 	});
 	$("#guaranterRowCount").val(num);//重新赋值
-	$("#tRow"+num).append(str);
 }
 //保证人删除行
-function delGuaranterRow(rowIndex){
+function delGuaranterRow(){
 	var num=$("#guaranterRowCount").val();
 	num=parseInt(num);
-	if(rowIndex>0&&num>0){//判断是不是第一行
-		$("#tRow"+rowIndex).remove();
+	if(num>0){//判断是不是第一行
+		$("#tRow"+num).remove();
 		num--;//删除后要自减
 		$('#guaranterRowCount').val(num);//重新赋值
 	}else{

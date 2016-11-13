@@ -2,29 +2,42 @@ package com.dayuan.action;
 
 
 import java.io.File;
-import java.util.Date;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dayuan.bean.BusLoanInfo;
+import com.dayuan.bean.BusLoanInfoController;
+import com.dayuan.bean.BusLoanInfoGuaranter;
 import com.dayuan.bean.BusLoanInfoLegal;
+import com.dayuan.bean.BusLoanInfoShop;
 import com.dayuan.bean.SysUser;
-import com.dayuan.exception.ServiceException;
+import com.dayuan.form.GuaranterListForm;
+import com.dayuan.form.ShopListForm;
 import com.dayuan.model.BusLoanInfoModel;
+import com.dayuan.service.BusLoanInfoControllerService;
+import com.dayuan.service.BusLoanInfoGuaranterService;
+import com.dayuan.service.BusLoanInfoLegalService;
 import com.dayuan.service.BusLoanInfoService;
+import com.dayuan.service.BusLoanInfoShopService;
 import com.dayuan.utils.CreateWords;
 import com.dayuan.utils.DateUtil;
 import com.dayuan.utils.HtmlUtil;
 import com.dayuan.utils.SessionUtils;
+import com.dayuan.utils.ZipUtil;
 
 
 
@@ -33,9 +46,29 @@ import com.dayuan.utils.SessionUtils;
 @RequestMapping("/BusLoan") 
 public class BusinessLoanAction extends BaseAction{
 	
-	// Servrice start
+	private final static Logger log= Logger.getLogger(BusinessLoanAction.class);
+	
+	// Servrice start 商贷主表
 	@Autowired(required=false) //自动注入，不需要生成set方法了，required=false表示没有实现类，也不会报错。
 	private BusLoanInfoService<BusLoanInfo> busLoanInfoService;
+	
+	// Servrice start 商贷法人
+	@Autowired(required=false)
+	private BusLoanInfoLegalService<BusLoanInfoLegal> busLoanInfoLegalService;
+	
+	// Servrice start 商贷实际控制人
+	@Autowired(required=false)
+	private BusLoanInfoControllerService<BusLoanInfoController> busLoanInfoControllerService;
+	
+	// Servrice start 经营实体
+	@Autowired(required=false)
+	private BusLoanInfoShopService<BusLoanInfoShop> busLoanInfoShopService;
+	
+	// Servrice start 保证人
+	@Autowired(required=false)
+	private BusLoanInfoGuaranterService<BusLoanInfoGuaranter> busLoanInfoGuaranterService;
+	
+	
 	
 	
 	
@@ -60,12 +93,18 @@ public class BusinessLoanAction extends BaseAction{
 	 * @throws Exception 
 	 */
 	@RequestMapping("/dataList")
-	public void dataList(BusLoanInfoModel busLoanInfoModel,HttpServletResponse response)throws Exception{
-		List<BusLoanInfo> lsit=busLoanInfoService.queryByList(busLoanInfoModel);
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("total",busLoanInfoModel.getPager().getRowCount());
-		map.put("rows", lsit);
-		HtmlUtil.writerJson(response, map);	
+	public void dataList(BusLoanInfoModel busLoanInfoModel,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		if(busLoanInfoModel!=null){
+			SysUser user = SessionUtils.getUser(request);
+			busLoanInfoModel.setuId(user.getId().toString());
+			busLoanInfoModel.setuName(user.getNickName());
+			List<BusLoanInfo> lsit=busLoanInfoService.queryByList(busLoanInfoModel);
+			Map<String,Object> map=new HashMap<String,Object>();
+			map.put("total",busLoanInfoModel.getPager().getRowCount());
+			map.put("rows", lsit);
+			HtmlUtil.writerJson(response, map);
+		}
+		
 	}
 	
 	/**
@@ -76,34 +115,86 @@ public class BusinessLoanAction extends BaseAction{
 	 * @throws Exception 
 	 */
 	@RequestMapping("/save")
-	public void save(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal ,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		System.out.println("uName="+busLoanInfo.getuName());
-		System.out.println("surveyOrgName="+busLoanInfo.getSurveyOrgName());
-		System.out.println("legalPerson="+busLoanInfoLegal.getLegalPerson());
-		System.out.println("idCard="+busLoanInfoLegal.getIdCard());
-		int rowCount=0;
-		int guaranterRowCount=0;
+	public void save(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal,BusLoanInfoController busLoanInfoController,ShopListForm shopForm,GuaranterListForm guaranterForm,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		
+		/**for(BusLoanInfoGuaranter guaranter:guaranterForm.getGuaranter()){
+			System.out.println("guaranter.name="+guaranter.getGuaranterName());
+		}*/
+		
 		boolean flag=false;
-		if(!request.getParameter("rowCount").equals("")){
-			rowCount=Integer.parseInt(request.getParameter("rowCount").trim().toString());
-		}
-		if(!request.getParameter("guaranterRowCount").equals("")){
-			guaranterRowCount=Integer.parseInt(request.getParameter("guaranterRowCount").trim().toString());
-		}
-		busLoanInfo.setContent(busLoanInfo.getApplicationName()+","+busLoanInfo.getApplicationAmount()+","+busLoanInfo.getApplicationTerm());
+		busLoanInfo.setContent(busLoanInfo.getApplicationName()+","+busLoanInfo.getApplicationAmount()+","+busLoanInfo.getApplicationTerm());//拼接主表内容
+		/**保存商贷主表信息*/
 		if(busLoanInfo.getId()==null){
-			int num=busLoanInfoService.save(busLoanInfo);
+			int num=busLoanInfoService.save(busLoanInfo);//保存后返回插入记录数
 			if(num==1){
 				flag=true;
 			}
-			System.out.println("save="+num);
-			System.out.println("busLoanInfo.id="+busLoanInfo.getId());
 		}else{
-			int num=busLoanInfoService.updateReturnInfluences(busLoanInfo);
+			int num=busLoanInfoService.updateReturnInfluences(busLoanInfo);//更新后返回影响记录数
 			if(num==1){
 				flag=true;
 			}
-			System.out.println("update="+num);
+		}
+		/**保存商贷法人信息*/
+		if(busLoanInfoLegal.getId()==null){
+			busLoanInfoLegal.setBid(busLoanInfo.getId());//设置商贷主表id
+			int num=busLoanInfoLegalService.save(busLoanInfoLegal);
+			if(num!=1){
+				flag=false;
+			}
+		}else{
+			int num=busLoanInfoLegalService.updateReturnInfluences(busLoanInfoLegal);
+			if(num!=1){
+				flag=false;
+			}
+		}
+		/**保存控制人信息*/
+		if(busLoanInfoController.getId()==null){
+			busLoanInfoController.setBid(busLoanInfo.getId());//设置商贷主表id
+			int num=busLoanInfoControllerService.save(busLoanInfoController);
+			if(num!=1){
+				flag=false;
+			}
+		}else{
+			int num=busLoanInfoControllerService.updateReturnInfluences(busLoanInfoController);
+			if(num!=1){
+				flag=false;
+			}
+		}
+		
+		/**保存实体或店铺信息*/
+		for(BusLoanInfoShop shop:shopForm.getShop()){
+			if(shop.getId()==null){
+				shop.setBid(busLoanInfo.getId());
+				int num=busLoanInfoShopService.save(shop);
+				if(num!=1){
+					flag=false;
+				}
+			}else{
+				int num=busLoanInfoShopService.updateReturnInfluences(shop);
+				if(num!=1){
+					flag=false;
+				}
+			}
+		}
+		
+		/**保存保证人信息*/
+		if(busLoanInfo.getIfGuaranter().equals("是")){
+			for(BusLoanInfoGuaranter guaranter:guaranterForm.getGuaranter()){
+				if(guaranter.getId()==null){
+					guaranter.setBid(busLoanInfo.getId());
+					int num=busLoanInfoGuaranterService.save(guaranter);
+					if(num!=1){
+						flag=false;
+					}
+				}else{
+					int num=busLoanInfoGuaranterService.updateReturnInfluences(guaranter);
+					if(num!=1){
+						flag=false;
+					}
+				}
+				
+			}
 		}
 		if(flag){
 			sendSuccessMessage(response,"保存成功！");
@@ -144,9 +235,88 @@ public class BusinessLoanAction extends BaseAction{
 		
 	}
 	
+	/**
+	 * 生成文书（新）:在线下载 
+	 * @author xuanaw
+	 * @data 201611136
+	 * */
+	@RequestMapping("/createWordsOnLine")
+	public void createWordsOnLine(Integer id,String wordType,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		if(id==null||wordType.equals("")){
+			sendFailureMessage(response, "请不要非法操作~！");
+			return;
+		}
+		BusLoanInfo busLoanInfo=this.busLoanInfoService.queryById(id);
+		if(busLoanInfo==null){
+			sendFailureMessage(response, "没有找到对应记录~！");
+			return;
+		}
+		Map<String,Object> dataMap=new HashMap<String,Object>();
+		String path="\\com\\dayuan\\template\\";//模板位置
+		String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads");//文件保存位置,项目部署绝对路径（物理路径）
+		savePath=savePath+"\\"+UUID.randomUUID();
+		File fileSavePath=new File(savePath);
+		if(fileSavePath.exists()){
+			fileSavePath.delete();
+			fileSavePath.mkdirs();
+		}else{
+			fileSavePath.mkdirs();
+		}
+		CreateWords createWords=new CreateWords();
+		boolean sign=false;
+		String wordName="";//保存文件名
+		if(wordType.equals("1")){
+			dataMap.put("xingming", busLoanInfo.getApplicationName());
+			wordName="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi.ftl",savePath+"\\",wordName);
+		}else{
+			sendFailureMessage(response, "你输入的信息无效！");
+			return;
+		}
+		if(sign){
+			String saveZipPath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/ziptemp");//zip文件保存位置,项目部署绝对路径（物理路径）
+			String zipSaveName="word"+DateUtil.getNowPlusTimeMill();
+			String sourceFile=ZipUtil.fileToZip(savePath,saveZipPath,zipSaveName);//返回压缩后的zip绝对路径+文件名
+			//File file=new File(savePath+"\\",wordName);不用zip压缩，直接下载
+			if(sourceFile!=null){
+				File file=new File(sourceFile);
+				if(!file.exists()){
+					sendFailureMessage(response, "创建文件程序出错了。");
+					return;
+				}
+				//设置文件MIME类型
+				response.setContentType(request.getSession().getServletContext().getMimeType(zipSaveName+".zip"));
+				//设置Content-Disposition
+				response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(zipSaveName+".zip","UTF-8"));
+				//response.setHeader("content-disposition","attachment;filename"+URLEncoder.encode(wordName,"UTF-8"));
+				
+				FileInputStream in=new FileInputStream(sourceFile);
+				OutputStream out=response.getOutputStream();
+				byte buffer[]=new byte[1024];
+				int len=0;
+				while((len=in.read(buffer))>0){
+					out.write(buffer,0,len);
+				}
+				in.close();
+				out.close();
+				if(file!=null){
+					file.delete();//删除zip文件
+					file=null;
+				}
+				if(fileSavePath!=null){
+					fileSavePath=null;
+				}
+			}
+			//sendSuccessMessage(response, "word生成成功！文件名是："+wordName);
+		}else{
+			sendFailureMessage(response, "word生成失败,请联系管理员！");
+		}
+		
+	}
+	
 	
 	/**
-	 * 生成文书
+	 * 生成文书（旧）:生成在本地
 	 * */
 	@RequestMapping("/createWords")
 	public void createWords(Integer id,String wordType,String filePath,HttpServletRequest request,HttpServletResponse response)throws Exception{
@@ -161,8 +331,8 @@ public class BusinessLoanAction extends BaseAction{
 		}
 		Map<String,Object> dataMap=new HashMap<String,Object>();
 		//String path=request.getRealPath("/")+"wordsTemplate"+"\\daihouxuzhi.ftl";
-		String path="\\com\\dayuan\\template\\";
-		String outFilePath="";
+		String path="\\com\\dayuan\\template\\";//模板位置
+		String outFilePath="";//文件保存位置
 		if(filePath.equals("")){
 			outFilePath="D://createWords//";
 		}else{
@@ -178,7 +348,7 @@ public class BusinessLoanAction extends BaseAction{
 		}
 		CreateWords createWords=new CreateWords();
 		boolean sign=false;
-		String wordName="";
+		String wordName="";//保存的文件名
 		if(wordType.equals("0")){
 			String tempName1="";
 			String tempName2="";
@@ -202,8 +372,6 @@ public class BusinessLoanAction extends BaseAction{
 			wordName=tempName1+","+tempName2;
 		}else if(wordType.equals("1")){
 			dataMap.put("xingming", busLoanInfo.getApplicationName());
-			dataMap.put("xingming2", busLoanInfo.getApplicationName());
-			dataMap.put("dianhua", busLoanInfo.getSurveyPhone());
 			wordName="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi.ftl",outFilePath,wordName);
 		}else if(wordType.equals("2")){
@@ -226,11 +394,10 @@ public class BusinessLoanAction extends BaseAction{
 		}
 		if(sign){
 			sendSuccessMessage(response, "word生成成功！文件名是："+wordName);
-			return;
 		}else{
 			sendFailureMessage(response, "word生成失败,请联系管理员！");
-			return;
 		}
+		System.out.println("createWords....end");
 		
 		
 	}
