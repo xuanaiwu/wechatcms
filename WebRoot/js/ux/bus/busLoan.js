@@ -63,13 +63,23 @@ dy.busLoan = function(){
 				toolbar:[
 					{id:'btnadd',text:'添加',btnType:'add'},
 					{id:'btnedit',text:'修改',btnType:'edit'},
-					{id:'btnedit',text:'生成word',btnType:'edit',iconCls:'icon-edit',handler:function(){
+					{id:'word',text:'生成word',btnType:'edit',iconCls:'icon-edit',handler:function(){
 							var selected = _box.utils.getCheckedRows();
 							if ( _box.utils.checkSelectOne(selected)){
 								_this.editPwdForm().resetForm();
 								_this.editPwdForm().find("input[name='id']").val(selected[0].id);
 								//_this.editPwdForm().find("input[name='email']").val(selected[0].email);
 								_this.editPwdWin().window('open'); 
+							}
+						}},
+						{id:'excel',text:'导出excel',btnType:'edit',iconCls:'icon-edit',handler:function(){
+							var selected = _box.utils.getCheckedRows();
+							if ( _box.utils.checkSelectOne(selected)){
+								_this.editPwdForm().find("input[name='id']").val(selected[0].id);
+								$.post("exportExcel.do",{id:selected[0].id},function(data,status){
+									//alert("Data: " + data + "\nStatus: " + status);
+									alert("导出成功！");
+								});
 							}
 						}},
 					{id:'btndelete',text:'删除',btnType:'remove'}
