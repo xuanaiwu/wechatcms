@@ -75,11 +75,29 @@ dy.busLoan = function(){
 						{id:'excel',text:'导出excel',btnType:'exportExcel',iconCls:'icon-edit',handler:function(){
 							var selected = _box.utils.getCheckedRows();
 							if ( _box.utils.checkSelectOne(selected)){
+								
+								/**1
+								 * var iframe = document.createElement("iframe");
+								iframe.style.display = "none";
+								iframe.id = "iframe";
+								document.body.appendChild(iframe);
+								document.getElementById("iframe").src = "exportExcel.do";
+								*/
+								
+								//2
 								_this.editPwdForm().find("input[name='id']").val(selected[0].id);
-								$.post("exportExcel.do",{id:selected[0].id},function(data,status){
+								_this.editPwdForm().attr('action','exportExcel.do');
+								_this.editPwdForm().submit();
+								alert("导出成功！");
+								
+								
+								//3,下载时不能用异步
+								//$.post("exportExcel.do",{id:selected[0].id},function(data,status){
 									//alert("Data: " + data + "\nStatus: " + status);
-									alert("导出成功！");
-								});
+									//alert("导出成功！");
+								//});
+								
+								
 							}
 						}},
 					{id:'btndelete',text:'删除',btnType:'remove'}

@@ -337,34 +337,35 @@ public class BusinessLoanAction extends BaseAction{
 		    //与             row.createCell((short) 10).setCellValue(busLoanInfoShop.getSbuPassword());相同
 		        
 		    String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
-		    System.out.println("savePath="+savePath);
-		    savePath=savePath+"\\"+UUID.randomUUID();
+		    savePath=savePath+"\\"+UUID.randomUUID();//文件最终保存路径
 		    File fileSavePath=new File(savePath);
+		    /**创建要保存的文件夹*/
 			if(fileSavePath.exists()){
 				fileSavePath.delete();
 				fileSavePath.mkdirs();
 			}else{
 				fileSavePath.mkdirs();
 			}
-			String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";
-			FileOutputStream fout = new FileOutputStream(savePath+"\\"+excel);  
-	        wb.write(fout); 
+			String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";//eccel文件名称
+			FileOutputStream fout = new FileOutputStream(savePath+"\\"+excel);  //创建文件
+	        wb.write(fout); //写入excel数据
 	        fout.flush();
 	        fout.close();
 	        //设置文件MIME类型
 		    response.setContentType(request.getSession().getServletContext().getMimeType(excel));
 		    //设置Content-Disposition
 			response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(excel,"UTF-8"));
-			
+			//下载时,把文件读书io流
 			FileInputStream in=new FileInputStream(savePath+"\\"+excel);
 			OutputStream out=response.getOutputStream();
 			byte buffer[]=new byte[1024];
 			int len=0;
 			while((len=in.read(buffer))>0){
-				out.write(buffer,0,len);
+				out.write(buffer,0,len);//向response写入数据
 			}
 			in.close();
 			out.close();
+			/**删除文件*/
 			File file=new File(savePath+"\\"+excel);
 			if(file!=null){
 				if(file.exists()){
@@ -372,16 +373,16 @@ public class BusinessLoanAction extends BaseAction{
 				}
 				file=null;
 			}
+			/**删除文件夹*/
 			if(fileSavePath!=null){
+				if(fileSavePath.exists()){
+					fileSavePath.delete();
+				}
 				fileSavePath=null;
 			}
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-        
-		
+		}
 	}
 	
 	
