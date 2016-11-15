@@ -253,75 +253,128 @@ public class BusinessLoanAction extends BaseAction{
 			sendFailureMessage(response, "请不要非法操作~！");
 			return;
 		}
-		System.out.println("id="+id);
 		BusLoanInfo busLoanInfo=this.busLoanInfoService.queryById(id);
-		 // 第一步，创建一个webbook，对应一个Excel文件  
+		if(busLoanInfo==null){
+			sendFailureMessage(response, "找不到对应记录！");
+			return;
+		}
+		Integer bid=busLoanInfo.getId();
+		if(bid==null){
+			sendFailureMessage(response, "找不到对应记录！");
+			return;
+		}
+		BusLoanInfoLegal busLoanInfoLegal=this.busLoanInfoLegalService.getBusLoanInfoLegal(bid);
+		BusLoanInfoShop busLoanInfoShop=this.busLoanInfoShopService.getBusLoanInfoShop(bid);
+		
+		// 第一步，创建一个webbook，对应一个Excel文件  
         HSSFWorkbook wb = new HSSFWorkbook();
-     // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
+        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
         HSSFSheet sheet = wb.createSheet("商贷信息表");
         
         // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
         HSSFRow row = sheet.createRow((int) 0); 
         // 第四步，创建单元格，并设置值表头 设置表头居中  
-        HSSFCellStyle style = wb.createCellStyle();  
-        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+        HSSFCellStyle style = wb.createCellStyle();
+        // 创建一个居中格式
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
         
         
         HSSFCell cell = row.createCell((short) 0);  
         cell.setCellValue("序号");  
         cell.setCellStyle(style);  
         cell = row.createCell((short) 1);  
-        cell.setCellValue("客户姓名");  
+        cell.setCellValue("客户姓名"); //商贷主表，applicationName 
         cell.setCellStyle(style);  
         cell = row.createCell((short) 2);  
-        cell.setCellValue("紧急联系人");  
+        cell.setCellValue("紧急联系人");//商贷主表，urgentCont 
         cell.setCellStyle(style);  
         cell = row.createCell((short) 3);  
-        cell.setCellValue("关系");  
+        cell.setCellValue("关系"); //商贷主表， relationship
         cell.setCellStyle(style); 
         cell = row.createCell((short) 4);  
-        cell.setCellValue("电话");  
+        cell.setCellValue("电话");  //法人，legalPhone
         cell.setCellStyle(style);
         cell = row.createCell((short) 5);  
-        cell.setCellValue("地址");  
+        cell.setCellValue("地址");  //法人，houseAddress
         cell.setCellStyle(style);
         cell = row.createCell((short) 6);  
-        cell.setCellValue("公司");  
+        cell.setCellValue("公司");  //法人，companyName
         cell.setCellStyle(style);
         cell = row.createCell((short) 7);  
-        cell.setCellValue("平台");  
+        cell.setCellValue("平台");//  经验实体，platformName
         cell.setCellStyle(style);
         cell = row.createCell((short) 8);  
-        cell.setCellValue("店铺");  
+        cell.setCellValue("店铺");  //经验实体，shopName
         cell.setCellStyle(style);
         cell = row.createCell((short) 9);  
-        cell.setCellValue("子帐号");  
+        cell.setCellValue("子帐号");  //经验实体,subAccount
         cell.setCellStyle(style);
         cell = row.createCell((short) 10);  
-        cell.setCellValue("密码");  
+        cell.setCellValue("密码");  //经验实体,sbuPassword
         cell.setCellStyle(style);
         
         
-     // 第五步，写入实体数据 实际应用中这些数据从数据库得到，  
+       // 第五步，写入实体数据 实际应用中这些数据从数据库得到，  
         try {
-			List list =null;
-			 for (int i = 0; i < list.size(); i++)  
-		        {  
-		            row = sheet.createRow((int) i + 1);  
-		           // Student stu = (Student) list.get(i);  
-		            // 第四步，创建单元格，并设置值  
-		         //   row.createCell((short) 0).setCellValue((double) stu.getId());  
-		         //   row.createCell((short) 1).setCellValue(stu.getName());  
-		         //   row.createCell((short) 2).setCellValue((double) stu.getAge());  
-		            cell = row.createCell((short) 3);  
-		      //      cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(stu  
-		         //           .getBirth()));  
-		        }
-			 
-			 FileOutputStream fout = new FileOutputStream("D:/students.xls");  
+		
+			  
+        	row = sheet.createRow((int) 0 + 1);      
+		    row.createCell((short) 0).setCellValue(1);  
+		    row.createCell((short) 1).setCellValue(busLoanInfo.getApplicationName());  
+		    row.createCell((short) 2).setCellValue(busLoanInfo.getUrgentCont()); 
+		    row.createCell((short) 3).setCellValue(busLoanInfo.getRelationship());
+		    row.createCell((short) 4).setCellValue(busLoanInfoLegal.getLegalPhone());
+		    row.createCell((short) 5).setCellValue(busLoanInfoLegal.getHouseAddress());
+		    row.createCell((short) 6).setCellValue(busLoanInfoLegal.getCompanyName());
+		    row.createCell((short) 7).setCellValue(busLoanInfoShop.getPlatformName());
+		    row.createCell((short) 8).setCellValue(busLoanInfoShop.getShopName());
+		    row.createCell((short) 9).setCellValue(busLoanInfoShop.getSubAccount());
+		    row.createCell((short) 10).setCellValue(busLoanInfoShop.getSbuPassword());
+		    // Student stu = (Student) list.get(i);  
+            // 第四步，创建单元格，并设置值  
+		    //  cell = row.createCell((short) 3);  
+		    //   cell.setCellValue(new SimpleDateFormat("yyyy-mm-dd").format(stu.getBirth()));  
+		    //与             row.createCell((short) 10).setCellValue(busLoanInfoShop.getSbuPassword());相同
+		        
+		    String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
+		    savePath=savePath+"\\"+UUID.randomUUID();
+		    File fileSavePath=new File(savePath);
+			if(fileSavePath.exists()){
+				fileSavePath.delete();
+				fileSavePath.mkdirs();
+			}else{
+				fileSavePath.mkdirs();
+			}
+			String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";
+			 FileOutputStream fout = new FileOutputStream(savePath+"\\"+excel);  
 	         wb.write(fout); 
 	         fout.flush();
-	         fout.close(); 
+	         fout.close();
+	        //设置文件MIME类型
+		    response.setContentType(request.getSession().getServletContext().getMimeType(excel));
+		    //设置Content-Disposition
+			response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(excel,"UTF-8"));
+			
+			FileInputStream in=new FileInputStream(savePath+"\\"+excel);
+			OutputStream out=response.getOutputStream();
+			byte buffer[]=new byte[1024];
+			int len=0;
+			while((len=in.read(buffer))>0){
+				out.write(buffer,0,len);
+			}
+			in.close();
+			out.close();
+			File file=new File(savePath+"\\"+excel);
+			if(file!=null){
+				if(file.exists()){
+					file.delete();//删除文件
+				}
+				file=null;
+			}
+			if(fileSavePath!=null){
+				fileSavePath=null;
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -38,5 +38,18 @@ public class BusLoanInfoShopService<T> extends BaseService<T> {
 		return mapper.updateReturnInfluences(t);
 		
 	}
+	
+	
+	/**
+	 * 
+	 * 根据bid返回单个对象
+	 * 
+	 * */
+	public T getBusLoanInfoShop(Object bid) throws Exception{
+		if(bid==null){
+			return null;
+		}
+		return getMapper().getBusLoanInfoShop(bid);
+	}
 
 }

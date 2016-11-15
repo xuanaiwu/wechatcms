@@ -72,7 +72,7 @@ dy.busLoan = function(){
 								_this.editPwdWin().window('open'); 
 							}
 						}},
-						{id:'excel',text:'导出excel',btnType:'edit',iconCls:'icon-edit',handler:function(){
+						{id:'excel',text:'导出excel',btnType:'exportExcel',iconCls:'icon-edit',handler:function(){
 							var selected = _box.utils.getCheckedRows();
 							if ( _box.utils.checkSelectOne(selected)){
 								_this.editPwdForm().find("input[name='id']").val(selected[0].id);

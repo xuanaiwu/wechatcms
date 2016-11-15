@@ -16,5 +16,13 @@ update bus_loaninfo_legal set bid=#{bid},legalPerson=#{legalPerson},idCard=#{idC
 licenseNumber=#{licenseNumber},totalCarValue=#{totalCarValue},otherAssets=#{otherAssets},borrowOfBank=#{borrowOfBank},amount=#{amount},theTerm=#{theTerm},ifController=#{ifController}  where id=#{id}
 </update>
 
+
+<!-- 根据bid查询 -->
+<select id="getBusLoanInfoLegal"  resultType="com.dayuan.bean.BusLoanInfoLegal" parameterType="Object">
+	select * from bus_loaninfo_legal where bid = #{bid} limit 0,1
+</select>
+
+
+
 </mapper>
   

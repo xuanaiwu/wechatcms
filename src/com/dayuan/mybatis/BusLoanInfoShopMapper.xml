@@ -30,6 +30,11 @@
     from bus_loaninfo_shop
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="getBusLoanInfoShop" resultType="com.dayuan.bean.BusLoanInfoShop" parameterType="Object">
+  	select * from bus_loaninfo_shop where bid=#{bid} order by id limit 0,1
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from bus_loaninfo_shop
     where id = #{id,jdbcType=INTEGER}
@@ -50,20 +55,6 @@
       #{netProfit,jdbcType=VARCHAR})
   </insert>
   
-  <insert id="insert" parameterType="com.dayuan.bean.BusLoanInfoShop" >
-    insert into bus_loaninfo_shop (id, bid, shopName, 
-      platformName, shopLevel, operatingPeriod, 
-      shopOwner, subAccount, sbuPassword, 
-      businessOpera, businessAddress, warehouseAddress, 
-      salesIncome, totalLiability, bankLiabilities, 
-      netProfit)
-    values (#{id,jdbcType=INTEGER}, #{bid,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, 
-      #{platformname,jdbcType=VARCHAR}, #{shoplevel,jdbcType=VARCHAR}, #{operatingperiod,jdbcType=VARCHAR}, 
-      #{shopowner,jdbcType=VARCHAR}, #{subaccount,jdbcType=VARCHAR}, #{sbupassword,jdbcType=VARCHAR}, 
-      #{businessopera,jdbcType=VARCHAR}, #{businessaddress,jdbcType=VARCHAR}, #{warehouseaddress,jdbcType=VARCHAR}, 
-      #{salesincome,jdbcType=VARCHAR}, #{totalliability,jdbcType=VARCHAR}, #{bankliabilities,jdbcType=VARCHAR}, 
-      #{netprofit,jdbcType=VARCHAR})
-  </insert>
   <insert id="insertSelective" parameterType="com.dayuan.bean.BusLoanInfoShop" >
     insert into bus_loaninfo_shop
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -239,23 +230,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dayuan.bean.BusLoanInfoShop" >
-    update bus_loaninfo_shop
-    set bid = #{bid,jdbcType=INTEGER},
-      shopName = #{shopname,jdbcType=VARCHAR},
-      platformName = #{platformname,jdbcType=VARCHAR},
-      shopLevel = #{shoplevel,jdbcType=VARCHAR},
-      operatingPeriod = #{operatingperiod,jdbcType=VARCHAR},
-      shopOwner = #{shopowner,jdbcType=VARCHAR},
-      subAccount = #{subaccount,jdbcType=VARCHAR},
-      sbuPassword = #{sbupassword,jdbcType=VARCHAR},
-      businessOpera = #{businessopera,jdbcType=VARCHAR},
-      businessAddress = #{businessaddress,jdbcType=VARCHAR},
-      warehouseAddress = #{warehouseaddress,jdbcType=VARCHAR},
-      salesIncome = #{salesincome,jdbcType=VARCHAR},
-      totalLiability = #{totalliability,jdbcType=VARCHAR},
-      bankLiabilities = #{bankliabilities,jdbcType=VARCHAR},
-      netProfit = #{netprofit,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  
 </mapper>

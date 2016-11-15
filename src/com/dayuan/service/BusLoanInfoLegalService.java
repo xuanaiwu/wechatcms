@@ -39,5 +39,18 @@ public class BusLoanInfoLegalService<T> extends BaseService<T>{
 		return mapper.updateReturnInfluences(t);
 		
 	}
+	
+	
+	/**
+	 * 
+	 * 根据bid返回单个对象
+	 * 
+	 * */
+	public T getBusLoanInfoLegal(Object bid) throws Exception{
+		if(bid==null){
+			return null;
+		}
+		return mapper.getBusLoanInfoLegal(bid);
+	}
 
 }
