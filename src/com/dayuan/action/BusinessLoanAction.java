@@ -337,6 +337,7 @@ public class BusinessLoanAction extends BaseAction{
 		    //与             row.createCell((short) 10).setCellValue(busLoanInfoShop.getSbuPassword());相同
 		        
 		    String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
+		    System.out.println("savePath="+savePath);
 		    savePath=savePath+"\\"+UUID.randomUUID();
 		    File fileSavePath=new File(savePath);
 			if(fileSavePath.exists()){
@@ -346,10 +347,10 @@ public class BusinessLoanAction extends BaseAction{
 				fileSavePath.mkdirs();
 			}
 			String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";
-			 FileOutputStream fout = new FileOutputStream(savePath+"\\"+excel);  
-	         wb.write(fout); 
-	         fout.flush();
-	         fout.close();
+			FileOutputStream fout = new FileOutputStream(savePath+"\\"+excel);  
+	        wb.write(fout); 
+	        fout.flush();
+	        fout.close();
 	        //设置文件MIME类型
 		    response.setContentType(request.getSession().getServletContext().getMimeType(excel));
 		    //设置Content-Disposition

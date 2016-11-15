@@ -16,7 +16,7 @@ public class ZipUtil {
 	 * @param sourceFilePath :待压缩的文件路径
 	 * @param zipFilePath :压缩后存放路径
 	 * @param fileName :压缩后文件的名称
-	 * @return
+	 * @return 文件存放路径+文件名
 	 */
 	public static String fileToZip(String sourceFilePath,String zipFilePath,String fileName){
 		boolean flag = false;
