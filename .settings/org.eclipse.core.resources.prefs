@@ -1,4 +1,3 @@
-#Wed Jul 13 14:18:58 CST 2016
 eclipse.preferences.version=1
 encoding//WebRoot/css/main.css=UTF-8
 encoding//WebRoot/js/commons/YDataGrid.js=UTF-8
@@ -12,6 +11,7 @@ encoding//WebRoot/js/ux/sys/sysMenu.js=UTF-8
 encoding//WebRoot/js/ux/sys/sysRole.js=UTF-8
 encoding//WebRoot/js/ux/sys/sysUser.js=UTF-8
 encoding//WebRoot/js/ux/sys/sysUserRole.js=UTF-8
+encoding//conf/log4j.properties=UTF-8
 encoding//conf/sysconfig.properties=UTF-8
 encoding//src/com/dayuan/utils/WolfXmlUtil.java=UTF-8
 encoding/<project>=UTF-8
