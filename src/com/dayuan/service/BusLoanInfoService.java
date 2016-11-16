@@ -1,10 +1,13 @@
 package com.dayuan.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dayuan.bean.BusLoanInfo;
 import com.dayuan.mapper.BusLoanInfoMapper;
+import com.dayuan.model.BusLoanInfoModel;
 
 @Service("busLoanInfoService")
 public class BusLoanInfoService<T> extends BaseService<T>{
@@ -38,6 +41,15 @@ public class BusLoanInfoService<T> extends BaseService<T>{
 			return 0;
 		}
 		return mapper.updateReturnInfluences(t);
+		
+	}
+	
+	
+	public List<T> queryList(BusLoanInfoModel busLoanInfoModel){
+		if(busLoanInfoModel==null){
+			return null;
+		}
+		return mapper.queryList(busLoanInfoModel);
 		
 	}
 

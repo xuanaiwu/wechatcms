@@ -46,14 +46,14 @@
 									</li>
 									<li class=user_main_input>
 										<img class="vc-pic" width="65" height="23" title="点击刷新验证码" src="ImageServlet?time=new Date().getTime()">
-										<input class="vc-text easyui-validatebox" data-options="required:true,missingMessage:'验证码不能为空.'" maxlength="4" type="text" name="verifyCode">
+										<input class="txtvalidatecodecssclass vc-text easyui-validatebox" data-options="required:true,missingMessage:'验证码不能为空.'" maxlength="4" type="text" name="verifyCode">
 									</li>
 								</ul>
 							</div>
 						</li>
 						<li class=user_main_r>
 							<input class="ibtnentercssclass"
-								style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px"
+								style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px ;float:left; margin-left:-5px"
 								type=image src="images/login/user_botton.gif">
 						</li>
 					</ul>

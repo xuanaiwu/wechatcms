@@ -100,6 +100,14 @@ dy.busLoan = function(){
 								
 							}
 						}},
+						{id:'excel',text:'导出全部数据到excel',btnType:'exportExcel',iconCls:'icon-edit',handler:function(){
+								
+								//用表单form的方式提交
+								_this.editPwdForm().attr('action','exportAllExcel.do');
+								_this.editPwdForm().submit();
+								alert("导出成功！");
+
+						}},
 					{id:'btndelete',text:'删除',btnType:'remove'}
 				]
 			}

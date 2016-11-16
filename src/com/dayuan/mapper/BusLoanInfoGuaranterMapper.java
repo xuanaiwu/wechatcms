@@ -14,4 +14,11 @@ public interface BusLoanInfoGuaranterMapper<T> extends BaseMapper<T>{
     int updateByPrimaryKeySelective(BusLoanInfoGuaranter record);
 
     int updateReturnInfluences(T t);
+    
+    /**
+	 * 
+	 * 根据bid返回单个对象
+	 * 
+	 * */
+	public T getBusLoanInfoGuaranter(Object bid);
 }

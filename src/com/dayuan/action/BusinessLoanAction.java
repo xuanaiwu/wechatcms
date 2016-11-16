@@ -1,12 +1,13 @@
 package com.dayuan.action;
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ import com.dayuan.utils.CreateWords;
 import com.dayuan.utils.DateUtil;
 import com.dayuan.utils.HtmlUtil;
 import com.dayuan.utils.SessionUtils;
+import com.dayuan.utils.StringUtil;
 import com.dayuan.utils.ZipUtil;
 
 
@@ -106,10 +108,10 @@ public class BusinessLoanAction extends BaseAction{
 			SysUser user = SessionUtils.getUser(request);
 			busLoanInfoModel.setuId(user.getId().toString());
 			busLoanInfoModel.setuName(user.getNickName());
-			List<BusLoanInfo> lsit=busLoanInfoService.queryByList(busLoanInfoModel);
+			List<BusLoanInfo> list=busLoanInfoService.queryByList(busLoanInfoModel);
 			Map<String,Object> map=new HashMap<String,Object>();
 			map.put("total",busLoanInfoModel.getPager().getRowCount());
-			map.put("rows", lsit);
+			map.put("rows", list);
 			HtmlUtil.writerJson(response, map);
 		}
 		
@@ -244,6 +246,132 @@ public class BusinessLoanAction extends BaseAction{
 	}
 	
 	/**
+	 * 导出所有数据到excel
+	 * */
+	@RequestMapping("/exportAllExcel")
+	public void exportAllExcel(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		SysUser user = SessionUtils.getUser(request);
+		BusLoanInfoModel busLoanInfoModel=new BusLoanInfoModel();
+		busLoanInfoModel.setuId(user.getId().toString());
+		busLoanInfoModel.setuName(user.getNickName());
+		List<BusLoanInfo> list=busLoanInfoService.queryList(busLoanInfoModel);
+		if(list!=null&&list.size()>0){
+			// 第一步，创建一个webbook，对应一个Excel文件  
+	        HSSFWorkbook wb = new HSSFWorkbook();
+	        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
+	        HSSFSheet sheet = wb.createSheet("贷后台帐");
+	        
+	        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
+	        HSSFRow row = sheet.createRow((int) 0); 
+	        // 第四步，创建单元格，并设置值表头 设置表头居中  
+	        HSSFCellStyle style = wb.createCellStyle();
+	        // 创建一个居中格式
+	        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+	        
+	        
+	        HSSFCell cell = row.createCell((short) 0);  
+	        cell.setCellValue("序号");  
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 1);  
+	        cell.setCellValue("客户姓名"); //商贷主表，applicationName 
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 2);  
+	        cell.setCellValue("紧急联系人");//商贷主表，urgentCont 
+	        cell.setCellStyle(style);  
+	        cell = row.createCell((short) 3);  
+	        cell.setCellValue("关系"); //商贷主表， relationship
+	        cell.setCellStyle(style); 
+	        cell = row.createCell((short) 4);  
+	        cell.setCellValue("电话");  //法人，legalPhone
+	        cell.setCellStyle(style);
+	        cell = row.createCell((short) 5);  
+	        cell.setCellValue("地址");  //法人，houseAddress
+	        cell.setCellStyle(style);
+	        cell = row.createCell((short) 6);  
+	        cell.setCellValue("公司");  //法人，companyName
+	        cell.setCellStyle(style);
+	        cell = row.createCell((short) 7);  
+	        cell.setCellValue("平台");//  经验实体，platformName
+	        cell.setCellStyle(style);
+	        cell = row.createCell((short) 8);  
+	        cell.setCellValue("店铺");  //经验实体，shopName
+	        cell.setCellStyle(style);
+	        cell = row.createCell((short) 9);  
+	        cell.setCellValue("子帐号");  //经验实体,subAccount
+	        cell.setCellStyle(style);
+	        cell = row.createCell((short) 10);  
+	        cell.setCellValue("密码");  //经验实体,sbuPassword
+	        cell.setCellStyle(style);
+	        
+			for(int i=0;i<list.size();i++){
+				BusLoanInfo busLoanInfo=list.get(i);
+				Integer bid=busLoanInfo.getId();
+				BusLoanInfoLegal busLoanInfoLegal=this.busLoanInfoLegalService.getBusLoanInfoLegal(bid);
+				BusLoanInfoShop busLoanInfoShop=this.busLoanInfoShopService.getBusLoanInfoShop(bid);
+				
+				row = sheet.createRow((int) 1 + i);      
+			    row.createCell((short) 0).setCellValue(1);  
+			    row.createCell((short) 1).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));  
+			    row.createCell((short) 2).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getUrgentCont())); 
+			    row.createCell((short) 3).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getRelationship()));
+			    row.createCell((short) 4).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+			    row.createCell((short) 5).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getHouseAddress()));
+			    row.createCell((short) 6).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+			    row.createCell((short) 7).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+			    row.createCell((short) 8).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+			    row.createCell((short) 9).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSubAccount()));
+			    row.createCell((short) 10).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSbuPassword()));
+				
+				
+			}
+			String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
+			savePath=savePath+"\\"+UUID.randomUUID();//文件最终保存路径
+			File fileSavePath=new File(savePath);
+			/**创建要保存的文件夹*/
+			if(fileSavePath.exists()){
+				fileSavePath.delete();
+				fileSavePath.mkdirs();
+			}else{
+				fileSavePath.mkdirs();
+			}
+			String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";//eccel文件名称
+			BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(savePath+"\\"+excel));  //创建文件
+	        wb.write(fout); //写入excel数据
+	        fout.flush();
+	        fout.close();
+	        //设置文件MIME类型
+		    response.setContentType(request.getSession().getServletContext().getMimeType(excel));
+		    //设置Content-Disposition
+			response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(excel,"UTF-8"));
+			
+			BufferedInputStream in=new BufferedInputStream(new FileInputStream(savePath+"\\"+excel));//下载时,把文件读入io流
+			OutputStream out=new BufferedOutputStream(response.getOutputStream());
+			byte buffer[]=new byte[1024];
+			int len=0;
+			while((len=in.read(buffer))>0){
+				out.write(buffer,0,len);//向response写入数据
+			}
+			in.close();
+			out.flush();
+			out.close();
+			/**删除文件*/
+			File file=new File(savePath+"\\"+excel);
+			if(file!=null){
+				if(file.exists()){
+					file.delete();//删除文件
+				}
+				file=null;
+			}
+			/**删除文件夹*/
+			if(fileSavePath!=null){
+				if(fileSavePath.exists()){
+					fileSavePath.delete();
+				}
+				fileSavePath=null;
+			}
+		}
+	}
+	/**
 	 * 导出excel
 	 * 
 	 * */
@@ -269,7 +397,7 @@ public class BusinessLoanAction extends BaseAction{
 		// 第一步，创建一个webbook，对应一个Excel文件  
         HSSFWorkbook wb = new HSSFWorkbook();
         // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
-        HSSFSheet sheet = wb.createSheet("商贷信息表");
+        HSSFSheet sheet = wb.createSheet("贷后台帐");
         
         // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
         HSSFRow row = sheet.createRow((int) 0); 
@@ -320,16 +448,16 @@ public class BusinessLoanAction extends BaseAction{
 			  
         	row = sheet.createRow((int) 0 + 1);      
 		    row.createCell((short) 0).setCellValue(1);  
-		    row.createCell((short) 1).setCellValue(busLoanInfo.getApplicationName());  
-		    row.createCell((short) 2).setCellValue(busLoanInfo.getUrgentCont()); 
-		    row.createCell((short) 3).setCellValue(busLoanInfo.getRelationship());
-		    row.createCell((short) 4).setCellValue(busLoanInfoLegal.getLegalPhone());
-		    row.createCell((short) 5).setCellValue(busLoanInfoLegal.getHouseAddress());
-		    row.createCell((short) 6).setCellValue(busLoanInfoLegal.getCompanyName());
-		    row.createCell((short) 7).setCellValue(busLoanInfoShop.getPlatformName());
-		    row.createCell((short) 8).setCellValue(busLoanInfoShop.getShopName());
-		    row.createCell((short) 9).setCellValue(busLoanInfoShop.getSubAccount());
-		    row.createCell((short) 10).setCellValue(busLoanInfoShop.getSbuPassword());
+		    row.createCell((short) 1).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));  
+		    row.createCell((short) 2).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getUrgentCont())); 
+		    row.createCell((short) 3).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getRelationship()));
+		    row.createCell((short) 4).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+		    row.createCell((short) 5).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getHouseAddress()));
+		    row.createCell((short) 6).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+		    row.createCell((short) 7).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+		    row.createCell((short) 8).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+		    row.createCell((short) 9).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSubAccount()));
+		    row.createCell((short) 10).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSbuPassword()));
 		    // Student stu = (Student) list.get(i);  
             // 第四步，创建单元格，并设置值  
 		    //  cell = row.createCell((short) 3);  
@@ -347,7 +475,7 @@ public class BusinessLoanAction extends BaseAction{
 				fileSavePath.mkdirs();
 			}
 			String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";//eccel文件名称
-			FileOutputStream fout = new FileOutputStream(savePath+"\\"+excel);  //创建文件
+			BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(savePath+"\\"+excel));  //创建文件
 	        wb.write(fout); //写入excel数据
 	        fout.flush();
 	        fout.close();
@@ -355,15 +483,16 @@ public class BusinessLoanAction extends BaseAction{
 		    response.setContentType(request.getSession().getServletContext().getMimeType(excel));
 		    //设置Content-Disposition
 			response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(excel,"UTF-8"));
-			//下载时,把文件读书io流
-			FileInputStream in=new FileInputStream(savePath+"\\"+excel);
-			OutputStream out=response.getOutputStream();
+			//下载时,把文件读入io流
+			BufferedInputStream in=new BufferedInputStream(new FileInputStream(savePath+"\\"+excel));
+			OutputStream out=new BufferedOutputStream(response.getOutputStream());
 			byte buffer[]=new byte[1024];
 			int len=0;
 			while((len=in.read(buffer))>0){
 				out.write(buffer,0,len);//向response写入数据
 			}
 			in.close();
+			out.flush();
 			out.close();
 			/**删除文件*/
 			File file=new File(savePath+"\\"+excel);
@@ -398,6 +527,11 @@ public class BusinessLoanAction extends BaseAction{
 			return;
 		}
 		BusLoanInfo busLoanInfo=this.busLoanInfoService.queryById(id);
+		Integer bid=busLoanInfo.getId();
+		BusLoanInfoLegal busLoanInfoLegal=this.busLoanInfoLegalService.getBusLoanInfoLegal(bid);
+		BusLoanInfoShop busLoanInfoShop=this.busLoanInfoShopService.getBusLoanInfoShop(bid);
+		BusLoanInfoGuaranter busLoanInfoGuaranter=this.busLoanInfoGuaranterService.getBusLoanInfoGuaranter(bid);
+		
 		if(busLoanInfo==null){
 			sendFailureMessage(response, "没有找到对应记录~！");
 			return;
@@ -405,7 +539,8 @@ public class BusinessLoanAction extends BaseAction{
 		Map<String,Object> dataMap=new HashMap<String,Object>();
 		String path="\\com\\dayuan\\template\\";//模板位置
 		String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads");//文件保存位置,项目部署绝对路径（物理路径）
-		savePath=savePath+"\\"+UUID.randomUUID();
+		savePath=savePath+"\\"+UUID.randomUUID();//最后保存路径
+		/**创建文件夹 */
 		File fileSavePath=new File(savePath);
 		if(fileSavePath.exists()){
 			fileSavePath.delete();
@@ -413,21 +548,60 @@ public class BusinessLoanAction extends BaseAction{
 		}else{
 			fileSavePath.mkdirs();
 		}
-		CreateWords createWords=new CreateWords();
+		CreateWords createWords=new CreateWords();//封装好的word生成类
 		boolean sign=false;
 		String wordName="";//保存文件名
 		if(wordType.equals("1")){
-			dataMap.put("xingming", busLoanInfo.getApplicationName());
-			wordName="贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
-			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi.ftl",savePath+"\\",wordName);
+			dataMap.put("applicationName", StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			wordName="电商贷客户贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi1.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("2")){
+			dataMap.put("companyName",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+			wordName="董事会(股东会)成员名单及签字样本(参考文本)"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"chengyuanmingdan2.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("3")){
+			dataMap.put("legalPerson",StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPerson()));
+			dataMap.put("gender",StringUtil.getNotNullStr(busLoanInfoLegal.getGender()));
+			dataMap.put("idCard",StringUtil.getNotNullStr(busLoanInfoLegal.getIdCard()));
+			dataMap.put("companyName",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+			wordName="法定代表人证明书及签字样本"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"fadingdaibiaoren3.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("4")){
+			dataMap.put("companyName1",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+			dataMap.put("companyName2",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			wordName="股东会决议"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"gudonghuijueyi4.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("5")){
+			dataMap.put("companyName",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+			wordName="预留公章样本"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"yuliugongzhangyangben5.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("61")){
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("guaranterCard",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterCard()));
+			dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterHouseAddress()));
+			dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterEmployer()));
+			dataMap.put("guaranterPhone",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterPhone()));
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			wordName="个人最高额保证合同1"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"baozhenghetong61.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("62")){
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("guaranterCard",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterCard()));
+			dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterHouseAddress()));
+			dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterEmployer()));
+			dataMap.put("guaranterPhone",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterPhone()));
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			wordName="个人最高额保证合同2"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"baozhenghetong62.ftl",savePath+"\\",wordName);
 		}else{
 			sendFailureMessage(response, "你输入的信息无效！");
 			return;
 		}
 		if(sign){
 			String saveZipPath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/ziptemp");//zip文件保存位置,项目部署绝对路径（物理路径）
-			String zipSaveName="word"+DateUtil.getNowPlusTimeMill();
-			String sourceFile=ZipUtil.fileToZip(savePath,saveZipPath,zipSaveName);//返回压缩后的zip绝对路径+文件名
+			String zipSaveName="word"+DateUtil.getNowPlusTimeMill()+".zip";//压缩文件名
+			String sourceFile=ZipUtil.fileToZip(savePath,saveZipPath,zipSaveName);//封装好的压缩方法，返回压缩后的zip绝对路径+文件名
 			//File file=new File(savePath+"\\",wordName);不用zip压缩，直接下载
 			if(sourceFile!=null){
 				File file=new File(sourceFile);
@@ -436,9 +610,9 @@ public class BusinessLoanAction extends BaseAction{
 					return;
 				}
 				//设置文件MIME类型
-				response.setContentType(request.getSession().getServletContext().getMimeType(zipSaveName+".zip"));
+				response.setContentType(request.getSession().getServletContext().getMimeType(zipSaveName));
 				//设置Content-Disposition
-				response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(zipSaveName+".zip","UTF-8"));
+				response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(zipSaveName,"UTF-8"));
 				//response.setHeader("content-disposition","attachment;filename"+URLEncoder.encode(wordName,"UTF-8"));
 				
 				FileInputStream in=new FileInputStream(sourceFile);
@@ -458,7 +632,6 @@ public class BusinessLoanAction extends BaseAction{
 					fileSavePath=null;
 				}
 			}
-			//sendSuccessMessage(response, "word生成成功！文件名是："+wordName);
 		}else{
 			sendFailureMessage(response, "word生成失败,请联系管理员！");
 		}

@@ -30,9 +30,9 @@ public class ZipUtil {
 			System.out.println("待压缩的文件目录："+sourceFilePath+"不存在.");
 		}else{
 			try {
-				File zipFile = new File(zipFilePath + "/" + fileName +".zip");
+				File zipFile = new File(zipFilePath + "/" + fileName);
 				if(zipFile.exists()){
-					System.out.println(zipFilePath + "目录下存在名字为:" + fileName +".zip" +"打包文件.");
+					System.out.println(zipFilePath + "目录下存在名字为:" + fileName +"打包文件.");
 				}else{
 					File[] sourceFiles = sourceFile.listFiles();
 					if(null == sourceFiles || sourceFiles.length<1){
@@ -88,7 +88,7 @@ public class ZipUtil {
 			}
 		}
 		if(flag){
-			return zipFilePath + "/" + fileName +".zip";
+			return zipFilePath + "/" + fileName;
 		}else{
 			return null;
 		}

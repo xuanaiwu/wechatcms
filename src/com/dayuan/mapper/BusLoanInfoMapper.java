@@ -1,5 +1,9 @@
 package com.dayuan.mapper;
 
+import java.util.List;
+
+import com.dayuan.model.BusLoanInfoModel;
+
 public interface BusLoanInfoMapper<T> extends BaseMapper<T> {
 	
 	/**
@@ -11,6 +15,9 @@ public interface BusLoanInfoMapper<T> extends BaseMapper<T> {
 	 *更新返回影响记录数
 	 * */
 	public int updateReturnInfluences(T t);
+	
+	
+	public List<T> queryList(BusLoanInfoModel busLoanInfoModel);
 	
 
 }

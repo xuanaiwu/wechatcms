@@ -26,6 +26,12 @@
     from bus_loaninfo_guaranter
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="getBusLoanInfoGuaranter" resultType="com.dayuan.bean.BusLoanInfoGuaranter" parameterType="java.lang.Integer">
+  	select * from  bus_loaninfo_guaranter where bid=#{bid} order by id asc limit 0,1
+  </select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from bus_loaninfo_guaranter
     where id = #{id,jdbcType=INTEGER}

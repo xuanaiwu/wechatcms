@@ -35,12 +35,18 @@ where 1=1
 <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
  select count(1) from bus_loanInfo
  <include refid="Example_Where_Clause"/>
+</select>
 
+<select id="queryList" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
+    select * from bus_loanInfo
+	<include refid="Example_Where_Clause"/> 
+	order by id desc
 </select>
 
 <select id="queryByList" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
 		select * from bus_loanInfo
-		<include refid="Example_Where_Clause"/>
+		<include refid="Example_Where_Clause"/> 
+		order by id desc
 		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
 	      ${pager.orderCondition}
 	    </if>

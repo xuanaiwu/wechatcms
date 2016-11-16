@@ -31,5 +31,17 @@ public class BusLoanInfoGuaranterService<T> extends BaseService<T> {
 		}
 		return mapper.updateReturnInfluences(t);
 	}
+	
+	/**
+	 * 
+	 * 根据bid返回单个对象
+	 * 
+	 * */
+	public T getBusLoanInfoGuaranter(Object bid) throws Exception{
+		if(bid==null){
+			return null;
+		}
+		return getMapper().getBusLoanInfoGuaranter(bid);
+	}
 
 }

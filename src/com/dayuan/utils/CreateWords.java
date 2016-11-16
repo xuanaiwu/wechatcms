@@ -31,6 +31,14 @@ public class CreateWords {
 		configuration.setDefaultEncoding("UTF-8");
 	}
 	
+	/**
+	 * 创建并生成word
+	 * @param dataMap 数据map
+	 * @param path 模板FTL文件所存在的位置
+	 * @param templeName templeName 模版名称
+	 * @param outFilePath 文件保存路径（部署项目绝对路径）
+	 * @param outFileName 保存文件名
+	 * */
 	public boolean create(Map<String,Object> dataMap,String path,String templeName,String outFilePath,String outFileName){
 		Boolean sign=false;
 		configuration.setClassForTemplateLoading(this.getClass(),path);  //模板FTL文件所存在的位置
