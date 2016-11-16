@@ -594,6 +594,18 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
 			wordName="个人最高额保证合同2"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"baozhenghetong62.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("9")){
+			dataMap.put("applicationName1",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			dataMap.put("guaranterName1",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("applicationAmount1",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
+			dataMap.put("applicationName2",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			dataMap.put("applicationAmount2",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
+			dataMap.put("guaranterName2",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("applicationName3",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			dataMap.put("applicationAmount3",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
+			wordName="华夏银行小企业授信业务实地见证确认书"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"shouxinquerenshu9.ftl",savePath+"\\",wordName);
+			
 		}else{
 			sendFailureMessage(response, "你输入的信息无效！");
 			return;

@@ -31,16 +31,26 @@ public class BusLoanInfoShop {
 		this.bid = bid;
 	}
 	public String getShopName(){
-		return this.shopName;
+		return this.shopName!=null?shopName:"";
 	}
 	public void setShopName(String shopName){
-		this.shopName=shopName;
+		if(shopName==null){
+			this.shopName="";
+		}else{
+			this.shopName=shopName;
+		}
+		
 	}
 	public String getPlatformName(){
-		return this.platformName;
+		return this.platformName!=null?platformName:"";
 	}
 	public void setPlatformName(String platformName){
-		this.platformName=platformName;
+		if(platformName==null){
+			this.platformName="";
+		}else{
+			this.platformName=platformName;
+		}
+		
 	}
 	public String getShopLevel(){
 		return this.shopLevel;
@@ -61,16 +71,26 @@ public class BusLoanInfoShop {
 		this.shopOwner=shopOwner;
 	}
 	public String getSubAccount(){
-		return this.subAccount;
+		return this.subAccount!=null?subAccount:"";
 	}
 	public void setSubAccount(String subAccount){
-		this.subAccount=subAccount;
+		if(subAccount==null){
+			this.subAccount="";
+		}else{
+			this.subAccount=subAccount;
+		}
+		
 	}
 	public String getSbuPassword(){
-		return this.sbuPassword;
+		return this.sbuPassword!=null?sbuPassword:"";
 	}
 	public void setSbuPassword(String sbuPassword){
-		this.sbuPassword=sbuPassword;
+		if(sbuPassword==null){
+			this.sbuPassword="";
+		}else{
+			this.sbuPassword=sbuPassword;
+		}
+		
 	}
 	public String getBusinessOpera(){
 		return this.businessOpera;

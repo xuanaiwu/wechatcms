@@ -119,10 +119,15 @@ public class BusLoanInfo extends BaseBean{
 		this.surveyPhone = surveyPhone;
 	}
 	public String getApplicationName() {
-		return applicationName;
+		return applicationName!=null?applicationName:"";
 	}
 	public void setApplicationName(String applicationName) {
-		this.applicationName = applicationName;
+		if(applicationName==null){
+			this.applicationName="";
+		}else{
+			this.applicationName = applicationName;
+		}
+		
 	}
 	public String getApplicationAmount() {
 		return applicationAmount;
@@ -143,10 +148,16 @@ public class BusLoanInfo extends BaseBean{
 		this.loanType = loanType;
 	}
 	public String getUrgentCont() {
-		return urgentCont;
+		return urgentCont!=null?urgentCont:"";
 	}
 	public void setUrgentCont(String urgentCont) {
-		this.urgentCont = urgentCont;
+		if(urgentCont==null){
+			this.urgentCont="";
+		}else{
+			
+			this.urgentCont = urgentCont;
+		}
+		
 	}
 	public String getUrgentContPhone() {
 		return urgentContPhone;
@@ -161,10 +172,15 @@ public class BusLoanInfo extends BaseBean{
 		this.urgentContAddress = urgentContAddress;
 	}
 	public String getRelationship() {
-		return relationship;
+		return relationship!=null?relationship:"" ;
 	}
 	public void setRelationship(String relationship) {
-		this.relationship = relationship;
+		if(relationship==null){
+			this.relationship = "";
+		}else{
+			this.relationship = relationship;
+		}
+		
 	}
 	public String getTaobaoTreeDiamondMore() {
 		return taobaoTreeDiamondMore;

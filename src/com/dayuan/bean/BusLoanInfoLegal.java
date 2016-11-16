@@ -59,10 +59,15 @@ public class BusLoanInfoLegal {
 		this.gender=gender;
 	}
 	public String getCompanyName(){
-		return this.companyName;
+		return this.companyName!=null?companyName:"";
 	}
 	public void setCompanyName(String companyName){
-		this.companyName=companyName;
+		if(companyName==null){
+			this.companyName="";
+		}else{
+			this.companyName=companyName;
+		}
+		
 	}
 	public String getIdCardPeriod(){
 		return this.idCardPeriod;
@@ -83,10 +88,15 @@ public class BusLoanInfoLegal {
 		this.householdRegistration=householdRegistration;
 	}
 	public String getHouseAddress(){
-		return this.houseAddress;
+		return this.houseAddress!=null?houseAddress:"";
 	}
 	public void setHouseAddress(String houseAddress){
-		this.houseAddress=houseAddress;
+		if(houseAddress==null){
+			this.houseAddress="";
+		}else{
+			this.houseAddress=houseAddress;
+		}
+		
 	}
 	public String getDeliveryAddress(){
 		return this.deliveryAddress;
@@ -95,10 +105,15 @@ public class BusLoanInfoLegal {
 		this.deliveryAddress=deliveryAddress;
 	}
 	public String getLegalPhone(){
-		return this.legalPhone;
+		return this.legalPhone!=null?legalPhone:"";
 	}
 	public void setLegalPhone(String legalPhone){
-		this.legalPhone=legalPhone;
+		if(legalPhone==null){
+			this.legalPhone="";
+		}else{
+			this.legalPhone=legalPhone;
+		}
+		
 	}
 	public String getPropertyQuantity(){
 		return this.propertyQuantity;
