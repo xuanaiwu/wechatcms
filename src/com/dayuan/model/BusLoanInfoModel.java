@@ -36,7 +36,39 @@ public class BusLoanInfoModel extends BaseModel{
 	private String childrenIfLocally;
 	private String additionInfo;
 	
+	/**20161117 add*/
+	private String applicationGender;
+	private String applicationAddress;
+	private String applicationIdCard;
+	private String applicationPhone;
 	
+	
+	
+	
+	public String getApplicationGender() {
+		return applicationGender;
+	}
+	public void setApplicationGender(String applicationGender) {
+		this.applicationGender = applicationGender;
+	}
+	public String getApplicationAddress() {
+		return applicationAddress;
+	}
+	public void setApplicationAddress(String applicationAddress) {
+		this.applicationAddress = applicationAddress;
+	}
+	public String getApplicationIdCard() {
+		return applicationIdCard;
+	}
+	public void setApplicationIdCard(String applicationIdCard) {
+		this.applicationIdCard = applicationIdCard;
+	}
+	public String getApplicationPhone() {
+		return applicationPhone;
+	}
+	public void setApplicationPhone(String applicationPhone) {
+		this.applicationPhone = applicationPhone;
+	}
 	public String getuName() {
 		return uName;
 	}

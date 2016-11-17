@@ -36,10 +36,42 @@ public class BusLoanInfo extends BaseBean{
 	private String additionInfo;
 	
 	
+	/**20161117 add*/
+	private String applicationGender;
+	private String applicationAddress;
+	private String applicationIdCard;
+	private String applicationPhone;
 	
 	
 	
 	
+	
+	
+	
+	public String getApplicationGender() {
+		return applicationGender;
+	}
+	public void setApplicationGender(String applicationGender) {
+		this.applicationGender = applicationGender;
+	}
+	public String getApplicationAddress() {
+		return applicationAddress;
+	}
+	public void setApplicationAddress(String applicationAddress) {
+		this.applicationAddress = applicationAddress;
+	}
+	public String getApplicationIdCard() {
+		return applicationIdCard;
+	}
+	public void setApplicationIdCard(String applicationIdCard) {
+		this.applicationIdCard = applicationIdCard;
+	}
+	public String getApplicationPhone() {
+		return applicationPhone;
+	}
+	public void setApplicationPhone(String applicationPhone) {
+		this.applicationPhone = applicationPhone;
+	}
 	public String getuName() {
 		return uName;
 	}
@@ -59,10 +91,15 @@ public class BusLoanInfo extends BaseBean{
 		this.content = content;
 	}
 	public String getChannel() {
-		return channel;
+		return channel!=null?channel:"";
 	}
 	public void setChannel(String channel) {
-		this.channel = channel;
+		if(channel==null){
+			this.channel="";
+		}else{
+			this.channel = channel;
+		}
+		
 	}
 	public String getIfGuaranter() {
 		return ifGuaranter;

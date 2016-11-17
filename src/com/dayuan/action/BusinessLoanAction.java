@@ -310,19 +310,30 @@ public class BusinessLoanAction extends BaseAction{
 				BusLoanInfoShop busLoanInfoShop=this.busLoanInfoShopService.getBusLoanInfoShop(bid);
 				
 				row = sheet.createRow((int) 1 + i);      
-			    row.createCell((short) 0).setCellValue(1);  
+			    row.createCell((short) 0).setCellValue(i+1);  
 			    row.createCell((short) 1).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));  
 			    row.createCell((short) 2).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getUrgentCont())); 
 			    row.createCell((short) 3).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getRelationship()));
-			    row.createCell((short) 4).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
-			    row.createCell((short) 5).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getHouseAddress()));
-			    row.createCell((short) 6).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
-			    row.createCell((short) 7).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
-			    row.createCell((short) 8).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
-			    row.createCell((short) 9).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSubAccount()));
-			    row.createCell((short) 10).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSbuPassword()));
-				
-				
+			    if(busLoanInfoLegal!=null){
+			    	    row.createCell((short) 4).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+					    row.createCell((short) 5).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getHouseAddress()));
+					    row.createCell((short) 6).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+			    }else{
+			    	row.createCell((short) 4).setCellValue("");
+				    row.createCell((short) 5).setCellValue("");
+				    row.createCell((short) 6).setCellValue("");
+			    }
+			    if(busLoanInfoShop!=null){
+			    	 row.createCell((short) 7).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+					 row.createCell((short) 8).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+					 row.createCell((short) 9).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSubAccount()));
+					 row.createCell((short) 10).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSbuPassword()));
+			    }else{
+			    	 row.createCell((short) 7).setCellValue("");
+					 row.createCell((short) 8).setCellValue("");
+					 row.createCell((short) 9).setCellValue("");
+					 row.createCell((short) 10).setCellValue("");
+			    }
 			}
 			String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads/excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
 			savePath=savePath+"\\"+UUID.randomUUID();//文件最终保存路径
@@ -444,20 +455,32 @@ public class BusinessLoanAction extends BaseAction{
         
        // 第五步，写入实体数据 实际应用中这些数据从数据库得到，  
         try {
-		
-			  
+
         	row = sheet.createRow((int) 0 + 1);      
 		    row.createCell((short) 0).setCellValue(1);  
 		    row.createCell((short) 1).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));  
 		    row.createCell((short) 2).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getUrgentCont())); 
 		    row.createCell((short) 3).setCellValue(StringUtil.getNotNullStr(busLoanInfo.getRelationship()));
-		    row.createCell((short) 4).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
-		    row.createCell((short) 5).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getHouseAddress()));
-		    row.createCell((short) 6).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
-		    row.createCell((short) 7).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
-		    row.createCell((short) 8).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
-		    row.createCell((short) 9).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSubAccount()));
-		    row.createCell((short) 10).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSbuPassword()));
+		    if(busLoanInfoLegal!=null){
+	    	    row.createCell((short) 4).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+			    row.createCell((short) 5).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getHouseAddress()));
+			    row.createCell((short) 6).setCellValue(StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
+		    }else{
+		    	row.createCell((short) 4).setCellValue("");
+			    row.createCell((short) 5).setCellValue("");
+			    row.createCell((short) 6).setCellValue("");
+		    }
+		    if(busLoanInfoShop!=null){
+		    	 row.createCell((short) 7).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+				 row.createCell((short) 8).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+				 row.createCell((short) 9).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSubAccount()));
+				 row.createCell((short) 10).setCellValue(StringUtil.getNotNullStr(busLoanInfoShop.getSbuPassword()));
+		    }else{
+		    	 row.createCell((short) 7).setCellValue("");
+				 row.createCell((short) 8).setCellValue("");
+				 row.createCell((short) 9).setCellValue("");
+				 row.createCell((short) 10).setCellValue("");
+		    }
 		    // Student stu = (Student) list.get(i);  
             // 第四步，创建单元格，并设置值  
 		    //  cell = row.createCell((short) 3);  
@@ -577,7 +600,7 @@ public class BusinessLoanAction extends BaseAction{
 			wordName="预留公章样本"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"yuliugongzhangyangben5.ftl",savePath+"\\",wordName);
 		}else if(wordType.equals("61")){
-			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
 			dataMap.put("guaranterCard",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterCard()));
 			dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterHouseAddress()));
 			dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterEmployer()));
@@ -586,7 +609,7 @@ public class BusinessLoanAction extends BaseAction{
 			wordName="个人最高额保证合同1"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"baozhenghetong61.ftl",savePath+"\\",wordName);
 		}else if(wordType.equals("62")){
-			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
 			dataMap.put("guaranterCard",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterCard()));
 			dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterHouseAddress()));
 			dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterEmployer()));
@@ -594,6 +617,32 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
 			wordName="个人最高额保证合同2"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"baozhenghetong62.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("71")){
+			dataMap.put("guaranterName", busLoanInfoGuaranter.getGuaranterName());
+			dataMap.put("guaranterHouseAddress", busLoanInfoGuaranter.getGuaranterHouseAddress());
+			dataMap.put("legalPerson", busLoanInfoLegal.getLegalPerson());
+			dataMap.put("legalPhone", busLoanInfoLegal.getLegalPhone());
+			dataMap.put("applicationName", busLoanInfo.getApplicationName());
+			wordName="最高额保证合同1"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"zuigaoebaozhenghetong71.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("72")){
+			dataMap.put("guaranterName", busLoanInfoGuaranter.getGuaranterName());
+			dataMap.put("guaranterHouseAddress", busLoanInfoGuaranter.getGuaranterHouseAddress());
+			dataMap.put("legalPerson", busLoanInfoLegal.getLegalPerson());
+			dataMap.put("legalPhone", busLoanInfoLegal.getLegalPhone());
+			dataMap.put("applicationName", busLoanInfo.getApplicationName());
+			wordName="最高额保证合同2"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"zuigaoebaozhenghetong72.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("8")){
+			dataMap.put("applicationName", StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			dataMap.put("applicationAddress", StringUtil.getNotNullStr(busLoanInfo.getApplicationAddress()));
+			dataMap.put("applicationPhone", StringUtil.getNotNullStr(busLoanInfo.getApplicationPhone()));
+			dataMap.put("applicationIdCard", StringUtil.getNotNullStr(busLoanInfo.getApplicationIdCard()));
+			dataMap.put("guaranterName1", StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("guaranterName2", StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("guaranterName3", StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			wordName="华夏银行小企业网络贷最高额借款合同"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"jiekuanhetong8.ftl",savePath+"\\",wordName);
 		}else if(wordType.equals("9")){
 			dataMap.put("applicationName1",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
 			dataMap.put("guaranterName1",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
@@ -605,6 +654,42 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("applicationAmount3",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
 			wordName="华夏银行小企业授信业务实地见证确认书"+DateUtil.getNowPlusTimeMill()+".doc";
 			sign=createWords.create(dataMap,path,"shouxinquerenshu9.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("10")){
+			dataMap.put("applicationName", StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			wordName="华夏银行授信业务办理申请书"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"shouxinbanlishenqingshu10.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("11")){
+			dataMap.put("legalPerson1", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPerson()));
+			dataMap.put("idCard1", StringUtil.getNotNullStr(busLoanInfoLegal.getIdCard()));
+			dataMap.put("legalPhone1", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+			dataMap.put("legalPerson2", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPerson()));
+			dataMap.put("legalPhone2", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+			dataMap.put("legalPerson3", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPerson()));
+			dataMap.put("idCard2", StringUtil.getNotNullStr(busLoanInfoLegal.getIdCard()));
+			dataMap.put("legalPhone3", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+			wordName="贷前文件4合1"+DateUtil.getNowPlusTimeMill()+".doc";
+			sign=createWords.create(dataMap,path,"daiqianwenjian11.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("12")){
+			dataMap.put("applicationName", StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			dataMap.put("legalPerson", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPerson()));
+			dataMap.put("idCard", StringUtil.getNotNullStr(busLoanInfoLegal.getIdCard()));
+			dataMap.put("idCardPeriod", StringUtil.getNotNullStr(busLoanInfoLegal.getIdCardPeriod()));
+			dataMap.put("idCarAddress", StringUtil.getNotNullStr(busLoanInfoLegal.getIdCardAddress()));
+			dataMap.put("legalPhone", StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+			if(!busLoanInfo.getChannel().equals("")&&busLoanInfo.getChannel().equals("自流量")){
+				wordName="融信通开立账户信息表(自流量)"+DateUtil.getNowPlusTimeMill()+".doc";
+				sign=createWords.create(dataMap,path,"rongxintongziliuliang12.ftl",savePath+"\\",wordName);
+			}else if(!busLoanInfo.getChannel().equals("")&&busLoanInfo.getChannel().equals("云贷推送")){
+				wordName="融信通开立账户信息表(云贷推送)"+DateUtil.getNowPlusTimeMill()+".doc";
+				sign=createWords.create(dataMap,path,"rongxintongyundaituisong12.ftl",savePath+"\\",wordName);
+			}
+		}else if(wordType.equals("13")){
+			dataMap.put("surveyOrgName",busLoanInfo.getSurveyOrgName());
+			dataMap.put("surveyPersonName",busLoanInfo.getSurveyPersonName());
+			dataMap.put("surveyPhone",busLoanInfo.getSurveyPhone());
+			wordName="小企业电商贷调查表"+DateUtil.getNowPlusTimeMill()+".xls";
+			sign=createWords.create(dataMap,path,"shangdaidiaochabiao13.ftl",savePath+"\\",wordName);
+		}else if(wordType.equals("0")){
 			
 		}else{
 			sendFailureMessage(response, "你输入的信息无效！");

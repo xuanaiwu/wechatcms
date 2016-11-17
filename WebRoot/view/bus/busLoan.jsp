@@ -54,9 +54,23 @@
 			       
 			           
 			            <div class="ftitle">申请人信息</div>
+			            
 			            <div class="fitem">  
 			               <label>借款申请人名称:</label>  
-			               <input id="birthday" type="text" name="applicationName" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
+			               <input id="applicationName" type="text" name="applicationName" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
+			               <label>申请人性别:</label>  
+			               <input id="applicationGender" type="text" name="applicationGender" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
+			               <label>申请人住址:</label>  
+			               <input id="applicationAddress" type="text" name="applicationAddress" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input> 
+						   <label>申请人身份证号码:</label>  
+			               <input id="applicationIdCard" type="text" name="applicationIdCard" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>  
+			           </div>
+			            
+			            
+			            
+			            <div class="fitem">  
+			               <label>申请人电话:</label>  
+			               <input id="applicationPhone" type="text" name="applicationPhone" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
 			               <label>申请金额:</label>  
 			               <input id="birthday" type="text" name="applicationAmount" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
 			               <label>申请期限:</label>  
@@ -490,6 +504,9 @@
 		                    	<option value="8">8.华夏银行小企业网络贷最高额借款合同</option>
 		                    	<option value="9">9.华夏银行小企业授信业务实地见证确认书</option>
 		                    	<option value="10">10.华夏银行授信业务办理申请书.doc</option>
+		                    	<option value="11">11.贷前文件4合1</option>
+		                    	<option value="12">12.融信通开立账户信息表</option>
+		                    	<option value="13">13.小企业电商贷调查表(execl)</option>
 		            		</select>
 		           </div>
 	         </div>
