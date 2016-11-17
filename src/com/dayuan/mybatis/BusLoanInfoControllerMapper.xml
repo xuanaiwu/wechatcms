@@ -16,5 +16,11 @@ update bus_loaninfo_controller set bid=#{bid},controllerName=#{controllerName},c
 controllerTotalCarValue=#{controllerTotalCarValue},controllerOtherAssets=#{controllerOtherAssets},controllerBorrowOfBank=#{controllerBorrowOfBank},controllerAmount=#{controllerAmount},controllerTheTerm=#{controllerTheTerm} where id=#{id}
 </update>
 
+
+<!-- 根据bid查询 -->
+<select id="getBusLoanInfoController"  resultType="com.dayuan.bean.BusLoanInfoController" parameterType="Object">
+	select * from bus_loaninfo_controller where bid = #{bid} order by id asc limit 0,1
+</select>
+
 </mapper>
   

@@ -10,5 +10,13 @@ public interface BusLoanInfoControllerMapper<T> extends BaseMapper<T>{
 	 *更新返回影响记录数
 	 * */
 	public int updateReturnInfluences(T t);
+	
+	
+	 /**
+	 * 
+	* 根据bid返回单个对象
+	* 
+	* */
+	public T getBusLoanInfoController(Object bid);
 
 }

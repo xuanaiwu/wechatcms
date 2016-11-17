@@ -550,15 +550,31 @@ public class BusinessLoanAction extends BaseAction{
 			return;
 		}
 		BusLoanInfo busLoanInfo=this.busLoanInfoService.queryById(id);
-		Integer bid=busLoanInfo.getId();
-		BusLoanInfoLegal busLoanInfoLegal=this.busLoanInfoLegalService.getBusLoanInfoLegal(bid);
-		BusLoanInfoShop busLoanInfoShop=this.busLoanInfoShopService.getBusLoanInfoShop(bid);
-		BusLoanInfoGuaranter busLoanInfoGuaranter=this.busLoanInfoGuaranterService.getBusLoanInfoGuaranter(bid);
-		
 		if(busLoanInfo==null){
 			sendFailureMessage(response, "没有找到对应记录~！");
 			return;
 		}
+		Integer bid=busLoanInfo.getId();
+		BusLoanInfoLegal busLoanInfoLegal=this.busLoanInfoLegalService.getBusLoanInfoLegal(bid);
+		if(busLoanInfoLegal==null){
+			sendFailureMessage(response, "没有找到对应记录~！");
+			return;
+		}
+		BusLoanInfoShop busLoanInfoShop=this.busLoanInfoShopService.getBusLoanInfoShop(bid);
+		if(busLoanInfoShop==null){
+			sendFailureMessage(response, "没有找到对应记录~！");
+			return;
+		}
+		BusLoanInfoGuaranter busLoanInfoGuaranter=this.busLoanInfoGuaranterService.getBusLoanInfoGuaranter(bid);
+		if(busLoanInfoGuaranter==null){
+			sendFailureMessage(response, "没有找到对应记录~！");
+			return;
+		}
+		BusLoanInfoController busLoanInfoController=null;
+		if(busLoanInfoLegal.getIfController().equals("否")){
+			busLoanInfoController=busLoanInfoControllerService.getBusLoanInfoController(bid);
+		}
+		
 		Map<String,Object> dataMap=new HashMap<String,Object>();
 		String path="\\com\\dayuan\\template\\";//模板位置
 		String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads");//文件保存位置,项目部署绝对路径（物理路径）
@@ -684,9 +700,105 @@ public class BusinessLoanAction extends BaseAction{
 				sign=createWords.create(dataMap,path,"rongxintongyundaituisong12.ftl",savePath+"\\",wordName);
 			}
 		}else if(wordType.equals("13")){
-			dataMap.put("surveyOrgName",busLoanInfo.getSurveyOrgName());
-			dataMap.put("surveyPersonName",busLoanInfo.getSurveyPersonName());
-			dataMap.put("surveyPhone",busLoanInfo.getSurveyPhone());
+			dataMap.put("surveyOrgName",StringUtil.getNotNullStr(busLoanInfo.getSurveyOrgName()));
+			dataMap.put("surveyPersonName",StringUtil.getNotNullStr(busLoanInfo.getSurveyPersonName()));
+			dataMap.put("surveyPhone",StringUtil.getNotNullStr(busLoanInfo.getSurveyPhone()));
+			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+			dataMap.put("applicationAmount",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
+			dataMap.put("applicationTerm",StringUtil.getNotNullStr(busLoanInfo.getApplicationTerm()));
+			dataMap.put("loanType",StringUtil.getNotNullStr(busLoanInfo.getLoanType()));
+			dataMap.put("urgentCont",StringUtil.getNotNullStr(busLoanInfo.getUrgentCont()));
+			dataMap.put("urgentContPhone",StringUtil.getNotNullStr(busLoanInfo.getUrgentContPhone()));
+			dataMap.put("taobaoTreeDiamondMore",StringUtil.getNotNullStr(busLoanInfo.getTaobaoTreeDiamondMore()));
+			dataMap.put("otherPlatform",StringUtil.getNotNullStr(busLoanInfo.getOtherPlatform()));
+			dataMap.put("operatingPeriodMore",StringUtil.getNotNullStr(busLoanInfo.getOperatingPeriodMore()));
+			dataMap.put("ifShopOwner",StringUtil.getNotNullStr(busLoanInfo.getIfShopOwner()));
+			dataMap.put("haveGuarantor",StringUtil.getNotNullStr(busLoanInfo.getHaveGuarantor()));
+			dataMap.put("shopController",StringUtil.getNotNullStr(busLoanInfo.getShopController()));
+			dataMap.put("salesOfMore",StringUtil.getNotNullStr(busLoanInfo.getSalesOfMore()));
+			dataMap.put("than3credit",StringUtil.getNotNullStr(busLoanInfo.getThan3credit()));
+			dataMap.put("notOverdue",StringUtil.getNotNullStr(busLoanInfo.getNotOverdue()));
+			dataMap.put("shopName",StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+			dataMap.put("platformName",StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+			dataMap.put("shopLevel",StringUtil.getNotNullStr(busLoanInfoShop.getShopLevel()));
+			dataMap.put("operatingPeriod",StringUtil.getNotNullStr(busLoanInfoShop.getOperatingPeriod()));
+			dataMap.put("shopOwner",StringUtil.getNotNullStr(busLoanInfoShop.getShopOwner()));
+			dataMap.put("businessOpera",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessOpera()));
+			dataMap.put("businessAddress",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessAddress()));
+			dataMap.put("warehouseAddress",StringUtil.getNotNullStr(busLoanInfoShop.getWarehouseAddress()));
+			dataMap.put("salesIncome",StringUtil.getNotNullStr(busLoanInfoShop.getSalesIncome()));
+			dataMap.put("totalLiability",StringUtil.getNotNullStr(busLoanInfoShop.getTotalLiability()));
+			dataMap.put("bankLiabilities",StringUtil.getNotNullStr(busLoanInfoShop.getBankLiabilities()));
+			dataMap.put("netProfit",StringUtil.getNotNullStr(busLoanInfoShop.getNetProfit()));
+			dataMap.put("legalPerson",StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPerson()));
+			dataMap.put("idCard",StringUtil.getNotNullStr(busLoanInfoLegal.getIdCard()));
+			dataMap.put("householdRegistration",StringUtil.getNotNullStr(busLoanInfoLegal.getHouseholdRegistration()));
+			dataMap.put("houseAddress",StringUtil.getNotNullStr(busLoanInfoLegal.getHouseAddress()));
+			dataMap.put("legalPhone",StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPhone()));
+			dataMap.put("propertyQuantity",StringUtil.getNotNullStr(busLoanInfoLegal.getPropertyQuantity()));
+			dataMap.put("totalArea",StringUtil.getNotNullStr(busLoanInfoLegal.getTotalArea()));
+			dataMap.put("totalValue",StringUtil.getNotNullStr(busLoanInfoLegal.getTotalValue()));
+			dataMap.put("mortgage",StringUtil.getNotNullStr(busLoanInfoLegal.getMortgage()));
+			dataMap.put("propertyAddress",StringUtil.getNotNullStr(busLoanInfoLegal.getPropertyAddress()));
+			dataMap.put("totalCar",StringUtil.getNotNullStr(busLoanInfoLegal.getTotalCar()));
+			dataMap.put("licenseNumber",StringUtil.getNotNullStr(busLoanInfoLegal.getLicenseNumber()));
+			dataMap.put("totalCarValue",StringUtil.getNotNullStr(busLoanInfoLegal.getTotalCarValue()));
+			dataMap.put("otherAssets",StringUtil.getNotNullStr(busLoanInfoLegal.getOtherAssets()));
+			dataMap.put("borrowOfBank",StringUtil.getNotNullStr(busLoanInfoLegal.getBorrowOfBank()));
+			dataMap.put("amount",StringUtil.getNotNullStr(busLoanInfoLegal.getAmount()));
+			dataMap.put("theTerm",StringUtil.getNotNullStr(busLoanInfoLegal.getTheTerm()));
+			dataMap.put("ifController",StringUtil.getNotNullStr(busLoanInfoLegal.getIfController()));
+			if(busLoanInfoController!=null&&busLoanInfoLegal.getIfController().equals("否")){
+				dataMap.put("controllerName",StringUtil.getNotNullStr(busLoanInfoController.getControllerName()));
+				dataMap.put("controllerIdCard",StringUtil.getNotNullStr(busLoanInfoController.getControllerIdCard()));
+				dataMap.put("controllerRegistration",StringUtil.getNotNullStr(busLoanInfoController.getControllerRegistration()));
+				dataMap.put("controllerHouseAddress",StringUtil.getNotNullStr(busLoanInfoController.getControllerHouseAddress()));
+				dataMap.put("controllerPhone",StringUtil.getNotNullStr(busLoanInfoController.getControllerPhone()));
+				dataMap.put("controllerPropertyQuantity",StringUtil.getNotNullStr(busLoanInfoController.getControllerPropertyQuantity()));
+				dataMap.put("controllertotalValue",StringUtil.getNotNullStr(busLoanInfoController.getControllertotalValue()));
+				dataMap.put("contrallerMortgage",StringUtil.getNotNullStr(busLoanInfoController.getContrallerMortgage()));
+				dataMap.put("controllerPropertyAddress",StringUtil.getNotNullStr(busLoanInfoController.getControllerPropertyAddress()));
+				dataMap.put("controllerTotalCar",StringUtil.getNotNullStr(busLoanInfoController.getControllerTotalCar()));
+				dataMap.put("controllerLicenseNumber",StringUtil.getNotNullStr(busLoanInfoController.getControllerLicenseNumber()));
+				dataMap.put("controllerTotalCarValue",StringUtil.getNotNullStr(busLoanInfoController.getControllerTotalCarValue()));
+				dataMap.put("controllerOtherAssets",StringUtil.getNotNullStr(busLoanInfoController.getControllerOtherAssets()));
+				dataMap.put("controllerBorrowOfBank",StringUtil.getNotNullStr(busLoanInfoController.getControllerBorrowOfBank()));
+				dataMap.put("controllerAmount",StringUtil.getNotNullStr(busLoanInfoController.getControllerAmount()));
+				dataMap.put("controllerTheTerm",StringUtil.getNotNullStr(busLoanInfoController.getControllerTheTerm()));
+			}else{
+				//法人替换控制人信息，未完成
+				dataMap.put("controllerName",StringUtil.getNotNullStr(busLoanInfoController.getControllerName()));
+				dataMap.put("controllerIdCard",StringUtil.getNotNullStr(busLoanInfoController.getControllerIdCard()));
+				dataMap.put("controllerRegistration",StringUtil.getNotNullStr(busLoanInfoController.getControllerRegistration()));
+				dataMap.put("controllerHouseAddress",StringUtil.getNotNullStr(busLoanInfoController.getControllerHouseAddress()));
+				dataMap.put("controllerPhone",StringUtil.getNotNullStr(busLoanInfoController.getControllerPhone()));
+				dataMap.put("controllerPropertyQuantity",StringUtil.getNotNullStr(busLoanInfoController.getControllerPropertyQuantity()));
+				dataMap.put("controllertotalValue",StringUtil.getNotNullStr(busLoanInfoController.getControllertotalValue()));
+				dataMap.put("contrallerMortgage",StringUtil.getNotNullStr(busLoanInfoController.getContrallerMortgage()));
+				dataMap.put("controllerPropertyAddress",StringUtil.getNotNullStr(busLoanInfoController.getControllerPropertyAddress()));
+				dataMap.put("controllerTotalCar",StringUtil.getNotNullStr(busLoanInfoController.getControllerTotalCar()));
+				dataMap.put("controllerLicenseNumber",StringUtil.getNotNullStr(busLoanInfoController.getControllerLicenseNumber()));
+				dataMap.put("controllerTotalCarValue",StringUtil.getNotNullStr(busLoanInfoController.getControllerTotalCarValue()));
+				dataMap.put("controllerOtherAssets",StringUtil.getNotNullStr(busLoanInfoController.getControllerOtherAssets()));
+				dataMap.put("controllerBorrowOfBank",StringUtil.getNotNullStr(busLoanInfoController.getControllerBorrowOfBank()));
+				dataMap.put("controllerAmount",StringUtil.getNotNullStr(busLoanInfoController.getControllerAmount()));
+				dataMap.put("controllerTheTerm",StringUtil.getNotNullStr(busLoanInfoController.getControllerTheTerm()));
+			}
+			dataMap.put("ifGuaranter",StringUtil.getNotNullStr(busLoanInfo.getIfGuaranter()));
+			dataMap.put("guaranterName",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+			dataMap.put("guaranterCard",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterCard()));
+			dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterEmployer()));
+			dataMap.put("guaranterDuties",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterDuties()));
+			dataMap.put("guaranterPhone",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterPhone()));
+			dataMap.put("guaranterMaritalStatus",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterMaritalStatus()));
+			dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterHouseAddress()));
+			dataMap.put("guaranterMonthlyIncome",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterMonthlyIncome()));
+			dataMap.put("guaranterValues",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterValues()));
+			dataMap.put("guaranterTotalLiabilities",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterTotalLiabilities()));
+			dataMap.put("localPaySocialSecurity",StringUtil.getNotNullStr(busLoanInfo.getLocalPaySocialSecurity()));
+			dataMap.put("ifCustomersVIP",StringUtil.getNotNullStr(busLoanInfo.getIfCustomersVIP()));
+			dataMap.put("childrenIfLocally",StringUtil.getNotNullStr(busLoanInfo.getChildrenIfLocally()));
+			dataMap.put("additionInfo",StringUtil.getNotNullStr(busLoanInfo.getAdditionInfo()));
 			wordName="小企业电商贷调查表"+DateUtil.getNowPlusTimeMill()+".xls";
 			sign=createWords.create(dataMap,path,"shangdaidiaochabiao13.ftl",savePath+"\\",wordName);
 		}else if(wordType.equals("0")){
