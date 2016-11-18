@@ -240,9 +240,25 @@ public class BusinessLoanAction extends BaseAction{
 	 * */
 	@RequestMapping("/delete")
 	public void delete(Integer[] id,HttpServletResponse response)throws Exception{
+		if(id!=null&&id.length>0){
+			for(int i=0;i<id.length;i++){
+				BusLoanInfo busLoanInfo=busLoanInfoService.queryById(id);
+				if(busLoanInfo!=null){
+					int bid=busLoanInfo.getId();
+					
+				}
+			}
+			
+		}
+
+		/**
+		 * 
+		 * 
+		 * 没有做关联删除
 		busLoanInfoService.delete(id);
 		sendSuccessMessage(response,"删除成功！");
-		
+		 * 
+		 * */
 	}
 	
 	/**
