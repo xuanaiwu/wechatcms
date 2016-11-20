@@ -24,7 +24,7 @@ controllerTotalCarValue=#{controllerTotalCarValue},controllerOtherAssets=#{contr
 
 
  <delete id="deleteByBid" parameterType="Object">
-  	delete from bus_loaninfo_shop where bid=#{bid} 
+  	delete from bus_loaninfo_controller where bid=#{bid} 
   </delete>
 
 </mapper>

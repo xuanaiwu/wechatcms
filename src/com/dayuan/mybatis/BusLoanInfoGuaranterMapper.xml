@@ -185,7 +185,7 @@
   </update>
   
   <delete id="deleteByBid" parameterType="Object">
-  	delete from bus_loaninfo_shop where bid=#{bid} 
+  	delete from bus_loaninfo_guaranter where bid=#{bid} 
   </delete>
   
   

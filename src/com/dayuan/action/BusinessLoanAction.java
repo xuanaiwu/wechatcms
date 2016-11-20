@@ -605,7 +605,7 @@ public class BusinessLoanAction extends BaseAction{
 		Map<String,Object> dataMap=new HashMap<String,Object>();
 		String path="\\com\\dayuan\\template\\";//模板位置
 		String savePath=request.getSession().getServletContext().getRealPath("/WEB-INF/downloads");//文件保存位置,项目部署绝对路径（物理路径）
-		savePath=savePath+"\\"+UUID.randomUUID();//最后保存路径
+		savePath=savePath+"/"+UUID.randomUUID();//最后保存路径
 		/**创建文件夹 */
 		File fileSavePath=new File(savePath);
 		if(fileSavePath.exists()){
@@ -620,11 +620,11 @@ public class BusinessLoanAction extends BaseAction{
 		if(wordType.equals("1")){
 			dataMap.put("applicationName", StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
 			wordName="电商贷客户贷后须知"+DateUtil.getNowPlusTimeMill()+".doc";
-			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi1.ftl",savePath+"\\",wordName);
+			sign=createWords.create(dataMap,path,"dianshangdaihouxuzhi1.ftl",savePath+"/",wordName);
 		}else if(wordType.equals("2")){
 			dataMap.put("companyName",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
 			wordName="董事会(股东会)成员名单及签字样本(参考文本)"+DateUtil.getNowPlusTimeMill()+".doc";
-			sign=createWords.create(dataMap,path,"chengyuanmingdan2.ftl",savePath+"\\",wordName);
+			sign=createWords.create(dataMap,path,"chengyuanmingdan2.ftl",savePath+"/",wordName);
 		}else if(wordType.equals("3")){
 			dataMap.put("legalPerson",StringUtil.getNotNullStr(busLoanInfoLegal.getLegalPerson()));
 			dataMap.put("gender",StringUtil.getNotNullStr(busLoanInfoLegal.getGender()));

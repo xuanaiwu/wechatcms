@@ -33,18 +33,18 @@ where 1=1
 </sql>
 
 <select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
- select count(1) from bus_loanInfo
+ select count(1) from bus_loaninfo
  <include refid="Example_Where_Clause"/>
 </select>
 
 <select id="queryList" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
-    select * from bus_loanInfo
+    select * from bus_loaninfo
 	<include refid="Example_Where_Clause"/> 
 	order by id desc
 </select>
 
 <select id="queryByList" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
-		select * from bus_loanInfo
+		select * from bus_loaninfo
 		<include refid="Example_Where_Clause"/> 
 		order by id desc
 		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
@@ -57,11 +57,11 @@ where 1=1
 
 
 <select id="queryById" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
-select * from bus_loanInfo where id=#{id}
+select * from bus_loaninfo where id=#{id}
 </select>
 
 <insert id="save"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
-  insert into bus_loanInfo (surveyOrgName,surveyPersonName,surveyPhone,applicationName,applicationAmount,applicationTerm,loanType,urgentCont,urgentContPhone,urgentContAddress,relationship,taobaoTreeDiamondMore,otherPlatform,operatingPeriodMore,
+  insert into bus_loaninfo (surveyOrgName,surveyPersonName,surveyPhone,applicationName,applicationAmount,applicationTerm,loanType,urgentCont,urgentContPhone,urgentContAddress,relationship,taobaoTreeDiamondMore,otherPlatform,operatingPeriodMore,
   ifShopOwner,haveGuarantor,shopController,salesOfMore,than3credit,notOverdue,perNotOverdue,uName,uId,content,channel,ifGuaranter,localPaySocialSecurity,ifCustomersVIP,childrenIfLocally,additionInfo,applicationGender,applicationAddress,applicationIdCard,applicationPhone) values (#{surveyOrgName},#{surveyPersonName},#{surveyPhone},#{applicationName},#{applicationAmount},#{applicationTerm},#{loanType},#{urgentCont},#{urgentContPhone},
   #{urgentContAddress},#{relationship},#{taobaoTreeDiamondMore},#{otherPlatform},#{operatingPeriodMore},#{ifShopOwner},#{haveGuarantor},#{shopController},#{salesOfMore},#{than3credit},#{notOverdue},#{perNotOverdue},#{uName},#{uId},#{content},#{channel},#{ifGuaranter},#{localPaySocialSecurity},#{ifCustomersVIP},#{childrenIfLocally},#{additionInfo},#{applicationGender},#{applicationAddress},#{applicationIdCard},#{applicationPhone})
 </insert>
@@ -71,14 +71,14 @@ select * from bus_loanInfo where id=#{id}
  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 	SELECT LAST_INSERT_ID() as id
   </selectKey>
-  insert into bus_loanInfo (surveyOrgName,surveyPersonName,surveyPhone,applicationName,applicationAmount,applicationTerm,loanType,urgentCont,urgentContPhone,urgentContAddress,relationship,taobaoTreeDiamondMore,otherPlatform,operatingPeriodMore,
+  insert into bus_loaninfo (surveyOrgName,surveyPersonName,surveyPhone,applicationName,applicationAmount,applicationTerm,loanType,urgentCont,urgentContPhone,urgentContAddress,relationship,taobaoTreeDiamondMore,otherPlatform,operatingPeriodMore,
   ifShopOwner,haveGuarantor,shopController,salesOfMore,than3credit,notOverdue,perNotOverdue,uName,uId,content,channel,ifGuaranter,localPaySocialSecurity,ifCustomersVIP,childrenIfLocally,additionInfo,applicationGender,applicationAddress,applicationIdCard,applicationPhone) values (#{surveyOrgName},#{surveyPersonName},#{surveyPhone},#{applicationName},#{applicationAmount},#{applicationTerm},#{loanType},#{urgentCont},#{urgentContPhone},
   #{urgentContAddress},#{relationship},#{taobaoTreeDiamondMore},#{otherPlatform},#{operatingPeriodMore},#{ifShopOwner},#{haveGuarantor},#{shopController},#{salesOfMore},#{than3credit},#{notOverdue},#{perNotOverdue},#{uName},#{uId},#{content},#{channel},#{ifGuaranter},#{localPaySocialSecurity},#{ifCustomersVIP},#{childrenIfLocally},#{additionInfo},#{applicationGender},#{applicationAddress},#{applicationIdCard},#{applicationPhone})
 </insert>
 
 <!-- 根据id，修改记录-->  
 <update id="update" parameterType="Object">
-update bus_loanInfo set surveyOrgName=#{surveyOrgName},surveyPersonName=#{surveyPersonName},surveyPhone=#{surveyPhone},applicationName=#{applicationName},applicationAmount=#{applicationAmount},applicationTerm=#{applicationTerm},loanType=#{loanType},urgentCont=#{urgentCont},
+update bus_loaninfo set surveyOrgName=#{surveyOrgName},surveyPersonName=#{surveyPersonName},surveyPhone=#{surveyPhone},applicationName=#{applicationName},applicationAmount=#{applicationAmount},applicationTerm=#{applicationTerm},loanType=#{loanType},urgentCont=#{urgentCont},
 urgentContPhone=#{urgentContPhone},urgentContAddress=#{urgentContAddress},relationship=#{relationship},taobaoTreeDiamondMore=#{taobaoTreeDiamondMore},otherPlatform=#{otherPlatform},operatingPeriodMore=#{operatingPeriodMore},ifShopOwner=#{ifShopOwner},haveGuarantor=#{haveGuarantor},
 shopController=#{shopController},salesOfMore=#{salesOfMore},than3credit=#{than3credit},notOverdue=#{notOverdue},perNotOverdue=#{perNotOverdue},uName=#{uName},uId=#{uId},content=#{content},channel=#{channel},ifGuaranter=#{ifGuaranter},localPaySocialSecurity=#{localPaySocialSecurity},ifCustomersVIP=#{ifCustomersVIP},childrenIfLocally=#{childrenIfLocally},additionInfo=#{additionInfo},applicationGender=#{applicationGender},applicationAddress=#{applicationAddress},applicationIdCard=#{applicationIdCard},applicationPhone=#{applicationPhone} where id=#{id}
 </update>
@@ -86,14 +86,14 @@ shopController=#{shopController},salesOfMore=#{salesOfMore},than3credit=#{than3c
 
 <!-- 根据id，修改记录-->  
 <update id="updateReturnInfluences" parameterType="Object">
-update bus_loanInfo set surveyOrgName=#{surveyOrgName},surveyPersonName=#{surveyPersonName},surveyPhone=#{surveyPhone},applicationName=#{applicationName},applicationAmount=#{applicationAmount},applicationTerm=#{applicationTerm},loanType=#{loanType},urgentCont=#{urgentCont},
+update bus_loaninfo set surveyOrgName=#{surveyOrgName},surveyPersonName=#{surveyPersonName},surveyPhone=#{surveyPhone},applicationName=#{applicationName},applicationAmount=#{applicationAmount},applicationTerm=#{applicationTerm},loanType=#{loanType},urgentCont=#{urgentCont},
 urgentContPhone=#{urgentContPhone},urgentContAddress=#{urgentContAddress},relationship=#{relationship},taobaoTreeDiamondMore=#{taobaoTreeDiamondMore},otherPlatform=#{otherPlatform},operatingPeriodMore=#{operatingPeriodMore},ifShopOwner=#{ifShopOwner},haveGuarantor=#{haveGuarantor},
 shopController=#{shopController},salesOfMore=#{salesOfMore},than3credit=#{than3credit},notOverdue=#{notOverdue},perNotOverdue=#{perNotOverdue},uName=#{uName},uId=#{uId},content=#{content},channel=#{channel},ifGuaranter=#{ifGuaranter},localPaySocialSecurity=#{localPaySocialSecurity},ifCustomersVIP=#{ifCustomersVIP},childrenIfLocally=#{childrenIfLocally},additionInfo=#{additionInfo},applicationGender=#{applicationGender},applicationAddress=#{applicationAddress},applicationIdCard=#{applicationIdCard},applicationPhone=#{applicationPhone} where id=#{id}
 </update>
 
 <!-- 删除记录 -->
 <delete id="delete" parameterType="Object">
-delete from bus_loanInfo where id=#{id}
+delete from bus_loaninfo where id=#{id}
 </delete>
  
 
