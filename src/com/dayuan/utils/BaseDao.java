@@ -15,7 +15,7 @@ public class BaseDao {
 	static PreparedStatement ps = null;
 
 	private final static String deriver = "com.mysql.jdbc.Driver";
-	private final static String url = "jdbc:mysql://127.0.0.1/dyfda?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true";
+	private final static String url = "jdbc:mysql://127.0.0.1/demo?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true";
 	private final static String user = "root";
 	private final static String password = "root";
 
