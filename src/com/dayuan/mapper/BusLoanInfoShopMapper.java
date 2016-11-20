@@ -18,5 +18,9 @@ public interface BusLoanInfoShopMapper<T> extends BaseMapper<T> {
 	 * 
 	 * */
 	public T getBusLoanInfoShop(Object bid);
+	
+	
+	
+	public void deleteByBid(Object bid);
 
 }

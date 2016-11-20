@@ -22,7 +22,9 @@ licenseNumber=#{licenseNumber},totalCarValue=#{totalCarValue},otherAssets=#{othe
 	select * from bus_loaninfo_legal where bid = #{bid} limit 0,1
 </select>
 
-
+ <delete id="deleteByBid" parameterType="Object">
+  	delete from bus_loaninfo_legal where bid=#{bid} 
+  </delete>
 
 </mapper>
   

@@ -51,5 +51,13 @@ public class BusLoanInfoShopService<T> extends BaseService<T> {
 		}
 		return getMapper().getBusLoanInfoShop(bid);
 	}
+	
+	
+	public void deleteByBid(Object bid){
+		if(bid!=null){
+			mapper.deleteByBid(bid);
+		}
+		
+	}
 
 }

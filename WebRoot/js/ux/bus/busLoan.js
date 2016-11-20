@@ -47,7 +47,7 @@ dy.busLoan = function(){
 	   			url:'dataList.do',
 	   			columns:[[
 						{field:'id',checkbox:true},
-						{field:'content',title:'内容',width:200,sortable:true},
+						{field:'content',title:'内容',width:300,sortable:true},
 						{field:'surveyOrgName',title:'调查机构名称',width:120,sortable:true},
 						{field:'surveyPersonName',title:'调查人姓名',width:80,sortable:true},
 						{field:'surveyPhone',title:'手机',width:120,sortable:true},

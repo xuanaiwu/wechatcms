@@ -231,4 +231,8 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <delete id="deleteByBid" parameterType="Object">
+  	delete from bus_loaninfo_shop where bid=#{bid} 
+  </delete>
+  
 </mapper>

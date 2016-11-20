@@ -43,5 +43,13 @@ public class BusLoanInfoGuaranterService<T> extends BaseService<T> {
 		}
 		return getMapper().getBusLoanInfoGuaranter(bid);
 	}
+	
+	
+	public void deleteByBid(Object bid){
+		if(bid!=null){
+			mapper.deleteByBid(bid);
+		}
+		
+	}
 
 }

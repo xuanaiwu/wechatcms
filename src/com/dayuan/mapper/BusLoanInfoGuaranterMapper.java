@@ -21,4 +21,10 @@ public interface BusLoanInfoGuaranterMapper<T> extends BaseMapper<T>{
 	 * 
 	 * */
 	public T getBusLoanInfoGuaranter(Object bid);
+	
+	
+	public void deleteByBid(Object bid);
+	
+	
+	
 }

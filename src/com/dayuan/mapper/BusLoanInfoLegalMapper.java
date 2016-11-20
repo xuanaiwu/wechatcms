@@ -19,5 +19,7 @@ public interface BusLoanInfoLegalMapper<T> extends BaseMapper<T> {
 	 * */
 	public T getBusLoanInfoLegal(Object bid);
 	
+	public void deleteByBid(Object bid);
+	
 
 }

@@ -22,5 +22,10 @@ controllerTotalCarValue=#{controllerTotalCarValue},controllerOtherAssets=#{contr
 	select * from bus_loaninfo_controller where bid = #{bid} order by id asc limit 0,1
 </select>
 
+
+ <delete id="deleteByBid" parameterType="Object">
+  	delete from bus_loaninfo_shop where bid=#{bid} 
+  </delete>
+
 </mapper>
   

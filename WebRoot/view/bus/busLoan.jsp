@@ -58,8 +58,11 @@
 			            <div class="fitem">  
 			               <label>借款申请人名称:</label>  
 			               <input id="applicationName" type="text" name="applicationName" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
-			               <label>申请人性别:</label>  
-			               <input id="applicationGender" type="text" name="applicationGender" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
+			               <label>申请人性别:</label>
+			               <select class="easyui-combobox" name="applicationGender" style="width:139px" data-options="required:true,validType:'length[1,200]'" >
+		                    	<option value="男">男</option>
+		                    	<option value="女">女</option>
+		            	   </select>  
 			               <label>申请人住址:</label>  
 			               <input id="applicationAddress" type="text" name="applicationAddress" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input> 
 						   <label>申请人身份证号码:</label>  
@@ -71,9 +74,9 @@
 			            <div class="fitem">  
 			               <label>申请人电话:</label>  
 			               <input id="applicationPhone" type="text" name="applicationPhone" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
-			               <label>申请金额:</label>  
+			               <label>申请金额（万元）:</label>  
 			               <input id="birthday" type="text" name="applicationAmount" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input>
-			               <label>申请期限:</label>  
+			               <label>申请期限（年）:</label>  
 			               <input id="birthday" type="text" name="applicationTerm" class="easyui-validatebox" data-options="required:true,validType:'length[1,200]'" ></input> 
 							<label class="ui-label">申请贷款类型：</label><select class="easyui-combobox" name="loanType" style="width:129px" data-options="required:true,validType:'length[1,50]'" >
 		            			<option value=""></option>
@@ -215,9 +218,9 @@
 			            <div class="fitem">  
 			               <label>房产数量:</label>  
 			               <input class="easyui-validatebox" type="text" name="propertyQuantity" data-options="required:true,validType:'length[1,100]'" >
-			               <label>总面积:</label>  
+			               <label>总面积（平方米）:</label>  
 			               <input class="easyui-validatebox" type="text" name="totalArea" data-options="required:true,validType:'length[1,100]'" >
-			              	<label>总价值:</label>  
+			              	<label>总价值（万元）:</label>  
 			               <input class="easyui-validatebox" type="text" name="totalValue" data-options="required:true,validType:'length[1,100]'" >
 			               <label>详细地址（以;隔开）:</label>  
 			               <input class="easyui-validatebox" type="text" name="propertyAddress" data-options="required:true,validType:'length[1,500]'" >
@@ -229,11 +232,11 @@
 		                    	<option value="是">是</option>
 		                    	<option value="否">否</option>
 		            	   </select>
-			               <label>车辆总数:</label>  
+			               <label>车辆总数（辆）:</label>  
 			               <input class="easyui-validatebox" type="text" name="totalCar" data-options="required:true,validType:'length[1,500]'" >
 			              	<label>牌照号（以;隔开）:</label>  
 			               <input class="easyui-validatebox" type="text" name="licenseNumber" data-options="required:true,validType:'length[1,500]'" >
-			               <label>总价值:</label>  
+			               <label>总价值（万元）:</label>  
 			               <input class="easyui-validatebox" type="text" name="totalCarValue" data-options="required:true,validType:'length[1,100]'" >
 			           </div>
 			           
@@ -242,9 +245,9 @@
 			             	<input class="easyui-validatebox" type="text" name="otherAssets" data-options="required:true,validType:'length[1,500]'" >
 			               <label>借款所属银行:</label>  
 			               <input class="easyui-validatebox" type="text" name="borrowOfBank" data-options="required:true,validType:'length[1,200]'" >
-			              	<label>金额:</label>  
+			              	<label>金额（万元）:</label>  
 			               <input class="easyui-validatebox" type="text" name="amount" data-options="required:true,validType:'length[1,200]'" >
-			               <label>期限:</label>  
+			               <label>期限（年）:</label>  
 			               <input class="easyui-validatebox" type="text" name="theTerm" data-options="required:true,validType:'length[1,200]'" >
 			           </div>
 			           
@@ -275,9 +278,9 @@
 			               <input class="easyui-validatebox" type="text" name="controllerPhone">
 			               <label>房产数量:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerPropertyQuantity" >
-			              	<label>房产总面积:</label>  
+			              	<label>房产总面积（平方米）:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerTotalArea" >
-			               <label>房产总价值:</label>  
+			               <label>房产总价值（万元）:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllertotalValue">
 			           </div>
 			           
@@ -289,7 +292,7 @@
 		            	   </select>	  
 			               <label>房产详细地址（以;隔开）:</label>  
 			             	<input class="easyui-validatebox" type="text" name="controllerPropertyAddress">
-			               <label>车辆总数:</label>  
+			               <label>车辆总数（辆）:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerTotalCar" >
 			              	<label>牌照号（以;隔开）:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerLicenseNumber" >
@@ -297,18 +300,18 @@
 			           </div>
 			           
 			            <div class="fitem">
-			               <label>总价值:</label>  
+			               <label>总价值（万元）:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerTotalCarValue">  
 			               <label>其他资产:</label>  
 			             	<input class="easyui-validatebox" type="text" name="controllerOtherAssets">
 			               <label>借款所属银行:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerBorrowOfBank" >
-			              	<label>金额:</label>  
+			              	<label>金额（万元）:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerAmount" >
 			               
 			           </div>
 			           <div class="fitem">
-			               <label>期限:</label>  
+			               <label>期限（年）:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerTheTerm">
 			           </div>
 			           
@@ -323,17 +326,17 @@
 			              			<td>网店名称</td>
 			              			<td>电商平台名称</td>
 			              			<td>网店级别（仅限淘宝及天猫商户）</td>
-			              			<td>网店持续经营年限</td>
+			              			<td>网店持续经营年限（年）</td>
 			              			<td>网店实际所有者（个人名称或公司名称)</td>
 			              			<td>子帐号</td>
 			              			<td>密码</td>
 			              			<td>主要产品、品牌</td>
 			              			<td>经营地址</td>
 			              			<td>仓库地址</td>
-			              			<td>上年度销售</td>
-			              			<td>总负债</td>
-			              			<td>银行负债</td>
-			              			<td>上年度净利润</td>
+			              			<td>上年度销售（万元）</td>
+			              			<td>总负债（万元）</td>
+			              			<td>银行负债（万元）</td>
+			              			<td>上年度净利润（万元）</td>
 			              		</tr>
 			              		<tr id="tShopRow0">
 			              			<td>
@@ -410,9 +413,9 @@
 			              			<td>联系电话</td>
 			              			<td>婚姻状况</td>
 			              			<td>家庭地址</td>
-			              			<td>月收入情况</td>
-			              			<td>资产总额</td>
-			              			<td>负债总额</td>
+			              			<td>月收入情况（万元）</td>
+			              			<td>资产总额（万元）</td>
+			              			<td>负债总额（万元）</td>
 			              		</tr>
 			              		<tr id="tRow0">
 			              			<td>
@@ -470,10 +473,16 @@
 		                    	<option value="是">是</option>
 		                    	<option value="否">否</option>
 		            		</select>
-			               <label>是否华夏银行金融资产类贵宾客户:</label>  
-			               <input class="easyui-validatebox" type="text" name="ifCustomersVIP" >
-			              	<label>子女是否在当地入学:</label>  
-			               <input class="easyui-validatebox" type="text" name="childrenIfLocally" >
+			               <label>是否华夏银行金融资产类贵宾客户:</label>
+			               <select class="easyui-combobox" name="ifCustomersVIP" style="width:139px" data-options="required:true,validType:'length[1,200]'" >
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            	   </select>    
+			              	<label>子女是否在当地入学:</label>
+			              	<select class="easyui-combobox" name="childrenIfLocally" style="width:139px" data-options="required:true,validType:'length[1,200]'" >
+		                    	<option value="是">是</option>
+		                    	<option value="否">否</option>
+		            	   </select>
 			               <label>其他补充信息:</label>  
 			               <input class="easyui-validatebox" type="text" name="additionInfo">
 			           </div>
