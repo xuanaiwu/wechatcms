@@ -56,7 +56,7 @@ import com.dayuan.utils.ZipUtil;
 @RequestMapping("/BusLoan") 
 public class BusinessLoanAction extends BaseAction{
 	
-	private final static Logger log= Logger.getLogger(BusinessLoanAction.class);
+	private final static Logger log= Logger.getLogger(BusinessLoanAction.class.getName());
 	
 	// Servrice start 商贷主表
 	@Autowired(required=false) //自动注入，不需要生成set方法了，required=false表示没有实现类，也不会报错。
@@ -207,8 +207,10 @@ public class BusinessLoanAction extends BaseAction{
 			}
 		}
 		if(flag){
+			log.info("保存成功！");
 			sendSuccessMessage(response,"保存成功！");
 		}else{
+			log.info("保存失败！");
 			sendFailureMessage(response, "保存失败！");
 		}
 		
@@ -257,8 +259,10 @@ public class BusinessLoanAction extends BaseAction{
 			
 		}
 		if(flag){
+			log.info("删除成功！");
 			sendSuccessMessage(response,"删除成功！");
 		}else{
+			log.info("删除失败！");
 			sendFailureMessage(response,"删除失败！");
 		}
 

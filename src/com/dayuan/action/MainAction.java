@@ -97,9 +97,7 @@ public class MainAction extends BaseAction {
 			return;
 		}
 		String msg = "用户登录日志:";
-		System.out.println("-----------------------------");
 		SysUser user = sysUserService.queryLogin(email, MethodUtil.MD5(pwd));
-		System.out.println("===================="+user);
 		if(user == null){
 			//记录错误登录日志
 			log.debug(msg+"["+email+"]"+"账号或者密码输入错误.");

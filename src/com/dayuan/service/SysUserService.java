@@ -44,7 +44,6 @@ public class SysUserService<T> extends BaseService<T> {
 		SysUserModel model = new SysUserModel();
 		model.setEmail(email);
 		model.setPwd(pwd);
-		System.out.println("pwd=="+pwd);
 		return getMapper().queryLogin(model);
 	}
 	
