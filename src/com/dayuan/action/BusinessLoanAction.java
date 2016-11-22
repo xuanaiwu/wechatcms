@@ -635,13 +635,13 @@ public class BusinessLoanAction extends BaseAction{
 			dataMap.put("idCard",StringUtil.getNotNullStr(busLoanInfoLegal.getIdCard()));
 			dataMap.put("companyName",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
 			wordName="法定代表人证明书及签字样本"+DateUtil.getNowPlusTimeMill()+".doc";
-			sign=createWords.create(dataMap,path,"fadingdaibiaoren3.ftl",savePath+"\\",wordName);
+			sign=createWords.create(dataMap,path,"fadingdaibiaoren3.ftl",savePath+"/",wordName);
 		}else if(wordType.equals("4")){
 			dataMap.put("companyName1",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
 			dataMap.put("companyName2",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
 			dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
 			wordName="股东会决议"+DateUtil.getNowPlusTimeMill()+".doc";
-			sign=createWords.create(dataMap,path,"gudonghuijueyi4.ftl",savePath+"\\",wordName);
+			sign=createWords.create(dataMap,path,"gudonghuijueyi4.ftl",savePath+"/",wordName);
 		}else if(wordType.equals("5")){
 			dataMap.put("companyName",StringUtil.getNotNullStr(busLoanInfoLegal.getCompanyName()));
 			wordName="预留公章样本"+DateUtil.getNowPlusTimeMill()+".doc";
