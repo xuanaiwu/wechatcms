@@ -10,33 +10,40 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.apache.log4j.Logger;
+
+import com.dayuan.action.BaseAction;
+
 public class ZipUtil {
+	
+	public final static Logger log= Logger.getLogger(BaseAction.class.getName());
 	/**
 	 * 将存放在sourceFilePath目录下的源文件，打包成fileName名称的zip文件，并存放到zipFilePath路径下
 	 * @param sourceFilePath :待压缩的文件路径
 	 * @param zipFilePath :压缩后存放路径
 	 * @param fileName :压缩后文件的名称
-	 * @return 文件存放路径+文件名
+	 * @return 返回文件存放路径+文件名
 	 */
 	public static String fileToZip(String sourceFilePath,String zipFilePath,String fileName){
 		boolean flag = false;
-		File sourceFile = new File(sourceFilePath);
+		File sourceFile = new File(sourceFilePath);//待压缩的文件路径
 		FileInputStream fis = null;
 		BufferedInputStream bis = null;
 		FileOutputStream fos = null;
 		ZipOutputStream zos = null;
-		
+
 		if(sourceFile.exists() == false){
-			System.out.println("待压缩的文件目录："+sourceFilePath+"不存在.");
+			log.error("待压缩的文件目录："+sourceFilePath+"不存在.");
 		}else{
 			try {
-				File zipFile = new File(zipFilePath + File.separator + fileName);
+				File zipFile = new File(zipFilePath + File.separator + fileName);//压缩后存放路径+压缩后文件的名称
 				if(zipFile.exists()){
 					System.out.println(zipFilePath + "目录下存在名字为:" + fileName +"打包文件.");
+					log.error(zipFilePath + "目录下已经存在名字为:" + fileName +"打包文件.");
 				}else{
 					File[] sourceFiles = sourceFile.listFiles();
 					if(null == sourceFiles || sourceFiles.length<1){
-						System.out.println("待压缩的文件目录：" + sourceFilePath + "里面不存在文件，无需压缩.");
+						log.error("待压缩的文件目录：" + sourceFilePath + "里面不存在文件，无需压缩.");
 					}else{
 						fos = new FileOutputStream(zipFile);
 						zos = new ZipOutputStream(new BufferedOutputStream(fos));
@@ -54,6 +61,7 @@ public class ZipUtil {
 							}
 						}
 						flag = true;
+						log.error("文件："+zipFile+"创建成功！");
 					}
 				}
 			} catch (FileNotFoundException e) {

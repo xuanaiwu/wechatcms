@@ -12,6 +12,9 @@ import java.util.Hashtable;
 import java.util.Locale;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
+import com.dayuan.action.BaseAction;
 
 /**
  * <p>公共方法类</p>
@@ -25,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 
 public class DateUtil
 {
+	public final static Logger log= Logger.getLogger(DateUtil.class.getName());
 	static java.text.SimpleDateFormat sdfShort = new java.text.SimpleDateFormat("yyyyMMdd");
 	static java.text.SimpleDateFormat sdfLong = new java.text.SimpleDateFormat("yyyy-MM-dd");
 	static java.text.SimpleDateFormat sdfLongCn = new java.text.SimpleDateFormat("yyyy年MM月dd日");
@@ -322,7 +326,7 @@ public class DateUtil
 	 * @return String
 	 * @throws java.lang.Exception
 	 */
-	public static String getNowPlusTimeMill() throws Exception
+	public static String getNowPlusTimeMill()
 	{
 		String nowDate = "";
 		try
@@ -330,12 +334,13 @@ public class DateUtil
 			java.sql.Date date = null;
 			date = new java.sql.Date(new java.util.Date().getTime());
 			nowDate = sdfLongTimePlusMill.format(date);
-			return nowDate;
 		}
 		catch (Exception e)
 		{
-			throw e;
+			log.error("格式化日期时间出错了："+e.getMessage());
+			e.printStackTrace();
 		}
+		return nowDate;
 	}
 
 	/**

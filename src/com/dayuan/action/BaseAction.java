@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -18,6 +19,8 @@ import com.dayuan.utils.HtmlUtil;
 import com.dayuan.utils.URLUtils;
 
 public class BaseAction{
+	
+	public final static Logger log= Logger.getLogger(BaseAction.class.getName());
 	
 	public final static String SUCCESS ="success";  
 	
