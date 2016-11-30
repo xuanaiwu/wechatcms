@@ -79,6 +79,8 @@ public class MainAction extends BaseAction {
 	public void  toLogin(String email,String pwd,String verifyCode,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		String vcode  = SessionUtils.getValidateCode(request);
 		SessionUtils.removeValidateCode(request);//清除验证码，确保验证码只能用一次
+		
+		/**电商贷不需要验证码 20161130
 		if(StringUtils.isBlank(verifyCode)){
 			sendFailureMessage(response, "验证码不能为空!");
 			return;
@@ -88,6 +90,8 @@ public class MainAction extends BaseAction {
 			sendFailureMessage(response, "验证码输入错误.");
 			return;
 		}
+		*/
+		
 		if(StringUtils.isBlank(email)){
 			sendFailureMessage(response, "账号不能为空.");
 			return;

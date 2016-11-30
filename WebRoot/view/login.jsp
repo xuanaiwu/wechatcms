@@ -40,6 +40,7 @@
 										<input class="txtpasswordcssclass easyui-validatebox"   data-options="required:true,missingMessage:'密码不能为空.'" type="password" name="pwd" >
 									</li>
 								</ul>
+								<!-- 次电商贷不需要验证码
 								<ul>
 									<li class=user_main_text>
 										验证码：
@@ -49,6 +50,7 @@
 										<input class="txtvalidatecodecssclass vc-text easyui-validatebox" data-options="required:true,missingMessage:'验证码不能为空.'" maxlength="4" type="text" name="verifyCode">
 									</li>
 								</ul>
+								 -->
 							</div>
 						</li>
 						<li class=user_main_r>

@@ -8,7 +8,7 @@ dy.login = function(){
 					dy.progress('Please waiting','Loading...');
 					dy.submitForm(form,function(data){
 						dy.closeProgress();
-						dy.login.loadVrifyCode();//刷新验证码
+						//dy.login.loadVrifyCode();//刷新验证码,电商贷不需要验证码 20161130
 						if(data.success){
 					 		window.location= "main.shtml";
 				        }else{
@@ -30,7 +30,7 @@ dy.login = function(){
 				window.top.location =  window.self.location;
 			}
 			//验证码图片绑定点击事件
-			$(".vc-pic").click(dy.login.loadVrifyCode);
+			//$(".vc-pic").click(dy.login.loadVrifyCode);电商贷不需要验证码 20161130
 			
 			var form = $("#loginForm");
 			form.submit(dy.login.toLogin);
