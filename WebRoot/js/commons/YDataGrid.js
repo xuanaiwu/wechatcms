@@ -292,7 +292,7 @@ var YDataGrid = function(config){
 		//初始话form
 		var initForm = function(){
 			if(Form.search && Form.search[0]){
-				Form.search.find("#btn-search").click(Events.search); //保存事件
+				Form.search.find("#btn-search").click(Events.search); //查询事件
 			}
 		}
 		

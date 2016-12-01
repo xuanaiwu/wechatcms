@@ -10,15 +10,7 @@
  	 <div class="easyui-panel ui-search-panel" title="信息查询" data-options="striped: true,collapsible:true,iconCls:'icon-search'">  
  	 <form id="searchForm">
  	 	<p class="ui-fields">
- 	 	    <label class="ui-label">申请人姓名:</label><input name="applicationName" class="easyui-box ui-text" style="width:100px;">
- 	 	    <label class="ui-label">申请贷款类型：</label><select class="easyui-combobox" name="loanType" >
-            			<option value=""></option>
-                    	<option value="个体工商户">个体工商户</option>
-                    	<option value="小企业主">小企业主</option>
-                    	<option value="小企业">小企业</option>
-            </select>
-            <label class="ui-label">紧急联系人地址: </label><input name="urgentContAddress" class="easyui-box ui-text" style="width:100px;">
-            
+ 	 	    <label class="ui-label">申请人姓名:</label><input name="applicationName" class="easyui-box ui-text" style="width:100px;"> 
         </p>
         <a href="#" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
       </form>  
