@@ -94,6 +94,16 @@ public class BusinessLoanAction extends BaseAction{
 		return forword("bus/busLoan",context); 
 	}
 	
+	/**
+	 * 跳转到电商贷信息添加页面
+	 * */
+	@RequestMapping("/loanAdd")
+	public ModelAndView loanAdd(HttpServletRequest request){
+		Map<String,Object> context=getRootMap();
+		SysUser user=SessionUtils.getUser(request);
+		context.put("user", user);
+		return forword("bus/busloanAdd",context);
+	}
 	
 	
 	/**
