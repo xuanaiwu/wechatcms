@@ -99,12 +99,12 @@ public class SysMenuAction extends BaseAction{
 	 */
 	@RequestMapping("/save")
 	public void save(SysMenu bean,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		if(true){
-			new Exception(" Test Error");
-		}
-		//设置菜单按钮数据
+		//设置菜单和关联按钮数据
 		List<SysMenuBtn> btns = getReqBtns(request);
 		bean.setBtns(btns);
+		if(bean.getRank()==null){
+			bean.setRank(0);
+		}
 		if(bean.getId() == null){
 			bean.setDeleted(DELETED.NO.key);
 			sysMenuService.add(bean);
@@ -170,17 +170,19 @@ public class SysMenuAction extends BaseAction{
 		String[] btnType  = request.getParameterValues("btnType");
 		String[] actionUrls  = request.getParameterValues("actionUrls");
 		String[] deleteFlag  = request.getParameterValues("deleteFlag");
-		for (int i = 0; i < btnId.length; i++) {
-			if(StringUtils.isNotBlank(btnName[i]) && StringUtils.isNotBlank(btnType[i])){
-				SysMenuBtn btn = new SysMenuBtn();
-				if(StringUtils.isNotBlank(btnId[i]) && NumberUtils.isNumber(btnId[i])){
-					btn.setId(NumberUtils.toInt(btnId[i]));
+		if(btnId!=null){
+			for (int i = 0; i < btnId.length; i++) {
+				if(StringUtils.isNotBlank(btnName[i]) && StringUtils.isNotBlank(btnType[i])){
+					SysMenuBtn btn = new SysMenuBtn();
+					if(StringUtils.isNotBlank(btnId[i]) && NumberUtils.isNumber(btnId[i])){
+						btn.setId(NumberUtils.toInt(btnId[i]));
+					}
+					btn.setBtnName(btnName[i]);
+					btn.setBtnType(btnType[i]);
+					btn.setActionUrls(actionUrls[i]);
+					btn.setDeleteFlag(deleteFlag[i]);
+					btnList.add(btn);
 				}
-				btn.setBtnName(btnName[i]);
-				btn.setBtnType(btnType[i]);
-				btn.setActionUrls(actionUrls[i]);
-				btn.setDeleteFlag(deleteFlag[i]);
-				btnList.add(btn);
 			}
 		}
 		return btnList;

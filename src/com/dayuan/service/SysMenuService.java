@@ -64,8 +64,8 @@ public class SysMenuService<T> extends BaseService<T> {
 	
 
 	public void add(SysMenu menu) throws Exception {
-		super.add((T)menu);
-		saveBtns(menu.getId(),menu.getBtns());
+		super.add((T)menu);//保存主菜单
+		saveBtns(menu.getId(),menu.getBtns());//保存菜单关联按钮
 	}
 
 
