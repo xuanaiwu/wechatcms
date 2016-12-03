@@ -102,7 +102,7 @@ public class BusinessLoanAction extends BaseAction{
 		Map<String,Object> context=getRootMap();
 		SysUser user=SessionUtils.getUser(request);
 		context.put("user", user);
-		return forword("bus/busloanAdd",context);
+		return forword("bus/busLoanAdd",context);
 	}
 	
 	
