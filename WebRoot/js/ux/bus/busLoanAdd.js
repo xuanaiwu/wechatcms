@@ -6,8 +6,13 @@ dy.busLoanAdd = function(){
 		},
 		initForm:function(){
 			//保存
-			$("#btn-add").click(function(){
-				alert("add");
+			$("#btn-add").click(function(callback){
+				//if(_this.addForm().form('validate')){
+					_this.addForm().attr('action','save.do');
+					dy.saveForm(_this.addForm(),function(data){
+						location.reload();
+					});
+			    // }
 			});
 			
 			//重置
@@ -23,7 +28,6 @@ dy.busLoanAdd = function(){
 }();
 
 $(function(){
-	alert("add");
 	dy.busLoanAdd.init();
 });	
 

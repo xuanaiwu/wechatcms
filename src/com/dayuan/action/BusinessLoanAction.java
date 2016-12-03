@@ -107,6 +107,18 @@ public class BusinessLoanAction extends BaseAction{
 	
 	
 	/**
+	 * 跳转到建档页面
+	 * */
+	@RequestMapping("/filing")
+	public ModelAndView filing(HttpServletRequest request){
+		Map<String,Object> context=getRootMap();
+		SysUser user=SessionUtils.getUser(request);
+		context.put("user", user);
+		return forword("bus/filing",context);
+	}
+	
+	
+	/**
 	 * json 列表页面
 	 * @param url
 	 * @param classifyId
@@ -136,7 +148,7 @@ public class BusinessLoanAction extends BaseAction{
 	 * @throws Exception 
 	 */
 	@RequestMapping("/save")
-	public void save(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal,BusLoanInfoController busLoanInfoController,ShopListForm shopForm,GuaranterListForm guaranterForm,HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public void saveBak(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal,BusLoanInfoController busLoanInfoController,ShopListForm shopForm,GuaranterListForm guaranterForm,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
 		/**for(BusLoanInfoGuaranter guaranter:guaranterForm.getGuaranter()){
 			System.out.println("guaranter.name="+guaranter.getGuaranterName());
