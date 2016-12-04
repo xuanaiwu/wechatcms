@@ -132,7 +132,7 @@ where 1=1   and deleted =  0
 <select id="queryByList" resultMap="ExtResultMap"  parameterType="Object">
 	select 
 	<include refid="Base_Column_List"/>
-	,(SELECT COUNT(*) FROM sys_menu c WHERE c.parentId = m.id) AS subCount
+	,(SELECT COUNT(*) FROM sys_menu c WHERE c.parentId = m.id and deleted !=1) AS subCount
 	from sys_menu m
 	<include refid="Example_Where_Clause"/>
 	<if test="pager.orderCondition != null and pager.orderCondition != ''" >

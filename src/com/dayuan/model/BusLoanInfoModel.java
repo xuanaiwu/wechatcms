@@ -43,6 +43,10 @@ public class BusLoanInfoModel extends BaseModel{
 	private String applicationPhone;
 	
 	
+	/**20131205 add*/
+	private Integer lId;
+	
+	
 	
 	
 	public String getApplicationGender() {

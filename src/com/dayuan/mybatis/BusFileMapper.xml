@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.BusFileMapper" >
+
+
+<resultMap id="BaseResultMap" type="com.dayuan.bean.BusFiles" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lName" property="lName" jdbcType="VARCHAR" />
+    <result column="lIdCard" property="lIdCard" jdbcType="VARCHAR" />
+    <result column="lTelPhone" property="lTelPhone" jdbcType="VARCHAR" />
+    <result column="lStatus" property="lStatus" jdbcType="VARCHAR" />
+    <result column="lUserName" property="lUserName" jdbcType="VARCHAR" />
+    <result column="lUId" property="lUId" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+	<if test="lUId != null and lUId != ''" >
+	    and lUId =  #{lUId}
+	</if>
+	<if test="lUserName != null and lUserName != ''" >
+	    and lUserName =  #{lUserName}
+	</if>
+	<if test="lName != null and lName != ''" >
+	     and lName like CONCAT('%', #{lName}, '%')
+	</if>
+
+</trim>
+</sql>
+
+<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+ select count(1) from bus_file
+ <include refid="Example_Where_Clause"/>
+</select>
+
+
+
+<select id="queryByList" resultMap="BaseResultMap" parameterType="Object">
+		select * from bus_file
+		<include refid="Example_Where_Clause"/> 
+		order by id desc
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+	      ${pager.orderCondition}
+	    </if>
+	    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+	       ${pager.mysqlQueryCondition}
+	    </if>
+</select>
+
+
+<insert id="save"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
+	insert into bus_file (lName,lIdCard,lTelPhone,lStatus,lUserName,lUId,createTime,updateTime) values (#{lName},#{lIdCard},#{lTelPhone},#{lStatus},#{lUserName},#{lUId},#{createTime},#{updateTime})
+</insert>
+
+
+
+
+	
+</mapper>

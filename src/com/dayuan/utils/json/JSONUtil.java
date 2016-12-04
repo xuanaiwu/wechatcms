@@ -85,7 +85,6 @@ public class JSONUtil{
 
     @SuppressWarnings("unchecked")
 	JSONStringObject getJSONObject(Object value, boolean useClassConvert) throws JSONException{
-
         //处理原始类型
 
         if (value == null){

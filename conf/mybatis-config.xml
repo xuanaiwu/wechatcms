@@ -74,7 +74,10 @@
   
   <mapper resource="com/dayuan/mybatis/BusLoanInfoShopMapper.xml"/>
   
-  <mapper resource="com/dayuan/mybatis/BusLoanInfoGuaranterMapper.xml"/>		
+  <mapper resource="com/dayuan/mybatis/BusLoanInfoGuaranterMapper.xml"/>
+  
+  
+  <mapper resource="com/dayuan/mybatis/BusFileMapper.xml"/>		
   
  
  

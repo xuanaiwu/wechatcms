@@ -43,11 +43,21 @@ public class BusLoanInfo extends BaseBean{
 	private String applicationPhone;
 	
 	
+	/**20161205*/
+	private Integer lId;
 	
 	
 	
 	
 	
+	
+	
+	public Integer getlId() {
+		return lId;
+	}
+	public void setlId(Integer lId) {
+		this.lId = lId;
+	}
 	public String getApplicationGender() {
 		return applicationGender;
 	}

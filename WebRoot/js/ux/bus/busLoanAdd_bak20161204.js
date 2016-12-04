@@ -7,14 +7,12 @@ dy.busLoanAdd = function(){
 		initForm:function(){
 			//保存
 			$("#btn-add").click(function(callback){
-				if(_this.addForm().form('validate')){
+				//if(_this.addForm().form('validate')){
 					_this.addForm().attr('action','save.do');
 					dy.saveForm(_this.addForm(),function(data){
-						//alert("建档成功！");
-						window.location.href="filing.shtml";
-						//location.reload();
+						location.reload();
 					});
-			     }
+			    // }
 			});
 			
 			//重置

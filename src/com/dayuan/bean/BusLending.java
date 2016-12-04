@@ -2,7 +2,7 @@ package com.dayuan.bean;
 
 import java.util.Date;
 
-public class busLending {
+public class BusLending {
 	private Integer id;
 	private Integer bid;
 	private String guaranteeCompany1;

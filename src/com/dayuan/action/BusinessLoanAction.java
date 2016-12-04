@@ -16,8 +16,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -27,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import com.dayuan.bean.BusLoanInfo;
 import com.dayuan.bean.BusLoanInfoController;
@@ -59,25 +58,26 @@ public class BusinessLoanAction extends BaseAction{
 	
 	
 	
-	// Servrice start 商贷主表
+	// Service start 商贷主表
 	@Autowired(required=false) //自动注入，不需要生成set方法了，required=false表示没有实现类，也不会报错。
 	private BusLoanInfoService<BusLoanInfo> busLoanInfoService;
 	
-	// Servrice start 商贷法人
+	// Service start 商贷法人
 	@Autowired(required=false)
 	private BusLoanInfoLegalService<BusLoanInfoLegal> busLoanInfoLegalService;
 	
-	// Servrice start 商贷实际控制人
+	// Service start 商贷实际控制人
 	@Autowired(required=false)
 	private BusLoanInfoControllerService<BusLoanInfoController> busLoanInfoControllerService;
 	
-	// Servrice start 经营实体
+	// Service start 经营实体
 	@Autowired(required=false)
 	private BusLoanInfoShopService<BusLoanInfoShop> busLoanInfoShopService;
 	
-	// Servrice start 保证人
+	// Service start 保证人
 	@Autowired(required=false)
 	private BusLoanInfoGuaranterService<BusLoanInfoGuaranter> busLoanInfoGuaranterService;
+	
 	
 	
 	
@@ -93,30 +93,6 @@ public class BusinessLoanAction extends BaseAction{
 		context.put("user", user);
 		return forword("bus/busLoan",context); 
 	}
-	
-	/**
-	 * 跳转到电商贷信息添加页面
-	 * */
-	@RequestMapping("/loanAdd")
-	public ModelAndView loanAdd(HttpServletRequest request){
-		Map<String,Object> context=getRootMap();
-		SysUser user=SessionUtils.getUser(request);
-		context.put("user", user);
-		return forword("bus/busLoanAdd",context);
-	}
-	
-	
-	/**
-	 * 跳转到建档页面
-	 * */
-	@RequestMapping("/filing")
-	public ModelAndView filing(HttpServletRequest request){
-		Map<String,Object> context=getRootMap();
-		SysUser user=SessionUtils.getUser(request);
-		context.put("user", user);
-		return forword("bus/filing",context);
-	}
-	
 	
 	/**
 	 * json 列表页面
@@ -140,15 +116,17 @@ public class BusinessLoanAction extends BaseAction{
 		
 	}
 	
+	
+	
 	/**
-	 * 添加或修改数据
+	 * 添加或修改数据（旧，备份用途）
 	 * @param url
 	 * @param classifyId
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping("/save")
-	public void saveBak(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal,BusLoanInfoController busLoanInfoController,ShopListForm shopForm,GuaranterListForm guaranterForm,HttpServletRequest request,HttpServletResponse response) throws Exception{
+	
+	public void save(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal,BusLoanInfoController busLoanInfoController,ShopListForm shopForm,GuaranterListForm guaranterForm,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
 		/**for(BusLoanInfoGuaranter guaranter:guaranterForm.getGuaranter()){
 			System.out.println("guaranter.name="+guaranter.getGuaranterName());
