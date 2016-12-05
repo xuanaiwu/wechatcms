@@ -88,6 +88,7 @@ public class HtmlUtil {
 	
 	private static void writer(HttpServletResponse response,String str){
 		try {
+			System.out.println("str="+str);
 			//设置页面不缓存
 			response.setHeader("Pragma", "No-cache");
 			response.setHeader("Cache-Control", "no-cache");

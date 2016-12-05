@@ -119,7 +119,7 @@ public class BusinessLoanAction extends BaseAction{
 	
 	
 	/**
-	 * 添加或修改数据（旧，备份用途）
+	 * 添加或修改数据
 	 * @param url
 	 * @param classifyId
 	 * @return

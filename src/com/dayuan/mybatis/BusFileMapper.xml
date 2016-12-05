@@ -63,6 +63,16 @@ where 1=1
 </insert>
 
 
+<select id="queryById" resultType="com.dayuan.bean.BusFiles" parameterType="Object">
+	select * from bus_file where id=#{id}
+</select>
+
+
+<update id="updateReturnInfluences" parameterType="Object">
+	update bus_file set lName=#{lName},lIdCard=#{lIdCard},lTelPhone=#{lTelPhone},lStatus=#{lStatus},updateTime=#{updateTime} where id=#{id}
+</update>
+
+
 
 
 	

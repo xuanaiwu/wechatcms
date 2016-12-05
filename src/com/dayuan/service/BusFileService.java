@@ -26,5 +26,17 @@ public class BusFileService<T> extends BaseService<T> {
 		}
 		return busFileMapper.save(t);
 	}
+	
+	
+	/**
+	 *更新返回影响记录数
+	 * */
+	public int updateReturnInfluences(T t) throws Exception{
+		if(t==null){
+			return 0;
+		}
+		return busFileMapper.updateReturnInfluences(t);
+		
+	}
 
 }

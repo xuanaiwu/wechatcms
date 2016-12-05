@@ -1,14 +1,10 @@
 package com.dayuan.bean;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
-import org.json.JSONObject;
 
-import com.dayuan.utils.DateUtil;
-import com.dayuan.utils.json.JSONStringObject;
 
-public class BusFiles {
+public class BusFiles extends BaseBean{
 	
 	private Integer id;
 	private String lName;
@@ -20,7 +16,7 @@ public class BusFiles {
 	private Date createTime;
 	private Date updateTime;
 	
-	//转换时间格式
+	//扩展属性，转换时间格式
 	private String createTime2;
 	private String updateTime2;
 	
@@ -91,9 +87,4 @@ public class BusFiles {
 		this.updateTime = updateTime;
 	}
 	
-	
-	
-	
-	
-
 }

@@ -1,6 +1,6 @@
 package com.dayuan.action;
 
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,6 +37,7 @@ public class BusFileAction extends BaseAction{
 	//Service start 建档
 	@Autowired(required=false)
 	private BusFileService<BusFiles> busFileService;
+	
 	
 	
 	/**
@@ -108,16 +109,30 @@ public class BusFileAction extends BaseAction{
 		int num=0;
 		String message="";
 		if(busFiles!=null){
-			busFiles.setCreateTime(new Date());
 			try{
-				num=busFileService.save(busFiles);
-				if(num>0){
-					flag=true;
+				if(busFiles.getId()==null){
+					busFiles.setCreateTime(new Date());
+					num=busFileService.save(busFiles);
+					if(num>0){
+						flag=true;
+					}
+				}else{
+					busFiles.setUpdateTime(new Date());
+					num=busFileService.updateReturnInfluences(busFiles);
+					if(num>0){
+						flag=true;
+					}
 				}
 			}catch(Exception e){
 				log.error("BusFile保存出错："+e.getMessage());
 			}
 		}
+		
+		Integer lId=busFiles.getId();
+		if(lId!=null){
+			
+		}
+		
 		if(flag){
 			message="保存成功！";
 		}else{
@@ -125,6 +140,28 @@ public class BusFileAction extends BaseAction{
 		}
 		log.info(message);
 		sendSuccessMessage(response,message);
+	}
+	
+	/**
+	 * 根据id获取busfiles
+	 * */
+	@RequestMapping("getId")
+	public void getId(Integer id,HttpServletResponse response){
+		if(id!=null){
+			try{
+				Map<String,Object> content=getRootMap();
+				BusFiles busFiles=busFileService.queryById(id);
+				if(busFiles==null){
+					sendFailureMessage(response,"没有找到对应记录!");
+					return;
+				}
+				content.put(SUCCESS, true);
+				content.put("data", busFiles);
+				HtmlUtil.writerJson(response,"",content);
+			}catch(Exception e){
+				log.error("getId方法出错："+e.getMessage());
+			}
+		}
 	}
 
 }
