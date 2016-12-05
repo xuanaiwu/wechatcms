@@ -170,64 +170,64 @@
 	         	 		 <div class="fitem">  
 			              	<table id="tblShopData">
 			              		<tr>
-			              			<td>网店名称</td>
-			              			<td>电商平台名称</td>
-			              			<td>网店级别（仅限淘宝及天猫商户）</td>
-			              			<td>网店持续经营年限（年）</td>
-			              			<td>网店实际所有者（个人名称或公司名称)</td>
-			              			<td>子帐号</td>
-			              			<td>密码</td>
-			              			<td>主要产品、品牌</td>
-			              			<td>经营地址</td>
-			              			<td>仓库地址</td>
-			              			<td>上年度销售（万元）</td>
-			              			<td>总负债（万元）</td>
-			              			<td>银行负债（万元）</td>
-			              			<td>上年度净利润（万元）</td>
+			              			<td style="width:89px">网店名称</td>
+			              			<td style="width:89px">电商平台名称</td>
+			              			<td style="width:89px">网店级别（仅限淘宝及天猫商户）</td>
+			              			<td style="width:89px">网店持续经营年限（年）</td>
+			              			<td style="width:89px">网店实际所有者（个人名称或公司名称)</td>
+			              			<td style="width:89px">子帐号</td>
+			              			<td style="width:89px">密码</td>
+			              			<td style="width:89px">主要产品、品牌</td>
+			              			<td style="width:89px">经营地址</td>
+			              			<td style="width:89px">仓库地址</td>
+			              			<td style="width:89px">上年度销售（万元）</td>
+			              			<td style="width:89px">总负债（万元）</td>
+			              			<td style="width:89px">银行负债（万元）</td>
+			              			<td style="width:89px">上年度净利润（万元）</td>
 			              		</tr>
 			              		<tr id="tShopRow0">
 			              			<td>
-			              			<input id="shop[0].shopName" class="easyui-validatebox" name="shop[0].shopName" style="width:59px"  >
+			              			<input id="shop[0].shopName" class="easyui-validatebox" name="shop[0].shopName" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              			<input id="shop[0].platformName" class="easyui-validatebox" name="shop[0].platformName" style="width:59px"  >
+			              			<input id="shop[0].platformName" class="easyui-validatebox" name="shop[0].platformName" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              			<input id="shop[0].shopLevel" class="easyui-validatebox" name="shop[0].shopLevel" style="width:59px"  >
+			              			<input id="shop[0].shopLevel" class="easyui-validatebox" name="shop[0].shopLevel" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              			<input id="shop[0].operatingPeriod" class="easyui-validatebox"  name="shop[0].operatingPeriod" style="width:59px"  >
+			              			<input id="shop[0].operatingPeriod" class="easyui-validatebox"  name="shop[0].operatingPeriod" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              			<input id="shop[0].shopOwner" class="easyui-validatebox"  name="shop[0].shopOwner" style="width:59px"  >
+			              			<input id="shop[0].shopOwner" class="easyui-validatebox"  name="shop[0].shopOwner" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              			<input id="shop[0].subAccount" class="easyui-validatebox"  name="shop[0].subAccount" style="width:59px"  >
+			              			<input id="shop[0].subAccount" class="easyui-validatebox"  name="shop[0].subAccount" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              				<input id="shop[0].sbuPassword" class="easyui-validatebox" name="shop[0].sbuPassword" style="width:59px" >
+			              				<input id="shop[0].sbuPassword" class="easyui-validatebox" name="shop[0].sbuPassword" style="width:89px" >
 			              			</td>
 			              			<td>
-			              				<input id="shop[0].businessOpera" class="easyui-validatebox"  name="shop[0].businessOpera" style="width:59px"  >
+			              				<input id="shop[0].businessOpera" class="easyui-validatebox"  name="shop[0].businessOpera" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              				<input id="shop[0].businessAddress" class="easyui-validatebox" name="shop[0].businessAddress" style="width:59px"  >
+			              				<input id="shop[0].businessAddress" class="easyui-validatebox" name="shop[0].businessAddress" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              				<input id="shop[0].warehouseAddress" class="easyui-validatebox"  name="shop[0].warehouseAddress" style="width:59px"  >
+			              				<input id="shop[0].warehouseAddress" class="easyui-validatebox"  name="shop[0].warehouseAddress" style="width:89px"  >
 			              			</td>
 			              			
 			              			<td>
-			              				<input id="shop[0].salesIncome" class="easyui-validatebox" name="shop[0].salesIncome" style="width:59px"  >
+			              				<input id="shop[0].salesIncome" class="easyui-validatebox" name="shop[0].salesIncome" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              				<input id="shop[0].totalLiability" class="easyui-validatebox"  name="shop[0].totalLiability" style="width:59px"  >
+			              				<input id="shop[0].totalLiability" class="easyui-validatebox"  name="shop[0].totalLiability" style="width:89px"  >
 			              			</td>
 			              			<td>
-			              				<input id="shop[0].bankLiabilities" class="easyui-validatebox" name="shop[0].bankLiabilities" style="width:59px" >
+			              				<input id="shop[0].bankLiabilities" class="easyui-validatebox" name="shop[0].bankLiabilities" style="width:89px" >
 			              			</td>
 			              			<td>
-			              				<input id="shop[0].netProfit" class="easyui-validatebox" name="shop[0].netProfit" style="width:59px" >
+			              				<input id="shop[0].netProfit" class="easyui-validatebox" name="shop[0].netProfit" style="width:89px" >
 			              			</td>
 			              			
 			              		</tr>
@@ -385,16 +385,16 @@
 			            <div class="fitem">  
 			              	<table id="tblData">
 			              		<tr>
-			              			<td>保证人姓名</td>
-			              			<td>证件号码</td>
-			              			<td>工作单位</td>
-			              			<td>职务</td>
-			              			<td>联系电话</td>
-			              			<td>婚姻状况</td>
-			              			<td>家庭地址</td>
-			              			<td>月收入情况（万元）</td>
-			              			<td>资产总额（万元）</td>
-			              			<td>负债总额（万元）</td>
+			              			<td style="width:89px">保证人姓名</td>
+			              			<td style="width:89px">证件号码</td>
+			              			<td style="width:89px">工作单位</td>
+			              			<td style="width:89px">职务</td>
+			              			<td style="width:89px">联系电话</td>
+			              			<td style="width:89px">婚姻状况</td>
+			              			<td style="width:89px">家庭地址</td>
+			              			<td style="width:89px">月收入情况（万元）</td>
+			              			<td style="width:89px">资产总额（万元）</td>
+			              			<td style="width:89px">负债总额（万元）</td>
 			              		</tr>
 			              		<tr id="tRow0">
 			              			<td>

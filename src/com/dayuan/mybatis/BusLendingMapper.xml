@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.BusLendingMapper" >
+  
+  <insert id="save"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
+	insert into bus_lending (bid,guaranteeCompany1,guaranteeAddress1,guaranteeLegal1,numberOfShareHolders1,shareHoldersName1,guaranteeCompany2,guaranteeAddress2,guaranteeLegal2,numberOfShareHolders2,shareHoldersName2,loanAmount,openingQuota,creditTerm,startTerm,endTerm) 
+	values (#{bid},#{guaranteeCompany1},#{guaranteeAddress1),#{guaranteeLegal1},#{numberOfShareHolders1},#{shareHoldersName1},#{guaranteeCompany2},#{guaranteeAddress2},#{guaranteeLegal2},#{numberOfShareHolders2},#{shareHoldersName2},#{loanAmount},#{openingQuota},#{creditTerm},#{startTerm},#{endTerm})
+ </insert>
+ 
+ 
+ <update id="updateReturnInfluences" parameterType="Object">
+	update bus_lending set bid=#{bid},guaranteeCompany1=#{guaranteeCompany1},guaranteeAddress1=#{guaranteeAddress1},guaranteeLegal1=#{guaranteeLegal1},numberOfShareHolders1=#{numberOfShareHolders1},shareHoldersName1=#{shareHoldersName1},guaranteeCompany2=#{guaranteeCompany2},guaranteeAddress2=#{guaranteeAddress2},
+	guaranteeLegal2=#{guaranteeLegal2},numberOfShareHolders2=#{numberOfShareHolders2},shareHoldersName2=#{shareHoldersName2},loanAmount=#{loanAmount},openingQuota=#{openingQuota},creditTerm=#{creditTerm},startTerm=#{startTerm},endTerm=#{endTerm} where id=#{id}
+</update>
+
+</mapper>

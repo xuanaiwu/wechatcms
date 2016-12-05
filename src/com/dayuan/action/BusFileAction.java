@@ -20,12 +20,21 @@ import com.dayuan.bean.BusFiles;
 import com.dayuan.bean.BusLending;
 import com.dayuan.bean.BusLoanInfo;
 import com.dayuan.bean.BusLoanInfoController;
+import com.dayuan.bean.BusLoanInfoGuaranter;
 import com.dayuan.bean.BusLoanInfoLegal;
+import com.dayuan.bean.BusLoanInfoShop;
 import com.dayuan.bean.SysUser;
 import com.dayuan.form.GuaranterListForm;
 import com.dayuan.form.ShopListForm;
 import com.dayuan.model.BusFileModel;
+import com.dayuan.service.BusBilingService;
 import com.dayuan.service.BusFileService;
+import com.dayuan.service.BusLendingService;
+import com.dayuan.service.BusLoanInfoControllerService;
+import com.dayuan.service.BusLoanInfoGuaranterService;
+import com.dayuan.service.BusLoanInfoLegalService;
+import com.dayuan.service.BusLoanInfoService;
+import com.dayuan.service.BusLoanInfoShopService;
 import com.dayuan.utils.DateUtil;
 import com.dayuan.utils.HtmlUtil;
 import com.dayuan.utils.SessionUtils;
@@ -38,7 +47,36 @@ public class BusFileAction extends BaseAction{
 	@Autowired(required=false)
 	private BusFileService<BusFiles> busFileService;
 	
+	// Service start 商贷主表
+	@Autowired(required=false) //自动注入，不需要生成set方法了，required=false表示没有实现类，也不会报错。
+	private BusLoanInfoService<BusLoanInfo> busLoanInfoService;
 	
+	
+	// Service start 商贷法人
+	@Autowired(required=false)
+	private BusLoanInfoLegalService<BusLoanInfoLegal> busLoanInfoLegalService;
+	
+	
+	// Service start 商贷实际控制人
+	@Autowired(required=false)
+	private BusLoanInfoControllerService<BusLoanInfoController> busLoanInfoControllerService;
+	
+	
+	// Service start 经营实体
+	@Autowired(required=false)
+	private BusLoanInfoShopService<BusLoanInfoShop> busLoanInfoShopService;
+	
+	
+	// Service start 保证人
+	@Autowired(required=false)
+	private BusLoanInfoGuaranterService<BusLoanInfoGuaranter> busLoanInfoGuaranterService;
+	
+	
+	@Autowired(required=false)
+	private BusLendingService<BusLending> busLendingService;
+	
+	@Autowired(required=false)
+	private BusBilingService<BusBiling> busBilingService;
 	
 	/**
 	 * 跳转到建档页面
@@ -108,18 +146,19 @@ public class BusFileAction extends BaseAction{
 		boolean flag=false;
 		int num=0;
 		String message="";
+		/**保存建档表信息*/
 		if(busFiles!=null){
 			try{
 				if(busFiles.getId()==null){
 					busFiles.setCreateTime(new Date());
 					num=busFileService.save(busFiles);
-					if(num>0){
+					if(num==1){
 						flag=true;
 					}
 				}else{
 					busFiles.setUpdateTime(new Date());
 					num=busFileService.updateReturnInfluences(busFiles);
-					if(num>0){
+					if(num==1){
 						flag=true;
 					}
 				}
@@ -127,9 +166,148 @@ public class BusFileAction extends BaseAction{
 				log.error("BusFile保存出错："+e.getMessage());
 			}
 		}
-		
 		Integer lId=busFiles.getId();
-		if(lId!=null){
+		/**保存商贷主表信息*/
+		if(busLoanInfo!=null){
+			try{
+				if(busLoanInfo.getId()==null){
+					busLoanInfo.setlId(lId);
+					num=busLoanInfoService.save(busLoanInfo);
+					if(num!=1){
+						flag=false;
+					}
+				}else{
+					num=busLoanInfoService.updateReturnInfluences(busLoanInfo);
+					if(num!=1){
+						flag=false;
+					}
+				}
+			}catch(Exception e){
+				log.error("BusLoanInfo保存出错："+e.getMessage());
+			}
+		}
+		/**保存法人表信息*/
+		if(busLoanInfoLegal!=null){
+			try{
+				if(busLoanInfoLegal.getId()==null){
+					busLoanInfoLegal.setBid(lId);
+					num=busLoanInfoLegalService.save(busLoanInfoLegal);
+					if(num!=1){
+						flag=false;
+					}
+				}else{
+					num=busLoanInfoLegalService.updateReturnInfluences(busLoanInfoLegal);
+					if(num!=1){
+						flag=false;
+					}
+				}
+			}catch(Exception e){
+				log.error("BusLoanInfoLegal保存出错："+e.getMessage());
+			}
+		}
+		if(busLoanInfoLegal.getIfController()!=null&&busLoanInfoLegal.getIfController().equals("否")){
+			/**保存实际控制人信息*/
+			if(busLoanInfoController!=null){
+				try{
+					if(busLoanInfoController.getId()==null){
+						busLoanInfoController.setBid(lId);
+						num=busLoanInfoControllerService.save(busLoanInfoController);
+						if(num!=1){
+							flag=false;
+						}
+					}else{
+						num=busLoanInfoControllerService.updateReturnInfluences(busLoanInfoController);
+						if(num!=1){
+							flag=false;
+						}
+					}
+				}catch(Exception e){
+					log.error("BusLoanInfoController保存出错："+e.getMessage());
+				}
+			}
+		}
+		/**保存实体或店铺信息*/
+		for(BusLoanInfoShop shop:shopForm.getShop()){
+			try{
+				if(shop.getId()==null){
+					shop.setBid(lId);
+					num=busLoanInfoShopService.save(shop);
+					if(num!=1){
+						flag=false;
+					}
+				}else{
+					num=busLoanInfoShopService.updateReturnInfluences(shop);
+					if(num!=1){
+						flag=false;
+					}
+				}
+			}catch(Exception e){
+				log.error("BusLoanInfoShop保存出错："+e.getMessage());
+			}
+			
+		}
+		
+		/**保存保证人信息*/
+		if(busLoanInfo!=null){
+			if(busLoanInfo.getIfGuaranter().equals("是")){
+				for(BusLoanInfoGuaranter guaranter:guaranterForm.getGuaranter()){
+					if(guaranter.getId()==null){
+						guaranter.setBid(lId);
+						num=busLoanInfoGuaranterService.save(guaranter);
+						if(num!=1){
+							flag=false;
+						}
+					}else{
+						num=busLoanInfoGuaranterService.updateReturnInfluences(guaranter);
+						if(num!=1){
+							flag=false;
+						}
+					}
+					
+				}
+			}
+		}
+		
+		/**保存放款信息*/
+		if(busLending!=null){
+			try{
+				if(busLending.getId()==null){
+					busLending.setBid(lId);
+					num=busLendingService.save(busLending);
+					if(num!=1){
+						flag=false;
+					}
+				}else{
+					num=busLendingService.updateReturnInfluences(busLending);
+					if(num!=1){
+						flag=false;
+					}
+				}
+			}catch(Exception e){
+				log.error("BusLending保存出错："+e.getMessage());
+			}
+			
+		}
+		
+		/**保存贷后台帐信息*/
+		if(busBiling!=null){
+			try{
+				if(busBiling.getId()==null){
+					busBiling.setBid(lId);
+					num=busBilingService.save(busBiling);
+					if(num!=1){
+						flag=false;
+					}
+				}else{
+					num=busBilingService.updateReturnInfluences(busBiling);
+					if(num!=1){
+						flag=false;
+					}
+					
+				}
+			}catch(Exception e){
+				log.error("busBiling保存出错："+e.getMessage());
+			}
 			
 		}
 		
