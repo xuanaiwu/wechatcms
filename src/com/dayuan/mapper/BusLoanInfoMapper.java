@@ -19,5 +19,8 @@ public interface BusLoanInfoMapper<T> extends BaseMapper<T> {
 	
 	public List<T> queryList(BusLoanInfoModel busLoanInfoModel);
 	
+	/**根据lid获取对象*/
+	public T queryByLId(Object id);
+	
 
 }

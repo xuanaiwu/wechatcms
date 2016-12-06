@@ -93,6 +93,11 @@ shopController=#{shopController},salesOfMore=#{salesOfMore},than3credit=#{than3c
 <delete id="delete" parameterType="Object">
 delete from bus_loaninfo where id=#{id}
 </delete>
+
+
+<select id="queryByLId" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
+	select * from bus_loaninfo where lId=#{id}
+</select>
  
 
 

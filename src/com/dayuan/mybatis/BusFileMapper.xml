@@ -72,8 +72,5 @@ where 1=1
 	update bus_file set lName=#{lName},lIdCard=#{lIdCard},lTelPhone=#{lTelPhone},lStatus=#{lStatus},updateTime=#{updateTime} where id=#{id}
 </update>
 
-
-
-
 	
 </mapper>

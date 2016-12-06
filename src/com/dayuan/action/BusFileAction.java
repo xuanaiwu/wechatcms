@@ -365,10 +365,24 @@ public class BusFileAction extends BaseAction{
 		Map<String,Object> context=getRootMap();
 		SysUser user=SessionUtils.getUser(request);
 		context.put("user", user);
-		if(request.getParameter("id")==null||request.getParameter("id").equals("")){
+		Integer id=Integer.parseInt(request.getParameter("id").trim());
+		if(id==null||id.equals("")){
 			return forword("error/error",context);
 		}
-		return forword("error/error",context);
+		try{
+			BusFiles busFiles=busFileService.queryById(id);
+			if(busFiles!=null){
+				context.put("busFiles",busFiles);
+			}
+			BusLoanInfo busLoanInfo=busLoanInfoService.queryByLId(id);
+			if(busLoanInfo!=null){
+				context.put("busLoanInfo",busLoanInfo);
+			}
+		}catch(Exception e){
+			log.error("toEdit出错："+e.getMessage());
+		}
+		
+		return forword("bus/busLoanAdd",context);
 	}
 
 }

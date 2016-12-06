@@ -52,6 +52,14 @@ public class BusLoanInfoService<T> extends BaseService<T>{
 		return mapper.queryList(busLoanInfoModel);
 		
 	}
+	
+	/**根据lid获取对象*/
+	public T queryByLId(Object id){
+		if(id==null){
+			return null;
+		}
+		return mapper.queryByLId(id);
+	}
 
 
 	

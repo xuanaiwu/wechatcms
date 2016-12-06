@@ -75,7 +75,7 @@ public class BaseAction{
 	}
 	
 	public ModelAndView error(String errMsg){
-		return new ModelAndView("error"); 
+		return new ModelAndView("error/error"); 
 	}
 	
 	/**
