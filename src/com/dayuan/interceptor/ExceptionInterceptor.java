@@ -19,7 +19,7 @@ import com.dayuan.utils.HtmlUtil;
 
 /**
  * 异常拦截器
- * @author lu
+ * @author xuanaiwu
  *
  */
 public class ExceptionInterceptor extends HandlerInterceptorAdapter {

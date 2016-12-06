@@ -3,6 +3,14 @@ dy.filing = function(){
 	var _box = null;
 	var _this = {
 		createWordsAction:'createWordsOnLine.do',
+		toList:function(parentId){	
+			if(parentId){
+				window.location.href="toEdit.do?id="+parentId;
+			}else{
+				alert("找不到对应记录！");
+				return;
+			}
+		},
 		editPwdForm:function(){
 			return $("#pwdForm");
 		},
@@ -47,12 +55,18 @@ dy.filing = function(){
 	   			url:'dataList.do',
 	   			columns:[[
 						{field:'id',checkbox:true},
-						{field:'lName',title:'姓名',width:300,sortable:true},
-						{field:'lIdCard',title:'身份证',width:150,sortable:true},
+						{field:'lName',title:'姓名',width:120,sortable:true},
+						{field:'lIdCard',title:'身份证',width:135,sortable:true},
 						{field:'lTelPhone',title:'电话',width:120,sortable:true},
-						{field:'lStatus',title:'当前状态',width:150,sortable:true},
-						{field:'createTime2',title:'创建时间',width:150,sortable:true},
-						{field:'updateTime2',title:'修改时间',width:150,sortable:true}
+						{field:'lStatus',title:'当前状态',width:120,sortable:true},
+						{field:'createTime2',title:'创建时间',width:120,sortable:true},
+						{field:'updateTime2',title:'修改时间',width:120,sortable:true},
+						{field:'childMenus',title:'操作',width:450,align:'center',formatter:function(value,row,index){
+							var html ="<a href='#' onclick='dy.filing.toList("+row.id+")'>修改</a>";
+							html+="&nbsp;&nbsp;<a href='#' onclick='dy.filing.toList("+row.id+")'>修改网店信息</a>";
+							html+="&nbsp;&nbsp;<a href='#' onclick='dy.filing.toList("+row.id+")'>修改保证人信息</a>";
+							return html;
+						}}
 				]],
 				toolbar:[
 					{id:'btnedit',text:'修改',btnType:'edit'},

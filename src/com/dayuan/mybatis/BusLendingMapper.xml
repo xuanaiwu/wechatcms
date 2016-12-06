@@ -6,7 +6,7 @@
   
   <insert id="save"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
 	insert into bus_lending (bid,guaranteeCompany1,guaranteeAddress1,guaranteeLegal1,numberOfShareHolders1,shareHoldersName1,guaranteeCompany2,guaranteeAddress2,guaranteeLegal2,numberOfShareHolders2,shareHoldersName2,loanAmount,openingQuota,creditTerm,startTerm,endTerm) 
-	values (#{bid},#{guaranteeCompany1},#{guaranteeAddress1),#{guaranteeLegal1},#{numberOfShareHolders1},#{shareHoldersName1},#{guaranteeCompany2},#{guaranteeAddress2},#{guaranteeLegal2},#{numberOfShareHolders2},#{shareHoldersName2},#{loanAmount},#{openingQuota},#{creditTerm},#{startTerm},#{endTerm})
+	values (#{bid},#{guaranteeCompany1},#{guaranteeAddress1},#{guaranteeLegal1},#{numberOfShareHolders1},#{shareHoldersName1},#{guaranteeCompany2},#{guaranteeAddress2},#{guaranteeLegal2},#{numberOfShareHolders2},#{shareHoldersName2},#{loanAmount},#{openingQuota},#{creditTerm},#{startTerm},#{endTerm})
  </insert>
  
  

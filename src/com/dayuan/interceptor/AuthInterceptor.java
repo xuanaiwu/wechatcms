@@ -19,7 +19,7 @@ import com.dayuan.utils.SessionUtils;
 
 /**
  * 权限拦截器
- * @author lu
+ * @author xuanaiwu
  *
  */
 public class AuthInterceptor extends HandlerInterceptorAdapter {

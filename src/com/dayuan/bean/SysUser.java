@@ -1,6 +1,7 @@
 package com.dayuan.bean;
 
-import java.text.SimpleDateFormat;
+
+
 import java.util.Date;
 
 
@@ -9,6 +10,7 @@ public class SysUser extends BaseBean {
 		private Integer id;//   id主键	private String email;//   邮箱也是登录帐号	private String pwd;//   登录密码	private String nickName;//   昵称	private Integer state;//   状态 0=可用,1=禁用	private Integer loginCount;//   登录总次数	private java.sql.Timestamp loginTime;//   最后登录时间	private Integer deleted;//   删除状态 0=未删除,1=已删除	private java.sql.Timestamp createTime;//   创建时间	private java.sql.Timestamp updateTime;//   修改时间	private Integer createBy;//   创建人	private Integer updateBy;//   修改人
 	
 	private Integer superAdmin;//超级管理员
+	
 	
 	private String kind;//用户类型
 	private String gender;//用户性别
@@ -107,13 +109,15 @@ public class SysUser extends BaseBean {
 	public void setUDate(Date date) {
 		uDate = date;
 	}
+	
 	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String birthday) throws Exception{
-		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-		date = formatter.parse(birthday);
-		this.birthday = date;
+	
+	public void setBirthday(Date birthday) {
+		
+		this.birthday=birthday;
 	}
+	
+	
 }

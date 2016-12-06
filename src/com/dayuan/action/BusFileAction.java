@@ -1,6 +1,7 @@
 package com.dayuan.action;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -71,12 +75,23 @@ public class BusFileAction extends BaseAction{
 	@Autowired(required=false)
 	private BusLoanInfoGuaranterService<BusLoanInfoGuaranter> busLoanInfoGuaranterService;
 	
-	
+	// Service start 放款信息
 	@Autowired(required=false)
 	private BusLendingService<BusLending> busLendingService;
 	
+	// Service start 贷后台帐信息
 	@Autowired(required=false)
 	private BusBilingService<BusBiling> busBilingService;
+	
+	//DATE属性编辑器
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+	
+	
+	
 	
 	/**
 	 * 跳转到建档页面
@@ -103,7 +118,6 @@ public class BusFileAction extends BaseAction{
 	
 	@RequestMapping("/dataList")
 	public void dataList(BusFileModel busFileModel,HttpServletRequest request,HttpServletResponse response){
-		log.info("lNmae="+busFileModel.getlName());
 		if(busFileModel!=null){
 			SysUser user = SessionUtils.getUser(request);
 			busFileModel.setlUserName(user.getNickName());
@@ -284,6 +298,7 @@ public class BusFileAction extends BaseAction{
 					}
 				}
 			}catch(Exception e){
+				flag=false;
 				log.error("BusLending保存出错："+e.getMessage());
 			}
 			
@@ -316,7 +331,7 @@ public class BusFileAction extends BaseAction{
 		}else{
 			message="保存出错";
 		}
-		log.info(message);
+		log.info("BusFileAction.save："+message);
 		sendSuccessMessage(response,message);
 	}
 	
@@ -340,6 +355,20 @@ public class BusFileAction extends BaseAction{
 				log.error("getId方法出错："+e.getMessage());
 			}
 		}
+	}
+	
+	/**
+	 * 跳转到建档编辑页面
+	 * */
+	@RequestMapping("/toEdit")
+	public ModelAndView toEdit(HttpServletRequest request){
+		Map<String,Object> context=getRootMap();
+		SysUser user=SessionUtils.getUser(request);
+		context.put("user", user);
+		if(request.getParameter("id")==null||request.getParameter("id").equals("")){
+			return forword("error/error",context);
+		}
+		return forword("error/error",context);
 	}
 
 }

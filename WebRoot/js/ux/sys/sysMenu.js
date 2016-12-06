@@ -11,7 +11,6 @@ dy.sysMenu = function(){
 					_box.grid.datagrid('hideColumn','childMenus');
 				}else{
 					$('#btnback').linkbutton('disable');
-					$('#btnback').linkbutton('disable');
 					_box.grid.datagrid('showColumn','childMenus');
 				}
 				_box.handler.refresh();

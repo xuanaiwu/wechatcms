@@ -1,5 +1,7 @@
 package com.dayuan.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,19 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
-import com.dayuan.bean.SysMenu;
+
 import com.dayuan.bean.SysRole;
 import com.dayuan.bean.SysRoleRel;
 import com.dayuan.bean.SysUser;
 import com.dayuan.bean.BaseBean.DELETED;
 import com.dayuan.bean.BaseBean.STATE;
 import com.dayuan.exception.ServiceException;
-import com.dayuan.model.SysMenuModel;
 import com.dayuan.model.SysUserModel;
 import com.dayuan.service.SysRoleService;
 import com.dayuan.service.SysUserService;
@@ -44,6 +48,14 @@ public class SysUserAction extends BaseAction{
 	// Servrice start
 	@Autowired(required=false) 
 	private SysRoleService<SysRole> sysRoleService; 
+	
+	//DATE属性编辑器
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+	
 	/**
 	 * ilook 首页
 	 * @param url
@@ -110,7 +122,6 @@ public class SysUserAction extends BaseAction{
 	 */
 	@RequestMapping("/save")
 	public void save(SysUser bean,HttpServletResponse response) throws Exception{
-		Map<String,Object>  context = new HashMap<String,Object>();
 		int count = sysUserService.getUserCountByEmail(bean.getEmail());
 		if(bean.getId() == null){
 			if(count > 0){
