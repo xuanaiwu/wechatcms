@@ -7,7 +7,6 @@
 	<body>
 	<form id="addForm" class="ui-form" method="post">
 	<input class="hidden" type="text" name="id" value="${busFiles.id}">
-    <input class="hidden" id="rowCount" type="text" name="rowCount" value="0">
 	<input class="hidden" type="text" name="uName" value="${user.nickName}">
     <input class="hidden" type="text"  name="uId" value="${user.id}">
     <input class="hidden" type="text" name="lUserName" value="${user.nickName}">
@@ -184,52 +183,109 @@
 			              			<td style="width:89px">银行负债（万元）</td>
 			              			<td style="width:89px">上年度净利润（万元）</td>
 			              		</tr>
-			              		<tr id="tShopRow0">
-			              			<td>
-			              			<input id="shop[0].shopName" class="easyui-validatebox" name="shop[0].shopName" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              			<input id="shop[0].platformName" class="easyui-validatebox" name="shop[0].platformName" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              			<input id="shop[0].shopLevel" class="easyui-validatebox" name="shop[0].shopLevel" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              			<input id="shop[0].operatingPeriod" class="easyui-validatebox"  name="shop[0].operatingPeriod" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              			<input id="shop[0].shopOwner" class="easyui-validatebox"  name="shop[0].shopOwner" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              			<input id="shop[0].subAccount" class="easyui-validatebox"  name="shop[0].subAccount" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              				<input id="shop[0].sbuPassword" class="easyui-validatebox" name="shop[0].sbuPassword" style="width:89px" >
-			              			</td>
-			              			<td>
-			              				<input id="shop[0].businessOpera" class="easyui-validatebox"  name="shop[0].businessOpera" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              				<input id="shop[0].businessAddress" class="easyui-validatebox" name="shop[0].businessAddress" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              				<input id="shop[0].warehouseAddress" class="easyui-validatebox"  name="shop[0].warehouseAddress" style="width:89px"  >
-			              			</td>
-			              			
-			              			<td>
-			              				<input id="shop[0].salesIncome" class="easyui-validatebox" name="shop[0].salesIncome" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              				<input id="shop[0].totalLiability" class="easyui-validatebox"  name="shop[0].totalLiability" style="width:89px"  >
-			              			</td>
-			              			<td>
-			              				<input id="shop[0].bankLiabilities" class="easyui-validatebox" name="shop[0].bankLiabilities" style="width:89px" >
-			              			</td>
-			              			<td>
-			              				<input id="shop[0].netProfit" class="easyui-validatebox" name="shop[0].netProfit" style="width:89px" >
-			              			</td>
-			              			
-			              		</tr>
+			              		<c:if test="${shopList==null}">
+			              			<input class="hidden" id="rowCount" type="text" name="rowCount" value="0">
+				              		<tr id="tShopRow0">
+				              			<td>
+				              			<input id="shop[0].shopName" class="easyui-validatebox" name="shop[0].shopName" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              			<input id="shop[0].platformName" class="easyui-validatebox" name="shop[0].platformName" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              			<input id="shop[0].shopLevel" class="easyui-validatebox" name="shop[0].shopLevel" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              			<input id="shop[0].operatingPeriod" class="easyui-validatebox"  name="shop[0].operatingPeriod" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              			<input id="shop[0].shopOwner" class="easyui-validatebox"  name="shop[0].shopOwner" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              			<input id="shop[0].subAccount" class="easyui-validatebox"  name="shop[0].subAccount" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              				<input id="shop[0].sbuPassword" class="easyui-validatebox" name="shop[0].sbuPassword" style="width:89px" >
+				              			</td>
+				              			<td>
+				              				<input id="shop[0].businessOpera" class="easyui-validatebox"  name="shop[0].businessOpera" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              				<input id="shop[0].businessAddress" class="easyui-validatebox" name="shop[0].businessAddress" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              				<input id="shop[0].warehouseAddress" class="easyui-validatebox"  name="shop[0].warehouseAddress" style="width:89px"  >
+				              			</td>
+				              			
+				              			<td>
+				              				<input id="shop[0].salesIncome" class="easyui-validatebox" name="shop[0].salesIncome" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              				<input id="shop[0].totalLiability" class="easyui-validatebox"  name="shop[0].totalLiability" style="width:89px"  >
+				              			</td>
+				              			<td>
+				              				<input id="shop[0].bankLiabilities" class="easyui-validatebox" name="shop[0].bankLiabilities" style="width:89px" >
+				              			</td>
+				              			<td>
+				              				<input id="shop[0].netProfit" class="easyui-validatebox" name="shop[0].netProfit" style="width:89px" >
+				              			</td>
+				              			
+				              		</tr>
+			              		</c:if>
+			              		
+			              		<c:if test="${shopList!=null}">
+			              			<c:forEach var="shop" items="${shopList}"  varStatus="status">
+			              				<c:if test="${status.last}">
+				              				<input class="hidden" id="rowCount" type="text" name="rowCount" value="${status.count-1}">
+				              			</c:if>
+					              		<tr id="tShopRow${status.index}">
+					              			<td>
+					              			<input id="shop[${status.index}].shopName" class="easyui-validatebox" name="shop[${status.index}].shopName" value="${shop.shopName}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              			<input id="shop[${status.index}].platformName" class="easyui-validatebox" name="shop[${status.index}].platformName" value="${shop.platformName}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              			<input id="shop[${status.index}].shopLevel" class="easyui-validatebox" name="shop[${status.index}].shopLevel" value="${shop.shopLevel}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              			<input id="shop[${status.index}].operatingPeriod" class="easyui-validatebox"  name="shop[${status.index}].operatingPeriod" value="${shop.operatingPeriod}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              			<input id="shop[${status.index}].shopOwner" class="easyui-validatebox"  name="shop[${status.index}].shopOwner" value="${shop.shopOwner}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              			<input id="shop[${status.index}].subAccount" class="easyui-validatebox"  name="shop[${status.index}].subAccount" value="${shop.subAccount}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              				<input id="shop[${status.index}].sbuPassword" class="easyui-validatebox" name="shop[${status.index}].sbuPassword" value="${shop.sbuPassword}" style="width:89px" >
+					              			</td>
+					              			<td>
+					              				<input id="shop[${status.index}].businessOpera" class="easyui-validatebox"  name="shop[${status.index}].businessOpera" value="${shop.businessOpera}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              				<input id="shop[${status.index}].businessAddress" class="easyui-validatebox" name="shop[${status.index}].businessAddress" value="${shop.businessAddress}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              				<input id="shop[${status.index}].warehouseAddress" class="easyui-validatebox"  name="shop[${status.index}].warehouseAddress" value="${shop.warehouseAddress}" style="width:89px"  >
+					              			</td>
+					              			
+					              			<td>
+					              				<input id="shop[${status.index}].salesIncome" class="easyui-validatebox" name="shop[${status.index}].salesIncome" value="${shop.salesIncome}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              				<input id="shop[${status.index}].totalLiability" class="easyui-validatebox"  name="shop[${status.index}].totalLiability" value="${shop.totalLiability}" style="width:89px"  >
+					              			</td>
+					              			<td>
+					              				<input id="shop[${status.index}].bankLiabilities" class="easyui-validatebox" name="shop[${status.index}].bankLiabilities" value="${shop.bankLiabilities}" style="width:89px" >
+					              			</td>
+					              			<td>
+					              				<input id="shop[${status.index}].netProfit" class="easyui-validatebox" name="shop[${status.index}].netProfit" value="${shop.netProfit}" style="width:89px" >
+					              			</td>
+					              		</tr>
+					              	</c:forEach>
+			              		</c:if>
+			              		
 			              	</table>
 			              	<br />
 					        <div style="text-align:center;">  
@@ -396,7 +452,50 @@
 			              			<td style="width:89px">负债总额（万元）</td>
 			              		</tr>
 			              		
-			              		<c:forEach var="guaranter" items="${guaranterList}"  varStatus="status">
+			              		<c:if test="${guaranterList==null}">
+			              			<input id="guaranterRowCount" type="text" name="guaranterRowCount" value="0" />
+			              			<tr id="tRow0">
+			              			<td>
+			              			<input type="text" class="easyui-validatebox" id="guaranter[0].guaranterName" name="guaranter[0].guaranterName"  style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input  type="text" class="easyui-validatebox" id="guaranter[0].guaranterCard"  name="guaranter[0].guaranterCard"  style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input  type="text" class="easyui-validatebox" id="guaranter[0].guaranterEmployer"  name="guaranter[0].guaranterEmployer"  style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input  type="text" class="easyui-validatebox" id="guaranter[0].guaranterDuties"  name="guaranter[0].guaranterDuties"  style="width:89px">
+			              			</td>
+			              			<td>
+			              			<input  type="text" class="easyui-validatebox" id="guaranter[0].guaranterPhone"  name="guaranter[0].guaranterPhone"  style="width:89px">
+			              			</td>
+			              			<td>
+			              			<select  id="guaranter[0].guaranterMaritalStatus"  name="guaranter[0].guaranterMaritalStatus"  style="width:89px">
+			              			        <option value="未婚">未婚</option>
+					                    	<option value="已婚">已婚</option>
+					                    	<option value="离异">离异</option>
+					                    	<option value="丧偶">丧偶</option>
+					                    	<option value="其他">其他</option>
+					            	</select>
+			              			</td>
+			              			<td>
+			              				<input  type="text" class="easyui-validatebox" id="guaranter[0].guaranterHouseAddress" name="guaranter[0].guaranterHouseAddress"  style="width:89px">
+			              			</td>
+			              			<td>
+			              				<input  type="text" class="easyui-validatebox" id="guaranter[0].guaranterMonthlyIncome"  name="guaranter[0].guaranterMonthlyIncome"  style="width:89px">
+			              			</td>
+			              			<td>
+			              				<input  type="text" class="easyui-validatebox" id="guaranter[0].guaranterValues" name="guaranter[0].guaranterValues"  style="width:89px">
+			              			</td>
+			              			<td>
+			              				<input   type="text" class="easyui-validatebox"  id="guaranter[0].guaranterTotalLiabilities"  name="guaranter[0].guaranterTotalLiabilities"  style="width:89px">
+			              			</td>
+			              			</tr>
+			              		</c:if>
+			              		
+			              		<c:if test="${guaranterList!=null}">
+			              			<c:forEach var="guaranter" items="${guaranterList}"  varStatus="status">
 			              			<c:if test="${status.last}">
 			              		    	<input id="guaranterRowCount" type="text" name="guaranterRowCount" value="${status.count-1}" />
 			              		    </c:if>
@@ -438,7 +537,9 @@
 				              				<input   type="text" class="easyui-validatebox"  id="guaranter[${status.index}].guaranterTotalLiabilities"  name="guaranter[${status.index}].guaranterTotalLiabilities" value="${guaranter.guaranterTotalLiabilities}" style="width:89px">
 				              			</td>
 				              		</tr>
-			              		</c:forEach>
+			              		    </c:forEach>
+			              		</c:if>
+			              		
 			              		
 			              	</table>
 			              	<br />
