@@ -40,5 +40,17 @@ public class BusBilingService<T> extends BaseService<T>{
 		
 	}
 	
+	
+	/**
+	 * 根据bid返回对象
+	 * */
+	public T queryByBId(Object bid)throws Exception{
+		if(bid==null){
+			return null;
+		}
+		return mapper.queryByBId(bid);
+		
+	}
+	
 
 }

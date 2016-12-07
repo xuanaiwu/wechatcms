@@ -1,5 +1,5 @@
 package com.dayuan.bean;
-
+/**法人*/
 public class BusLoanInfoLegal {
 	private Integer id;
 	private Integer bid;

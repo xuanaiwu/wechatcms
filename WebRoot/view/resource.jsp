@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 公共资源CSS,JS  -->
 <!--Css -->
 <link rel="stylesheet" type="text/css" href="${easyuiUrl}/themes/bootstrap/easyui.css">

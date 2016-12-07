@@ -38,5 +38,17 @@ public class BusLendingService<T> extends BaseService<T> {
 		return mapper.updateReturnInfluences(t);
 		
 	}
+	
+	/**
+	 * 跟bid返回list
+	 * */
+	public T queryByBId(Object bid) throws Exception{
+		if(bid==null){
+			return null;
+		}
+		return mapper.queryByBId(bid);
+		
+	}
+	
 
 }

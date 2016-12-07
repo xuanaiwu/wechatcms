@@ -13,4 +13,11 @@
 	update bus_billing set bid=#{bid},checkDate=#{checkDate},creditorIfNormal=#{creditorIfNormal},guarantorIfNormal=#{guarantorIfNormal},cloudLoanIfWarning=#{cloudLoanIfWarning},shopOperation=#{shopOperation},otherNeedToExplained=#{otherNeedToExplained},loanCardNumber=#{loanCardNumber},creditEndDate=#{creditEndDate} ,loanAccount=#{loanAccount},loanTerm=#{loanTerm} where id=#{id}
 </update>
 
+
+
+
+<select id="queryByBId" resultType="com.dayuan.bean.BusBiling" parameterType="Object">
+	select * from bus_billing where bid=#{bid}
+</select>
+
 </mapper>

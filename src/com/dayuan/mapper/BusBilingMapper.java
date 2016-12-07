@@ -13,5 +13,11 @@ public interface BusBilingMapper<T> extends BaseMapper<T> {
 	 *更新返回影响记录数
 	 * */
 	public int updateReturnInfluences(T t);
+	
+	
+	/**
+	 * 根据bid返回对象
+	 * */
+	public T queryByBId(Object bid);
 
 }

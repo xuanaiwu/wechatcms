@@ -235,4 +235,8 @@
   	delete from bus_loaninfo_shop where bid=#{bid} 
   </delete>
   
+  <select id="queryListByBId" resultType="com.dayuan.bean.BusLoanInfoShop" parameterType="Object">
+  	select * from bus_loaninfo_shop where bid=#{bid}
+  </select>
+  
 </mapper>

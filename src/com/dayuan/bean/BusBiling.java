@@ -2,6 +2,7 @@ package com.dayuan.bean;
 
 import java.util.Date;
 
+/**贷后台帐*/
 public class BusBiling {
 	private Integer id;
 	private Integer bid;

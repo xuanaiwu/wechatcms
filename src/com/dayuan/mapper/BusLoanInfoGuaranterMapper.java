@@ -1,5 +1,7 @@
 package com.dayuan.mapper;
 
+import java.util.List;
+
 import com.dayuan.bean.BusLoanInfoGuaranter;
 
 public interface BusLoanInfoGuaranterMapper<T> extends BaseMapper<T>{
@@ -22,8 +24,15 @@ public interface BusLoanInfoGuaranterMapper<T> extends BaseMapper<T>{
 	 * */
 	public T getBusLoanInfoGuaranter(Object bid);
 	
-	
+	/**
+	 * 根据bid删除对象
+	 * */
 	public void deleteByBid(Object bid);
+	
+	/**
+	 * 根据bid返回list
+	 * */
+	public List<T> queryListByBId(Object bid);
 	
 	
 	

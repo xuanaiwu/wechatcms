@@ -1,6 +1,7 @@
 package com.dayuan.bean;
 
-public class BusLoanInfoShop {
+
+public class BusLoanInfoShop{
 	private Integer id;
 	private Integer bid;
 	private String shopName;

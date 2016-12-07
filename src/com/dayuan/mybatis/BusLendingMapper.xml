@@ -15,4 +15,8 @@
 	guaranteeLegal2=#{guaranteeLegal2},numberOfShareHolders2=#{numberOfShareHolders2},shareHoldersName2=#{shareHoldersName2},loanAmount=#{loanAmount},openingQuota=#{openingQuota},creditTerm=#{creditTerm},startTerm=#{startTerm},endTerm=#{endTerm} where id=#{id}
 </update>
 
+<select id="queryByBId" resultType="com.dayuan.bean.BusLending" parameterType="Object">
+	select * from  bus_lending  where bid=#{bid}
+</select>
+
 </mapper>

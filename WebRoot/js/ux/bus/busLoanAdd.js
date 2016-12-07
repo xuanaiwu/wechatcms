@@ -104,3 +104,11 @@ function delGuaranterRow(){
 		alert("这是第一行了！");
 	}
 }
+
+$.fn.datebox.defaults.formatter = function(date){
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	var d = date.getDate();
+	//return m+'/'+d+'/'+y;
+	return y+"-"+m+'-'+d;
+}

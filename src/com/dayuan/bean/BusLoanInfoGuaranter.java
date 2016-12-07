@@ -1,5 +1,7 @@
 package com.dayuan.bean;
 
+/**保证人*/
+
 public class BusLoanInfoGuaranter {
 	private Integer id;
 	private Integer bid;

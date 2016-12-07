@@ -53,6 +53,9 @@ public class BusLoanInfoLegalService<T> extends BaseService<T>{
 		return mapper.getBusLoanInfoLegal(bid);
 	}
 	
+	/**
+	 * 根据bid删除对象
+	 * */
 	public void deleteByBid(Object bid){
 		if(bid!=null){
 			mapper.deleteByBid(bid);

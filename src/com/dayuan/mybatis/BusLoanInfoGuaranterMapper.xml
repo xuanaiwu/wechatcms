@@ -188,5 +188,9 @@
   	delete from bus_loaninfo_guaranter where bid=#{bid} 
   </delete>
   
+ <select id="queryListByBId" resultType="com.dayuan.bean.BusLoanInfoGuaranter" parameterType="Object">
+ 	select * from bus_loaninfo_guaranter where bid=#{bid}
+ </select>
+  
   
 </mapper>

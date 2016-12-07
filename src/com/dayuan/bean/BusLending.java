@@ -2,6 +2,7 @@ package com.dayuan.bean;
 
 import java.util.Date;
 
+/**放款*/
 public class BusLending {
 	private Integer id;
 	private Integer bid;

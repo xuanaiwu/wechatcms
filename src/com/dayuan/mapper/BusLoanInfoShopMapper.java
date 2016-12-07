@@ -1,5 +1,7 @@
 package com.dayuan.mapper;
 
+import java.util.List;
+
 public interface BusLoanInfoShopMapper<T> extends BaseMapper<T> {
 	/**
 	 * 保存数据并返回主键id和插入记录数
@@ -20,7 +22,16 @@ public interface BusLoanInfoShopMapper<T> extends BaseMapper<T> {
 	public T getBusLoanInfoShop(Object bid);
 	
 	
-	
+	/**
+	 * 
+	 * 根据bid删除对象
+	 * 
+	 * */
 	public void deleteByBid(Object bid);
+	
+	/**
+	 * 根据bid返回list
+	 * */
+	public List<T> queryListByBId(Object bid);
 
 }

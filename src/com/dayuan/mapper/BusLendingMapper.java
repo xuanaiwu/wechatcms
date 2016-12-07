@@ -12,5 +12,11 @@ public interface BusLendingMapper<T> extends BaseMapper<T> {
 	 *更新返回影响记录数
 	 * */
 	public int updateReturnInfluences(T t);
+	
+	
+	/**
+	 * 跟bid返回list
+	 * */
+	public T queryByBId(Object bid);
 
 }

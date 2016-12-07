@@ -1,6 +1,7 @@
 package com.dayuan.action;
 
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,15 +84,13 @@ public class BusFileAction extends BaseAction{
 	@Autowired(required=false)
 	private BusBilingService<BusBiling> busBilingService;
 	
+	
 	//DATE属性编辑器
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
-	
-	
-	
 	
 	/**
 	 * 跳转到建档页面
@@ -197,6 +196,7 @@ public class BusFileAction extends BaseAction{
 					}
 				}
 			}catch(Exception e){
+				flag=false;
 				log.error("BusLoanInfo保存出错："+e.getMessage());
 			}
 		}
@@ -216,6 +216,7 @@ public class BusFileAction extends BaseAction{
 					}
 				}
 			}catch(Exception e){
+				flag=false;
 				log.error("BusLoanInfoLegal保存出错："+e.getMessage());
 			}
 		}
@@ -236,6 +237,7 @@ public class BusFileAction extends BaseAction{
 						}
 					}
 				}catch(Exception e){
+					flag=false;
 					log.error("BusLoanInfoController保存出错："+e.getMessage());
 				}
 			}
@@ -256,6 +258,7 @@ public class BusFileAction extends BaseAction{
 					}
 				}
 			}catch(Exception e){
+				flag=false;
 				log.error("BusLoanInfoShop保存出错："+e.getMessage());
 			}
 			
@@ -321,6 +324,7 @@ public class BusFileAction extends BaseAction{
 					
 				}
 			}catch(Exception e){
+				flag=false;
 				log.error("busBiling保存出错："+e.getMessage());
 			}
 			
@@ -378,11 +382,38 @@ public class BusFileAction extends BaseAction{
 			if(busLoanInfo!=null){
 				context.put("busLoanInfo",busLoanInfo);
 			}
+			BusLoanInfoLegal busLoanInfoLegal=busLoanInfoLegalService.getBusLoanInfoLegal(id);
+			if(busLoanInfoLegal!=null){
+				context.put("busLoanInfoLegal", busLoanInfoLegal);
+				if(busLoanInfoLegal.getIfController().equals("否")){
+					BusLoanInfoController busLoanInfoController=busLoanInfoControllerService.getBusLoanInfoController(id);
+					if(busLoanInfoController!=null){
+						context.put("busLoanInfoController", busLoanInfoController);
+					}
+				}
+			}
+			List<BusLoanInfoShop> shopList=busLoanInfoShopService.queryListByBId(id);
+			if(shopList!=null&&shopList.size()>0){
+				context.put("shopList", shopList);
+			}
+			if(busLoanInfo!=null&&busLoanInfo.getIfGuaranter().equals("是")){
+				List<BusLoanInfoGuaranter> guaranterList=busLoanInfoGuaranterService.queryListByBId(id);
+				if(guaranterList!=null&&guaranterList.size()>0){
+					context.put("guaranterList", guaranterList);
+				}
+			}
+			BusLending busLending=busLendingService.queryByBId(id);
+			if(busLending!=null){
+				context.put("busLending", busLending);
+			}
+			BusBiling busBiling=busBilingService.queryByBId(id);
+			if(busBiling!=null){
+				context.put("busBiling", busBiling);
+			}
 		}catch(Exception e){
 			log.error("toEdit出错："+e.getMessage());
 		}
-		
-		return forword("bus/busLoanAdd",context);
+		return forword("bus/busLoanEdit",context);
 	}
 
 }

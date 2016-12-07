@@ -1,6 +1,8 @@
 package com.dayuan.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,11 +54,26 @@ public class BusLoanInfoShopService<T> extends BaseService<T> {
 		return getMapper().getBusLoanInfoShop(bid);
 	}
 	
-	
+	/**
+	 * 
+	 * 根据bid删除对象
+	 * 
+	 * */
 	public void deleteByBid(Object bid){
 		if(bid!=null){
 			mapper.deleteByBid(bid);
 		}
+		
+	}
+	
+	/**
+	 * 根据bid返回list
+	 * */
+	public List<T> queryListByBId(Object bid)throws Exception{
+		if(bid==null){
+			return null;
+		}
+		return mapper.queryListByBId(bid);
 		
 	}
 
