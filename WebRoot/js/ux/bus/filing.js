@@ -3,13 +3,16 @@ dy.filing = function(){
 	var _box = null;
 	var _this = {
 		createWordsAction:'createWordsOnLine.do',
-		toList:function(parentId){	
+		toEdit:function(parentId){	
 			if(parentId){
 				window.location.href="toEdit.do?id="+parentId;
 			}else{
 				alert("找不到对应记录！");
 				return;
 			}
+		},
+		commonsForm:function(){
+			return $("#commonsForm");
 		},
 		editPwdForm:function(){
 			return $("#pwdForm");
@@ -62,12 +65,12 @@ dy.filing = function(){
 						{field:'createTime2',title:'创建时间',width:120,sortable:true},
 						{field:'updateTime2',title:'修改时间',width:120,sortable:true},
 						{field:'childMenus',title:'操作',width:200,align:'center',formatter:function(value,row,index){
-							var html ="<a href='#' onclick='dy.filing.toList("+row.id+")'>修改</a>";
+							var html ="<a href='#' onclick='dy.filing.toEdit("+row.id+")'>修改</a>";
 							return html;
 						}}
 				]],
 				toolbar:[
-					{id:'btnedit',text:'修改',btnType:'edit'},
+					{id:'btnedit',text:'修改',btnType:'edit222'},
 					{id:'word',text:'生成word',btnType:'edit222',iconCls:'icon-edit',handler:function(){
 							var selected = _box.utils.getCheckedRows();
 							if ( _box.utils.checkSelectOne(selected)){
@@ -105,11 +108,11 @@ dy.filing = function(){
 								
 							}
 						}},
-						{id:'excel',text:'导出全部数据到excel',btnType:'edit',iconCls:'icon-edit',handler:function(){
+						{id:'excel',text:'导出Excel',btnType:'exportExcel',iconCls:'icon-edit',handler:function(){
 								
 								//用表单form的方式提交
-								_this.editPwdForm().attr('action','exportAllExcel.do');
-								_this.editPwdForm().submit();
+								_this.commonsForm().attr('action','exportExcel.do');
+								_this.commonsForm().submit();
 								alert("导出成功！");
 
 						}},

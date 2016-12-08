@@ -100,7 +100,7 @@ delete from bus_loaninfo where id=#{id}
 </select>
  
  
-<delete id="delete" parameterType="Object">
+<delete id="deleteByLId" parameterType="Object">
 delete from bus_loaninfo where lId=#{id}
 </delete>
 

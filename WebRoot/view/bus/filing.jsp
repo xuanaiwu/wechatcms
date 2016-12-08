@@ -45,7 +45,11 @@
 		            </select> 
 			  </div> 
      	</form>
-  	 </div> 	 
+  	 </div> 
+  	 
+  	 <!-- 用来请求的form -->	
+  	 <form id="commonsForm" class="ui-form" method="post">
+  	 </form> 
       	 
 </div>
 

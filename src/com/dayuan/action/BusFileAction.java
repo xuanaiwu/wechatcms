@@ -459,5 +459,22 @@ public class BusFileAction extends BaseAction{
 		}
 		
 	}
+	
+	/**贷后台帐，导出Excel*/
+	@RequestMapping("/exportExcel")
+	public void exportExcel(HttpServletRequest request,HttpServletResponse response){
+		SysUser user = SessionUtils.getUser(request);
+		BusFileModel busFileModel=new BusFileModel();
+		busFileModel.setlUserName(user.getNickName());
+		busFileModel.setlUId(user.getId().toString());
+		try{
+			List<BusFiles> list=busFileService.queryByList(busFileModel);
+		}catch(Exception e){
+			log.error("exportExcel方法出错："+e.getMessage());
+		}
+		
+		
+		
+	}
 
 }
