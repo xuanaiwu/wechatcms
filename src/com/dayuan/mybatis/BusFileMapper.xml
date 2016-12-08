@@ -72,5 +72,9 @@ where 1=1
 	update bus_file set lName=#{lName},lIdCard=#{lIdCard},lTelPhone=#{lTelPhone},lStatus=#{lStatus},updateTime=#{updateTime} where id=#{id}
 </update>
 
+
+<delete id="delete" parameterType="Object">
+	delete from bus_file where id=#{id}
+</delete>
 	
 </mapper>

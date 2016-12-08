@@ -35,7 +35,8 @@
 		            	   </select> 
 			           </div>    
 		    </div>   
-		    <div title="授信申报"  style="overflow:auto;padding:20px;">   
+		    <div title="授信申报"  style="overflow:auto;padding:20px;">
+		    	 <input class="hidden" type="text" name="loanInfoTempId" value="${busLoanInfo.id}">   
 		         <div class="ftitle">机构信息</div>
 			           <div class="fitem">  
 			               <label style="width:120px">调查机构名称:</label>  
@@ -238,6 +239,7 @@
 			              				<c:if test="${status.last}">
 				              				<input class="hidden" id="rowCount" type="text" name="rowCount" value="${status.count-1}">
 				              			</c:if>
+				              			<input class="hidden" id="shop[${status.index}].tempShopId" type="text" name="shop[${status.index}].tempShopId" value="${shop.id}"> 
 					              		<tr id="tShopRow${status.index}">
 					              			<td>
 					              			<input id="shop[${status.index}].shopName" class="easyui-validatebox" name="shop[${status.index}].shopName" value="${shop.shopName}" style="width:89px"  >
@@ -296,6 +298,7 @@
 			           
 			           
 			           <div class="ftitle">法定代表人或负责人基本信息（必填）</div>
+			           <input class="hidden" type="text" name="legalTempId" value="${busLoanInfoLegal.id}"> 
 			            <div class="fitem">  
 			               <label style="width:120px">姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="legalPerson" value="${busLoanInfoLegal.legalPerson}" style="width:139px" >
@@ -374,6 +377,7 @@
 			           
 			           
 			           <div class="ftitle">实际控制人基本信息</div>
+			           <input class="hidden" type="text" name="controllerTempId" value="${busLoanInfoController.id}">
 			            <div class="fitem">  
 			               <label style="width:120px">姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerName" value="${busLoanInfoController.controllerName}"  style="width:139px">
@@ -453,7 +457,7 @@
 			              		</tr>
 			              		
 			              		<c:if test="${guaranterList==null}">
-			              			<input id="guaranterRowCount" type="text" name="guaranterRowCount" value="0" />
+			              			<input class="hidden" id="guaranterRowCount" type="text" name="guaranterRowCount" value="0" />
 			              			<tr id="tRow0">
 			              			<td>
 			              			<input type="text" class="easyui-validatebox" id="guaranter[0].guaranterName" name="guaranter[0].guaranterName"  style="width:89px">
@@ -497,8 +501,9 @@
 			              		<c:if test="${guaranterList!=null}">
 			              			<c:forEach var="guaranter" items="${guaranterList}"  varStatus="status">
 			              			<c:if test="${status.last}">
-			              		    	<input id="guaranterRowCount" type="text" name="guaranterRowCount" value="${status.count-1}" />
+			              		    	<input class="hidden" id="guaranterRowCount" type="text" name="guaranterRowCount" value="${status.count-1}" />
 			              		    </c:if>
+			              		    <input class="hidden" id="guaranter[${status.index}].guaranterTempId" type="text" name="guaranter[${status.index}].guaranterTempId" value="${guaranter.id}" />
 				              		<tr id="tRow${status.index}">
 				              			<td>
 				              			<input type="text" class="easyui-validatebox" id="guaranter[${status.index}].guaranterName" name="guaranter[${status.index}].guaranterName" value="${guaranter.guaranterName}"  style="width:89px">
@@ -574,6 +579,7 @@
 			               
 		    </div>   
 		    <div title="放款"  style="overflow:auto;padding:20px;">
+		    <input class="hidden" type="text" name="lendingTempId" value="${busLending.id}">
 		    	 <div class="ftitle">保证人公司信息</div>
 			            <div class="fitem">  
 			              	<table id="guaranteeCompanyRowtblData">
@@ -582,7 +588,7 @@
 			              			<td style="width:120px">地址</td>
 			              			<td style="width:120px">法人</td>
 			              			<td style="width:120px">股东人数</td>
-			              			<td style="width:120px">股东名（以、隔开）</td>
+			              			<td style="width:120px">股东名（以；隔开）</td>
 			              		</tr>
 			              		<tr id="guaranteeCompanyRow0">
 			              			<td>
@@ -640,6 +646,7 @@
 		    </div>
 		    
 		    <div title="贷后台帐"  style="overflow:auto;padding:20px;">
+		        <input class="hidden" type="text" name="bilingTempId" value="${busBiling.id}">
 		        <div class="ftitle">贷后台帐信息</div>   
 		           <div class="fitem">
 			           	<label style="width:80px">检查日期:</label>  

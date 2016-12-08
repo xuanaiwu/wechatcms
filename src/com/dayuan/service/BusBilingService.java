@@ -52,5 +52,14 @@ public class BusBilingService<T> extends BaseService<T>{
 		
 	}
 	
+	
+	/**根据lId删除数据*/
+	public void deleteByLId(Object lId)throws Exception{
+		if(lId!=null){
+			mapper.deleteByLId(lId);
+		}
+		
+	}
+	
 
 }

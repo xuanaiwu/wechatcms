@@ -22,6 +22,16 @@ public class BusLending {
 	private Date startTerm;
 	private Date endTerm;
 	
+	
+	/**扩展属性，更新时临时保存主键id*/	
+	private Integer lendingTempId;
+
+	public Integer getLendingTempId() {
+		return lendingTempId;
+	}
+	public void setLendingTempId(Integer lendingTempId) {
+		this.lendingTempId = lendingTempId;
+	}
 	public Integer getId() {
 		return id;
 	}

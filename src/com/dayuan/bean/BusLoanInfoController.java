@@ -1,5 +1,6 @@
 package com.dayuan.bean;
 
+/**实际控制人*/
 public class BusLoanInfoController {
 	private Integer id;
 	private Integer bid;
@@ -20,10 +21,19 @@ public class BusLoanInfoController {
 	private String controllerBorrowOfBank;
 	private String controllerAmount;
 	private String controllerTheTerm;
+	
+	
+	
+	/**扩展属性，更新时临时保存主键id*/
 
+	private Integer controllerTempId;
 	
-	
-	
+	public Integer getControllerTempId() {
+		return controllerTempId;
+	}
+	public void setControllerTempId(Integer controllerTempId) {
+		this.controllerTempId = controllerTempId;
+	}
 	public Integer getId() {
 		return id;
 	}

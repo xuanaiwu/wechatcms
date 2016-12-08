@@ -26,8 +26,17 @@ public class BusLoanInfoLegal {
 	private String amount;
 	private String theTerm;
 	private String ifController;
-
 	
+	
+	/**扩展属性，更新时临时保存主键id*/
+	private Integer legalTempId;
+	
+	public Integer getLegalTempId() {
+		return legalTempId;
+	}
+	public void setLegalTempId(Integer legalTempId) {
+		this.legalTempId = legalTempId;
+	}
 	public Integer getId() {
 		return id;
 	}

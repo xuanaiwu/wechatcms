@@ -1,5 +1,6 @@
 package com.dayuan.bean;
 
+/**商贷主表*/
 public class BusLoanInfo extends BaseBean{
 	private Integer id;
 	private String surveyOrgName;
@@ -46,12 +47,15 @@ public class BusLoanInfo extends BaseBean{
 	/**20161205*/
 	private Integer lId;
 	
+	/**扩展属性，更新时临时保存主键id*/
+	private Integer loanInfoTempId;
 	
-	
-	
-	
-	
-	
+	public Integer getLoanInfoTempId() {
+		return loanInfoTempId;
+	}
+	public void setLoanInfoTempId(Integer loanInfoTempId) {
+		this.loanInfoTempId = loanInfoTempId;
+	}
 	public Integer getlId() {
 		return lId;
 	}

@@ -60,6 +60,14 @@ public class BusLoanInfoService<T> extends BaseService<T>{
 		}
 		return mapper.queryByLId(id);
 	}
+	
+	
+	/**根据lid删除对象*/
+	public void deleteByLId(Object id)throws Exception{
+		if(id!=null){
+			mapper.deleteByLId(id);
+		}
+	}
 
 
 	

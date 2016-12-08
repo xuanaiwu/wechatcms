@@ -15,8 +15,16 @@ public class BusLoanInfoGuaranter {
 	private String guaranterMonthlyIncome;
 	private String guaranterValues;
 	private String guaranterTotalLiabilities;
-
 	
+	/**扩展属性，更新时临时保存主键id*/
+	private Integer guaranterTempId;
+	
+	public Integer getGuaranterTempId() {
+		return guaranterTempId;
+	}
+	public void setGuaranterTempId(Integer guaranterTempId) {
+		this.guaranterTempId = guaranterTempId;
+	}
 	public Integer getId() {
 		return id;
 	}

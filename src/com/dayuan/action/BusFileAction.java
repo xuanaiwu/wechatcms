@@ -100,7 +100,8 @@ public class BusFileAction extends BaseAction{
 		Map<String,Object> context=getRootMap();
 		SysUser user=SessionUtils.getUser(request);
 		context.put("user", user);
-		return forword("bus/busLoanAdd",context);
+		//return forword("bus/busLoanAdd",context);
+		return forword("bus/busLoanEdit",context);
 	}
 	
 	/**
@@ -183,8 +184,9 @@ public class BusFileAction extends BaseAction{
 		/**保存商贷主表信息*/
 		if(busLoanInfo!=null){
 			try{
+				busLoanInfo.setlId(lId);
+				busLoanInfo.setId(busLoanInfo.getLoanInfoTempId());
 				if(busLoanInfo.getId()==null){
-					busLoanInfo.setlId(lId);
 					num=busLoanInfoService.save(busLoanInfo);
 					if(num!=1){
 						flag=false;
@@ -203,8 +205,9 @@ public class BusFileAction extends BaseAction{
 		/**保存法人表信息*/
 		if(busLoanInfoLegal!=null){
 			try{
+				busLoanInfoLegal.setBid(lId);
+				busLoanInfoLegal.setId(busLoanInfoLegal.getLegalTempId());
 				if(busLoanInfoLegal.getId()==null){
-					busLoanInfoLegal.setBid(lId);
 					num=busLoanInfoLegalService.save(busLoanInfoLegal);
 					if(num!=1){
 						flag=false;
@@ -224,8 +227,9 @@ public class BusFileAction extends BaseAction{
 			/**保存实际控制人信息*/
 			if(busLoanInfoController!=null){
 				try{
+					busLoanInfoController.setBid(lId);
+					busLoanInfoController.setId(busLoanInfoController.getControllerTempId());
 					if(busLoanInfoController.getId()==null){
-						busLoanInfoController.setBid(lId);
 						num=busLoanInfoControllerService.save(busLoanInfoController);
 						if(num!=1){
 							flag=false;
@@ -245,8 +249,9 @@ public class BusFileAction extends BaseAction{
 		/**保存实体或店铺信息*/
 		for(BusLoanInfoShop shop:shopForm.getShop()){
 			try{
+				shop.setBid(lId);
+				shop.setId(shop.getTempShopId());
 				if(shop.getId()==null){
-					shop.setBid(lId);
 					num=busLoanInfoShopService.save(shop);
 					if(num!=1){
 						flag=false;
@@ -268,8 +273,9 @@ public class BusFileAction extends BaseAction{
 		if(busLoanInfo!=null){
 			if(busLoanInfo.getIfGuaranter().equals("是")){
 				for(BusLoanInfoGuaranter guaranter:guaranterForm.getGuaranter()){
+					guaranter.setBid(lId);
+					guaranter.setId(guaranter.getGuaranterTempId());
 					if(guaranter.getId()==null){
-						guaranter.setBid(lId);
 						num=busLoanInfoGuaranterService.save(guaranter);
 						if(num!=1){
 							flag=false;
@@ -288,8 +294,9 @@ public class BusFileAction extends BaseAction{
 		/**保存放款信息*/
 		if(busLending!=null){
 			try{
+				busLending.setBid(lId);
+				busLending.setId(busLending.getLendingTempId());
 				if(busLending.getId()==null){
-					busLending.setBid(lId);
 					num=busLendingService.save(busLending);
 					if(num!=1){
 						flag=false;
@@ -310,8 +317,9 @@ public class BusFileAction extends BaseAction{
 		/**保存贷后台帐信息*/
 		if(busBiling!=null){
 			try{
+				busBiling.setBid(lId);
+				busBiling.setId(busBiling.getBilingTempId());
 				if(busBiling.getId()==null){
-					busBiling.setBid(lId);
 					num=busBilingService.save(busBiling);
 					if(num!=1){
 						flag=false;
@@ -414,6 +422,42 @@ public class BusFileAction extends BaseAction{
 			log.error("toEdit出错："+e.getMessage());
 		}
 		return forword("bus/busLoanEdit",context);
+	}
+	
+	
+	/**单个或批量删除文件*/
+	@RequestMapping("/delete")
+	public void delete(Integer[] id,HttpServletResponse response){
+		boolean flag=false;
+		if(id!=null&&id.length>0){
+			try{
+				for(int i=0;i<id.length;i++){
+					BusFiles busFiles=busFileService.queryById(id[i]);
+					if(busFiles!=null){
+						Integer lId=busFiles.getId();
+						busLoanInfoService.deleteByLId(lId);
+						busLoanInfoLegalService.deleteByBid(lId);
+						busLoanInfoControllerService.deleteByBid(lId);
+						busLoanInfoShopService.deleteByBid(lId);
+						busLoanInfoGuaranterService.deleteByBid(lId);
+						busLendingService.deleteByLId(lId);
+						busBilingService.deleteByLId(lId);
+						busFileService.delete(lId);
+						flag=true;
+					}
+				}
+			}catch(Exception e){
+				log.error("删除失败！"+e.getMessage());
+			}
+		}
+		if(flag){
+			log.info("删除成功！");
+			sendSuccessMessage(response,"删除成功！");
+		}else{
+			log.info("删除失败！");
+			sendFailureMessage(response,"删除失败！");
+		}
+		
 	}
 
 }

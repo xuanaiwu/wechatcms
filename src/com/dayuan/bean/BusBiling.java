@@ -17,6 +17,17 @@ public class BusBiling {
 	private String loanAccount;
 	private String loanTerm;
 	
+	/**扩展属性，更新时临时保存主键id*/
+	private Integer bilingTempId;
+	
+	
+	
+	public Integer getBilingTempId() {
+		return bilingTempId;
+	}
+	public void setBilingTempId(Integer bilingTempId) {
+		this.bilingTempId = bilingTempId;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -19,4 +19,8 @@
 	select * from  bus_lending  where bid=#{bid}
 </select>
 
+<delete id="deleteByLId" parameterType="Object">
+delete from bus_lending where bid=#{bid}
+</delete>
+
 </mapper>

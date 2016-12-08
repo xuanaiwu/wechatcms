@@ -18,5 +18,9 @@ public interface BusLendingMapper<T> extends BaseMapper<T> {
 	 * 跟bid返回list
 	 * */
 	public T queryByBId(Object bid);
+	
+	
+	/**根据LId删除数据*/
+	public void deleteByLId(Object LId);
 
 }

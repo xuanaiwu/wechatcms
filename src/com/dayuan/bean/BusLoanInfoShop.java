@@ -1,6 +1,6 @@
 package com.dayuan.bean;
 
-
+/**实体或店铺*/
 public class BusLoanInfoShop{
 	private Integer id;
 	private Integer bid;
@@ -18,7 +18,18 @@ public class BusLoanInfoShop{
 	private String totalLiability;
 	private String bankLiabilities;
 	private String netProfit;
-
+	
+	
+	/**扩展属性，更新时临时存放主键id*/
+	private Integer tempShopId;
+	
+	
+	public Integer getTempShopId() {
+		return tempShopId;
+	}
+	public void setTempShopId(Integer tempShopId) {
+		this.tempShopId = tempShopId;
+	}
 	public Integer getId() {
 		return id;
 	}

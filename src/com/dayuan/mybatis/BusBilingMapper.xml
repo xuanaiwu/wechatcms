@@ -20,4 +20,10 @@
 	select * from bus_billing where bid=#{bid}
 </select>
 
+
+
+<delete id="deleteByLId" parameterType="Object">
+delete from bus_billing where bid=#{bid}
+</delete>
+
 </mapper>

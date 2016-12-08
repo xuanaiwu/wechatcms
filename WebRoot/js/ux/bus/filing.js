@@ -61,10 +61,8 @@ dy.filing = function(){
 						{field:'lStatus',title:'当前状态',width:120,sortable:true},
 						{field:'createTime2',title:'创建时间',width:120,sortable:true},
 						{field:'updateTime2',title:'修改时间',width:120,sortable:true},
-						{field:'childMenus',title:'操作',width:450,align:'center',formatter:function(value,row,index){
+						{field:'childMenus',title:'操作',width:200,align:'center',formatter:function(value,row,index){
 							var html ="<a href='#' onclick='dy.filing.toList("+row.id+")'>修改</a>";
-							html+="&nbsp;&nbsp;<a href='#' onclick='dy.filing.toList("+row.id+")'>修改网店信息</a>";
-							html+="&nbsp;&nbsp;<a href='#' onclick='dy.filing.toList("+row.id+")'>修改保证人信息</a>";
 							return html;
 						}}
 				]],
@@ -107,7 +105,7 @@ dy.filing = function(){
 								
 							}
 						}},
-						{id:'excel',text:'导出全部数据到excel',btnType:'edit2222',iconCls:'icon-edit',handler:function(){
+						{id:'excel',text:'导出全部数据到excel',btnType:'edit',iconCls:'icon-edit',handler:function(){
 								
 								//用表单form的方式提交
 								_this.editPwdForm().attr('action','exportAllExcel.do');

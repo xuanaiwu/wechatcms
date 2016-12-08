@@ -99,6 +99,10 @@ delete from bus_loaninfo where id=#{id}
 	select * from bus_loaninfo where lId=#{id}
 </select>
  
+ 
+<delete id="delete" parameterType="Object">
+delete from bus_loaninfo where lId=#{id}
+</delete>
 
 
 

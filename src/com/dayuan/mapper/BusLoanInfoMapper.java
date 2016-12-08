@@ -22,5 +22,9 @@ public interface BusLoanInfoMapper<T> extends BaseMapper<T> {
 	/**根据lid获取对象*/
 	public T queryByLId(Object id);
 	
+	
+	/**根据LId删除对象*/
+	public void deleteByLId(Object id);
+	
 
 }
