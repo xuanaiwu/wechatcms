@@ -477,22 +477,11 @@ public class BusFileAction extends BaseAction{
 	/**贷后台帐，导出Excel*/
 	@RequestMapping("/exportExcel")
 	public void exportExcel(HttpServletRequest request,HttpServletResponse response){
-		try{
-			PrintWriter out= null;
-			out = response.getWriter();
-			out.print("123");
-			out.flush();
-			out.close();
-		}catch(Exception e){
-			log.error("123");
-		}
-		
-		///sendFailureMessage(response,"exportExcel方法出错");
-		//return;
-		/**SysUser user = SessionUtils.getUser(request);
+		SysUser user = SessionUtils.getUser(request);
 		BusFileModel busFileModel=new BusFileModel();
 		busFileModel.setlUserName(user.getNickName());
 		busFileModel.setlUId(user.getId().toString());
+		busFileModel.setRows(200);
 		try{
 			List<BusFiles> list=busFileService.queryByList(busFileModel);
 			if(list!=null&&list.size()>0){
@@ -500,14 +489,17 @@ public class BusFileAction extends BaseAction{
 		        HSSFWorkbook wb = new HSSFWorkbook();
 		        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
 		        HSSFSheet sheet = wb.createSheet("基本信息");
+		        HSSFSheet sheetLoan = wb.createSheet("贷后");
 		        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
 		        HSSFRow row = sheet.createRow((int) 0);
+		        HSSFRow rowLoan = sheetLoan.createRow((int) 0);
 		        // 第四步，创建单元格，并设置值表头 设置表头居中  
 		        HSSFCellStyle style = wb.createCellStyle();
 		        // 创建一个居中格式
 		        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		        
 		        
+		        /**sheet1 基本信息*/
 		        HSSFCell cell = row.createCell((short) 0);  
 		        cell.setCellValue("序号");  
 		        cell.setCellStyle(style);
@@ -542,6 +534,72 @@ public class BusFileAction extends BaseAction{
 		        cell.setCellValue("邮寄地址");  //legal.deliveryAddress
 		        cell.setCellStyle(style);
 		        
+		        
+		        /**sheet2 贷后*/
+		        HSSFCell cellLoan = rowLoan.createCell((short) 0);
+		        cellLoan.setCellValue("序号");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)1);
+		        cellLoan.setCellValue("客户姓名");//busLoanInfo.applicationName  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)2);
+		        cellLoan.setCellValue("紧急联系人"); //busLoanInfo.urgentCont 
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)3);
+		        cellLoan.setCellValue("关系");//busLoanInfo.relationship  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)4);
+		        cellLoan.setCellValue("电话");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)5);
+		        cellLoan.setCellValue("地址");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)6);
+		        cellLoan.setCellValue("贷款卡号");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)7);
+		        cellLoan.setCellValue("店铺1");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)8);
+		        cellLoan.setCellValue("平台1");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)9);
+		        cellLoan.setCellValue("子帐号1");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)10);
+		        cellLoan.setCellValue("密码1");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)11);
+		        cellLoan.setCellValue("店铺2");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)12);
+		        cellLoan.setCellValue("平台2");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)13);
+		        cellLoan.setCellValue("子帐号2");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)14);
+		        cellLoan.setCellValue("密码2");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)15);
+		        cellLoan.setCellValue("检查日期");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)16);
+		        cellLoan.setCellValue("借款人征信是否正常");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)17);
+		        cellLoan.setCellValue("保证人征信是否正常");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)18);
+		        cellLoan.setCellValue("云贷是否有预警信息");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)19);
+		        cellLoan.setCellValue("店铺经营情况");  
+		        cellLoan.setCellStyle(style);
+		        cellLoan=rowLoan.createCell((short)20);
+		        cellLoan.setCellValue("其他需要说明的地方");  
+		        cellLoan.setCellStyle(style);
+		        
 		        for(int i=0;i<list.size();i++){
 		        	BusFiles busFiles=list.get(i);
 		        	Integer lId=busFiles.getId();
@@ -549,14 +607,28 @@ public class BusFileAction extends BaseAction{
 		        	BusLending busLending=busLendingService.queryByBId(lId);
 		        	BusBiling busBiling=busBilingService.queryByBId(lId);
 		        	BusLoanInfoLegal legal=busLoanInfoLegalService.getBusLoanInfoLegal(lId);
+		        	
+		        	
+		        	/**row对应sheet1*/
 		        	row = sheet.createRow((int) 1 + i); 
 		        	row.createCell((short) 0).setCellValue(i+1);
 		        	row.createCell((short) 1).setCellValue(busFiles.getlUserName());
 		        	row.createCell((short) 3).setCellValue(busFiles.getlStatus());
-		        	row.createCell((short) 4).setCellValue(busFiles.getCreateTime());
+		        	row.createCell((short) 4).setCellValue(DateUtil.getFormattedDateUtil((Date)busFiles.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
+		        	
+		        	
+		        	/**rowLoan对应sheet2*/
+		        	rowLoan = sheetLoan.createRow((int) 1 + i);
+		        	rowLoan.createCell((short)0).setCellValue(i+1);
+		        	
+		        	
 		        	if(busLoanInfo!=null){
 		        		row.createCell((short) 2).setCellValue(busLoanInfo.getApplicationName());
 		        		row.createCell((short) 5).setCellValue(busLoanInfo.getChannel());
+		        		
+		        		rowLoan.createCell((short)1).setCellValue(busLoanInfo.getApplicationName());
+		        		rowLoan.createCell((short)2).setCellValue(busLoanInfo.getUrgentCont());
+		        		rowLoan.createCell((short)3).setCellValue(busLoanInfo.getRelationship());
 		        	}else{
 		        		row.createCell((short) 2).setCellValue("");
 		        		row.createCell((short) 5).setCellValue("");
@@ -585,7 +657,7 @@ public class BusFileAction extends BaseAction{
 		        String savePath=request.getSession().getServletContext().getRealPath(File.separator+"WEB-INF"+File.separator+"downloads"+File.separator+"excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
 		        savePath=savePath+File.separator+UUID.randomUUID();//文件最终保存路径
 		        File fileSavePath=new File(savePath);
-		        /**创建要保存的文件夹*//*
+		        /**创建要保存的文件夹*/
 				if(fileSavePath.exists()){
 					if(fileSavePath.isDirectory()){
 						File[] files=fileSavePath.listFiles();
@@ -619,7 +691,7 @@ public class BusFileAction extends BaseAction{
 				in.close();
 				out.flush();
 				out.close();
-				*//**删除文件*//*
+				/**删除文件*/
 				File file=new File(savePath+File.separator+excel);
 				if(file!=null){
 					if(file.exists()){
@@ -627,7 +699,7 @@ public class BusFileAction extends BaseAction{
 					}
 					file=null;
 				}
-				*//**删除文件夹*//*
+				/**删除文件夹*/
 				if(fileSavePath!=null){
 					if(fileSavePath.exists()){
 						fileSavePath.delete();
@@ -638,9 +710,8 @@ public class BusFileAction extends BaseAction{
 			}
 		}catch(Exception e){
 			log.error("exportExcel方法出错："+e.getMessage());
-			sendFailureMessage(response,"exportExcel方法出错");
-		}*/
-		
+			sendFailureMessage(response,"导出数据出错了！");
+		}
 	}
 
 }

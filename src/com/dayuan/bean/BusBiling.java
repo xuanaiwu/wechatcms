@@ -83,13 +83,13 @@ public class BusBiling {
 		this.loanCardNumber = loanCardNumber;
 	}
 	public Date getCreditEndDate() {
-		return creditEndDate;
+		return creditEndDate!=null?creditEndDate:new Date();
 	}
 	public void setCreditEndDate(Date creditEndDate) {
 		this.creditEndDate = creditEndDate;
 	}
 	public String getLoanAccount() {
-		return loanAccount;
+		return loanAccount!=null?loanAccount:"";
 	}
 	public void setLoanAccount(String loanAccount) {
 		this.loanAccount = loanAccount;

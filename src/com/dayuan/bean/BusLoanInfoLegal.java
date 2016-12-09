@@ -108,7 +108,7 @@ public class BusLoanInfoLegal {
 		
 	}
 	public String getDeliveryAddress(){
-		return this.deliveryAddress;
+		return this.deliveryAddress!=null?deliveryAddress:"";
 	}
 	public void setDeliveryAddress(String deliveryAddress){
 		this.deliveryAddress=deliveryAddress;

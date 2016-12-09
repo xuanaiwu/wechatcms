@@ -116,7 +116,7 @@ dy.filing = function(){
 								
 								
 								
-								alert("导出成功！");
+								alert("123");
 
 						}},
 					{id:'btndelete',text:'删除',btnType:'remove'}

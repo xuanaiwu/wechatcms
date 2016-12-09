@@ -57,13 +57,13 @@ public class BusFiles extends BaseBean{
 		this.lTelPhone = lTelPhone;
 	}
 	public String getlStatus() {
-		return lStatus;
+		return lStatus!=null?lStatus:"";
 	}
 	public void setlStatus(String lStatus) {
 		this.lStatus = lStatus;
 	}
 	public String getlUserName() {
-		return lUserName;
+		return lUserName!=null?lUserName:"";
 	}
 	public void setlUserName(String lUserName) {
 		this.lUserName = lUserName;
@@ -75,7 +75,7 @@ public class BusFiles extends BaseBean{
 		this.lUId = lUId;
 	}
 	public Date getCreateTime() {
-		return createTime;
+		return createTime!=null?createTime:new Date();
 	}
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;

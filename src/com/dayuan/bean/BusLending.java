@@ -105,13 +105,13 @@ public class BusLending {
 		this.shareHoldersName2 = shareHoldersName2;
 	}
 	public String getLoanAmount() {
-		return loanAmount;
+		return loanAmount!=null?loanAmount:"";
 	}
 	public void setLoanAmount(String loanAmount) {
 		this.loanAmount = loanAmount;
 	}
 	public String getOpeningQuota() {
-		return openingQuota;
+		return openingQuota!=null?loanAmount:"";
 	}
 	public void setOpeningQuota(String openingQuota) {
 		this.openingQuota = openingQuota;
