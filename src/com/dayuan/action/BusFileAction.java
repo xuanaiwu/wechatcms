@@ -2,16 +2,30 @@ package com.dayuan.action;
 
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -463,17 +477,169 @@ public class BusFileAction extends BaseAction{
 	/**贷后台帐，导出Excel*/
 	@RequestMapping("/exportExcel")
 	public void exportExcel(HttpServletRequest request,HttpServletResponse response){
-		SysUser user = SessionUtils.getUser(request);
+		try{
+			PrintWriter out= null;
+			out = response.getWriter();
+			out.print("123");
+			out.flush();
+			out.close();
+		}catch(Exception e){
+			log.error("123");
+		}
+		
+		///sendFailureMessage(response,"exportExcel方法出错");
+		//return;
+		/**SysUser user = SessionUtils.getUser(request);
 		BusFileModel busFileModel=new BusFileModel();
 		busFileModel.setlUserName(user.getNickName());
 		busFileModel.setlUId(user.getId().toString());
 		try{
 			List<BusFiles> list=busFileService.queryByList(busFileModel);
+			if(list!=null&&list.size()>0){
+				// 第一步，创建一个webbook，对应一个Excel文件  
+		        HSSFWorkbook wb = new HSSFWorkbook();
+		        // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet  
+		        HSSFSheet sheet = wb.createSheet("基本信息");
+		        // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short  
+		        HSSFRow row = sheet.createRow((int) 0);
+		        // 第四步，创建单元格，并设置值表头 设置表头居中  
+		        HSSFCellStyle style = wb.createCellStyle();
+		        // 创建一个居中格式
+		        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		        
+		        
+		        HSSFCell cell = row.createCell((short) 0);  
+		        cell.setCellValue("序号");  
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 1);  
+		        cell.setCellValue("客户经理");//busfiles.lUserName
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 2);  
+		        cell.setCellValue("客户姓名");//busLoanInfo.applicationName 
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 3);  
+		        cell.setCellValue("状态"); //busfiles.lStatus
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 4);  
+		        cell.setCellValue("时间");  //busfiles.createTime
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 5);  
+		        cell.setCellValue("客户来源");  //busLoanInfo.channel
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 6);  
+		        cell.setCellValue("授信金额");  //buslending.loanAmount
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 7);  
+		        cell.setCellValue("开通额度");  //buslending.openingQuota
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 8);  
+		        cell.setCellValue("授信到期日");  //busBiling.creditEndDate
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 9);  
+		        cell.setCellValue("融信通帐号");  //busBiling.loanAccount
+		        cell.setCellStyle(style);
+		        cell = row.createCell((short) 10);  
+		        cell.setCellValue("邮寄地址");  //legal.deliveryAddress
+		        cell.setCellStyle(style);
+		        
+		        for(int i=0;i<list.size();i++){
+		        	BusFiles busFiles=list.get(i);
+		        	Integer lId=busFiles.getId();
+		        	BusLoanInfo busLoanInfo=busLoanInfoService.queryByLId(lId);
+		        	BusLending busLending=busLendingService.queryByBId(lId);
+		        	BusBiling busBiling=busBilingService.queryByBId(lId);
+		        	BusLoanInfoLegal legal=busLoanInfoLegalService.getBusLoanInfoLegal(lId);
+		        	row = sheet.createRow((int) 1 + i); 
+		        	row.createCell((short) 0).setCellValue(i+1);
+		        	row.createCell((short) 1).setCellValue(busFiles.getlUserName());
+		        	row.createCell((short) 3).setCellValue(busFiles.getlStatus());
+		        	row.createCell((short) 4).setCellValue(busFiles.getCreateTime());
+		        	if(busLoanInfo!=null){
+		        		row.createCell((short) 2).setCellValue(busLoanInfo.getApplicationName());
+		        		row.createCell((short) 5).setCellValue(busLoanInfo.getChannel());
+		        	}else{
+		        		row.createCell((short) 2).setCellValue("");
+		        		row.createCell((short) 5).setCellValue("");
+		        	}
+		        	if(busLending!=null){
+		        		row.createCell((short) 6).setCellValue(busLending.getLoanAmount());
+		        		row.createCell((short) 7).setCellValue(busLending.getOpeningQuota());
+		        	}else{
+		        		row.createCell((short) 6).setCellValue("");
+		        		row.createCell((short) 7).setCellValue("");
+		        	}
+		        	if(busBiling!=null){
+		        		row.createCell((short) 8).setCellValue(busBiling.getCreditEndDate());
+		        		row.createCell((short) 9).setCellValue(busBiling.getLoanAccount());
+		        	}else{
+		        		row.createCell((short) 8).setCellValue("");
+		        		row.createCell((short) 9).setCellValue("");
+		        	}
+		        	if(legal!=null){
+		        		row.createCell((short) 10).setCellValue(legal.getDeliveryAddress());
+		        	}else{
+		        		row.createCell((short) 10).setCellValue("");
+		        	}
+		        	
+		        }
+		        String savePath=request.getSession().getServletContext().getRealPath(File.separator+"WEB-INF"+File.separator+"downloads"+File.separator+"excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
+		        savePath=savePath+File.separator+UUID.randomUUID();//文件最终保存路径
+		        File fileSavePath=new File(savePath);
+		        /**创建要保存的文件夹*//*
+				if(fileSavePath.exists()){
+					if(fileSavePath.isDirectory()){
+						File[] files=fileSavePath.listFiles();
+						for(File file:files){
+							file.delete();
+						}
+						fileSavePath.delete();
+					}else{
+						fileSavePath.delete();
+					}
+					fileSavePath.mkdirs();
+				}else{
+					fileSavePath.mkdirs();
+				}
+				String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";//eccel文件名称
+				BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(savePath+File.separator+excel));  //创建excel文件
+				wb.write(fout); //写入excel数据
+				fout.flush();
+		        fout.close();
+		        //设置文件MIME类型
+			    response.setContentType(request.getSession().getServletContext().getMimeType(excel));
+			    //设置Content-Disposition
+				response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(excel,"UTF-8"));
+				BufferedInputStream in=new BufferedInputStream(new FileInputStream(savePath+File.separator+excel));//下载时,把文件读入io流
+				OutputStream out=new BufferedOutputStream(response.getOutputStream());
+				byte buffer[]=new byte[1024];
+				int len=0;
+				while((len=in.read(buffer))>0){
+					out.write(buffer,0,len);//向response写入数据
+				}
+				in.close();
+				out.flush();
+				out.close();
+				*//**删除文件*//*
+				File file=new File(savePath+File.separator+excel);
+				if(file!=null){
+					if(file.exists()){
+						file.delete();//删除文件
+					}
+					file=null;
+				}
+				*//**删除文件夹*//*
+				if(fileSavePath!=null){
+					if(fileSavePath.exists()){
+						fileSavePath.delete();
+					}
+					fileSavePath=null;
+				}
+				log.info("Excel导出成功。");
+			}
 		}catch(Exception e){
 			log.error("exportExcel方法出错："+e.getMessage());
-		}
-		
-		
+			sendFailureMessage(response,"exportExcel方法出错");
+		}*/
 		
 	}
 
