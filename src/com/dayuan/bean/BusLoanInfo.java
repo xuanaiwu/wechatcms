@@ -211,13 +211,13 @@ public class BusLoanInfo extends BaseBean{
 		
 	}
 	public String getUrgentContPhone() {
-		return urgentContPhone;
+		return urgentContPhone!=null?urgentContPhone:"";
 	}
 	public void setUrgentContPhone(String urgentContPhone) {
 		this.urgentContPhone = urgentContPhone;
 	}
 	public String getUrgentContAddress() {
-		return urgentContAddress;
+		return urgentContAddress!=null?urgentContAddress:"";
 	}
 	public void setUrgentContAddress(String urgentContAddress) {
 		this.urgentContAddress = urgentContAddress;

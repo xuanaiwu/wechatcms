@@ -23,33 +23,57 @@
      </form>
      
      
-      <!-- Edit Form 修改busfile -->
-     <div id="edit-win" class="easyui-dialog" title="建档信息" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:549px;height:300px;">  
-     	<form id="editForm" class="ui-form" method="post">  
-     		 <input class="hidden" type="text" name="id">
-     		 <input class="hidden" type="text" name="lUserName">
-     		 <input class="hidden" type="text"  name="lUId">
-			   <div class="fitem">  
-			          <label>姓名:</label>  
-			          <input class="easyui-validatebox" type="text" name="lName"  data-options="required:true,validType:'length[1,100]'">
-			          <label>身份证:</label>  
-			          <input class="easyui-numberbox" type="text" name="lIdCard" data-options="required:true">
-			          <label>电话:</label>  
-			          <input class="easyui-numberbox" type="text" name="lTelPhone" data-options="required:true">
-			          <label>当前状态:</label>  
-			          <select class="easyui-combobox" name="lStatus" style="width:139px" data-options="required:true" >
-		                    <option value="建档">建档</option>
-		                    <option value="授信申报">授信申报</option>
-		                    <option value="放款">放款</option>
-		                    <option value="贷后台帐">贷后台帐</option>
-		            </select> 
-			  </div> 
-     	</form>
-  	 </div> 
+     
   	 
   	 <!-- 用来请求的form -->	
   	 <form id="commonsForm" class="ui-form" method="post">
-  	 </form> 
+  	 </form>
+  	 
+  	 
+  	 
+  	  <!-- 生成文书开始    Form -->
+     <div id="create-words-win" class="easyui-dialog" buttons="#editPwdbtn" title="生成Words" data-options="closed:true,iconCls:'icon-save',modal:true" style="width:400px;height:300px;">
+     	<form id="createWordsForm" class="ui-form" method="post">  
+     		 <input class="hidden" name="id">
+     		 <div class="ui-edit">
+	     	   <div class="ftitle">生成Words</div>  
+		            <div class="fitem">  
+			           <label class="ui-label">word类型:</label><select class="easyui-combobox" name="wordType"  style="width:250px" data-options="required:true,validType:'length[1,100]'" >
+		            			<option value="0">全部</option>
+		                    	<option value="1">1.贷前文件四合一</option>
+		                    	<option value="2">2.小企业电商贷调查表</option>
+		                    	<option value="31">3.融信通开立账户信息表 云贷推送</option>
+		                    	<option value="32">3.融信通开立账户信息表 自流量</option>
+		                    	<option value="4">4.电商贷客户贷后须知</option>
+		                    	<option value="5">5.华夏银行小企业网络贷最高额借款合同</option>
+		                    	<option value="61">6.个人最高额保证合同 1</option>
+		                    	<option value="62">6.个人最高额保证合同 2</option>
+		                    	<option value="71">7.最高额保证合同 1</option>
+		                    	<option value="72">7.最高额保证合同 2</option>
+		                    	<option value="81">8.股东会成员名单及签字样本1</option>
+		                    	<option value="82">8.股东会成员名单及签字样本2</option>
+		                    	<option value="83">8.股东会成员名单及签字样本3 （一个股东）</option>
+		                    	<option value="91">9.股东会决议1</option>
+		                    	<option value="92">9.股东会决议2</option>
+		                    	<option value="93">9.股东会决议3 （一个股东）</option>
+		                    	<option value="101">10.法定代表人证明书及签字样本1</option>
+		                    	<option value="102">10.法定代表人证明书及签字样本2</option>
+		                    	<option value="111">11.预留公章样本1</option>
+		                    	<option value="112">11.预留公章样本2</option>
+		                    	<option value="12">12.华夏银行小企业授信业务实地见证确认书</option>
+		                    	<option value="13">13.华夏银行授信业务办理申请书</option>
+		            		</select>
+		           </div>
+	         </div>
+	         <br/>
+     	</form>
+     	 <div id="editPwdbtn" class="dialog-button">  
+            <a href="javascript:void(0)" class="easyui-linkbutton" id="btn-create-submit">确定</a>  
+            <a href="javascript:void(0)" class="easyui-linkbutton" id="btn-create-close">取消</a>  
+        </div>
+  	 </div> 
+  	 
+  	 <!-- 生成文书 结束   Form --> 
       	 
 </div>
 

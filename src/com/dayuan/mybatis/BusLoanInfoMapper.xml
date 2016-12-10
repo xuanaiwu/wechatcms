@@ -96,7 +96,7 @@ delete from bus_loaninfo where id=#{id}
 
 
 <select id="queryByLId" resultType="com.dayuan.bean.BusLoanInfo" parameterType="Object">
-	select * from bus_loaninfo where lId=#{id}
+	select * from bus_loaninfo where lId=#{id} order by id desc limit 0,1
 </select>
  
  

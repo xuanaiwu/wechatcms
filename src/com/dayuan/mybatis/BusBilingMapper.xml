@@ -17,7 +17,7 @@
 
 
 <select id="queryByBId" resultType="com.dayuan.bean.BusBiling" parameterType="Object">
-	select * from bus_billing where bid=#{bid}
+	select * from bus_billing where bid=#{bid} order by id desc limit 0,1
 </select>
 
 

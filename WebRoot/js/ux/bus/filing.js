@@ -2,7 +2,7 @@ $package('dy.filing');
 dy.filing = function(){
 	var _box = null;
 	var _this = {
-		createWordsAction:'createWordsOnLine.do',
+		createWordsAction:'createWords.do',
 		toEdit:function(parentId){	
 			if(parentId){
 				window.location.href="toEdit.do?id="+parentId;
@@ -14,40 +14,31 @@ dy.filing = function(){
 		commonsForm:function(){
 			return $("#commonsForm");
 		},
-		editPwdForm:function(){
-			return $("#pwdForm");
+		createWordsForm:function(){
+			return $("#createWordsForm");
 		},
-		editPwdWin:function(){
-			return $("#edit-pwd-win");
-		},
-		//生成words,需要返回值
-		createSave:function(){
-			if(_this.editPwdForm().form('validate')){
-				_this.editPwdForm().attr('action',_this.createWordsAction);
-				dy.saveForm(_this.editPwdForm(),function(data){
-					_this.editPwdWin().dialog('close');
-				});
-			 }
+		createWordsWin:function(){
+			return $("#create-words-win");
 		},
 		//生成words,不需要返回值，用于在线下载
 		createWords:function(){
-			if(_this.editPwdForm().form('validate')){
-				_this.editPwdForm().attr('action',_this.createWordsAction);
-				_this.editPwdForm().submit();
-				_this.editPwdWin().dialog('close');
+			if(_this.createWordsForm().form('validate')){
+				_this.createWordsForm().attr('action',_this.createWordsAction);
+				_this.createWordsForm().submit();
+				_this.createWordsWin().dialog('close');
 				alert("生成成功!");
 			}
 		},
 		initForm:function(){
 			//确定，生成文书
-			_this.editPwdWin().find("#btn-pwd-submit").click(function(){
+			_this.createWordsWin().find("#btn-create-submit").click(function(){
 				_this.createWords();
 			});
 			//关闭
-			_this.editPwdWin().find("#btn-pwd-close").click(function(){	
+			_this.createWordsWin().find("#btn-create-close").click(function(){	
 				$.messager.confirm('Confirm','你确定要关闭当前窗口?',function(r){  
 				    if (r){  
-				     	_this.editPwdWin().dialog('close');
+				     	_this.createWordsWin().dialog('close');
 				    }  
 				});
 			});
@@ -70,42 +61,12 @@ dy.filing = function(){
 						}}
 				]],
 				toolbar:[
-					{id:'btnedit',text:'修改',btnType:'edit222'},
-					{id:'word',text:'生成word',btnType:'edit222',iconCls:'icon-edit',handler:function(){
+					{id:'word',text:'生成Word',btnType:'createWords',iconCls:'icon-edit',handler:function(){
 							var selected = _box.utils.getCheckedRows();
 							if ( _box.utils.checkSelectOne(selected)){
-								_this.editPwdForm().resetForm();
-								_this.editPwdForm().find("input[name='id']").val(selected[0].id);
-								//_this.editPwdForm().find("input[name='email']").val(selected[0].email);
-								_this.editPwdWin().window('open'); 
-							}
-						}},
-						{id:'excel',text:'导出excel',btnType:'edit222',iconCls:'icon-edit',handler:function(){
-							var selected = _box.utils.getCheckedRows();
-							if ( _box.utils.checkSelectOne(selected)){
-								
-								/**1
-								 * var iframe = document.createElement("iframe");
-								iframe.style.display = "none";
-								iframe.id = "iframe";
-								document.body.appendChild(iframe);
-								document.getElementById("iframe").src = "exportExcel.do";
-								*/
-								
-								//2
-								_this.editPwdForm().find("input[name='id']").val(selected[0].id);
-								_this.editPwdForm().attr('action','exportExcel.do');
-								_this.editPwdForm().submit();
-								alert("导出成功！");
-								
-								
-								//3,下载时不能用异步
-								//$.post("exportExcel.do",{id:selected[0].id},function(data,status){
-									//alert("Data: " + data + "\nStatus: " + status);
-									//alert("导出成功！");
-								//});
-								
-								
+								_this.createWordsForm().resetForm();
+								_this.createWordsForm().find("input[name='id']").val(selected[0].id);
+								_this.createWordsWin().window('open'); 
 							}
 						}},
 						{id:'excel',text:'导出Excel',btnType:'exportExcel',iconCls:'icon-edit',handler:function(){
@@ -113,10 +74,7 @@ dy.filing = function(){
 								//用表单form的方式提交
 								_this.commonsForm().attr('action','exportExcel.do');
 								_this.commonsForm().submit();
-								
-								
-								
-								alert("123");
+								alert("导出成功");
 
 						}},
 					{id:'btndelete',text:'删除',btnType:'remove'}

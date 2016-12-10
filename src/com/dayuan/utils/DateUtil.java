@@ -198,7 +198,7 @@ public class DateUtil
 	}
 
 	/**
-	 * Descrption:取得当前日期时间,格式为:YYYYMMDDHHMISS
+	 * Descrption:取得当前日期时间,格式为:YYYYMMDDHHMMSS
 	 * @return String
 	 * @throws java.lang.Exception
 	 */

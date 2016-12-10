@@ -19,7 +19,7 @@ licenseNumber=#{licenseNumber},totalCarValue=#{totalCarValue},otherAssets=#{othe
 
 <!-- 根据bid查询 -->
 <select id="getBusLoanInfoLegal"  resultType="com.dayuan.bean.BusLoanInfoLegal" parameterType="Object">
-	select * from bus_loaninfo_legal where bid = #{bid} limit 0,1
+	select * from bus_loaninfo_legal where bid = #{bid} order by id desc limit 0,1
 </select>
 
  <delete id="deleteByBid" parameterType="Object">

@@ -39,19 +39,19 @@ public class BusFiles extends BaseBean{
 		this.id = id;
 	}
 	public String getlName() {
-		return lName;
+		return lName!=null?lName:"";
 	}
 	public void setlName(String lName) {
 		this.lName = lName;
 	}
 	public String getlIdCard() {
-		return lIdCard;
+		return lIdCard!=null?lIdCard:"";
 	}
 	public void setlIdCard(String lIdCard) {
 		this.lIdCard = lIdCard;
 	}
 	public String getlTelPhone() {
-		return lTelPhone;
+		return lTelPhone!=null?lTelPhone:"";
 	}
 	public void setlTelPhone(String lTelPhone) {
 		this.lTelPhone = lTelPhone;

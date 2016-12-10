@@ -7,8 +7,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,9 +54,12 @@ import com.dayuan.service.BusLoanInfoGuaranterService;
 import com.dayuan.service.BusLoanInfoLegalService;
 import com.dayuan.service.BusLoanInfoService;
 import com.dayuan.service.BusLoanInfoShopService;
+import com.dayuan.utils.CreateWords;
 import com.dayuan.utils.DateUtil;
 import com.dayuan.utils.HtmlUtil;
 import com.dayuan.utils.SessionUtils;
+import com.dayuan.utils.StringUtil;
+import com.dayuan.utils.ZipUtil;
 
 @Controller
 @RequestMapping("/BusFile") 
@@ -479,8 +482,10 @@ public class BusFileAction extends BaseAction{
 	public void exportExcel(HttpServletRequest request,HttpServletResponse response){
 		SysUser user = SessionUtils.getUser(request);
 		BusFileModel busFileModel=new BusFileModel();
-		busFileModel.setlUserName(user.getNickName());
-		busFileModel.setlUId(user.getId().toString());
+		if(user.getSuperAdmin()!=1){
+			busFileModel.setlUserName(user.getNickName());
+			busFileModel.setlUId(user.getId().toString());
+		}
 		busFileModel.setRows(200);
 		try{
 			List<BusFiles> list=busFileService.queryByList(busFileModel);
@@ -549,13 +554,13 @@ public class BusFileAction extends BaseAction{
 		        cellLoan.setCellValue("关系");//busLoanInfo.relationship  
 		        cellLoan.setCellStyle(style);
 		        cellLoan=rowLoan.createCell((short)4);
-		        cellLoan.setCellValue("电话");  
+		        cellLoan.setCellValue("电话");//busLoanInfo.urgentContPhone  
 		        cellLoan.setCellStyle(style);
 		        cellLoan=rowLoan.createCell((short)5);
-		        cellLoan.setCellValue("地址");  
+		        cellLoan.setCellValue("地址");//busLoanInfo.urgentContAddress  
 		        cellLoan.setCellStyle(style);
 		        cellLoan=rowLoan.createCell((short)6);
-		        cellLoan.setCellValue("贷款卡号");  
+		        cellLoan.setCellValue("贷款卡号"); //biling.loanCardNumber 
 		        cellLoan.setCellStyle(style);
 		        cellLoan=rowLoan.createCell((short)7);
 		        cellLoan.setCellValue("店铺1");  
@@ -607,6 +612,7 @@ public class BusFileAction extends BaseAction{
 		        	BusLending busLending=busLendingService.queryByBId(lId);
 		        	BusBiling busBiling=busBilingService.queryByBId(lId);
 		        	BusLoanInfoLegal legal=busLoanInfoLegalService.getBusLoanInfoLegal(lId);
+		        	List<BusLoanInfoShop> shopList=busLoanInfoShopService.queryListByBId(lId);
 		        	
 		        	
 		        	/**row对应sheet1*/
@@ -629,9 +635,18 @@ public class BusFileAction extends BaseAction{
 		        		rowLoan.createCell((short)1).setCellValue(busLoanInfo.getApplicationName());
 		        		rowLoan.createCell((short)2).setCellValue(busLoanInfo.getUrgentCont());
 		        		rowLoan.createCell((short)3).setCellValue(busLoanInfo.getRelationship());
+		        		rowLoan.createCell((short)4).setCellValue(busLoanInfo.getUrgentContPhone());
+		        		rowLoan.createCell((short)5).setCellValue(busLoanInfo.getUrgentContAddress());
+		        		
 		        	}else{
 		        		row.createCell((short) 2).setCellValue("");
 		        		row.createCell((short) 5).setCellValue("");
+		        		
+		        		rowLoan.createCell((short)1).setCellValue("");
+		        		rowLoan.createCell((short)2).setCellValue("");
+		        		rowLoan.createCell((short)3).setCellValue("");
+		        		rowLoan.createCell((short)4).setCellValue("");
+		        		rowLoan.createCell((short)5).setCellValue("");
 		        	}
 		        	if(busLending!=null){
 		        		row.createCell((short) 6).setCellValue(busLending.getLoanAmount());
@@ -643,9 +658,27 @@ public class BusFileAction extends BaseAction{
 		        	if(busBiling!=null){
 		        		row.createCell((short) 8).setCellValue(busBiling.getCreditEndDate());
 		        		row.createCell((short) 9).setCellValue(busBiling.getLoanAccount());
+		        		
+		        		rowLoan.createCell((short) 6).setCellValue(busBiling.getLoanCardNumber());//贷款卡号
+		        		rowLoan.createCell((short) 15).setCellValue(DateUtil.getFormattedDateUtil((Date)busBiling.getCheckDate(), "yyyy-MM-dd HH:mm:ss"));//检查日期
+		        		rowLoan.createCell((short)16).setCellValue(busBiling.getCreditorIfNormal());//借款人征信是否正常
+		        		rowLoan.createCell((short)17).setCellValue(busBiling.getGuarantorIfNormal());//保证人征信是否正常
+		        		rowLoan.createCell((short)18).setCellValue(busBiling.getCloudLoanIfWarning());//云贷是否有预警信息
+		        		rowLoan.createCell((short)19).setCellValue(busBiling.getShopOperation());//店铺经营情况
+		        		rowLoan.createCell((short)20).setCellValue(busBiling.getOtherNeedToExplained());//其他需要说明的地方
 		        	}else{
 		        		row.createCell((short) 8).setCellValue("");
 		        		row.createCell((short) 9).setCellValue("");
+		        		
+		        		
+		        		rowLoan.createCell((short) 6).setCellValue("");//贷款卡号
+		        		rowLoan.createCell((short) 15).setCellValue("");//检查日期
+		        		rowLoan.createCell((short)16).setCellValue("");//借款人征信是否正常
+		        		rowLoan.createCell((short)17).setCellValue("");//保证人征信是否正常
+		        		rowLoan.createCell((short)18).setCellValue("");//云贷是否有预警信息
+		        		rowLoan.createCell((short)19).setCellValue("");//店铺经营情况
+		        		rowLoan.createCell((short)20).setCellValue("");//其他需要说明的地方
+		        		
 		        	}
 		        	if(legal!=null){
 		        		row.createCell((short) 10).setCellValue(legal.getDeliveryAddress());
@@ -653,8 +686,48 @@ public class BusFileAction extends BaseAction{
 		        		row.createCell((short) 10).setCellValue("");
 		        	}
 		        	
+		        	
+		        	if(shopList!=null&&shopList.size()>0){
+		        		if(shopList.size()==1){
+		        			BusLoanInfoShop shop=shopList.get(0);
+		        			rowLoan.createCell((short) 7).setCellValue(shop.getShopName());//店铺
+		        			rowLoan.createCell((short) 8).setCellValue(shop.getPlatformName());//平台
+		        			rowLoan.createCell((short) 9).setCellValue(shop.getSubAccount());//子帐号
+		        			rowLoan.createCell((short) 10).setCellValue(shop.getSbuPassword());//密码
+		        			rowLoan.createCell((short) 11).setCellValue("");//店铺
+		        			rowLoan.createCell((short) 12).setCellValue("");//平台
+		        			rowLoan.createCell((short) 13).setCellValue("");//子帐号
+		        			rowLoan.createCell((short) 14).setCellValue("");//密码
+		        		}else if(shopList.size()==2){
+		        			BusLoanInfoShop shop=shopList.get(0);
+		        			rowLoan.createCell((short) 7).setCellValue(shop.getShopName());//店铺
+		        			rowLoan.createCell((short) 8).setCellValue(shop.getPlatformName());//平台
+		        			rowLoan.createCell((short) 9).setCellValue(shop.getSubAccount());//子帐号
+		        			rowLoan.createCell((short) 10).setCellValue(shop.getSbuPassword());//密码
+		        			BusLoanInfoShop shop1=shopList.get(1);
+		        			rowLoan.createCell((short) 11).setCellValue(shop1.getShopName());//店铺
+		        			rowLoan.createCell((short) 12).setCellValue(shop1.getPlatformName());//平台
+		        			rowLoan.createCell((short) 13).setCellValue(shop1.getSubAccount());//子帐号
+		        			rowLoan.createCell((short) 14).setCellValue(shop1.getSbuPassword());//密码
+		        		}
+		        		
+		        	}else{
+		        		rowLoan.createCell((short) 7).setCellValue("");
+		        		rowLoan.createCell((short) 8).setCellValue("");
+		        		rowLoan.createCell((short) 9).setCellValue("");
+		        		rowLoan.createCell((short) 10).setCellValue("");
+		        		rowLoan.createCell((short) 11).setCellValue("");
+		        		rowLoan.createCell((short) 12).setCellValue("");
+		        		rowLoan.createCell((short) 13).setCellValue("");
+		        		rowLoan.createCell((short) 14).setCellValue("");
+		        	}
+		        	
 		        }
 		        String savePath=request.getSession().getServletContext().getRealPath(File.separator+"WEB-INF"+File.separator+"downloads"+File.separator+"excelfiles");//文件保存位置,项目部署绝对路径（物理路径）
+		        File savePathFile=new File(savePath);
+		        if(!savePathFile.exists()){
+		        	savePathFile.mkdirs();
+		        }
 		        savePath=savePath+File.separator+UUID.randomUUID();//文件最终保存路径
 		        File fileSavePath=new File(savePath);
 		        /**创建要保存的文件夹*/
@@ -706,12 +779,143 @@ public class BusFileAction extends BaseAction{
 					}
 					fileSavePath=null;
 				}
+				if(savePathFile!=null){
+					savePathFile=null;
+				}
 				log.info("Excel导出成功。");
 			}
 		}catch(Exception e){
-			log.error("exportExcel方法出错："+e.getMessage());
+			//e.printStackTrace();
+			log.error("exportExcel方法出错：");
 			sendFailureMessage(response,"导出数据出错了！");
 		}
+	}
+	
+	
+	/**
+	 * 
+	 * 生成文档
+	 * @param id
+	 * @param wordType
+	 * @author xuanaw
+	 * */
+	@RequestMapping("/createWords")
+	public void createWords(Integer id,String wordType,HttpServletRequest request,HttpServletResponse response){
+		if(id==null){
+			log.info("id为null！");
+			sendFailureMessage(response,"请不要非法操作！");
+			return;
+		}
+		if(wordType==null||wordType.equals("")){
+			log.info("wordType为空！");
+			sendFailureMessage(response,"请不要非法操作！");
+			return;
+		}
+		boolean flag=false;
+		String savePath="";
+		BusFiles busFiles=null;
+		try{
+			busFiles=busFileService.queryById(id);
+			if(busFiles==null){
+				log.error("没有找到busFiles对应记录！");
+				sendFailureMessage(response,"没有找到对应记录！");
+				return;
+			}
+			Map<String,Object> dataMap=new HashMap<String,Object>();
+			String templatePath=File.separator+"com"+File.separator+"dayuan"+File.separator+"templatev1"+File.separator;//模板位置
+			savePath=request.getSession().getServletContext().getRealPath(File.separator+"WEB-INF"+File.separator+"downloads");//文件保存位置,项目部署绝对路径（物理路径）
+			savePath=savePath+File.separator+UUID.randomUUID();//最后保存路径
+			/**创建文件夹 */
+			File fileSavePath=new File(savePath);
+			if(fileSavePath.exists()){
+				if(fileSavePath.isDirectory()){
+					File[] files=fileSavePath.listFiles();
+					for(File file:files){
+						file.delete();
+					}
+					fileSavePath.delete();
+				}
+				else{
+					fileSavePath.delete();
+				}
+				fileSavePath.mkdirs();
+			}else{
+				fileSavePath.mkdirs();
+			}
+			CreateWords createWords=new CreateWords();//封装好的word生成类
+			String wordName="";//保存文件名
+			if(busFiles.getlName()!=null&&!busFiles.getlName().equals("")){
+				wordName+=busFiles.getlName();
+			}
+			if(wordType.equals("1")){
+				dataMap.put("lName1", StringUtil.getNotNullStr(busFiles.getlName()));
+				dataMap.put("lIdCard1", StringUtil.getNotNullStr(busFiles.getlIdCard()));
+				dataMap.put("lTelPhone1", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
+				dataMap.put("lName2", StringUtil.getNotNullStr(busFiles.getlName()));
+				dataMap.put("lTelPhone2", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
+				dataMap.put("lName3", StringUtil.getNotNullStr(busFiles.getlName()));
+				dataMap.put("lIdCard2", StringUtil.getNotNullStr(busFiles.getlIdCard()));
+				dataMap.put("lTelPhone3", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
+				wordName+="_贷前文件四合一"+DateUtil.getNowLongTime()+".doc";
+				flag=createWords.create(dataMap,templatePath,"daiqianwenjian1.ftl",savePath+File.separator,wordName);
+			}
+			
+		}catch(IOException e){
+			log.error("文件操作出错:"+e.getMessage());
+		}catch(Exception e){
+			log.error("程序出错：:"+e.getMessage());
+		}
+		if(flag){
+			try{
+				String saveZipPath=request.getSession().getServletContext().getRealPath(File.separator+"WEB-INF"+File.separator+"downloads"+File.separator+"ziptemp");//zip文件保存位置,项目部署绝对路径（物理路径）
+				File saveZipPathFile=new File(saveZipPath);
+				if(!saveZipPathFile.exists()){
+					saveZipPathFile.mkdirs();
+				}
+				String zipName="word";
+				if(busFiles.getlName()!=null&&!busFiles.getlName().equals("")){
+					zipName=busFiles.getlName();
+				}
+				String zipSaveName=zipName+DateUtil.getNowLongTime()+".zip";//压缩文件名
+				String sourceFile=ZipUtil.fileToZip(savePath,saveZipPath,zipSaveName);//封装好的压缩方法，返回压缩后的zip绝对路径+文件名
+				if(sourceFile!=null){
+					File file=new File(sourceFile);
+					if(!file.exists()){
+						log.error("创建文件程序出错了。");
+						return;
+					}
+					//设置文件MIME类型
+					response.setContentType(request.getSession().getServletContext().getMimeType(zipSaveName));
+					//设置Content-Disposition
+					response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(zipSaveName,"UTF-8"));
+					FileInputStream in=new FileInputStream(sourceFile);
+					OutputStream out=response.getOutputStream();
+					byte buffer[]=new byte[1024];
+					int len=0;
+					while((len=in.read(buffer))>0){
+						out.write(buffer,0,len);
+					}
+					in.close();
+					out.close();
+					if(file!=null){
+						file.delete();//删除zip文件
+						file=null;
+					}
+					if(saveZipPathFile!=null){
+						saveZipPathFile=null;
+					}
+					log.info("压缩文件下载完成！");
+				}
+			}catch(IOException e){
+				log.error("文件下载IO出错了："+e.getMessage());
+			}catch(Exception e){
+				log.error("文件下载出错了："+e.getMessage());
+			}
+		}else{
+			log.error("word生成失败,请联系管理员！");
+		}
+		
+		
 	}
 
 }

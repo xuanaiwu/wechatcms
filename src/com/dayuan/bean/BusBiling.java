@@ -41,43 +41,43 @@ public class BusBiling {
 		this.bid = bid;
 	}
 	public Date getCheckDate() {
-		return checkDate;
+		return checkDate!=null?checkDate:new Date();
 	}
 	public void setCheckDate(Date checkDate) {
 		this.checkDate = checkDate;
 	}
 	public String getCreditorIfNormal() {
-		return creditorIfNormal;
+		return creditorIfNormal!=null?creditorIfNormal:"";
 	}
 	public void setCreditorIfNormal(String creditorIfNormal) {
 		this.creditorIfNormal = creditorIfNormal;
 	}
 	public String getGuarantorIfNormal() {
-		return guarantorIfNormal;
+		return guarantorIfNormal!=null?guarantorIfNormal:"";
 	}
 	public void setGuarantorIfNormal(String guarantorIfNormal) {
 		this.guarantorIfNormal = guarantorIfNormal;
 	}
 	public String getCloudLoanIfWarning() {
-		return cloudLoanIfWarning;
+		return cloudLoanIfWarning!=null?cloudLoanIfWarning:"";
 	}
 	public void setCloudLoanIfWarning(String cloudLoanIfWarning) {
 		this.cloudLoanIfWarning = cloudLoanIfWarning;
 	}
 	public String getShopOperation() {
-		return shopOperation;
+		return shopOperation!=null?shopOperation:"";
 	}
 	public void setShopOperation(String shopOperation) {
 		this.shopOperation = shopOperation;
 	}
 	public String getOtherNeedToExplained() {
-		return otherNeedToExplained;
+		return otherNeedToExplained!=null?otherNeedToExplained:"";
 	}
 	public void setOtherNeedToExplained(String otherNeedToExplained) {
 		this.otherNeedToExplained = otherNeedToExplained;
 	}
 	public String getLoanCardNumber() {
-		return loanCardNumber;
+		return loanCardNumber!=null?loanCardNumber:"";
 	}
 	public void setLoanCardNumber(String loanCardNumber) {
 		this.loanCardNumber = loanCardNumber;

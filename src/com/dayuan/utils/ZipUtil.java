@@ -87,6 +87,8 @@ public class ZipUtil {
 							file.delete();
 						}
 						filePath.delete();
+					}else{
+						filePath.delete();
 					}
 					
 				} catch (IOException e) {
