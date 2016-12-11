@@ -45,7 +45,7 @@ public class BusLending {
 		this.bid = bid;
 	}
 	public String getGuaranteeCompany1() {
-		return guaranteeCompany1;
+		return guaranteeCompany1!=null?guaranteeCompany1:"";
 	}
 	public void setGuaranteeCompany1(String guaranteeCompany1) {
 		this.guaranteeCompany1 = guaranteeCompany1;
@@ -117,7 +117,7 @@ public class BusLending {
 		this.openingQuota = openingQuota;
 	}
 	public String getCreditTerm() {
-		return creditTerm;
+		return creditTerm!=null?creditTerm:"";
 	}
 	public void setCreditTerm(String creditTerm) {
 		this.creditTerm = creditTerm;

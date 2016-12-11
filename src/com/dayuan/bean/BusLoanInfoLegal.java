@@ -56,7 +56,7 @@ public class BusLoanInfoLegal {
 		this.legalPerson=legalPerson;
 	}
 	public String getIdCard(){
-		return this.idCard;
+		return this.idCard!=null?idCard:"";
 	}
 	public void setIdCard(String idCard){
 		this.idCard=idCard;
@@ -79,13 +79,13 @@ public class BusLoanInfoLegal {
 		
 	}
 	public String getIdCardPeriod(){
-		return this.idCardPeriod;
+		return this.idCardPeriod!=null?idCardPeriod:"";
 	}
 	public void setIdCardPeriod(String idCardPeriod){
 		this.idCardPeriod=idCardPeriod;
 	}
 	public String getIdCardAddress(){
-		return this.idCardAddress;
+		return this.idCardAddress!=null?idCardAddress:"";
 	}
 	public void setIdCardAddress(String idCardAddress){
 		this.idCardAddress=idCardAddress;

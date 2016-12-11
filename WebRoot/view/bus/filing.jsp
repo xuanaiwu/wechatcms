@@ -38,12 +38,11 @@
      		 <div class="ui-edit">
 	     	   <div class="ftitle">生成Words</div>  
 		            <div class="fitem">  
-			           <label class="ui-label">word类型:</label><select class="easyui-combobox" name="wordType"  style="width:250px" data-options="required:true,validType:'length[1,100]'" >
+			           <label class="ui-label">word类型:</label><select class="easyui-combobox" name="wordType"  style="width:250px"  >
 		            			<option value="0">全部</option>
 		                    	<option value="1">1.贷前文件四合一</option>
 		                    	<option value="2">2.小企业电商贷调查表</option>
-		                    	<option value="31">3.融信通开立账户信息表 云贷推送</option>
-		                    	<option value="32">3.融信通开立账户信息表 自流量</option>
+		                    	<option value="3">3.融信通开立账户信息表</option>
 		                    	<option value="4">4.电商贷客户贷后须知</option>
 		                    	<option value="5">5.华夏银行小企业网络贷最高额借款合同</option>
 		                    	<option value="61">6.个人最高额保证合同 1</option>

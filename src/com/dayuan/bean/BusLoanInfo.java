@@ -181,7 +181,7 @@ public class BusLoanInfo extends BaseBean{
 		
 	}
 	public String getApplicationAmount() {
-		return applicationAmount;
+		return applicationAmount!=null?applicationAmount:"";
 	}
 	public void setApplicationAmount(String applicationAmount) {
 		this.applicationAmount = applicationAmount;

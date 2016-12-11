@@ -26,7 +26,6 @@ dy.filing = function(){
 				_this.createWordsForm().attr('action',_this.createWordsAction);
 				_this.createWordsForm().submit();
 				_this.createWordsWin().dialog('close');
-				alert("生成成功!");
 			}
 		},
 		initForm:function(){

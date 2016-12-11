@@ -479,7 +479,8 @@ public class BusFileAction extends BaseAction{
 	
 	/**贷后台帐，导出Excel*/
 	@RequestMapping("/exportExcel")
-	public void exportExcel(HttpServletRequest request,HttpServletResponse response){
+	public ModelAndView exportExcel(HttpServletRequest request,HttpServletResponse response){
+		Map<String,Object> context=getRootMap();
 		SysUser user = SessionUtils.getUser(request);
 		BusFileModel busFileModel=new BusFileModel();
 		if(user.getSuperAdmin()!=1){
@@ -745,7 +746,7 @@ public class BusFileAction extends BaseAction{
 				}else{
 					fileSavePath.mkdirs();
 				}
-				String excel="生成贷后台帐"+DateUtil.getNowPlusTimeMill()+".xls";//eccel文件名称
+				String excel="生成贷后台帐"+DateUtil.getNowLongTime()+".xls";//eccel文件名称
 				BufferedOutputStream fout = new BufferedOutputStream(new FileOutputStream(savePath+File.separator+excel));  //创建excel文件
 				wb.write(fout); //写入excel数据
 				fout.flush();
@@ -786,9 +787,11 @@ public class BusFileAction extends BaseAction{
 			}
 		}catch(Exception e){
 			//e.printStackTrace();
-			log.error("exportExcel方法出错：");
-			sendFailureMessage(response,"导出数据出错了！");
+			log.error("exportExcel方法出错："+e.getMessage());
+			context.put("message", "系统出错了，请联系技术人员！");
+			return forword("message/message",context);
 		}
+		return null;
 	}
 	
 	
@@ -800,16 +803,17 @@ public class BusFileAction extends BaseAction{
 	 * @author xuanaw
 	 * */
 	@RequestMapping("/createWords")
-	public void createWords(Integer id,String wordType,HttpServletRequest request,HttpServletResponse response){
+	public ModelAndView createWords(Integer id,String wordType,HttpServletRequest request,HttpServletResponse response){
+		Map<String,Object> context=getRootMap();
 		if(id==null){
 			log.info("id为null！");
-			sendFailureMessage(response,"请不要非法操作！");
-			return;
+			context.put("message", "请不要非法操作！");
+			return forword("message/message",context);
 		}
 		if(wordType==null||wordType.equals("")){
 			log.info("wordType为空！");
-			sendFailureMessage(response,"请不要非法操作！");
-			return;
+			context.put("message", "请不要非法操作！");
+			return forword("message/message",context);
 		}
 		boolean flag=false;
 		String savePath="";
@@ -818,9 +822,15 @@ public class BusFileAction extends BaseAction{
 			busFiles=busFileService.queryById(id);
 			if(busFiles==null){
 				log.error("没有找到busFiles对应记录！");
-				sendFailureMessage(response,"没有找到对应记录！");
-				return;
+				context.put("message", "没有找到对应记录！");
+				return forword("message/message",context);
 			}
+			Integer lId=busFiles.getId();
+			BusLoanInfo busLoanInfo=busLoanInfoService.queryByLId(lId);
+			BusLoanInfoLegal legal=busLoanInfoLegalService.getBusLoanInfoLegal(lId);
+			BusLending lending=busLendingService.queryByBId(lId);
+			List<BusLoanInfoShop> shopList=busLoanInfoShopService.queryListByBId(lId);
+			List<BusLoanInfoGuaranter> guaranterLsit=busLoanInfoGuaranterService.queryListByBId(lId);
 			Map<String,Object> dataMap=new HashMap<String,Object>();
 			String templatePath=File.separator+"com"+File.separator+"dayuan"+File.separator+"templatev1"+File.separator;//模板位置
 			savePath=request.getSession().getServletContext().getRealPath(File.separator+"WEB-INF"+File.separator+"downloads");//文件保存位置,项目部署绝对路径（物理路径）
@@ -858,12 +868,104 @@ public class BusFileAction extends BaseAction{
 				dataMap.put("lTelPhone3", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
 				wordName+="_贷前文件四合一"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"daiqianwenjian1.ftl",savePath+File.separator,wordName);
+			}else if(wordType.equals("3")){
+				if(busLoanInfo!=null){
+					dataMap.put("applicationName1",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					dataMap.put("applicationName2", StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					dataMap.put("applicationAmount",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
+				}else{
+					dataMap.put("applicationName1","");
+					dataMap.put("applicationName2","");
+					dataMap.put("applicationAmount","");
+				}
+				if(legal!=null){
+					dataMap.put("idCard",StringUtil.getNotNullStr(legal.getIdCard()));
+					dataMap.put("idCardPeriod", StringUtil.getNotNullStr(legal.getIdCardPeriod()));
+					dataMap.put("idCardAddress",StringUtil.getNotNullStr(legal.getIdCardAddress()));
+					dataMap.put("legalPhone",StringUtil.getNotNullStr(legal.getLegalPhone()));
+				}else{
+					dataMap.put("idCard","");
+					dataMap.put("idCardPeriod","");
+					dataMap.put("idCardAddress","");
+					dataMap.put("legalPhone","");
+				}
+				if(busLoanInfo.getChannel().equals("自流量")){
+					wordName+="_融信通开立账户信息表_自流量"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"ziliuliang3.ftl",savePath+File.separator,wordName);
+				}else if(busLoanInfo.getChannel().equals("云贷推送")){
+					wordName+="_融信通开立账户信息表_云贷推送"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"yundaituisong3.ftl",savePath+File.separator,wordName);
+				}
+			}else if(wordType.equals("4")){
+				if(busLoanInfo!=null){
+					dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+				}else{
+					dataMap.put("applicationName","");
+				}
+				wordName+="_电商贷客户贷后须知"+DateUtil.getNowLongTime()+".doc";
+				flag=createWords.create(dataMap,templatePath,"dianshangdaihouxuzhi4.ftl",savePath+File.separator,wordName);
+			}else if(wordType.equals("5")){
+				if(busLoanInfo!=null){
+					dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+				}else{
+					dataMap.put("applicationName","");
+				}
+				if(legal!=null){
+					dataMap.put("houseAddress",StringUtil.getNotNullStr(legal.getHouseAddress()));
+					dataMap.put("legalPhone",StringUtil.getNotNullStr(legal.getLegalPhone()));
+					dataMap.put("idCard",StringUtil.getNotNullStr(legal.getIdCard()));
+				}else{
+					dataMap.put("houseAddress","");
+					dataMap.put("legalPhone","");
+					dataMap.put("idCard","");
+				}
+				if(lending!=null){
+					dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+					dataMap.put("creditTerm",StringUtil.getNotNullStr(lending.getCreditTerm()));
+					dataMap.put("startTermYear",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "yyyy"));
+					dataMap.put("startTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "MM"));
+					dataMap.put("startTermDay",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "dd"));
+					dataMap.put("endTermYear",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "yyyy"));
+					dataMap.put("endTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "MM"));
+					dataMap.put("endTermDay",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "dd"));
+					dataMap.put("guaranteeCompany1",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+				}else{
+					dataMap.put("loanAmount","");
+					dataMap.put("creditTerm","");
+					dataMap.put("startTermYear","");
+					dataMap.put("startTermMonth","");
+					dataMap.put("startTermDay","");
+					dataMap.put("endTermYear","");
+					dataMap.put("endTermMonth","");
+					dataMap.put("endTermDay","");
+					dataMap.put("guaranteeCompany1","");
+				}
+				if(guaranterLsit!=null&&guaranterLsit.size()>0){
+					BusLoanInfoGuaranter guaranter=guaranterLsit.get(0);
+					dataMap.put("guaranterName",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+				}else{
+					dataMap.put("guaranterName","");
+				}
+				wordName+="_华夏银行小企业网络贷最高额借款合同"+DateUtil.getNowLongTime()+".doc";
+				flag=createWords.create(dataMap,templatePath,"xiaoqiyejiekuanhetong5.ftl",savePath+File.separator,wordName);
+			}else if(wordType.equals("61")){
+				if(guaranterLsit!=null&&guaranterLsit.size()>0){
+					BusLoanInfoGuaranter guaranter=guaranterLsit.get(0);
+					dataMap.put("guaranterName",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+					dataMap.put("guaranterCard",StringUtil.getNotNullStr(guaranter.getGuaranterCard())); ///
+				}else{
+					dataMap.put("guaranterName","");
+				}
+				
 			}
-			
 		}catch(IOException e){
 			log.error("文件操作出错:"+e.getMessage());
+			context.put("message", "系统出错了，请联系技术人员！");
+			return forword("message/message",context);
 		}catch(Exception e){
 			log.error("程序出错：:"+e.getMessage());
+			context.put("message", "系统出错了，请联系技术人员！");
+			return forword("message/message",context);
 		}
 		if(flag){
 			try{
@@ -882,7 +984,8 @@ public class BusFileAction extends BaseAction{
 					File file=new File(sourceFile);
 					if(!file.exists()){
 						log.error("创建文件程序出错了。");
-						return;
+						context.put("message", "系统出错了，请联系技术人员！");
+						return forword("message/message",context);
 					}
 					//设置文件MIME类型
 					response.setContentType(request.getSession().getServletContext().getMimeType(zipSaveName));
@@ -908,14 +1011,19 @@ public class BusFileAction extends BaseAction{
 				}
 			}catch(IOException e){
 				log.error("文件下载IO出错了："+e.getMessage());
+				context.put("message", "系统出错了，请联系技术人员！");
+				return forword("message/message",context);
 			}catch(Exception e){
 				log.error("文件下载出错了："+e.getMessage());
+				context.put("message", "系统出错了，请联系技术人员！");
+				return forword("message/message",context);
 			}
 		}else{
-			log.error("word生成失败,请联系管理员！");
+			log.error("word生成失败。");
+			context.put("message", "系统出错了，请联系技术人员！");
+			return forword("message/message",context);
 		}
-		
-		
+		return null;
 	}
 
 }
