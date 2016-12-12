@@ -38,7 +38,7 @@
      		 <div class="ui-edit">
 	     	   <div class="ftitle">生成Words</div>  
 		            <div class="fitem">  
-			           <label class="ui-label">word类型:</label><select class="easyui-combobox" name="wordType"  style="width:250px"  >
+			           <label class="ui-label">word类型:</label><select class="easyui-combobox" name="wordType"  style="width:250px" data-options="required:true" >
 		            			<option value="0">全部</option>
 		                    	<option value="1">1.贷前文件四合一</option>
 		                    	<option value="2">2.小企业电商贷调查表</option>
@@ -51,10 +51,8 @@
 		                    	<option value="72">7.最高额保证合同 2</option>
 		                    	<option value="81">8.股东会成员名单及签字样本1</option>
 		                    	<option value="82">8.股东会成员名单及签字样本2</option>
-		                    	<option value="83">8.股东会成员名单及签字样本3 （一个股东）</option>
 		                    	<option value="91">9.股东会决议1</option>
 		                    	<option value="92">9.股东会决议2</option>
-		                    	<option value="93">9.股东会决议3 （一个股东）</option>
 		                    	<option value="101">10.法定代表人证明书及签字样本1</option>
 		                    	<option value="102">10.法定代表人证明书及签字样本2</option>
 		                    	<option value="111">11.预留公章样本1</option>

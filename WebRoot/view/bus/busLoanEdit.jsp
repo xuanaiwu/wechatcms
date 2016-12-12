@@ -27,7 +27,7 @@
 			               <label style="width:120px">电话:</label>  
 			               <input class="easyui-numberbox" type="text" name="lTelPhone" value="${busFiles.lIdCard}"  data-options="required:true" style="width:139px">
 			               <label style="width:120px">当前状态:</label>  
-			               <select class="easyui-combobox" name="lStatus" style="width:139px" data-options="required:true" style="width:139px">
+			               <select  name="lStatus" style="width:139px" data-options="required:true" style="width:139px">
 		                    	<option <c:if test='${busFiles.lStatus=="建档"}'>selected="selected"</c:if> value="建档">建档</option>
 		                    	<option <c:if test='${busFiles.lStatus=="授信申报"}'>selected="selected"</c:if> value="授信申报">授信申报</option>
 		                    	<option <c:if test='${busFiles.lStatus=="放款"}'>selected="selected"</c:if> value="放款">放款</option>
@@ -52,7 +52,7 @@
 			               <label style="width:120px">借款申请人名称:</label>  
 			               <input id="applicationName" type="text" name="applicationName" value="${busLoanInfo.applicationName}" class="easyui-validatebox"  style="width:139px"></input>
 			               <label style="width:120px">申请人性别:</label>
-			               <select class="easyui-combobox" name="applicationGender"  style="width:139px"  >
+			               <select  name="applicationGender"  style="width:139px"  >
 		                    	<option <c:if test='${busLoanInfo.applicationGender=="男"}'>selected="selected"</c:if> value="男">男</option>
 		                    	<option <c:if test='${busLoanInfo.applicationGender=="女"}'>selected="selected"</c:if> value="女">女</option>
 		            	   </select>  
@@ -69,7 +69,7 @@
 			               <input id="birthday" type="text" name="applicationAmount" value="${busLoanInfo.applicationAmount}" class="easyui-validatebox"  style="width:139px"></input>
 			               <label style="width:120px">申请期限（年）:</label>  
 			               <input id="birthday" type="text" name="applicationTerm" value="${busLoanInfo.applicationTerm}" class="easyui-validatebox"  style="width:139px"></input> 
-							<label class="ui-label" style="width:120px">申请贷款类型：</label><select class="easyui-combobox" name="loanType" style="width:139px">
+							<label class="ui-label" style="width:120px">申请贷款类型：</label><select  name="loanType" style="width:139px">
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.applicationGender=="个体工商户"}'>selected="selected"</c:if> value="个体工商户">个体工商户</option>
 		                    	<option <c:if test='${busLoanInfo.applicationGender=="小企业主"}'>selected="selected"</c:if> value="小企业主">小企业主</option>
@@ -91,22 +91,22 @@
 			           
 			           <div class="ftitle">准入核查</div>
 			            <div class="fitem">  
-			               <label class="ui-label" style="width:120px">淘宝三钻以上：</label><select class="easyui-combobox" name="taobaoTreeDiamondMore" style="width:139px" >
+			               <label class="ui-label" style="width:120px">淘宝三钻以上：</label><select  name="taobaoTreeDiamondMore" style="width:139px" >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.taobaoTreeDiamondMore=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.taobaoTreeDiamondMore=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
-		            		 <label class="ui-label" style="width:120px">其他平台有营业执照：</label><select class="easyui-combobox" name="otherPlatform" style="width:139px" >
+		            		 <label class="ui-label" style="width:120px">其他平台有营业执照：</label><select  name="otherPlatform" style="width:139px" >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.otherPlatform=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.otherPlatform=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
-		            		  <label class="ui-label" style="width:120px">持续经营期限一年以上：</label><select class="easyui-combobox" name="operatingPeriodMore" style="width:139px"  >
+		            		  <label class="ui-label" style="width:120px">持续经营期限一年以上：</label><select  name="operatingPeriodMore" style="width:139px"  >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.operatingPeriodMore=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.operatingPeriodMore=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
-		            		 <label class="ui-label" style="width:120px">是否网商店铺注册所有人：</label><select class="easyui-combobox" name="ifShopOwner" style="width:139px" >
+		            		 <label class="ui-label" style="width:120px">是否网商店铺注册所有人：</label><select  name="ifShopOwner" style="width:139px" >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.ifShopOwner=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.ifShopOwner=="否"}'>selected="selected"</c:if> value="否">否</option>
@@ -116,22 +116,22 @@
 			           
 			           
 			           <div class="fitem">
-		            		 <label class="ui-label" style="width:120px">非网商店铺注册所有人，但追加所有人担保：</label><select class="easyui-combobox" name="haveGuarantor" style="width:139px" >
+		            		 <label class="ui-label" style="width:120px">非网商店铺注册所有人，但追加所有人担保：</label><select  name="haveGuarantor" style="width:139px" >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.haveGuarantor=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.haveGuarantor=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
-		            		 <label class="ui-label" style="width:120px">是否网商店铺实际控制人：</label><select class="easyui-combobox" name="shopController" style="width:139px"  >
+		            		 <label class="ui-label" style="width:120px">是否网商店铺实际控制人：</label><select  name="shopController" style="width:139px"  >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.shopController=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.shopController=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
-		            		 <label class="ui-label" style="width:120px">近一年月均销售额10万以上：</label><select class="easyui-combobox" name="salesOfMore" style="width:139px"  >
+		            		 <label class="ui-label" style="width:120px">近一年月均销售额10万以上：</label><select  name="salesOfMore" style="width:139px"  >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.salesOfMore=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.salesOfMore=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
-		            		 <label class="ui-label" style="width:120px">授信合作金融机构（含我行）原则上不超过3家，最多不超过5家：</label><select class="easyui-combobox" name="than3credit" style="width:139px"  >
+		            		 <label class="ui-label" style="width:120px">授信合作金融机构（含我行）原则上不超过3家，最多不超过5家：</label><select  name="than3credit" style="width:139px"  >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.than3credit=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.than3credit=="否"}'>selected="selected"</c:if> value="否">否</option>
@@ -141,13 +141,13 @@
 			           
 			           
 			           <div class="fitem">  
-		            		  <label class="ui-label" style="width:120px">借款企业、借款企业法人代表、实际控制人近2年内无经营性逾期、欠息记录：</label><select class="easyui-combobox" name="notOverdue" style="width:139px"  >
+		            		  <label class="ui-label" style="width:120px">借款企业、借款企业法人代表、实际控制人近2年内无经营性逾期、欠息记录：</label><select  name="notOverdue" style="width:139px"  >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.notOverdue=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.notOverdue=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
 		            	
-		            		 <label class="ui-label" style="width:120px">个人消费类贷款无累计5次或连续3次的逾期、欠息记录</label><select class="easyui-combobox" name="perNotOverdue" style="width:139px"  >
+		            		 <label class="ui-label" style="width:120px">个人消费类贷款无累计5次或连续3次的逾期、欠息记录</label><select  name="perNotOverdue" style="width:139px"  >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.perNotOverdue=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.perNotOverdue=="否"}'>selected="selected"</c:if> value="否">否</option>
@@ -157,7 +157,7 @@
 			           
 			           <div class="ftitle">渠道信息</div>
 			            <div class="fitem">  
-			               <label class="ui-label" style="width:120px">渠道：</label><select class="easyui-combobox" name="channel" style="width:139px"  >
+			               <label class="ui-label" style="width:120px">渠道：</label><select  name="channel" style="width:139px"  >
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.channel=="自流量"}'>selected="selected"</c:if> value="自流量">自流量</option>
 		                    	<option <c:if test='${busLoanInfo.channel=="云贷推送"}'>selected="selected"</c:if> value="云贷推送">云贷推送</option>
@@ -305,7 +305,7 @@
 			               <label style="width:120px">证件号码:</label>  
 			               <input class="easyui-validatebox" type="text" name="idCard" value="${busLoanInfoLegal.idCard}" style="width:139px">
 			               <label style="width:120px">性别:</label>  
-			               <select class="easyui-combobox" name="gender"  style="width:139px"  >
+			               <select  name="gender"  style="width:139px"  >
 		                    	<option <c:if test='${busLoanInfoLegal.gender=="男"}'>selected="selected"</c:if> value="男">男</option>
 		                    	<option <c:if test='${busLoanInfoLegal.gender=="女"}'>selected="selected"</c:if> value="女">女</option>
 		            	   </select>
@@ -343,7 +343,7 @@
 			           
 			           <div class="fitem">  
 			               <label style="width:120px">是否已为他人(企业)债权设定抵押:</label>  
-			               <select class="easyui-combobox" name="mortgage" style="width:139px"  >
+			               <select name="mortgage" style="width:139px"  >
 		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>
@@ -368,8 +368,7 @@
 			           
 			           <div class="ftitle">是否为实际控制人，选否要填写实际控制人信息</div>
 			           <div class="fitem">  
-			               <label class="ui-label" style="width:120px">是否为实际控制人：</label><select class="easyui-combobox" name="ifController" style="width:139px"  >
-		            			<option value=""></option>
+			               <label class="ui-label" style="width:120px">是否为实际控制人：</label><select  name="ifController" style="width:139px"  >
 		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
@@ -402,7 +401,7 @@
 			           
 			            <div class="fitem">
 			            <label style="width:120px">是否已为他人(企业)债权设定抵押:</label>  
-			               <select class="easyui-combobox" name="contrallerMortgage" style="width:139px" >
+			               <select  name="contrallerMortgage" style="width:139px" >
 		                    	<option <c:if test='${busLoanInfoController.contrallerMortgage=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfoController.contrallerMortgage=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>	  
@@ -558,18 +557,18 @@
 			           <div class="ftitle">附加信息</div>
 			            <div class="fitem">  
 			                <label style="width:120px">是否在当地缴纳社保:</label>  
-			             	<select class="easyui-combobox" name="localPaySocialSecurity" style="width:139px">
+			             	<select  name="localPaySocialSecurity" style="width:139px">
 		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.localPaySocialSecurity=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.localPaySocialSecurity=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
 			               <label style="width:120px">是否华夏银行金融资产类贵宾客户:</label>
-			               <select class="easyui-combobox" name="ifCustomersVIP" style="width:139px"  >
+			               <select  name="ifCustomersVIP" style="width:139px"  >
 		                    	<option <c:if test='${busLoanInfo.ifCustomersVIP=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.ifCustomersVIP=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>    
 			              	<label style="width:120px">子女是否在当地入学:</label>
-			              	<select class="easyui-combobox" name="childrenIfLocally" style="width:139px"  >
+			              	<select  name="childrenIfLocally" style="width:139px"  >
 		                    	<option <c:if test='${busLoanInfo.childrenIfLocally=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.childrenIfLocally=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>
@@ -652,17 +651,17 @@
 			           	<label style="width:80px">检查日期:</label>  
 			            <input id="checkDate" type="text" name="checkDate" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${busBiling.checkDate}" />' class="easyui-datebox"  style="width:139px"></input>
   						<label style="width:120px">借款人征信是否正常:</label>
-			            <select class="easyui-combobox" name="creditorIfNormal"  style="width:139px"  >
+			            <select  name="creditorIfNormal"  style="width:139px"  >
 		                    <option <c:if test='${busBiling.creditorIfNormal=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    <option <c:if test='${busBiling.creditorIfNormal=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	</select>
 		            	<label style="width:120px">保证人征信是否正常:</label>
-		            	<select class="easyui-combobox" name="guarantorIfNormal" style="width:139px" >
+		            	<select  name="guarantorIfNormal" style="width:139px" >
 		                    <option <c:if test='${busBiling.guarantorIfNormal=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    <option <c:if test='${busBiling.guarantorIfNormal=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	</select>
 		            	<label style="width:120px">云贷是否有预警信息:</label>
-		            	<select class="easyui-combobox" name="cloudLoanIfWarning" style="width:139px"  >
+		            	<select  name="cloudLoanIfWarning" style="width:139px"  >
 		                    <option <c:if test='${busBiling.cloudLoanIfWarning=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    <option <c:if test='${busBiling.cloudLoanIfWarning=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	</select>
