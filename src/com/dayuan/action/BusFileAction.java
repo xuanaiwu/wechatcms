@@ -830,7 +830,6 @@ public class BusFileAction extends BaseAction{
 			BusLoanInfoLegal legal=busLoanInfoLegalService.getBusLoanInfoLegal(lId);
 			BusLending lending=busLendingService.queryByBId(lId);
 			List<BusLoanInfoShop> shopList=busLoanInfoShopService.queryListByBId(lId);
-			BusLoanInfoShop busLoanInfoShop=this.busLoanInfoShopService.getBusLoanInfoShop(lId);
 			List<BusLoanInfoGuaranter> guaranterLsit=busLoanInfoGuaranterService.queryListByBId(lId);
 			BusLoanInfoGuaranter busLoanInfoGuaranter=this.busLoanInfoGuaranterService.getBusLoanInfoGuaranter(lId);
 			BusLoanInfoController busLoanInfoController=null;
@@ -872,7 +871,7 @@ public class BusFileAction extends BaseAction{
 				dataMap.put("lName3", StringUtil.getNotNullStr(busFiles.getlName()));
 				dataMap.put("lIdCard2", StringUtil.getNotNullStr(busFiles.getlIdCard()));
 				dataMap.put("lTelPhone3", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
-				wordName+="_贷前文件四合一"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_1贷前文件四合一_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"daiqianwenjian1.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("3")){
 				if(busLoanInfo!=null){
@@ -896,10 +895,10 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("legalPhone","");
 				}
 				if(busLoanInfo.getChannel().equals("自流量")){
-					wordName+="_融信通开立账户信息表_自流量"+DateUtil.getNowLongTime()+".doc";
+					wordName+="_3融信通开立账户信息表_自流量_"+DateUtil.getNowLongTime()+".doc";
 					flag=createWords.create(dataMap,templatePath,"ziliuliang3.ftl",savePath+File.separator,wordName);
 				}else if(busLoanInfo.getChannel().equals("云贷推送")){
-					wordName+="_融信通开立账户信息表_云贷推送"+DateUtil.getNowLongTime()+".doc";
+					wordName+="_3融信通开立账户信息表_云贷推送_"+DateUtil.getNowLongTime()+".doc";
 					flag=createWords.create(dataMap,templatePath,"yundaituisong3.ftl",savePath+File.separator,wordName);
 				}
 			}else if(wordType.equals("4")){
@@ -908,7 +907,7 @@ public class BusFileAction extends BaseAction{
 				}else{
 					dataMap.put("applicationName","");
 				}
-				wordName+="_电商贷客户贷后须知"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_4电商贷客户贷后须知_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"dianshangdaihouxuzhi4.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("5")){
 				if(busLoanInfo!=null){
@@ -952,9 +951,9 @@ public class BusFileAction extends BaseAction{
 				}else{
 					dataMap.put("guaranterName","");
 				}
-				wordName+="_华夏银行小企业网络贷最高额借款合同"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_5华夏银行小企业网络贷最高额借款合同_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"xiaoqiyejiekuanhetong5.ftl",savePath+File.separator,wordName);
-			}else if(wordType.equals("61")||wordType.equals("62")){
+			}else if(wordType.equals("61")){
 				if(guaranterLsit!=null&&guaranterLsit.size()>0){
 					BusLoanInfoGuaranter guaranter=guaranterLsit.get(0);
 					dataMap.put("guaranterName",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
@@ -982,7 +981,45 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("endTermYear",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "yyyy"));
 					dataMap.put("endTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "MM"));
 					dataMap.put("endTermDay",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "dd"));
-					
+				}else{
+					dataMap.put("loanAmount","");
+					dataMap.put("startTermYear","");
+					dataMap.put("startTermMonth","");
+					dataMap.put("startTermDay","");
+					dataMap.put("endTermYear","");
+					dataMap.put("endTermMonth","");
+					dataMap.put("endTermDay","");
+				}
+				wordName+="_6个人最高额保证合同1_"+DateUtil.getNowLongTime()+".doc";
+				flag=createWords.create(dataMap,templatePath,"gerenzuigaoe61.ftl",savePath+File.separator,wordName);
+			}else if(wordType.equals("62")){
+				if(guaranterLsit!=null&&guaranterLsit.size()>1){
+					BusLoanInfoGuaranter guaranter=guaranterLsit.get(1);
+					dataMap.put("guaranterName",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+					dataMap.put("guaranterCard",StringUtil.getNotNullStr(guaranter.getGuaranterCard()));
+					dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(guaranter.getGuaranterHouseAddress()));
+					dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(guaranter.getGuaranterEmployer()));
+					dataMap.put("guaranterPhone",StringUtil.getNotNullStr(guaranter.getGuaranterPhone()));
+				}else{
+					dataMap.put("guaranterName","");
+					dataMap.put("guaranterCard","");
+					dataMap.put("guaranterHouseAddress","");
+					dataMap.put("guaranterEmployer","");
+					dataMap.put("guaranterPhone","");
+				}
+				if(busLoanInfo!=null){
+					dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+				}else{
+					dataMap.put("applicationName","");
+				}
+				if(lending!=null){
+					dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+					dataMap.put("startTermYear",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "yyyy"));
+					dataMap.put("startTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "MM"));
+					dataMap.put("startTermDay",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "dd"));
+					dataMap.put("endTermYear",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "yyyy"));
+					dataMap.put("endTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "MM"));
+					dataMap.put("endTermDay",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "dd"));
 				}else{
 					dataMap.put("loanAmount","");
 					dataMap.put("startTermYear","");
@@ -993,13 +1030,8 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("endTermDay","");
 					
 				}
-				if(wordType.equals("61")){
-					wordName+="_个人最高额保证合同1"+DateUtil.getNowLongTime()+".doc";
-					flag=createWords.create(dataMap,templatePath,"gerenzuigaoe61.ftl",savePath+File.separator,wordName);
-				}else{
-					wordName+="_个人最高额保证合同2 "+DateUtil.getNowLongTime()+".doc";
-					flag=createWords.create(dataMap,templatePath,"gerenzuigaoe62.ftl",savePath+File.separator,wordName);
-				}
+				wordName+="_6个人最高额保证合同2_"+DateUtil.getNowLongTime()+".doc";
+				flag=createWords.create(dataMap,templatePath,"gerenzuigaoe62.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("71")||wordType.equals("72")){
 				if(lending!=null){
 					dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
@@ -1033,7 +1065,7 @@ public class BusFileAction extends BaseAction{
 						dataMap.put("guaranteeAddress1","");
 						dataMap.put("guaranteeLegal1","");
 					}
-					wordName+="_最高额保证合同1"+DateUtil.getNowLongTime()+".doc";
+					wordName+="_7最高额保证合同1_"+DateUtil.getNowLongTime()+".doc";
 					flag=createWords.create(dataMap,templatePath,"zuigaoebaozhenghetong7.ftl",savePath+File.separator,wordName);
 				}else{
 					if(lending!=null){
@@ -1045,7 +1077,7 @@ public class BusFileAction extends BaseAction{
 						dataMap.put("guaranteeAddress2","");
 						dataMap.put("guaranteeLegal2","");
 					}
-					wordName+="_最高额保证合同2"+DateUtil.getNowLongTime()+".doc";
+					wordName+="_7最高额保证合同2_"+DateUtil.getNowLongTime()+".doc";
 					flag=createWords.create(dataMap,templatePath,"zuigaoebaozhenghetong72.ftl",savePath+File.separator,wordName);
 				}
 				
@@ -1069,7 +1101,7 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("guaranteeCompany1","");
 				}
 				dataMap.put("holdersList", holdersList);
-				wordName+="_股东会成员名单及签字样本1"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_8股东会成员名单及签字样本1_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"gudongqianziyangben8.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("82")){
 				List<Map<String, Object>> holdersList=new ArrayList<Map<String,Object>>();
@@ -1091,7 +1123,7 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("guaranteeCompany1","");
 				}
 				dataMap.put("holdersList", holdersList);
-				wordName+="_股东会成员名单及签字样本2"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_8股东会成员名单及签字样本2_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"gudongqianziyangben8.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("91")){
 				if(lending!=null){
@@ -1108,7 +1140,7 @@ public class BusFileAction extends BaseAction{
 				}else{
 					dataMap.put("applicationName","");
 				}
-				wordName+="_股东会决议1"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_9股东会决议1_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"gudonghuiyi91.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("92")){
 				if(lending!=null){
@@ -1125,7 +1157,7 @@ public class BusFileAction extends BaseAction{
 				}else{
 					dataMap.put("applicationName","");
 				}
-				wordName+="_股东会决议2"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_9股东会决议2_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"gudonghuiyi92.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("101")){
 				if(lending!=null){
@@ -1135,7 +1167,7 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("guaranteeLegal1","");
 					dataMap.put("guaranteeCompany1","");
 				}
-				wordName+="_法定代表人证明书及签字样本1"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_10法定代表人证明书及签字样本1_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"fadingdaibiaorenqianziyangben10_1.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("102")){
 				if(lending!=null){
@@ -1145,7 +1177,7 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("guaranteeLegal2","");
 					dataMap.put("guaranteeCompany2","");
 				}
-				wordName+="_法定代表人证明书及签字样本2"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_10法定代表人证明书及签字样本2_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"fadingdaibiaorenqianziyangben10_2.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("111")){
 				if(lending!=null){
@@ -1153,7 +1185,7 @@ public class BusFileAction extends BaseAction{
 				}else{
 					dataMap.put("guaranteeCompany1","");
 				}
-				wordName+="_预留公章样本1"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_11预留公章样本1_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"yuliugongzhang11_1.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("112")){
 				if(lending!=null){
@@ -1161,7 +1193,7 @@ public class BusFileAction extends BaseAction{
 				}else{
 					dataMap.put("guaranteeCompany2","");
 				}
-				wordName+="_预留公章样本2"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_11预留公章样本2_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"yuliugongzhang11_2.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("12")){
 				if(busLoanInfo!=null){
@@ -1205,7 +1237,7 @@ public class BusFileAction extends BaseAction{
 					dataMap.put("guaranterName12","");
 					dataMap.put("guaranterName22","");
 				}
-				wordName+="_华夏银行小企业授信业务实地见证确认书"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_12华夏银行小企业授信业务实地见证确认书_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"xiaoqiyeshidijianzhengquerenshu12.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("13")){
 				if(busLoanInfo!=null){
@@ -1213,7 +1245,7 @@ public class BusFileAction extends BaseAction{
 				}else{
 					dataMap.put("applicationName","");
 				}
-				wordName+="_华夏银行授信业务办理申请书"+DateUtil.getNowLongTime()+".doc";
+				wordName+="_13华夏银行授信业务办理申请书_"+DateUtil.getNowLongTime()+".doc";
 				flag=createWords.create(dataMap,templatePath,"shouxinyewubanlishenqingshu13.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("2")){
 				dataMap.put("surveyOrgName",StringUtil.getNotNullStr(busLoanInfo.getSurveyOrgName()));
@@ -1235,18 +1267,93 @@ public class BusFileAction extends BaseAction{
 				dataMap.put("than3credit",StringUtil.getNotNullStr(busLoanInfo.getThan3credit()));
 				dataMap.put("notOverdue",StringUtil.getNotNullStr(busLoanInfo.getNotOverdue()));
 				dataMap.put("perNotOverdue",StringUtil.getNotNullStr(busLoanInfo.getPerNotOverdue()));
-				dataMap.put("shopName",StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
-				dataMap.put("platformName",StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
-				dataMap.put("shopLevel",StringUtil.getNotNullStr(busLoanInfoShop.getShopLevel()));
-				dataMap.put("operatingPeriod",StringUtil.getNotNullStr(busLoanInfoShop.getOperatingPeriod()));
-				dataMap.put("shopOwner",StringUtil.getNotNullStr(busLoanInfoShop.getShopOwner()));
-				dataMap.put("businessOpera",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessOpera()));
-				dataMap.put("businessAddress",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessAddress()));
-				dataMap.put("warehouseAddress",StringUtil.getNotNullStr(busLoanInfoShop.getWarehouseAddress()));
-				dataMap.put("salesIncome",StringUtil.getNotNullStr(busLoanInfoShop.getSalesIncome()));
-				dataMap.put("totalLiability",StringUtil.getNotNullStr(busLoanInfoShop.getTotalLiability()));
-				dataMap.put("bankLiabilities",StringUtil.getNotNullStr(busLoanInfoShop.getBankLiabilities()));
-				dataMap.put("netProfit",StringUtil.getNotNullStr(busLoanInfoShop.getNetProfit()));
+			
+				if(shopList!=null&&shopList.size()>0){
+					if(shopList.size()>1){
+						BusLoanInfoShop busLoanInfoShop=shopList.get(0);
+						BusLoanInfoShop busLoanInfoShop1=shopList.get(1);
+						dataMap.put("shopName",StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+						dataMap.put("platformName",StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+						dataMap.put("shopLevel",StringUtil.getNotNullStr(busLoanInfoShop.getShopLevel()));
+						dataMap.put("operatingPeriod",StringUtil.getNotNullStr(busLoanInfoShop.getOperatingPeriod()));
+						dataMap.put("shopOwner",StringUtil.getNotNullStr(busLoanInfoShop.getShopOwner()));
+						dataMap.put("businessOpera",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessOpera()));
+						dataMap.put("businessAddress",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessAddress()));
+						dataMap.put("warehouseAddress",StringUtil.getNotNullStr(busLoanInfoShop.getWarehouseAddress()));
+						dataMap.put("salesIncome",StringUtil.getNotNullStr(busLoanInfoShop.getSalesIncome()));
+						dataMap.put("totalLiability",StringUtil.getNotNullStr(busLoanInfoShop.getTotalLiability()));
+						dataMap.put("bankLiabilities",StringUtil.getNotNullStr(busLoanInfoShop.getBankLiabilities()));
+						dataMap.put("netProfit",StringUtil.getNotNullStr(busLoanInfoShop.getNetProfit()));
+						
+						dataMap.put("shopName1",StringUtil.getNotNullStr(busLoanInfoShop1.getShopName()));
+						dataMap.put("platformName1",StringUtil.getNotNullStr(busLoanInfoShop1.getPlatformName()));
+						dataMap.put("shopLevel1",StringUtil.getNotNullStr(busLoanInfoShop1.getShopLevel()));
+						dataMap.put("operatingPeriod1",StringUtil.getNotNullStr(busLoanInfoShop1.getOperatingPeriod()));
+						dataMap.put("shopOwner1",StringUtil.getNotNullStr(busLoanInfoShop1.getShopOwner()));
+						dataMap.put("businessOpera1",StringUtil.getNotNullStr(busLoanInfoShop1.getBusinessOpera()));
+						dataMap.put("businessAddress1",StringUtil.getNotNullStr(busLoanInfoShop1.getBusinessAddress()));
+						dataMap.put("warehouseAddress1",StringUtil.getNotNullStr(busLoanInfoShop1.getWarehouseAddress()));
+						dataMap.put("salesIncome1",StringUtil.getNotNullStr(busLoanInfoShop1.getSalesIncome()));
+						dataMap.put("totalLiability1",StringUtil.getNotNullStr(busLoanInfoShop1.getTotalLiability()));
+						dataMap.put("bankLiabilities1",StringUtil.getNotNullStr(busLoanInfoShop1.getBankLiabilities()));
+						dataMap.put("netProfit1",StringUtil.getNotNullStr(busLoanInfoShop1.getNetProfit()));
+					}else{
+						BusLoanInfoShop busLoanInfoShop=shopList.get(0);
+						dataMap.put("shopName",StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+						dataMap.put("platformName",StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+						dataMap.put("shopLevel",StringUtil.getNotNullStr(busLoanInfoShop.getShopLevel()));
+						dataMap.put("operatingPeriod",StringUtil.getNotNullStr(busLoanInfoShop.getOperatingPeriod()));
+						dataMap.put("shopOwner",StringUtil.getNotNullStr(busLoanInfoShop.getShopOwner()));
+						dataMap.put("businessOpera",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessOpera()));
+						dataMap.put("businessAddress",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessAddress()));
+						dataMap.put("warehouseAddress",StringUtil.getNotNullStr(busLoanInfoShop.getWarehouseAddress()));
+						dataMap.put("salesIncome",StringUtil.getNotNullStr(busLoanInfoShop.getSalesIncome()));
+						dataMap.put("totalLiability",StringUtil.getNotNullStr(busLoanInfoShop.getTotalLiability()));
+						dataMap.put("bankLiabilities",StringUtil.getNotNullStr(busLoanInfoShop.getBankLiabilities()));
+						dataMap.put("netProfit",StringUtil.getNotNullStr(busLoanInfoShop.getNetProfit()));
+						
+						dataMap.put("shopName1","");
+						dataMap.put("platformName1","");
+						dataMap.put("shopLevel1","");
+						dataMap.put("operatingPeriod1","");
+						dataMap.put("shopOwner1","");
+						dataMap.put("businessOpera1","");
+						dataMap.put("businessAddress1","");
+						dataMap.put("warehouseAddress1","");
+						dataMap.put("salesIncome1","");
+						dataMap.put("totalLiability1","");
+						dataMap.put("bankLiabilities1","");
+						dataMap.put("netProfit1","");
+					}
+				}else{
+					dataMap.put("shopName","");
+					dataMap.put("platformName","");
+					dataMap.put("shopLevel","");
+					dataMap.put("operatingPeriod","");
+					dataMap.put("shopOwner","");
+					dataMap.put("businessOpera","");
+					dataMap.put("businessAddress","");
+					dataMap.put("warehouseAddress","");
+					dataMap.put("salesIncome","");
+					dataMap.put("totalLiability","");
+					dataMap.put("bankLiabilities","");
+					dataMap.put("netProfit","");
+					
+					dataMap.put("shopName1","");
+					dataMap.put("platformName1","");
+					dataMap.put("shopLevel1","");
+					dataMap.put("operatingPeriod1","");
+					dataMap.put("shopOwner1","");
+					dataMap.put("businessOpera1","");
+					dataMap.put("businessAddress1","");
+					dataMap.put("warehouseAddress1","");
+					dataMap.put("salesIncome1","");
+					dataMap.put("totalLiability1","");
+					dataMap.put("bankLiabilities1","");
+					dataMap.put("netProfit1","");
+				}
+				
+				
 				dataMap.put("legalPerson",StringUtil.getNotNullStr(legal.getLegalPerson()));
 				dataMap.put("idCard",StringUtil.getNotNullStr(legal.getIdCard()));
 				dataMap.put("householdRegistration",StringUtil.getNotNullStr(legal.getHouseholdRegistration()));
@@ -1318,9 +1425,590 @@ public class BusFileAction extends BaseAction{
 				dataMap.put("ifCustomersVIP",StringUtil.getNotNullStr(busLoanInfo.getIfCustomersVIP()));
 				dataMap.put("childrenIfLocally",StringUtil.getNotNullStr(busLoanInfo.getChildrenIfLocally()));
 				dataMap.put("additionInfo",StringUtil.getNotNullStr(busLoanInfo.getAdditionInfo()));
-				wordName=wordName+"_小企业电商贷调查表"+DateUtil.getNowPlusTimeMill()+".xls";
+				wordName=wordName+"_2小企业电商贷调查表_"+DateUtil.getNowPlusTimeMill()+".xls";
 				flag=createWords.create(dataMap,templatePath,"shangdaidiaochabiao2.ftl",savePath+File.separator,wordName);
 			}else if(wordType.equals("0")){
+					//1
+					dataMap.put("lName1", StringUtil.getNotNullStr(busFiles.getlName()));
+					dataMap.put("lIdCard1", StringUtil.getNotNullStr(busFiles.getlIdCard()));
+					dataMap.put("lTelPhone1", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
+					dataMap.put("lName2", StringUtil.getNotNullStr(busFiles.getlName()));
+					dataMap.put("lTelPhone2", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
+					dataMap.put("lName3", StringUtil.getNotNullStr(busFiles.getlName()));
+					dataMap.put("lIdCard2", StringUtil.getNotNullStr(busFiles.getlIdCard()));
+					dataMap.put("lTelPhone3", StringUtil.getNotNullStr(busFiles.getlTelPhone()));
+					wordName+="_1贷前文件四合一_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"daiqianwenjian1.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+				    //3
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName1",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+						dataMap.put("applicationName2", StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+						dataMap.put("applicationAmount",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
+					}else{
+						dataMap.put("applicationName1","");
+						dataMap.put("applicationName2","");
+						dataMap.put("applicationAmount","");
+					}
+					if(legal!=null){
+						dataMap.put("idCard",StringUtil.getNotNullStr(legal.getIdCard()));
+						dataMap.put("idCardPeriod", StringUtil.getNotNullStr(legal.getIdCardPeriod()));
+						dataMap.put("idCardAddress",StringUtil.getNotNullStr(legal.getIdCardAddress()));
+						dataMap.put("legalPhone",StringUtil.getNotNullStr(legal.getLegalPhone()));
+					}else{
+						dataMap.put("idCard","");
+						dataMap.put("idCardPeriod","");
+						dataMap.put("idCardAddress","");
+						dataMap.put("legalPhone","");
+					}
+					if(busLoanInfo.getChannel().equals("自流量")){
+						wordName+="_3融信通开立账户信息表_自流量_"+DateUtil.getNowLongTime()+".doc";
+						flag=createWords.create(dataMap,templatePath,"ziliuliang3.ftl",savePath+File.separator,wordName);
+					}else if(busLoanInfo.getChannel().equals("云贷推送")){
+						wordName+="_3融信通开立账户信息表_云贷推送_"+DateUtil.getNowLongTime()+".doc";
+						flag=createWords.create(dataMap,templatePath,"yundaituisong3.ftl",savePath+File.separator,wordName);
+					}
+					wordName=busFiles.getlName();
+					//4
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					wordName+="_4电商贷客户贷后须知_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"dianshangdaihouxuzhi4.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//5
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					if(legal!=null){
+						dataMap.put("houseAddress",StringUtil.getNotNullStr(legal.getHouseAddress()));
+						dataMap.put("legalPhone",StringUtil.getNotNullStr(legal.getLegalPhone()));
+						dataMap.put("idCard",StringUtil.getNotNullStr(legal.getIdCard()));
+					}else{
+						dataMap.put("houseAddress","");
+						dataMap.put("legalPhone","");
+						dataMap.put("idCard","");
+					}
+					if(lending!=null){
+						dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+						dataMap.put("creditTerm",StringUtil.getNotNullStr(lending.getCreditTerm()));
+						dataMap.put("startTermYear",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "yyyy"));
+						dataMap.put("startTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "MM"));
+						dataMap.put("startTermDay",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "dd"));
+						dataMap.put("endTermYear",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "yyyy"));
+						dataMap.put("endTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "MM"));
+						dataMap.put("endTermDay",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "dd"));
+						dataMap.put("guaranteeCompany1",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+					}else{
+						dataMap.put("loanAmount","");
+						dataMap.put("creditTerm","");
+						dataMap.put("startTermYear","");
+						dataMap.put("startTermMonth","");
+						dataMap.put("startTermDay","");
+						dataMap.put("endTermYear","");
+						dataMap.put("endTermMonth","");
+						dataMap.put("endTermDay","");
+						dataMap.put("guaranteeCompany1","");
+					}
+					if(guaranterLsit!=null&&guaranterLsit.size()>0){
+						BusLoanInfoGuaranter guaranter=guaranterLsit.get(0);
+						dataMap.put("guaranterName",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+					}else{
+						dataMap.put("guaranterName","");
+					}
+					wordName+="_5华夏银行小企业网络贷最高额借款合同_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"xiaoqiyejiekuanhetong5.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//6
+					if(guaranterLsit!=null&&guaranterLsit.size()>0){
+						BusLoanInfoGuaranter guaranter=guaranterLsit.get(0);
+						dataMap.put("guaranterName",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+						dataMap.put("guaranterCard",StringUtil.getNotNullStr(guaranter.getGuaranterCard()));
+						dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(guaranter.getGuaranterHouseAddress()));
+						dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(guaranter.getGuaranterEmployer()));
+						dataMap.put("guaranterPhone",StringUtil.getNotNullStr(guaranter.getGuaranterPhone()));
+					}else{
+						dataMap.put("guaranterName","");
+						dataMap.put("guaranterCard","");
+						dataMap.put("guaranterHouseAddress","");
+						dataMap.put("guaranterEmployer","");
+						dataMap.put("guaranterPhone","");
+					}
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					if(lending!=null){
+						dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+						dataMap.put("startTermYear",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "yyyy"));
+						dataMap.put("startTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "MM"));
+						dataMap.put("startTermDay",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "dd"));
+						dataMap.put("endTermYear",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "yyyy"));
+						dataMap.put("endTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "MM"));
+						dataMap.put("endTermDay",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "dd"));
+					}else{
+						dataMap.put("loanAmount","");
+						dataMap.put("startTermYear","");
+						dataMap.put("startTermMonth","");
+						dataMap.put("startTermDay","");
+						dataMap.put("endTermYear","");
+						dataMap.put("endTermMonth","");
+						dataMap.put("endTermDay","");
+					}
+					
+					wordName+="_6个人最高额保证合同1_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"gerenzuigaoe61.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					
+					if(guaranterLsit!=null&&guaranterLsit.size()>1){
+						BusLoanInfoGuaranter guaranter=guaranterLsit.get(1);
+						dataMap.put("guaranterName",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+						dataMap.put("guaranterCard",StringUtil.getNotNullStr(guaranter.getGuaranterCard()));
+						dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(guaranter.getGuaranterHouseAddress()));
+						dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(guaranter.getGuaranterEmployer()));
+						dataMap.put("guaranterPhone",StringUtil.getNotNullStr(guaranter.getGuaranterPhone()));
+					}else{
+						dataMap.put("guaranterName","");
+						dataMap.put("guaranterCard","");
+						dataMap.put("guaranterHouseAddress","");
+						dataMap.put("guaranterEmployer","");
+						dataMap.put("guaranterPhone","");
+					}
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					if(lending!=null){
+						dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+						dataMap.put("startTermYear",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "yyyy"));
+						dataMap.put("startTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "MM"));
+						dataMap.put("startTermDay",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "dd"));
+						dataMap.put("endTermYear",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "yyyy"));
+						dataMap.put("endTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "MM"));
+						dataMap.put("endTermDay",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "dd"));
+					}else{
+						dataMap.put("loanAmount","");
+						dataMap.put("startTermYear","");
+						dataMap.put("startTermMonth","");
+						dataMap.put("startTermDay","");
+						dataMap.put("endTermYear","");
+						dataMap.put("endTermMonth","");
+						dataMap.put("endTermDay","");
+						
+					}
+					wordName+="_6个人最高额保证合同2_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"gerenzuigaoe62.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//7
+					if(lending!=null){
+						dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+						dataMap.put("startTermYear",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "yyyy"));
+						dataMap.put("startTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "MM"));
+						dataMap.put("startTermDay",DateUtil.getFormattedDateUtil((Date)lending.getStartTerm(), "dd"));
+						dataMap.put("endTermYear",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "yyyy"));
+						dataMap.put("endTermMonth",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "MM"));
+						dataMap.put("endTermDay",DateUtil.getFormattedDateUtil((Date)lending.getEndTerm(), "dd"));
+					}else{
+						dataMap.put("loanAmount","");
+						dataMap.put("startTermYear","");
+						dataMap.put("startTermMonth","");
+						dataMap.put("startTermDay","");
+						dataMap.put("endTermYear","");
+						dataMap.put("endTermMonth","");
+						dataMap.put("endTermDay","");
+					}
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					
+					if(lending!=null){
+						dataMap.put("guaranteeCompany1",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+						dataMap.put("guaranteeAddress1",StringUtil.getNotNullStr(lending.getGuaranteeAddress1()));
+						dataMap.put("guaranteeLegal1",StringUtil.getNotNullStr(lending.getGuaranteeLegal1()));
+					}else{
+						dataMap.put("guaranteeCompany1","");
+						dataMap.put("guaranteeAddress1","");
+						dataMap.put("guaranteeLegal1","");
+					}
+					wordName+="_7最高额保证合同1_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"zuigaoebaozhenghetong7.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					if(lending!=null){
+							dataMap.put("guaranteeCompany2",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+							dataMap.put("guaranteeAddress2",StringUtil.getNotNullStr(lending.getGuaranteeAddress2()));
+							dataMap.put("guaranteeLegal2",StringUtil.getNotNullStr(lending.getGuaranteeLegal2()));
+					}else{
+							dataMap.put("guaranteeCompany2","");
+							dataMap.put("guaranteeAddress2","");
+							dataMap.put("guaranteeLegal2","");
+					}
+					wordName+="_7最高额保证合同2_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"zuigaoebaozhenghetong72.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//8
+					List<Map<String, Object>> holdersList=new ArrayList<Map<String,Object>>();
+					if(lending!=null){
+						dataMap.put("numberOfShareHolders1",StringUtil.getNotNullStr(lending.getNumberOfShareHolders1()));
+						dataMap.put("guaranteeCompany1",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+						String holders=lending.getShareHoldersName1();
+						if(holders!=null&&!holders.equals("")){
+							holders=holders.replaceAll("、", "、");
+							String[] holdersArr=holders.split("、");
+							for(String value:holdersArr){
+								 Map<String, Object> map=new HashMap<String, Object>();
+						         map.put("holdersName",value);
+						         holdersList.add(map);
+							}
+						}
+					}else{
+						dataMap.put("numberOfShareHolders1","");
+						dataMap.put("guaranteeCompany1","");
+					}
+					dataMap.put("holdersList", holdersList);
+					wordName+="_8股东会成员名单及签字样本1_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"gudongqianziyangben8.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					List<Map<String, Object>> holdersList1=new ArrayList<Map<String,Object>>();
+					if(lending!=null){
+						dataMap.put("numberOfShareHolders1",StringUtil.getNotNullStr(lending.getNumberOfShareHolders2()));
+						dataMap.put("guaranteeCompany1",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+						String holders=lending.getShareHoldersName2();
+						if(holders!=null&&!holders.equals("")){
+							holders=holders.replaceAll("、", "、");
+							String[] holdersArr=holders.split("、");
+							for(String value:holdersArr){
+								 Map<String, Object> map=new HashMap<String, Object>();
+						         map.put("holdersName",value);
+						         holdersList1.add(map);
+							}
+						}
+					}else{
+						dataMap.put("numberOfShareHolders1","");
+						dataMap.put("guaranteeCompany1","");
+					}
+					dataMap.put("holdersList", holdersList1);
+					wordName+="_8股东会成员名单及签字样本2_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"gudongqianziyangben8.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//9
+					if(lending!=null){
+						dataMap.put("guaranteeCompany11",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+						dataMap.put("guaranteeCompany12",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+						dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+					}else{
+						dataMap.put("guaranteeCompany11","");
+						dataMap.put("guaranteeCompany12","");
+						dataMap.put("loanAmount","");
+					}
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					wordName+="_9股东会决议1_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"gudonghuiyi91.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					
+					if(lending!=null){
+						dataMap.put("guaranteeCompany21",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+						dataMap.put("guaranteeCompany22",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+						dataMap.put("loanAmount",StringUtil.getNotNullStr(lending.getLoanAmount()));
+					}else{
+						dataMap.put("guaranteeCompany21","");
+						dataMap.put("guaranteeCompany22","");
+						dataMap.put("loanAmount","");
+					}
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					wordName+="_9股东会决议2_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"gudonghuiyi92.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//10
+					if(lending!=null){
+						dataMap.put("guaranteeLegal1",StringUtil.getNotNullStr(lending.getGuaranteeLegal1()));
+						dataMap.put("guaranteeCompany1",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+					}else{
+						dataMap.put("guaranteeLegal1","");
+						dataMap.put("guaranteeCompany1","");
+					}
+					wordName+="_10法定代表人证明书及签字样本1_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"fadingdaibiaorenqianziyangben10_1.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					
+					if(lending!=null){
+						dataMap.put("guaranteeLegal2",StringUtil.getNotNullStr(lending.getGuaranteeLegal2()));
+						dataMap.put("guaranteeCompany2",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+					}else{
+						dataMap.put("guaranteeLegal2","");
+						dataMap.put("guaranteeCompany2","");
+					}
+					wordName+="_10法定代表人证明书及签字样本2_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"fadingdaibiaorenqianziyangben10_2.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//11
+					if(lending!=null){
+						dataMap.put("guaranteeCompany1",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+					}else{
+						dataMap.put("guaranteeCompany1","");
+					}
+					wordName+="_11预留公章样本1_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"yuliugongzhang11_1.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					if(lending!=null){
+						dataMap.put("guaranteeCompany2",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+					}else{
+						dataMap.put("guaranteeCompany2","");
+					}
+					wordName+="_11预留公章样本2_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"yuliugongzhang11_2.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//12
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName1",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+						dataMap.put("applicationName2",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+						dataMap.put("applicationName3",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName1","");
+						dataMap.put("applicationName2","");
+						dataMap.put("applicationName3","");
+					}
+					if(lending!=null){
+						dataMap.put("guaranteeCompany11",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+						dataMap.put("guaranteeCompany21",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+						dataMap.put("guaranteeCompany12",StringUtil.getNotNullStr(lending.getGuaranteeCompany1()));
+						dataMap.put("guaranteeCompany22",StringUtil.getNotNullStr(lending.getGuaranteeCompany2()));
+					}else{
+						dataMap.put("guaranteeCompany11","");
+						dataMap.put("guaranteeCompany21","");
+						dataMap.put("guaranteeCompany12","");
+						dataMap.put("guaranteeCompany22","");
+					}
+					if(guaranterLsit!=null&&guaranterLsit.size()>0){
+						if(guaranterLsit.size()>1){
+							BusLoanInfoGuaranter  guaranter=guaranterLsit.get(0);
+							BusLoanInfoGuaranter  guaranter1=guaranterLsit.get(1);
+							dataMap.put("guaranterName11",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+							dataMap.put("guaranterName12",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+							dataMap.put("guaranterName21",StringUtil.getNotNullStr(guaranter1.getGuaranterName()));
+							dataMap.put("guaranterName22",StringUtil.getNotNullStr(guaranter1.getGuaranterName()));
+						}else{
+							BusLoanInfoGuaranter  guaranter=guaranterLsit.get(0);
+							dataMap.put("guaranterName11",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+							dataMap.put("guaranterName12",StringUtil.getNotNullStr(guaranter.getGuaranterName()));
+							dataMap.put("guaranterName21","");
+							dataMap.put("guaranterName22","");
+						}
+					}else{
+						dataMap.put("guaranterName11","");
+						dataMap.put("guaranterName21","");
+						dataMap.put("guaranterName12","");
+						dataMap.put("guaranterName22","");
+					}
+					wordName+="_12华夏银行小企业授信业务实地见证确认书_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"xiaoqiyeshidijianzhengquerenshu12.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//13
+					if(busLoanInfo!=null){
+						dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					}else{
+						dataMap.put("applicationName","");
+					}
+					wordName+="_13华夏银行授信业务办理申请书_"+DateUtil.getNowLongTime()+".doc";
+					flag=createWords.create(dataMap,templatePath,"shouxinyewubanlishenqingshu13.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+					//2
+					dataMap.put("surveyOrgName",StringUtil.getNotNullStr(busLoanInfo.getSurveyOrgName()));
+					dataMap.put("surveyPersonName",StringUtil.getNotNullStr(busLoanInfo.getSurveyPersonName()));
+					dataMap.put("surveyPhone",StringUtil.getNotNullStr(busLoanInfo.getSurveyPhone()));
+					dataMap.put("applicationName",StringUtil.getNotNullStr(busLoanInfo.getApplicationName()));
+					dataMap.put("applicationAmount",StringUtil.getNotNullStr(busLoanInfo.getApplicationAmount()));
+					dataMap.put("applicationTerm",StringUtil.getNotNullStr(busLoanInfo.getApplicationTerm()));
+					dataMap.put("loanType",StringUtil.getNotNullStr(busLoanInfo.getLoanType()));
+					dataMap.put("urgentCont",StringUtil.getNotNullStr(busLoanInfo.getUrgentCont()));
+					dataMap.put("urgentContPhone",StringUtil.getNotNullStr(busLoanInfo.getUrgentContPhone()));
+					dataMap.put("taobaoTreeDiamondMore",StringUtil.getNotNullStr(busLoanInfo.getTaobaoTreeDiamondMore()));
+					dataMap.put("otherPlatform",StringUtil.getNotNullStr(busLoanInfo.getOtherPlatform()));
+					dataMap.put("operatingPeriodMore",StringUtil.getNotNullStr(busLoanInfo.getOperatingPeriodMore()));
+					dataMap.put("ifShopOwner",StringUtil.getNotNullStr(busLoanInfo.getIfShopOwner()));
+					dataMap.put("haveGuarantor",StringUtil.getNotNullStr(busLoanInfo.getHaveGuarantor()));
+					dataMap.put("shopController",StringUtil.getNotNullStr(busLoanInfo.getShopController()));
+					dataMap.put("salesOfMore",StringUtil.getNotNullStr(busLoanInfo.getSalesOfMore()));
+					dataMap.put("than3credit",StringUtil.getNotNullStr(busLoanInfo.getThan3credit()));
+					dataMap.put("notOverdue",StringUtil.getNotNullStr(busLoanInfo.getNotOverdue()));
+					dataMap.put("perNotOverdue",StringUtil.getNotNullStr(busLoanInfo.getPerNotOverdue()));
+				
+					if(shopList!=null&&shopList.size()>0){
+						if(shopList.size()>1){
+							BusLoanInfoShop busLoanInfoShop=shopList.get(0);
+							BusLoanInfoShop busLoanInfoShop1=shopList.get(1);
+							dataMap.put("shopName",StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+							dataMap.put("platformName",StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+							dataMap.put("shopLevel",StringUtil.getNotNullStr(busLoanInfoShop.getShopLevel()));
+							dataMap.put("operatingPeriod",StringUtil.getNotNullStr(busLoanInfoShop.getOperatingPeriod()));
+							dataMap.put("shopOwner",StringUtil.getNotNullStr(busLoanInfoShop.getShopOwner()));
+							dataMap.put("businessOpera",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessOpera()));
+							dataMap.put("businessAddress",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessAddress()));
+							dataMap.put("warehouseAddress",StringUtil.getNotNullStr(busLoanInfoShop.getWarehouseAddress()));
+							dataMap.put("salesIncome",StringUtil.getNotNullStr(busLoanInfoShop.getSalesIncome()));
+							dataMap.put("totalLiability",StringUtil.getNotNullStr(busLoanInfoShop.getTotalLiability()));
+							dataMap.put("bankLiabilities",StringUtil.getNotNullStr(busLoanInfoShop.getBankLiabilities()));
+							dataMap.put("netProfit",StringUtil.getNotNullStr(busLoanInfoShop.getNetProfit()));
+							
+							dataMap.put("shopName1",StringUtil.getNotNullStr(busLoanInfoShop1.getShopName()));
+							dataMap.put("platformName1",StringUtil.getNotNullStr(busLoanInfoShop1.getPlatformName()));
+							dataMap.put("shopLevel1",StringUtil.getNotNullStr(busLoanInfoShop1.getShopLevel()));
+							dataMap.put("operatingPeriod1",StringUtil.getNotNullStr(busLoanInfoShop1.getOperatingPeriod()));
+							dataMap.put("shopOwner1",StringUtil.getNotNullStr(busLoanInfoShop1.getShopOwner()));
+							dataMap.put("businessOpera1",StringUtil.getNotNullStr(busLoanInfoShop1.getBusinessOpera()));
+							dataMap.put("businessAddress1",StringUtil.getNotNullStr(busLoanInfoShop1.getBusinessAddress()));
+							dataMap.put("warehouseAddress1",StringUtil.getNotNullStr(busLoanInfoShop1.getWarehouseAddress()));
+							dataMap.put("salesIncome1",StringUtil.getNotNullStr(busLoanInfoShop1.getSalesIncome()));
+							dataMap.put("totalLiability1",StringUtil.getNotNullStr(busLoanInfoShop1.getTotalLiability()));
+							dataMap.put("bankLiabilities1",StringUtil.getNotNullStr(busLoanInfoShop1.getBankLiabilities()));
+							dataMap.put("netProfit1",StringUtil.getNotNullStr(busLoanInfoShop1.getNetProfit()));
+						}else{
+							BusLoanInfoShop busLoanInfoShop=shopList.get(0);
+							dataMap.put("shopName",StringUtil.getNotNullStr(busLoanInfoShop.getShopName()));
+							dataMap.put("platformName",StringUtil.getNotNullStr(busLoanInfoShop.getPlatformName()));
+							dataMap.put("shopLevel",StringUtil.getNotNullStr(busLoanInfoShop.getShopLevel()));
+							dataMap.put("operatingPeriod",StringUtil.getNotNullStr(busLoanInfoShop.getOperatingPeriod()));
+							dataMap.put("shopOwner",StringUtil.getNotNullStr(busLoanInfoShop.getShopOwner()));
+							dataMap.put("businessOpera",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessOpera()));
+							dataMap.put("businessAddress",StringUtil.getNotNullStr(busLoanInfoShop.getBusinessAddress()));
+							dataMap.put("warehouseAddress",StringUtil.getNotNullStr(busLoanInfoShop.getWarehouseAddress()));
+							dataMap.put("salesIncome",StringUtil.getNotNullStr(busLoanInfoShop.getSalesIncome()));
+							dataMap.put("totalLiability",StringUtil.getNotNullStr(busLoanInfoShop.getTotalLiability()));
+							dataMap.put("bankLiabilities",StringUtil.getNotNullStr(busLoanInfoShop.getBankLiabilities()));
+							dataMap.put("netProfit",StringUtil.getNotNullStr(busLoanInfoShop.getNetProfit()));
+							
+							dataMap.put("shopName1","");
+							dataMap.put("platformName1","");
+							dataMap.put("shopLevel1","");
+							dataMap.put("operatingPeriod1","");
+							dataMap.put("shopOwner1","");
+							dataMap.put("businessOpera1","");
+							dataMap.put("businessAddress1","");
+							dataMap.put("warehouseAddress1","");
+							dataMap.put("salesIncome1","");
+							dataMap.put("totalLiability1","");
+							dataMap.put("bankLiabilities1","");
+							dataMap.put("netProfit1","");
+						}
+					}else{
+						dataMap.put("shopName","");
+						dataMap.put("platformName","");
+						dataMap.put("shopLevel","");
+						dataMap.put("operatingPeriod","");
+						dataMap.put("shopOwner","");
+						dataMap.put("businessOpera","");
+						dataMap.put("businessAddress","");
+						dataMap.put("warehouseAddress","");
+						dataMap.put("salesIncome","");
+						dataMap.put("totalLiability","");
+						dataMap.put("bankLiabilities","");
+						dataMap.put("netProfit","");
+						
+						dataMap.put("shopName1","");
+						dataMap.put("platformName1","");
+						dataMap.put("shopLevel1","");
+						dataMap.put("operatingPeriod1","");
+						dataMap.put("shopOwner1","");
+						dataMap.put("businessOpera1","");
+						dataMap.put("businessAddress1","");
+						dataMap.put("warehouseAddress1","");
+						dataMap.put("salesIncome1","");
+						dataMap.put("totalLiability1","");
+						dataMap.put("bankLiabilities1","");
+						dataMap.put("netProfit1","");
+					}
+					
+					
+					dataMap.put("legalPerson",StringUtil.getNotNullStr(legal.getLegalPerson()));
+					dataMap.put("idCard",StringUtil.getNotNullStr(legal.getIdCard()));
+					dataMap.put("householdRegistration",StringUtil.getNotNullStr(legal.getHouseholdRegistration()));
+					dataMap.put("houseAddress",StringUtil.getNotNullStr(legal.getHouseAddress()));
+					dataMap.put("legalPhone",StringUtil.getNotNullStr(legal.getLegalPhone()));
+					dataMap.put("propertyQuantity",StringUtil.getNotNullStr(legal.getPropertyQuantity()));
+					dataMap.put("totalArea",StringUtil.getNotNullStr(legal.getTotalArea()));
+					dataMap.put("totalValue",StringUtil.getNotNullStr(legal.getTotalValue()));
+					dataMap.put("mortgage",StringUtil.getNotNullStr(legal.getMortgage()));
+					dataMap.put("propertyAddress",StringUtil.getNotNullStr(legal.getPropertyAddress()));
+					dataMap.put("totalCar",StringUtil.getNotNullStr(legal.getTotalCar()));
+					dataMap.put("licenseNumber",StringUtil.getNotNullStr(legal.getLicenseNumber()));
+					dataMap.put("totalCarValue",StringUtil.getNotNullStr(legal.getTotalCarValue()));
+					dataMap.put("otherAssets",StringUtil.getNotNullStr(legal.getOtherAssets()));
+					dataMap.put("borrowOfBank",StringUtil.getNotNullStr(legal.getBorrowOfBank()));
+					dataMap.put("amount",StringUtil.getNotNullStr(legal.getAmount()));
+					dataMap.put("theTerm",StringUtil.getNotNullStr(legal.getTheTerm()));
+					dataMap.put("ifController",StringUtil.getNotNullStr(legal.getIfController()));
+					if(busLoanInfoController!=null&&legal.getIfController().equals("否")){
+						dataMap.put("controllerName",StringUtil.getNotNullStr(busLoanInfoController.getControllerName()));
+						dataMap.put("controllerIdCard",StringUtil.getNotNullStr(busLoanInfoController.getControllerIdCard()));
+						dataMap.put("controllerRegistration",StringUtil.getNotNullStr(busLoanInfoController.getControllerRegistration()));
+						dataMap.put("controllerHouseAddress",StringUtil.getNotNullStr(busLoanInfoController.getControllerHouseAddress()));
+						dataMap.put("controllerPhone",StringUtil.getNotNullStr(busLoanInfoController.getControllerPhone()));
+						dataMap.put("controllerPropertyQuantity",StringUtil.getNotNullStr(busLoanInfoController.getControllerPropertyQuantity()));
+						dataMap.put("controllerTotalArea",StringUtil.getNotNullStr(busLoanInfoController.getControllerTotalArea()));
+						dataMap.put("controllertotalValue",StringUtil.getNotNullStr(busLoanInfoController.getControllertotalValue()));
+						dataMap.put("contrallerMortgage",StringUtil.getNotNullStr(busLoanInfoController.getContrallerMortgage()));
+						dataMap.put("controllerPropertyAddress",StringUtil.getNotNullStr(busLoanInfoController.getControllerPropertyAddress()));
+						dataMap.put("controllerTotalCar",StringUtil.getNotNullStr(busLoanInfoController.getControllerTotalCar()));
+						dataMap.put("controllerLicenseNumber",StringUtil.getNotNullStr(busLoanInfoController.getControllerLicenseNumber()));
+						dataMap.put("controllerTotalCarValue",StringUtil.getNotNullStr(busLoanInfoController.getControllerTotalCarValue()));
+						dataMap.put("controllerOtherAssets",StringUtil.getNotNullStr(busLoanInfoController.getControllerOtherAssets()));
+						dataMap.put("controllerBorrowOfBank",StringUtil.getNotNullStr(busLoanInfoController.getControllerBorrowOfBank()));
+						dataMap.put("controllerAmount",StringUtil.getNotNullStr(busLoanInfoController.getControllerAmount()));
+						dataMap.put("controllerTheTerm",StringUtil.getNotNullStr(busLoanInfoController.getControllerTheTerm()));
+					}else{
+						//是，法人替换控制人信息
+						dataMap.put("controllerName",StringUtil.getNotNullStr(legal.getLegalPerson()));
+						dataMap.put("controllerIdCard",StringUtil.getNotNullStr(legal.getIdCard()));
+						dataMap.put("controllerRegistration",StringUtil.getNotNullStr(legal.getHouseholdRegistration()));
+						dataMap.put("controllerHouseAddress",StringUtil.getNotNullStr(legal.getHouseAddress()));
+						dataMap.put("controllerPhone",StringUtil.getNotNullStr(legal.getHouseAddress()));
+						dataMap.put("controllerPropertyQuantity",StringUtil.getNotNullStr(legal.getPropertyQuantity()));
+						dataMap.put("controllerTotalArea",StringUtil.getNotNullStr(legal.getTotalArea()));
+						dataMap.put("controllertotalValue",StringUtil.getNotNullStr(legal.getTotalValue()));
+						dataMap.put("contrallerMortgage",StringUtil.getNotNullStr(legal.getMortgage()));
+						dataMap.put("controllerPropertyAddress",StringUtil.getNotNullStr(legal.getPropertyAddress()));
+						dataMap.put("controllerTotalCar",StringUtil.getNotNullStr(legal.getTotalCar()));
+						dataMap.put("controllerLicenseNumber",StringUtil.getNotNullStr(legal.getLicenseNumber()));
+						dataMap.put("controllerTotalCarValue",StringUtil.getNotNullStr(legal.getTotalCarValue()));
+						dataMap.put("controllerOtherAssets",StringUtil.getNotNullStr(legal.getOtherAssets()));
+						dataMap.put("controllerBorrowOfBank",StringUtil.getNotNullStr(legal.getBorrowOfBank()));
+						dataMap.put("controllerAmount",StringUtil.getNotNullStr(legal.getAmount()));
+						dataMap.put("controllerTheTerm",StringUtil.getNotNullStr(legal.getTheTerm()));
+					}
+					dataMap.put("ifGuaranter",StringUtil.getNotNullStr(busLoanInfo.getIfGuaranter()));
+					dataMap.put("guaranterName",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterName()));
+					dataMap.put("guaranterCard",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterCard()));
+					dataMap.put("guaranterEmployer",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterEmployer()));
+					dataMap.put("guaranterDuties",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterDuties()));
+					dataMap.put("guaranterPhone",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterPhone()));
+					dataMap.put("guaranterMaritalStatus",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterMaritalStatus()));
+					dataMap.put("guaranterHouseAddress",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterHouseAddress()));
+					dataMap.put("guaranterMonthlyIncome",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterMonthlyIncome()));
+					dataMap.put("guaranterValues",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterValues()));
+					dataMap.put("guaranterTotalLiabilities",StringUtil.getNotNullStr(busLoanInfoGuaranter.getGuaranterTotalLiabilities()));
+					dataMap.put("localPaySocialSecurity",StringUtil.getNotNullStr(busLoanInfo.getLocalPaySocialSecurity()));
+					dataMap.put("ifCustomersVIP",StringUtil.getNotNullStr(busLoanInfo.getIfCustomersVIP()));
+					dataMap.put("childrenIfLocally",StringUtil.getNotNullStr(busLoanInfo.getChildrenIfLocally()));
+					dataMap.put("additionInfo",StringUtil.getNotNullStr(busLoanInfo.getAdditionInfo()));
+					wordName=wordName+"_2小企业电商贷调查表_"+DateUtil.getNowPlusTimeMill()+".xls";
+					flag=createWords.create(dataMap,templatePath,"shangdaidiaochabiao2.ftl",savePath+File.separator,wordName);
+					wordName=busFiles.getlName();
+				
 				
 			}
 			

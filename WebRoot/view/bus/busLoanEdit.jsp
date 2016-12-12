@@ -23,9 +23,9 @@
 			               <label style="width:80px">姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="lName"  value="${busFiles.lName}" data-options="required:true,validType:'length[1,100]'" style="width:139px">
 			               <label style="width:120px">身份证:</label>  
-			               <input class="easyui-numberbox" type="text" name="lIdCard" value="${busFiles.lIdCard}" data-options="required:true" style="width:139px">
+			               <input class="easyui-validatebox" type="text" name="lIdCard" value="${busFiles.lIdCard}" data-options="required:true,validType:'length[18,18]'" style="width:139px">
 			               <label style="width:120px">电话:</label>  
-			               <input class="easyui-numberbox" type="text" name="lTelPhone" value="${busFiles.lIdCard}"  data-options="required:true" style="width:139px">
+			               <input class="easyui-numberbox" type="text" name="lTelPhone" value="${busFiles.lTelPhone}"  data-options="required:true,validType:'length[11,11]'" style="width:139px">
 			               <label style="width:120px">当前状态:</label>  
 			               <select  name="lStatus" style="width:139px" data-options="required:true" style="width:139px">
 		                    	<option <c:if test='${busFiles.lStatus=="建档"}'>selected="selected"</c:if> value="建档">建档</option>
@@ -44,7 +44,7 @@
 			               <label style="width:120px">调查人姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="surveyPersonName" value="${busLoanInfo.surveyPersonName}" style="width:139px">
 			               <label style="width:120px">手机:</label>  
-			               <input class="easyui-validatebox" type="text" name="surveyPhone" value="${busLoanInfo.surveyPhone}" style="width:139px">
+			               <input class="easyui-numberbox" type="text" name="surveyPhone" value="${busLoanInfo.surveyPhone}" data-options="validType:'length[11,11]'" style="width:139px">
 			           </div>
 			           <div class="ftitle">申请人信息</div>
 			           
@@ -53,27 +53,28 @@
 			               <input id="applicationName" type="text" name="applicationName" value="${busLoanInfo.applicationName}" class="easyui-validatebox"  style="width:139px"></input>
 			               <label style="width:120px">申请人性别:</label>
 			               <select  name="applicationGender"  style="width:139px"  >
+			               		<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.applicationGender=="男"}'>selected="selected"</c:if> value="男">男</option>
 		                    	<option <c:if test='${busLoanInfo.applicationGender=="女"}'>selected="selected"</c:if> value="女">女</option>
 		            	   </select>  
 			               <label style="width:120px">申请人住址:</label>  
 			               <input id="applicationAddress" type="text" name="applicationAddress" value="${busLoanInfo.applicationAddress}" class="easyui-validatebox" style="width:139px"></input> 
 						   <label style="width:120px">申请人身份证号码:</label>  
-			               <input id="applicationIdCard" type="text" name="applicationIdCard" value="${busLoanInfo.applicationIdCard}" class="easyui-validatebox"  style="width:139px"></input>  
+			               <input class="easyui-validatebox" id="applicationIdCard" type="text" name="applicationIdCard" value="${busLoanInfo.applicationIdCard}" data-options="validType:'length[18,18]'"  style="width:139px"></input>  
 			           </div>
 			           
 			           <div class="fitem">  
 			               <label style="width:120px">申请人电话:</label>  
-			               <input id="applicationPhone" type="text" name="applicationPhone" value="${busLoanInfo.applicationPhone}" class="easyui-validatebox"  style="width:139px"></input>
+			               <input class="easyui-numberbox" id="applicationPhone" type="text" name="applicationPhone" value="${busLoanInfo.applicationPhone}" data-options="validType:'length[11,11]'"  style="width:139px"></input>
 			               <label style="width:120px">申请金额（万元）:</label>  
 			               <input id="birthday" type="text" name="applicationAmount" value="${busLoanInfo.applicationAmount}" class="easyui-validatebox"  style="width:139px"></input>
 			               <label style="width:120px">申请期限（年）:</label>  
 			               <input id="birthday" type="text" name="applicationTerm" value="${busLoanInfo.applicationTerm}" class="easyui-validatebox"  style="width:139px"></input> 
 							<label class="ui-label" style="width:120px">申请贷款类型：</label><select  name="loanType" style="width:139px">
 		            			<option value=""></option>
-		                    	<option <c:if test='${busLoanInfo.applicationGender=="个体工商户"}'>selected="selected"</c:if> value="个体工商户">个体工商户</option>
-		                    	<option <c:if test='${busLoanInfo.applicationGender=="小企业主"}'>selected="selected"</c:if> value="小企业主">小企业主</option>
-		                    	<option <c:if test='${busLoanInfo.applicationGender=="小企业"}'>selected="selected"</c:if> value="小企业">小企业</option>
+		                    	<option <c:if test='${busLoanInfo.loanType=="个体工商户"}'>selected="selected"</c:if> value="个体工商户">个体工商户</option>
+		                    	<option <c:if test='${busLoanInfo.loanType=="小企业主"}'>selected="selected"</c:if> value="小企业主">小企业主</option>
+		                    	<option <c:if test='${busLoanInfo.loanType=="小企业"}'>selected="selected"</c:if> value="小企业">小企业</option>
 		            		</select> 
 			           </div>
 			           
@@ -155,10 +156,9 @@
 		            		
 			           </div>
 			           
-			           <div class="ftitle">渠道信息</div>
+			           <div class="ftitle">渠道信息<font color="red">(请注意选择)</font></div>
 			            <div class="fitem">  
 			               <label class="ui-label" style="width:120px">渠道：</label><select  name="channel" style="width:139px"  >
-		            			<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.channel=="自流量"}'>selected="selected"</c:if> value="自流量">自流量</option>
 		                    	<option <c:if test='${busLoanInfo.channel=="云贷推送"}'>selected="selected"</c:if> value="云贷推送">云贷推送</option>
 		            		</select>
@@ -303,9 +303,10 @@
 			               <label style="width:120px">姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="legalPerson" value="${busLoanInfoLegal.legalPerson}" style="width:139px" >
 			               <label style="width:120px">证件号码:</label>  
-			               <input class="easyui-validatebox" type="text" name="idCard" value="${busLoanInfoLegal.idCard}" style="width:139px">
+			               <input class="easyui-validatebox" class="easyui-validatebox" type="text" name="idCard" value="${busLoanInfoLegal.idCard}" data-options="validType:'length[18,18]'" style="width:139px">
 			               <label style="width:120px">性别:</label>  
 			               <select  name="gender"  style="width:139px"  >
+			               		<option value=""></option>
 		                    	<option <c:if test='${busLoanInfoLegal.gender=="男"}'>selected="selected"</c:if> value="男">男</option>
 		                    	<option <c:if test='${busLoanInfoLegal.gender=="女"}'>selected="selected"</c:if> value="女">女</option>
 		            	   </select>
@@ -326,7 +327,7 @@
 			               <label style="width:120px">可接受快递额地址:</label>  
 			               <input class="easyui-validatebox" type="text" name="deliveryAddress" value="${busLoanInfoLegal.deliveryAddress}"  style="width:139px">
 			               <label style="width:120px">手机:</label>  
-			               <input class="easyui-validatebox" type="text" name="legalPhone" value="${busLoanInfoLegal.legalPhone}" style="width:139px">
+			               <input class="easyui-numberbox" class="easyui-validatebox" type="text" name="legalPhone" value="${busLoanInfoLegal.legalPhone}" data-options="validType:'length[11,11]'" style="width:139px">
 			           </div>
 			           
 			           <div class="ftitle">法定代表人或负责人家庭资产（必填）</div>
@@ -344,6 +345,7 @@
 			           <div class="fitem">  
 			               <label style="width:120px">是否已为他人(企业)债权设定抵押:</label>  
 			               <select name="mortgage" style="width:139px"  >
+			               		<option value=""></option>
 		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>
@@ -366,11 +368,11 @@
 			               <input class="easyui-validatebox" type="text" name="theTerm" value="${busLoanInfoLegal.theTerm}" style="width:139px">
 			           </div>
 			           
-			           <div class="ftitle">是否为实际控制人，选否要填写实际控制人信息</div>
+			           <div class="ftitle">是否为实际控制人，选否要填写实际控制人信息 <font color="red">(请注意选择)</font> </div>
 			           <div class="fitem">  
 			               <label class="ui-label" style="width:120px">是否为实际控制人：</label><select  name="ifController" style="width:139px"  >
-		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="是"}'>selected="selected"</c:if> value="是">是</option>
-		                    	<option <c:if test='${busLoanInfoLegal.mortgage=="否"}'>selected="selected"</c:if> value="否">否</option>
+		                    	<option <c:if test='${busLoanInfoLegal.ifController=="是"}'>selected="selected"</c:if> value="是">是</option>
+		                    	<option <c:if test='${busLoanInfoLegal.ifController=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            		</select>
 			           </div>
 			           
@@ -381,7 +383,7 @@
 			               <label style="width:120px">姓名:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerName" value="${busLoanInfoController.controllerName}"  style="width:139px">
 			               <label style="width:120px">证件号码 :</label>  
-			               <input class="easyui-validatebox" type="text" name="controllerIdCard"  value="${busLoanInfoController.controllerIdCard}" style="width:139px">
+			               <input class="easyui-validatebox" class="easyui-validatebox" type="text" name="controllerIdCard"  value="${busLoanInfoController.controllerIdCard}" data-options="validType:'length[18,18]'" style="width:139px">
 			              	<label style="width:120px">户籍地址:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerRegistration" value="${busLoanInfoController.controllerRegistration}" style="width:139px">
 			               <label style="width:120px">家庭住址:</label>  
@@ -390,7 +392,7 @@
 			           
 			           <div class="fitem">  
 			               <label style="width:120px">手机:</label>  
-			               <input class="easyui-validatebox" type="text" name="controllerPhone" value="${busLoanInfoController.controllerPhone}" style="width:139px">
+			               <input class="easyui-numberbox" class="easyui-validatebox" type="text" name="controllerPhone" value="${busLoanInfoController.controllerPhone}" data-options="validType:'length[11,11]'" style="width:139px">
 			               <label style="width:120px">房产数量:</label>  
 			               <input class="easyui-validatebox" type="text" name="controllerPropertyQuantity" value="${busLoanInfoController.controllerPropertyQuantity}" style="width:139px" >
 			              	<label style="width:120px">房产总面积（平方米）:</label>  
@@ -402,6 +404,7 @@
 			            <div class="fitem">
 			            <label style="width:120px">是否已为他人(企业)债权设定抵押:</label>  
 			               <select  name="contrallerMortgage" style="width:139px" >
+			               		<option value=""></option>
 		                    	<option <c:if test='${busLoanInfoController.contrallerMortgage=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfoController.contrallerMortgage=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>	  
@@ -431,7 +434,7 @@
 			           </div>
 			           
 			           
-			           <div class="ftitle">是否提供自然人保证，是就填写下面信息</div>
+			           <div class="ftitle">是否提供自然人保证，是就填写下面信息 <font color="red">(请注意选择)</font></div>
 			            <div class="fitem">  
 			               <label class="ui-label" style="width:120px">是否提供自然人保证：</label><select  name="ifGuaranter" style="width:139px">
 		                    	<option <c:if test='${busLoanInfo.ifGuaranter=="是"}'>selected="selected"</c:if> value="是" >是</option>
@@ -475,6 +478,7 @@
 			              			</td>
 			              			<td>
 			              			<select  id="guaranter[0].guaranterMaritalStatus"  name="guaranter[0].guaranterMaritalStatus"  style="width:89px">
+			              					<option value=""></option>
 			              			        <option value="未婚">未婚</option>
 					                    	<option value="已婚">已婚</option>
 					                    	<option value="离异">离异</option>
@@ -521,6 +525,7 @@
 				              			</td>
 				              			<td>
 				              			<select  id="guaranter[${status.index}].guaranterMaritalStatus"  name="guaranter[${status.index}].guaranterMaritalStatus"  style="width:89px">
+				              					<option value=""></option>
 				              			        <option <c:if test='${guaranter.guaranterMaritalStatus=="未婚"}'>selected="selected"</c:if> value="未婚">未婚</option>
 						                    	<option <c:if test='${guaranter.guaranterMaritalStatus=="已婚"}'>selected="selected"</c:if> value="已婚">已婚</option>
 						                    	<option <c:if test='${guaranter.guaranterMaritalStatus=="离异"}'>selected="selected"</c:if> value="离异">离异</option>
@@ -564,11 +569,13 @@
 		            		</select>
 			               <label style="width:120px">是否华夏银行金融资产类贵宾客户:</label>
 			               <select  name="ifCustomersVIP" style="width:139px"  >
+			               		<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.ifCustomersVIP=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.ifCustomersVIP=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>    
 			              	<label style="width:120px">子女是否在当地入学:</label>
 			              	<select  name="childrenIfLocally" style="width:139px"  >
+			              		<option value=""></option>
 		                    	<option <c:if test='${busLoanInfo.childrenIfLocally=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    	<option <c:if test='${busLoanInfo.childrenIfLocally=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	   </select>
@@ -587,7 +594,7 @@
 			              			<td style="width:120px">地址</td>
 			              			<td style="width:120px">法人</td>
 			              			<td style="width:120px">股东人数</td>
-			              			<td style="width:120px">股东名（以；隔开）</td>
+			              			<td style="width:120px">股东名（以、隔开）</td>
 			              		</tr>
 			              		<tr id="guaranteeCompanyRow0">
 			              			<td>
@@ -652,16 +659,19 @@
 			            <input id="checkDate" type="text" name="checkDate" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${busBiling.checkDate}" />' class="easyui-datebox"  style="width:139px"></input>
   						<label style="width:120px">借款人征信是否正常:</label>
 			            <select  name="creditorIfNormal"  style="width:139px"  >
+			            	<option value=""></option>
 		                    <option <c:if test='${busBiling.creditorIfNormal=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    <option <c:if test='${busBiling.creditorIfNormal=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	</select>
 		            	<label style="width:120px">保证人征信是否正常:</label>
 		            	<select  name="guarantorIfNormal" style="width:139px" >
+		            		<option value=""></option>
 		                    <option <c:if test='${busBiling.guarantorIfNormal=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    <option <c:if test='${busBiling.guarantorIfNormal=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	</select>
 		            	<label style="width:120px">云贷是否有预警信息:</label>
 		            	<select  name="cloudLoanIfWarning" style="width:139px"  >
+		            		<option value=""></option>
 		                    <option <c:if test='${busBiling.cloudLoanIfWarning=="是"}'>selected="selected"</c:if> value="是">是</option>
 		                    <option <c:if test='${busBiling.cloudLoanIfWarning=="否"}'>selected="selected"</c:if> value="否">否</option>
 		            	</select>

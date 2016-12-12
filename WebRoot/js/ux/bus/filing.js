@@ -73,8 +73,6 @@ dy.filing = function(){
 								//用表单form的方式提交
 								_this.commonsForm().attr('action','exportExcel.do');
 								_this.commonsForm().submit();
-								alert("导出成功");
-
 						}},
 					{id:'btndelete',text:'删除',btnType:'remove'}
 				]
