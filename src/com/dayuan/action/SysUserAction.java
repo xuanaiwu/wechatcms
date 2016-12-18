@@ -121,18 +121,22 @@ public class SysUserAction extends BaseAction{
 	 * @throws Exception 
 	 */
 	@RequestMapping("/save")
-	public void save(SysUser bean,HttpServletResponse response) throws Exception{
+	public void save(SysUser bean,String rpwd,HttpServletResponse response) throws Exception{
+		if(StringUtils.isBlank(rpwd)){
+			sendFailureMessage(response, "请输入密码！");
+			return;
+		}
+		bean.setPwd(MethodUtil.MD5(rpwd));
 		int count = sysUserService.getUserCountByEmail(bean.getEmail());
 		if(bean.getId() == null){
 			if(count > 0){
-				throw new ServiceException("用户已存在.");
+				//throw new ServiceException("用户已存在.");
+				sendFailureMessage(response, "用户已存在.");
+				return;
 			}
 			bean.setDeleted(DELETED.NO.key);
 			sysUserService.add(bean);
 		}else{
-			if(count > 1){
-				throw new ServiceException("用户已存在.");
-			}
 			sysUserService.updateBySelective(bean);
 		}
 		sendSuccessMessage(response, "保存成功~");
@@ -166,23 +170,23 @@ public class SysUserAction extends BaseAction{
 	 * @throws Exception 
 	 */
 	@RequestMapping("/updatePwd")
-	public void updatePwd(Integer id,String oldPwd,String newPwd,HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public void updatePwd(Integer id,String oldPwd,String newPwd1,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		boolean isAdmin = SessionUtils.isAdmin(request); //是否超级管理员
 		SysUser bean  = sysUserService.queryById(id);
 		if(bean.getId() == null || DELETED.YES.key == bean.getDeleted()){
 			sendFailureMessage(response, "Sorry ,User is not exists.");
 			return;
 		}
-		if(StringUtils.isBlank(newPwd)){
+		if(StringUtils.isBlank(newPwd1)){
 			sendFailureMessage(response, "Password is required.");
 			return;
 		}
-		//不是超级管理员，匹配旧密码
-		if(!isAdmin && !MethodUtil.ecompareMD5(oldPwd,bean.getPwd())){
-			sendFailureMessage(response, "Wrong old password.");
+		//匹配旧密码
+		if(!MethodUtil.ecompareMD5(oldPwd,bean.getPwd())){
+			sendFailureMessage(response, "旧密码错误！");
 			return;
 		}
-		bean.setPwd(MethodUtil.MD5(newPwd));
+		bean.setPwd(MethodUtil.MD5(newPwd1));
 		sysUserService.update(bean);
 		sendSuccessMessage(response, "保存成功~");
 	}

@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -38,7 +39,7 @@ public class ZipUtil {
 			try {
 				File zipFile = new File(zipFilePath + File.separator + fileName);//压缩后存放路径+压缩后文件的名称
 				if(zipFile.exists()){
-					System.out.println(zipFilePath + "目录下存在名字为:" + fileName +"打包文件.");
+					//System.out.println(zipFilePath + "目录下存在名字为:" + fileName +"打包文件.");
 					log.error(zipFilePath + "目录下已经存在名字为:" + fileName +"打包文件.");
 				}else{
 					File[] sourceFiles = sourceFile.listFiles();
@@ -46,7 +47,7 @@ public class ZipUtil {
 						log.error("待压缩的文件目录：" + sourceFilePath + "里面不存在文件，无需压缩.");
 					}else{
 						fos = new FileOutputStream(zipFile);
-						zos = new ZipOutputStream(new BufferedOutputStream(fos));
+						zos = new ZipOutputStream(new BufferedOutputStream(fos),Charset.defaultCharset());
 						byte[] bufs = new byte[1024*10];
 						for(int i=0;i<sourceFiles.length;i++){
 							//创建ZIP实体，并添加进压缩包

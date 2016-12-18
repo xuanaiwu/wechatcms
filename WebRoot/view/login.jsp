@@ -29,7 +29,7 @@
 										用户名：
 									</li>
 									<li class=user_main_input>
-										<input class="txtusernamecssclass easyui-validatebox"  data-options="required:true,validType:'email',missingMessage:'邮箱不能为空.',invalidMessage:'邮箱格式不正确'" name="email" maxlength="20">
+										<input class="txtusernamecssclass easyui-validatebox"  data-options="required:true,missingMessage:'用户名不能为空.'" name="email" maxlength="20">
 									</li>
 								</ul>
 								<ul>

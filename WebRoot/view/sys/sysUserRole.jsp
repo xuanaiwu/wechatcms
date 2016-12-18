@@ -33,7 +33,7 @@
 		     	   <div class="ftitle">Information</div>    
 		           <div class="fitem">  
 		               <label>Email:</label>  
-		               <input class="easyui-validatebox" type="text" readonly="readonly" name="email" data-options="required:true,validType:'email'"></input>
+		               <input class="easyui-validatebox" type="text" readonly="readonly" name="email" data-options="required:true"></input>
 		           </div>  
 		            <div class="fitem">  
 		               <label>Roles:</label>  

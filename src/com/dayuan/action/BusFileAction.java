@@ -60,6 +60,7 @@ import com.dayuan.utils.HtmlUtil;
 import com.dayuan.utils.SessionUtils;
 import com.dayuan.utils.StringUtil;
 import com.dayuan.utils.ZipUtil;
+import com.dayuan.utils.Constant.SuperAdmin;
 
 @Controller
 @RequestMapping("/BusFile") 
@@ -137,8 +138,10 @@ public class BusFileAction extends BaseAction{
 	public void dataList(BusFileModel busFileModel,HttpServletRequest request,HttpServletResponse response){
 		if(busFileModel!=null){
 			SysUser user = SessionUtils.getUser(request);
-			busFileModel.setlUserName(user.getNickName());
-			busFileModel.setlUId(user.getId().toString());
+			if(SuperAdmin.YES.key!=user.getSuperAdmin()){
+				busFileModel.setlUserName(user.getNickName());
+				busFileModel.setlUId(user.getId().toString());
+			}
 			try{
 				List<BusFiles> list=busFileService.queryByList(busFileModel);
 				List<BusFiles> list2=new ArrayList<BusFiles>();
@@ -483,7 +486,7 @@ public class BusFileAction extends BaseAction{
 		Map<String,Object> context=getRootMap();
 		SysUser user = SessionUtils.getUser(request);
 		BusFileModel busFileModel=new BusFileModel();
-		if(user.getSuperAdmin()!=1){
+		if(SuperAdmin.YES.key!=user.getSuperAdmin()){
 			busFileModel.setlUserName(user.getNickName());
 			busFileModel.setlUId(user.getId().toString());
 		}

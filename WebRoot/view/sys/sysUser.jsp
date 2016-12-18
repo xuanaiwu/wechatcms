@@ -36,55 +36,32 @@
      		 <div class="ui-edit">
 	     	   <div class="ftitle">用户信息</div>    
 	           <div class="fitem">  
-	               <label>电子邮箱:</label>  
-	               <input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'">
+	               <label>登录账号:</label>  
+	               <input class="easyui-validatebox" type="text" name="email" data-options="required:true">
 	           </div>  
 	            
 	           <div class="fitem">  
-	               <label>别名:</label>  
+	               <label>中文名:</label>  
 	               <input class="easyui-validatebox" type="text" name="nickName" data-options="required:true,validType:'length[1,10]'">
 	           </div>
 	           
-	           
 	            <div class="fitem">  
-	               <label>用户性别:</label>  
-	               <select class="easyui-combobox" name="gender" data-options="required:true">
-                    	<option value="男" selected="selected">男</option>
-                    	<option value="女">女</option>
-                   	</select>
+	               <label>密码:</label>  
+	               <input id="newPwd" name="newPwd" type="password" class="easyui-validatebox" data-options="required:true" />
+	           </div> 
+	           <div class="fitem">  
+	               <label>再次输入:</label>  
+	              <input id="rpwd" name="rpwd" type="password" class="easyui-validatebox"   required="required" validType="equals['#newPwd']" />
 	           </div>
 	           
 	           <div class="fitem">  
-	               <label>用户类型:</label>  
-	               <select class="easyui-combobox" name="kind" data-options="required:true">
-                    	<option value="个人" selected="selected">个人</option>
-                    	<option value="企业">企业</option>
-                   	</select>
-	           </div>
-	           
-	            <div class="fitem">  
-	               <label>生日:</label>  
-	               <input id="birthday" type="text" name="birthday" class="easyui-datebox"></input> 
-	           </div>
-	           
-	            <div class="fitem">  
-	               <label>地址:</label>  
-	               <input id="addr" type="text" name="addr"  class="easyui-validatebox"></input> 
-	           </div>
-	           
-	           
-	            <div class="fitem">  
-	               <label>电话:</label>  
-	               <input id="phone" type="text" name="phone"  class="easyui-validatebox"   data-options="validType:'isNum'" ></input> 
-	           </div>
-	           
-	             <div class="fitem">  
 	               <label>状态:</label>  
-	               <select class="easyui-combobox" name="state" data-options="required:true">
+	               <select class="easyui-combobox" name="state" data-options="required:true" style="width:135px">
                     	<option value="0" selected="selected">可用</option>
                     	<option value="1">禁用</option>
                    	</select>
 	           </div> 
+	           
 	           
 	           <div class="fitem">  
 	               <label>备注:</label>  
@@ -103,20 +80,20 @@
      		 <div class="ui-edit">
 	     	   <div class="ftitle">用户信息</div>    
 	           <div class="fitem">  
-	               <label>电子邮箱:</label>  
-	               <input class="easyui-validatebox" type="text" readonly="readonly" name="email" data-options="required:true,validType:'email'">
+	               <label>登录账号:</label>  
+	               <input class="easyui-validatebox" type="text" readonly="readonly" name="email" data-options="required:true">
 	           </div>  
 	           <div class="fitem">  
 	              <label>旧密码:</label>  
-	              <input id="oldPwd" name="oldPwd" type="password" class="easyui-validatebox"/>
+	              <input id="oldPwd" name="oldPwd" type="password" class="easyui-validatebox" data-options="required:true" />
 	           </div>
-	            <div class="fitem">  
+	           <div class="fitem">  
 	               <label>新密码:</label>  
-	               <input id="newPwd" name="newPwd" type="password" class="easyui-validatebox" data-options="required:true" />
+	               <input id="newPwd1" name="newPwd1" type="password" class="easyui-validatebox" data-options="required:true" />
 	           </div> 
 	           <div class="fitem">  
 	               <label>再次输入:</label>  
-	              <input id="rpwd" name="rpwd" type="password" class="easyui-validatebox"   required="required" validType="equals['#newPwd']" />
+	              <input id="rpwd1" name="rpwd1" type="password" class="easyui-validatebox"   required="required" validType="equals['#newPwd1']" />
 	           </div> 
 	         </div>
      	</form>
