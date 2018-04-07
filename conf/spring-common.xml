@@ -25,6 +25,9 @@
 	
 	<!-- 扫描Service -->
 	<context:component-scan base-package="com.dayuan.service" />
+	
+	<!-- 扫描quartz -->
+	<context:component-scan base-package="com.dayuan.task" />  
 
 	<!-- ***************springframework.jdbc 配置数据源************** 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">	
@@ -96,6 +99,11 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 	  	<property name="configLocation" value="classpath:mybatis-config.xml"/>
+	  	 <property name="mapperLocations">  
+            <list>  
+                <value>classpath:com/dayuan/mybatis/*.xml</value>  
+            </list>  
+        </property>  
 	</bean>
 	
 	<!-- 扫描mapper.java  -->
@@ -107,5 +115,12 @@
   
 	<!-- Spring 工具类 -->
 	<bean id="springContextUtil" class="com.dayuan.utils.SpringContextUtil" />
+	
+	
+	
+	<!-- Spring中引入quartz配置文件 -->
+   <!--  <import resource="classpath:spring-quartz.xml" /> --> 
+    <import resource="classpath:spring-quartz2.xml" />
+	
 </beans>
 

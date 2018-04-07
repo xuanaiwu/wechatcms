@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.BusInsuranceIntegraMapper" >
+
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null " >
+	    and a.id =  #{id}
+	</if>
+	<if test="uId != null and uId != ''" >
+	    and a.uId =  #{uId}
+	</if>
+	<if test="loanPerson != null and loanPerson != ''" >
+	     and b.loanPerson like CONCAT('%', #{loanPerson}, '%')
+	</if>
+</trim>
+</sql>
+
+<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+ select count(1) from bus_insurance_base_material a left join bus_insurance_verification b on a.id=b.bid
+ <include refid="Example_Where_Clause"/>
+</select>
+
+
+
+<select id="queryByList" resultType="com.dayuan.bean.BusInsuranceIntegra" parameterType="Object">
+		select a.id,b.loanPerson,b.mortgagePerson,b.creditPerson,a.otherHappening,a.createTime,a.updateTime,a.uId from bus_insurance_base_material a left join bus_insurance_verification b on a.id=b.bid
+		<include refid="Example_Where_Clause"/> 
+		order by a.id desc
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+	      ${pager.orderCondition}
+	    </if>
+	    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+	       ${pager.mysqlQueryCondition}
+	    </if>
+</select>
+
+</mapper>

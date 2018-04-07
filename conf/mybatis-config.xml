@@ -18,7 +18,7 @@
   
   
   
-  
+  <!--  
   <mapper resource="com/dayuan/mybatis/SiteMainMapper.xml"/>
   
   
@@ -83,7 +83,7 @@
    
   <mapper resource="com/dayuan/mybatis/BusLendingMapper.xml"/>	
   
- 
+ -->
  
  </mappers>
 

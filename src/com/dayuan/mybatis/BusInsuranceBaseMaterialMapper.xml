@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.BusInsuranceBaseMaterialMapper" >
+
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+	<if test="uId != null and uId != ''" >
+	    and uId =  #{uId}
+	</if>
+	<if test="uName != null and uName != ''" >
+	    and uName =  #{uName}
+	</if>
+	<if test="companyName != null and companyName != ''" >
+	     and companyName like CONCAT('%', #{companyName}, '%')
+	</if>
+	<if test="companyLegal != null and companyLegal != ''" >
+	     and companyLegal like CONCAT('%', #{companyLegal}, '%')
+	</if>
+</trim>
+</sql>
+
+<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+ select count(1) from bus_insurance_base_material
+ <include refid="Example_Where_Clause"/>
+</select>
+
+
+
+<select id="queryByList" resultType="com.dayuan.bean.BusInsuranceBaseMaterial" parameterType="Object">
+		select * from bus_insurance_base_material
+		<include refid="Example_Where_Clause"/> 
+		order by id desc
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+	      ${pager.orderCondition}
+	    </if>
+	    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+	       ${pager.mysqlQueryCondition}
+	    </if>
+</select>
+
+
+<insert id="addT"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
+	insert into bus_insurance_base_material (companyName, setupTime, 
+      companyAddress, employeeNumber, companyLegal, 
+      associationCompany, otherHappening, controllerName, 
+      controllerGender, controllerIdCard, controllerPhone, 
+      controllerAddress, ifLegal, spouseName, 
+      spousePhone, spouseIdCard, familyAssets, 
+      mainAssets, liabilities, mortgageOwner, 
+      mortgageAddress, mortgageArea, propertyNumber, 
+      evaluationPrice, evaluationTotalPrice, 
+      uName, uId, createTime, 
+      updateTime)
+    values (#{companyName,jdbcType=VARCHAR}, #{setupTime,jdbcType=VARCHAR}, 
+      #{companyAddress,jdbcType=VARCHAR}, #{employeeNumber,jdbcType=VARCHAR}, #{companyLegal,jdbcType=VARCHAR}, 
+      #{associationCompany,jdbcType=VARCHAR}, #{otherHappening,jdbcType=VARCHAR}, #{controllerName,jdbcType=VARCHAR}, 
+      #{controllerGender,jdbcType=VARCHAR}, #{controllerIdCard,jdbcType=VARCHAR}, #{controllerPhone,jdbcType=VARCHAR}, 
+      #{controllerAddress,jdbcType=VARCHAR}, #{ifLegal,jdbcType=VARCHAR}, #{spouseName,jdbcType=VARCHAR}, 
+      #{spousePhone,jdbcType=VARCHAR}, #{spouseIdCard,jdbcType=VARCHAR}, #{familyAssets,jdbcType=VARCHAR}, 
+      #{mainAssets,jdbcType=VARCHAR}, #{liabilities,jdbcType=VARCHAR}, #{mortgageOwner,jdbcType=VARCHAR}, 
+      #{mortgageAddress,jdbcType=VARCHAR}, #{mortgageArea,jdbcType=VARCHAR}, #{propertyNumber,jdbcType=VARCHAR}, 
+      #{evaluationPrice,jdbcType=VARCHAR}, #{evaluationTotalPrice,jdbcType=VARCHAR}, 
+      #{uName,jdbcType=VARCHAR}, #{uId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+</insert>
+
+
+<select id="queryById" resultType="com.dayuan.bean.BusInsuranceBaseMaterial" parameterType="Object">
+	select * from bus_insurance_base_material where id=#{id}
+</select>
+
+
+<update id="updateT" parameterType="Object">
+	 update bus_insurance_base_material
+    set companyName = #{companyName,jdbcType=VARCHAR},
+      setupTime = #{setupTime,jdbcType=VARCHAR},
+      companyAddress = #{companyAddress,jdbcType=VARCHAR},
+      employeeNumber = #{employeeNumber,jdbcType=VARCHAR},
+      companyLegal = #{companyLegal,jdbcType=VARCHAR},
+      associationCompany = #{associationCompany,jdbcType=VARCHAR},
+      otherHappening = #{otherHappening,jdbcType=VARCHAR},
+      controllerName = #{controllerName,jdbcType=VARCHAR},
+      controllerGender = #{controllerGender,jdbcType=VARCHAR},
+      controllerIdCard = #{controllerIdCard,jdbcType=VARCHAR},
+      controllerPhone = #{controllerPhone,jdbcType=VARCHAR},
+      controllerAddress = #{controllerAddress,jdbcType=VARCHAR},
+      ifLegal = #{ifLegal,jdbcType=VARCHAR},
+      spouseName = #{spouseName,jdbcType=VARCHAR},
+      spousePhone = #{spousePhone,jdbcType=VARCHAR},
+      spouseIdCard = #{spouseIdCard,jdbcType=VARCHAR},
+      familyAssets = #{familyAssets,jdbcType=VARCHAR},
+      mainAssets = #{mainAssets,jdbcType=VARCHAR},
+      liabilities = #{liabilities,jdbcType=VARCHAR},
+      mortgageOwner = #{mortgageOwner,jdbcType=VARCHAR},
+      mortgageAddress = #{mortgageAddress,jdbcType=VARCHAR},
+      mortgageArea = #{mortgageArea,jdbcType=VARCHAR},
+      propertyNumber = #{propertyNumber,jdbcType=VARCHAR},
+      evaluationPrice = #{evaluationPrice,jdbcType=VARCHAR},
+      evaluationTotalPrice = #{evaluationTotalPrice,jdbcType=VARCHAR},
+      uName = #{uName,jdbcType=VARCHAR},
+      uId = #{uId,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+</update>
+
+
+<delete id="delete" parameterType="Object">
+	delete from bus_insurance_base_material where id=#{id}
+</delete>
+	
+</mapper>

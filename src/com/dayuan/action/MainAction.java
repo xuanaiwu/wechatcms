@@ -91,7 +91,6 @@ public class MainAction extends BaseAction {
 			return;
 		}
 		*/
-		
 		if(StringUtils.isBlank(email)){
 			sendFailureMessage(response, "账号不能为空.");
 			return;
@@ -121,6 +120,15 @@ public class MainAction extends BaseAction {
 		user.setLoginTime(DateUtil.getDateByString(""));
 		sysUserService.update(user);
 		//设置User到Session
+		
+		List<SysMenuBtn> childBtns = sysMenuBtnService.getMenuBtnByUser(user.getId());//按钮操作
+		if(childBtns!=null&&childBtns.size()>0){
+			for(SysMenuBtn btn:childBtns){
+				if(btn.getActionUrls().equals("excelAll.do")){
+					user.setExcelAuth(1);
+				}
+			}
+		}
 		SessionUtils.setUser(request,user);
 		//记录成功登录日志
 		log.debug(msg+"["+email+"]"+"登录成功");

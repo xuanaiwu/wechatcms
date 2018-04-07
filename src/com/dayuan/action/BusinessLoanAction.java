@@ -24,6 +24,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -101,19 +103,22 @@ public class BusinessLoanAction extends BaseAction{
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping("/dataList")
-	public void dataList(BusLoanInfoModel busLoanInfoModel,HttpServletRequest request,HttpServletResponse response)throws Exception{
+	@ResponseBody
+	@RequestMapping(value="/dataList",method=RequestMethod.POST)
+	public Map dataList(BusLoanInfoModel busLoanInfoModel,HttpServletRequest request,HttpServletResponse response)throws Exception{
+		log.info("dataList");
+		Map<String,Object> map=new HashMap<String,Object>();
 		if(busLoanInfoModel!=null){
 			SysUser user = SessionUtils.getUser(request);
 			busLoanInfoModel.setuId(user.getId().toString());
-			busLoanInfoModel.setuName(user.getNickName());
+			//busLoanInfoModel.setuName(user.getNickName());
 			List<BusLoanInfo> list=busLoanInfoService.queryByList(busLoanInfoModel);
-			Map<String,Object> map=new HashMap<String,Object>();
+			
 			map.put("total",busLoanInfoModel.getPager().getRowCount());
 			map.put("rows", list);
-			HtmlUtil.writerJson(response, map);
+			//HtmlUtil.writerJson(response, map);
 		}
-		
+		return map;
 	}
 	
 	
@@ -125,13 +130,13 @@ public class BusinessLoanAction extends BaseAction{
 	 * @return
 	 * @throws Exception 
 	 */
-	
+	@RequestMapping("/save")
 	public void save(BusLoanInfo busLoanInfo,BusLoanInfoLegal busLoanInfoLegal,BusLoanInfoController busLoanInfoController,ShopListForm shopForm,GuaranterListForm guaranterForm,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
 		/**for(BusLoanInfoGuaranter guaranter:guaranterForm.getGuaranter()){
 			System.out.println("guaranter.name="+guaranter.getGuaranterName());
 		}*/
-		
+		busLoanInfo.setlId(1);
 		boolean flag=false;
 		busLoanInfo.setContent("申请人："+busLoanInfo.getApplicationName()+",申请金额："+busLoanInfo.getApplicationAmount()+"万元,申请年限："+busLoanInfo.getApplicationTerm()+"年。");//拼接主表内容
 		/**保存商贷主表信息*/

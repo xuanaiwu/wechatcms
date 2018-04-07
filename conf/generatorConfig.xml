@@ -50,8 +50,8 @@
 		</javaClientGenerator>
 		
 		<!-- 配置表信息，这里没生成一张表，这里需要改变一次对应表名 -->	
-		<table  tableName="bus_file"
-			domainObjectName="BusFile" enableCountByExample="false"
+		<table  tableName="bus_insurance_guarantee"
+			domainObjectName="BusInsuranceGuarantee" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false">
 			<!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample 

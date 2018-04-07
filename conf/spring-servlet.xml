@@ -29,6 +29,12 @@
 	<!-- Saves a locale change using a cookie -->
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
 	
+	
+	<!-- 上传文件拦截，设置最大上传文件大小   10M=10*1024*1024(B)=10485760 bytes -->  
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <property name="maxUploadSize" value="10485760" />  
+	</bean>
+	
 	<!-- Application Message Bundle 
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="/WEB-INF/messages/messages" />
@@ -47,7 +53,5 @@
 		<property name="prefix" value="/view/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
-	
-	
-	
+		
 </beans>

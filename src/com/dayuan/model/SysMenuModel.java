@@ -12,6 +12,7 @@ public class SysMenuModel extends BaseModel {
 	private java.sql.Timestamp updateTime;//   修改时间
 	private Integer rank;//   排序
 	private String actions; //注册Action 按钮|分隔
+	private Integer serial;//排序
 
 	public String getActions() {
 		return actions;
@@ -67,6 +68,13 @@ public class SysMenuModel extends BaseModel {
 	public void setRank(Integer rank) {
 		this.rank = rank;
 	}
+	public Integer getSerial() {
+		return serial;
+	}
+	public void setSerial(Integer serial) {
+		this.serial = serial;
+	}
+	
 	
 	
 	

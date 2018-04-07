@@ -45,6 +45,10 @@
 		           <div class="fitem">  
 		               <label>层级:</label>  
 		               <input class="easyui-numberbox" type="text" value="0" name="rank" data-options="required:true,min:0,max:999">
+		           </div>
+		           <div class="fitem">
+		           	   <label>排序（从小到大）:</label>  
+		               <input class="easyui-numberbox" type="text"  name="serial" data-options="required:true,min:0,max:999">
 		           </div> 
 		           <div class="fitem">  
 		               <label>操作:</label>  

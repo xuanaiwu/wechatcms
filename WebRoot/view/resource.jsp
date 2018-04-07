@@ -13,3 +13,7 @@
 <script type="text/javascript" src="${easyuiUrl}/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${msUrl}/js/commons/urls.js?v=11"></script>
 <script type="text/javascript" src="${msUrl}/js/commons/base.js?v=11"></script>
+
+<!-- ** echarts 报表插件 ** -->
+<script type="text/javascript" src="${msUrl}/js/commons/echarts.min.js"></script>
+<script type="text/javascript" src="${msUrl}/js/commons/echartsthemes/shine.js"></script>

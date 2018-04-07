@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.BusInsuranceVerificationMapper" >
+
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+</trim>
+</sql>
+
+<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+ select count(1) from bus_insurance_verification
+ <include refid="Example_Where_Clause"/>
+</select>
+
+
+
+<select id="queryByList" resultType="com.dayuan.bean.BusInsuranceVerification" parameterType="Object">
+		select * from bus_insurance_verification
+		<include refid="Example_Where_Clause"/> 
+		order by id desc
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+	      ${pager.orderCondition}
+	    </if>
+	    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+	       ${pager.mysqlQueryCondition}
+	    </if>
+</select>
+
+
+<insert id="addT"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
+	insert into bus_insurance_verification (bid, contrateNumber, 
+      loanAmount, loanTerm, loanPerson, 
+      loanIdCard, loanPhone, highMortgageNumber, 
+      mortgageValue, mortgagePerson, mortgageIdCard, 
+      mortgagePhone, useCompanyName, shareholders, 
+      shareholdersName, creditPerson, creditPersonIdCard, 
+      creditPersonPhone, creditLoanContract, 
+      creditAmount, pledgeContrateNumber, pledgePerson, 
+      pledgePersonIdCard, pledgePersonPhone, 
+      proxyPerson, proxyPersonIdCard, witnessPerson, 
+      userManager)
+    values (#{bid,jdbcType=INTEGER}, #{contrateNumber,jdbcType=VARCHAR}, 
+      #{loanAmount,jdbcType=VARCHAR}, #{loanTerm,jdbcType=VARCHAR}, #{loanPerson,jdbcType=VARCHAR}, 
+      #{loanIdCard,jdbcType=VARCHAR}, #{loanPhone,jdbcType=VARCHAR}, #{highMortgageNumber,jdbcType=VARCHAR}, 
+      #{mortgageValue,jdbcType=VARCHAR}, #{mortgagePerson,jdbcType=VARCHAR}, #{mortgageIdCard,jdbcType=VARCHAR}, 
+      #{mortgagePhone,jdbcType=VARCHAR}, #{useCompanyName,jdbcType=VARCHAR}, #{shareholders,jdbcType=VARCHAR}, 
+      #{shareholdersName,jdbcType=VARCHAR}, #{creditPerson,jdbcType=VARCHAR}, #{creditPersonIdCard,jdbcType=VARCHAR}, 
+      #{creditPersonPhone,jdbcType=VARCHAR}, #{creditLoanContract,jdbcType=VARCHAR}, 
+      #{creditAmount,jdbcType=VARCHAR}, #{pledgeContrateNumber,jdbcType=VARCHAR}, #{pledgePerson,jdbcType=VARCHAR}, 
+      #{pledgePersonIdCard,jdbcType=VARCHAR}, #{pledgePersonPhone,jdbcType=VARCHAR}, 
+      #{proxyPerson,jdbcType=VARCHAR}, #{proxyPersonIdCard,jdbcType=VARCHAR}, #{witnessPerson,jdbcType=VARCHAR}, 
+      #{userManager,jdbcType=VARCHAR})
+</insert>
+
+
+<select id="queryById" resultType="com.dayuan.bean.BusInsuranceVerification" parameterType="Object">
+	select * from bus_insurance_verification where id=#{id}
+</select>
+
+
+<select id="queryBybid" resultType="com.dayuan.bean.BusInsuranceVerification" parameterType="Object">
+	select * from bus_insurance_verification where bid=#{id}
+</select>
+
+
+<update id="updateT" parameterType="Object">
+	  update bus_insurance_verification
+    set bid = #{bid,jdbcType=INTEGER},
+      contrateNumber = #{contrateNumber,jdbcType=VARCHAR},
+      loanAmount = #{loanAmount,jdbcType=VARCHAR},
+      loanTerm = #{loanTerm,jdbcType=VARCHAR},
+      loanPerson = #{loanPerson,jdbcType=VARCHAR},
+      loanIdCard = #{loanIdCard,jdbcType=VARCHAR},
+      loanPhone = #{loanPhone,jdbcType=VARCHAR},
+      highMortgageNumber = #{highMortgageNumber,jdbcType=VARCHAR},
+      mortgageValue = #{mortgageValue,jdbcType=VARCHAR},
+      mortgagePerson = #{mortgagePerson,jdbcType=VARCHAR},
+      mortgageIdCard = #{mortgageIdCard,jdbcType=VARCHAR},
+      mortgagePhone = #{mortgagePhone,jdbcType=VARCHAR},
+      useCompanyName = #{useCompanyName,jdbcType=VARCHAR},
+      shareholders = #{shareholders,jdbcType=VARCHAR},
+      shareholdersName = #{shareholdersName,jdbcType=VARCHAR},
+      creditPerson = #{creditPerson,jdbcType=VARCHAR},
+      creditPersonIdCard = #{creditPersonIdCard,jdbcType=VARCHAR},
+      creditPersonPhone = #{creditPersonPhone,jdbcType=VARCHAR},
+      creditLoanContract = #{creditLoanContract,jdbcType=VARCHAR},
+      creditAmount = #{creditAmount,jdbcType=VARCHAR},
+      pledgeContrateNumber = #{pledgeContrateNumber,jdbcType=VARCHAR},
+      pledgePerson = #{pledgePerson,jdbcType=VARCHAR},
+      pledgePersonIdCard = #{pledgePersonIdCard,jdbcType=VARCHAR},
+      pledgePersonPhone = #{pledgePersonPhone,jdbcType=VARCHAR},
+      proxyPerson = #{proxyPerson,jdbcType=VARCHAR},
+      proxyPersonIdCard = #{proxyPersonIdCard,jdbcType=VARCHAR},
+      witnessPerson = #{witnessPerson,jdbcType=VARCHAR},
+      userManager = #{userManager,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+</update>
+
+
+<delete id="delete" parameterType="Object">
+	delete from bus_insurance_verification where id=#{id}
+</delete>
+
+<delete id="deleteBybid" parameterType="Object">
+	delete from bus_insurance_verification where bid=#{id}
+</delete>
+	
+</mapper>

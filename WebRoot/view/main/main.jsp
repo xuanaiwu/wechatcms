@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>后台管理系统</title>
+    <title>${systemName}</title>
     <%@include file="/view/resource.jsp" %>
     <link rel="stylesheet" type="text/css" href="${msUrl}/css/main.css">
     <script type="text/javascript" src="${msUrl}/js/ux/main/main.js"></script>
@@ -12,7 +12,7 @@
   <body class="easyui-layout">
   	
  	<div class="ui-header" data-options="region:'north',split:true,border:false" style="height:40px;overflow: hidden;">
- 	<h1>DEMO</h1>
+ 	<h1><img alt="${systemName}" src="${msUrl}/images/logo/sysname.jpg" style="width:100px;height:29px;"/>  ${systemName}</h1>
  	<div  class="ui-login">
  		<div class="ui-login-info">
 	 		欢迎 <span class="orange">${user.nickName}</span> 第[<span class="orange">${user.loginCount}</span>]次登录系统 
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div data-options="region:'south',split:true,border:false" style="height: 30px;overflow:hidden;">
-		<div class="panel-header" style="border: none;text-align: center;" >CopyRight &copy; 2016 .</div>
+		<div class="panel-header" style="border: none;text-align: center;" >CopyRight &copy; 2017 . &nbsp;&nbsp; 技术支持：13533204050</div>
 	</div>
 	<!-- 中间内容页面 -->
 	<div data-options="region:'center'" >
@@ -44,7 +44,7 @@
 				<div style="margin-top:20px;">
 					<h3>简要说明</h3>
 					<ul>
-						<li>欢迎使用DEMO.</li> 
+						<li>欢迎使用${systemName}.</li> 
 					</ul>
 				</div>
 			</div>

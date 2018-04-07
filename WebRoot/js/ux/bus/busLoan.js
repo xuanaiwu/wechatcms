@@ -44,7 +44,7 @@ dy.busLoan = function(){
 		config:{
   			dataGrid:{
   				title:'商贷资料信息列表',
-	   			url:'dataList.do',
+	   			url:'dataList.json',
 	   			columns:[[
 						{field:'id',checkbox:true},
 						{field:'content',title:'内容',width:300,sortable:true},

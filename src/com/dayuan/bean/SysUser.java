@@ -32,6 +32,8 @@ public class SysUser extends BaseBean {
 	
 	private String roleStr;//用户权限, 按","区分
 	
+	private Integer excelAuth;//excel权限
+	
 	
 		public String getRoleStr() {
 		return roleStr;
@@ -118,6 +120,14 @@ public class SysUser extends BaseBean {
 		
 		this.birthday=birthday;
 	}
+	public Integer getExcelAuth() {
+		return excelAuth;
+	}
+	public void setExcelAuth(Integer excelAuth) {
+		this.excelAuth = excelAuth;
+	}
+	
+	
 	
 	
 }

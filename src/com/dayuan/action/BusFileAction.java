@@ -138,8 +138,8 @@ public class BusFileAction extends BaseAction{
 	public void dataList(BusFileModel busFileModel,HttpServletRequest request,HttpServletResponse response){
 		if(busFileModel!=null){
 			SysUser user = SessionUtils.getUser(request);
-			if(SuperAdmin.YES.key!=user.getSuperAdmin()){
-				busFileModel.setlUserName(user.getNickName());
+			if(SuperAdmin.YES.key!=user.getSuperAdmin()&&user.getExcelAuth()==0){
+				//busFileModel.setlUserName(user.getNickName());
 				busFileModel.setlUId(user.getId().toString());
 			}
 			try{
@@ -486,11 +486,11 @@ public class BusFileAction extends BaseAction{
 		Map<String,Object> context=getRootMap();
 		SysUser user = SessionUtils.getUser(request);
 		BusFileModel busFileModel=new BusFileModel();
-		if(SuperAdmin.YES.key!=user.getSuperAdmin()){
-			busFileModel.setlUserName(user.getNickName());
+		if(SuperAdmin.YES.key!=user.getSuperAdmin()&&user.getExcelAuth()==0){
+			//busFileModel.setlUserName(user.getNickName());
 			busFileModel.setlUId(user.getId().toString());
 		}
-		busFileModel.setRows(200);
+		busFileModel.setRows(500);
 		try{
 			List<BusFiles> list=busFileService.queryByList(busFileModel);
 			if(list!=null&&list.size()>0){
