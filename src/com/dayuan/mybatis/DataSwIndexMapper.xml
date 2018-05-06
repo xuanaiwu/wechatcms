@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dayuan.mapper.DataSwIndexMapper" >
+
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="id != null and id != ''" >
+	    and id =  #{id}
+	</if>
+	<if test="uuid != null and uuid != ''" >
+	    and uuid =  #{uuid}
+	</if>
+	<if test="indexCode != null and indexCode != ''" >
+	    and indexCode =  #{indexCode}
+	</if>
+	<if test="indexName != null and indexName != ''" >
+	     and indexName like CONCAT('%', #{indexName}, '%')
+	</if>
+	<if test="releaseDateString != null and releaseDateString != ''" >
+	     and releaseDateString like CONCAT('%', #{releaseDateString}, '%')
+	</if>
+	<if test="startDate != null and startDate !='' ">
+			<![CDATA[ and releaseDate >= #{startDate} ]]>
+	</if>
+	<if test="endDate !=null and endDate !='' ">
+		<![CDATA[ and releaseDate <= #{endDate} ]]>
+	</if>
+</trim>
+</sql>
+
+<select id="queryByCount" resultType="java.lang.Integer" parameterType="Object">
+ select count(1) from data_sw_index
+ <include refid="Example_Where_Clause"/>
+</select>
+
+
+
+<select id="queryByList" resultType="com.dayuan.bean.DataSwIndex" parameterType="Object">
+		select * from data_sw_index
+		<include refid="Example_Where_Clause"/> 
+		order by releaseDate desc
+		<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+	      ${pager.orderCondition}
+	    </if>
+	    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+	       ${pager.mysqlQueryCondition}
+	    </if>
+</select>
+
+
+<insert id="add"  parameterType="Object" useGeneratedKeys="true" keyProperty="id">
+	insert into data_sw_index (uuid, indexCode, 
+      indexName, releaseDate, indexStart, 
+      indexEnd, indexHigh, indexLow, 
+      turnover, volume, indexRange, 
+      trade, pe, pb, 
+      average, volumeRatio, circulateValue, 
+      averageCirculateValue, dividendRatio, ref1, 
+      ref2, ref3, ref4, 
+      ref5,releaseDateString)
+    values (#{uuid}, #{indexCode}, 
+      #{indexName}, #{releaseDate}, #{indexStart}, 
+      #{indexEnd}, #{indexHigh}, #{indexLow}, 
+      #{turnover}, #{volume}, #{indexRange}, 
+      #{trade}, #{pe}, #{pb}, 
+      #{average}, #{volumeRatio}, #{circulateValue}, 
+      #{averageCirculateValue}, #{dividendRatio}, #{ref1}, 
+      #{ref2}, #{ref3}, #{ref4}, 
+      #{ref5},#{releaseDateString})
+</insert>
+
+
+<select id="queryById" resultType="com.dayuan.bean.DataSwIndex" parameterType="Object">
+	select * from data_sw_index where id=#{id} limit 0,1
+</select>
+
+
+<update id="update" parameterType="Object">
+	 update data_sw_index
+    set indexCode = #{indexCode},
+      indexName = #{indexName},
+      releaseDate = #{releaseDate},
+      indexStart = #{indexStart},
+      indexEnd = #{indexEnd},
+      indexHigh = #{indexHigh},
+      indexLow = #{indexLow},
+      turnover = #{turnoverl},
+      volume = #{volume},
+      indexRange = #{indexRange},
+      trade = #{trade},
+      pe = #{pel},
+      pb = #{pb},
+      average = #{average},
+      volumeRatio = #{volumeRatio},
+      circulateValue = #{circulateValue},
+      averageCirculateValue = #{averageCirculateValue},
+      dividendRatio = #{dividendRatio},
+      ref1 = #{ref1},
+      ref2 = #{ref2l},
+      ref3 = #{ref3},
+      ref4 = #{ref4},
+      ref5 = #{ref5},
+      releaseDateString=#{releaseDateString}
+    where id = #{id,jdbcType=INTEGER}
+</update>
+
+
+<delete id="delete" parameterType="Object">
+	delete from data_sw_index where id=#{id}
+</delete>
+
+
+<select id="querySimpleLine" resultType="com.dayuan.bean.DataSwIndex" parameterType="Object">
+	select d.indexEnd as indexEnd,d.releaseDateString as  releaseDateString,d.pe as pe,d.pb as pb,d.turnover as turnover ,d.volume as volume,d.trade as trade,d.average as average,
+	d.volumeRatio as volumeRatio,d.dividendRatio as dividendRatio from data_sw_index d
+	<include refid="Example_Where_Clause"/>
+	order by releaseDate asc
+</select>
+
+
+<select id="queryIndexType" resultType="com.dayuan.bean.DataSwIndex" parameterType="Object">
+	select d.indexCode,d.indexName from data_sw_index d group by d.indexCode,d.indexName
+</select>
+	
+</mapper>

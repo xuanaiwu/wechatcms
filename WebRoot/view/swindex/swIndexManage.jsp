@@ -10,7 +10,7 @@
  	 <div class="easyui-panel ui-search-panel" title="信息查询" data-options="striped: true,collapsible:true,iconCls:'icon-search'">  
  	 <form id="searchForm">
  	 	<p class="ui-fields">
- 	 	    <label class="ui-label">借款人:</label><input name="loanPerson" class="easyui-box ui-text" style="width:100px;"> 
+ 	 	    <label class="ui-label">指数名称:</label><input name="indexName" class="easyui-box ui-text" style="width:100px;"> 
         </p>
         <a href="#" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
       </form>  

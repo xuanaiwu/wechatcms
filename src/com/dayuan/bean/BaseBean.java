@@ -1,8 +1,6 @@
 package com.dayuan.bean;
 
-import java.sql.Timestamp;
 
-import com.dayuan.bean.SiteScore.ScoreType;
 
 /**
  * 

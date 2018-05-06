@@ -20,9 +20,9 @@ dy.swIndexManage = function(){
 		//上传excel文件，导入数据
 		uploadExcel:function(){
 			//$("#uplaodExcelForm").ajaxSubmit(options);//提交代码时看看base.js有没有被修改...
-			_this.uploadExcelForm().attr('action',_this.uploadExcepAction);
-			_this.uploadExcelForm().submit();
-			_this.uploadExcelWin().dialog('close');
+				_this.uploadExcelForm().attr('action',_this.uploadExcepAction);
+				_this.uploadExcelForm().submit();
+				_this.uploadExcelWin().dialog('close');
 		},
 		initForm:function(){
 			

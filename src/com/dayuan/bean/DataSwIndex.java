@@ -1,9 +1,9 @@
-package com.dayuan.model;
+package com.dayuan.bean;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class DataSwIndexModel extends BaseModel{
+public class DataSwIndex extends BaseBean{
 	
 	private Integer id;
 	private String uuid;
@@ -31,10 +31,6 @@ public class DataSwIndexModel extends BaseModel{
 	private BigDecimal ref3;
 	private BigDecimal ref4;
 	private BigDecimal ref5;
-	
-	
-	private Date startDate;
-	private Date endDate;
 	
 	public Integer getId() {
 		return id;
@@ -192,21 +188,6 @@ public class DataSwIndexModel extends BaseModel{
 	public void setReleaseDateString(String releaseDateString) {
 		this.releaseDateString = releaseDateString;
 	}
-	public Date getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	
-	
-	
 	
 	
 	

@@ -3,7 +3,6 @@ package com.dayuan.model;
 import org.apache.commons.lang.StringUtils;
 
 import com.dayuan.utils.Pager;
-import com.dayuan.utils.StringUtil;
 
 public class BaseModel {
 
